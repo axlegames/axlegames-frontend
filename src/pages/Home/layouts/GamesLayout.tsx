@@ -10,86 +10,69 @@ import {
 } from "@chakra-ui/react";
 
 import { theme } from "../../../config/theme.config";
-import Game1 from "../../../assets/home/highlight/games/game_1.jpg";
-import Game2 from "../../../assets/home/highlight/games/game_2.jpg";
-import Game3 from "../../../assets/home/highlight/games/game_3.jpg";
-import Game4 from "../../../assets/home/highlight/games/game_4.jpg";
-import Game5 from "../../../assets/home/highlight/games/game_5.jpg";
-import Game6 from "../../../assets/home/highlight/games/game_6.jpg";
-import Game7 from "../../../assets/home/highlight/games/game_7.jpg";
-import Game8 from "../../../assets/home/highlight/games/game_8.jpg";
-import Game9 from "../../../assets/home/highlight/games/game_9.jpg";
-import Game10 from "../../../assets/home/highlight/games/game_10.jpg";
-import Game11 from "../../../assets/home/highlight/games/game_11.jpg";
-import Game12 from "../../../assets/home/highlight/games/game_12.jpg";
-import Game13 from "../../../assets/home/highlight/games/game_13.jpg";
+
+import Absurdle from "../../../assets/home/highlight/games/absurdle.png";
+import AnitWordle from "../../../assets/home/highlight/games/anti_wordle.png";
+import CrossWordle from "../../../assets/home/highlight/games/cross_wordle.png";
+import Framed from "../../../assets/home/highlight/games/framed.png";
+import Hurdle from "../../../assets/home/highlight/games/hurdle.png";
+
+import Lewdle from "../../../assets/home/highlight/games/lewdle.png";
+import Lookdle from "../../../assets/home/highlight/games/lookdle.png";
+import Nerdle from "../../../assets/home/highlight/games/nerdle.png";
+import Quordle from "../../../assets/home/highlight/games/quordle.png";
+import Redrctle from "../../../assets/home/highlight/games/redrctle.png";
+import Semantle from "../../../assets/home/highlight/games/semantle.png";
+import SpellBound from "../../../assets/home/highlight/games/spellbound.png";
+import Waffle from "../../../assets/home/highlight/games/waffle.png";
+import WordScramble from "../../../assets/home/highlight/games/word_scramble.png";
+import Wordle5 from "../../../assets/home/highlight/games/wordle5.png";
+import Wordle7 from "../../../assets/home/highlight/games/wordle7.png";
+import Wordle3 from "../../../assets/home/highlight/games/wordle3.png";
 
 import GameEntryModal from "../modals/GameEntryModal";
 
 const GamesLayout = () => {
-  const gridItems = [
-    1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  ];
+  const gridItems = [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   const images = [
-    Game1,
-    Game2,
-    Game3,
-    Game4,
-    Game5,
-    Game6,
-    Game7,
-    Game8,
-    Game9,
-    Game10,
-    Game11,
-    Game12,
-    Game13,
-    Game1,
-    Game2,
-    Game3,
-    Game4,
-    Game5,
-    Game6,
-    Game7,
-    Game1,
-    Game2,
-    Game3,
-    Game4,
-    Game5,
+    Wordle5,
+    Wordle3,
+    Wordle7,
+    Absurdle,
+    AnitWordle,
+    CrossWordle,
+    Framed,
+    Hurdle,
+    Lewdle,
+    Lookdle,
+    Nerdle,
+    Quordle,
+    Redrctle,
+    Semantle,
+    SpellBound,
+    Waffle,
+    WordScramble,
   ];
 
   const gridGames = [
     "Wordle 5",
-    "Wordle 6",
+    "Wordles",
     "Wordle 7",
-    "Dordle",
-    "Quordle",
-    "Lewdle",
-    "Sweardle",
-    "Nerdle",
-    "Mathler",
-    "Primel",
-    "Mathle",
-    "Numble",
-    "Reversle",
-    "Crosswordle",
     "Absurdle",
-    "Evil Wordle",
-    "Hardle",
-    "Squabble",
-    "Word Duel",
-    "World Cup",
+    "Anti Wordle",
+    "Cross Wordle",
+    "Framed",
     "Hurdle",
-    "Gameboy Worlde",
-    "Bytle",
-    "Hexle",
-    "Taylordle",
-    "Letterle",
-    "Worldle",
-    "Globle",
-    "Heardle",
-    "Don't Wordle",
+    "Lewdle",
+    "Lookdle",
+    "Nerdle",
+    "Quordle",
+    "Redrctle",
+    "Semantle",
+    "Spell Bound",
+    "Waffle",
+    "WordScramble",
   ];
 
   const [gameModal, setGameModal] = useState(false);

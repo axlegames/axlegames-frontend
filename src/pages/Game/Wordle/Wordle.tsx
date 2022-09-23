@@ -3,6 +3,7 @@ import { useState } from "react";
 import { theme } from "../../../config/theme.config";
 import Grid from "./components/Grid";
 import KeyBoard from "./components/Keyboard";
+import Navbar from "./components/Navbar";
 import { WordleServices } from "./WordleServices";
 
 const Wordle = () => {
@@ -84,22 +85,29 @@ const Wordle = () => {
   };
 
   return (
-    <Box
-      display={"flex"}
-      justifyContent="center"
-      flexDirection={"column"}
-      alignItems="center"
-      bg={theme.bgColor}
-      rowGap="3rem"
-      maxH={"100vh"}
-      minH="100vh"
-    >
-      <Grid
-        gameStatus={gameStatus}
-        completedRows={completedRows}
-        game={gameState}
-      />
-      <KeyBoard onDelete={onDelete} onEnter={onEnter} onKeyPress={onKeyPress} />
+    <Box>
+      <Navbar />
+      <Box
+        display={"flex"}
+        justifyContent="center"
+        flexDirection={"column"}
+        alignItems="center"
+        bg={theme.bgColor}
+        rowGap="3rem"
+        maxH={"100vh"}
+        minH="100vh"
+      >
+        <Grid
+          gameStatus={gameStatus}
+          completedRows={completedRows}
+          game={gameState}
+        />
+        <KeyBoard
+          onDelete={onDelete}
+          onEnter={onEnter}
+          onKeyPress={onKeyPress}
+        />
+      </Box>
     </Box>
   );
 };
