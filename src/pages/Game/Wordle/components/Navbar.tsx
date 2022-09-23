@@ -16,6 +16,7 @@ const Navbar = () => {
       fontFamily={"quicksand"}
       fontWeight="bold"
       bg={theme.fgColor}
+      color={theme.highLightColor}
       width="100%"
       py={{ base: "2" }}
       px={{ base: "3" }}

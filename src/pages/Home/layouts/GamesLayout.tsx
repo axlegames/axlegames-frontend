@@ -195,7 +195,7 @@ const GamesLayout = () => {
         </Flex>
         <Flex flexDirection={"column"}>
           <Box
-            bgColor={theme.primaryColor}
+            bgColor={theme.bgColor}
             color={theme.highLightColor}
             fontWeight="bold"
             p={{ base: "4" }}
@@ -207,7 +207,7 @@ const GamesLayout = () => {
             <Text>Axle Web3 Games</Text>
           </Box>
           <Box
-            bgColor={theme.primaryColor}
+            bgColor={theme.bgColor}
             p={{ base: "4" }}
             borderBottomRadius={"2xl"}
             borderTopRightRadius={{ base: "2xl" }}
@@ -247,7 +247,13 @@ const GamesLayout = () => {
                     zIndex={2}
                     top="0"
                   >
-                    <Box p="2" m="2" bg={theme.bgColor} borderRadius={"md"}>
+                    <Box
+                      p="2"
+                      m="2"
+                      color={theme.highLightColor}
+                      bg={theme.bgColor}
+                      borderRadius={"md"}
+                    >
                       <Text zIndex={2} fontWeight={"bold"} fontSize="smaller">
                         {gridGames[index]}
                       </Text>
@@ -262,12 +268,14 @@ const GamesLayout = () => {
                       right={"2"}
                     >
                       <Box
-                        bg={theme.secondaryColor}
+                        bg={theme.bgColor}
                         px={"3"}
                         py="2"
                         borderRadius={"md"}
                       >
-                        <Text fontWeight={"bold"}>Coming Soon</Text>
+                        <Text color={theme.highLightColor} fontWeight={"bold"}>
+                          Coming Soon
+                        </Text>
                       </Box>
                     </Box>
                   ) : (
@@ -275,10 +283,11 @@ const GamesLayout = () => {
                       <Button
                         variant={"ghost"}
                         _hover={{
-                          color: theme.bgColor,
-                          bg: theme.fgColor,
+                          color: theme.primaryColor,
+                          bg: theme.bgColor,
                         }}
                         bg={theme.bgColor}
+                        color={theme.highLightColor}
                         onClick={() => openModal(grid, index)}
                       >
                         <Box>Play Now</Box>

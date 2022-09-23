@@ -93,8 +93,8 @@ const HighLightsLayout = () => {
               margin="auto"
               position={"absolute"}
               _hover={{
-                color: theme.bgColor,
-                bg: theme.highLightColor,
+                color: theme.primaryColor,
+                bg: theme.bgColor,
               }}
             >
               Play

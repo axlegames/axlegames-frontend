@@ -32,15 +32,15 @@ const HowToPlayLayout = () => {
         <Button
           size={{ base: "md", lg: "lg" }}
           variant={"ghost"}
-          bg={theme.fgColor}
+          bg={theme.primaryColor}
           _hover={{
-            color: theme.bgColor,
-            bg: theme.highLightColor,
+            color: theme.primaryColor,
+            bg: theme.fgColor,
           }}
         >
           <Flex alignItems={{ base: "center" }} columnGap={{ base: ".5rem" }}>
             <Text>Try Now</Text>
-            <AiOutlineRight color={theme.primaryColor} />
+            <AiOutlineRight color={theme.highLightColor} />
           </Flex>
         </Button>
       </Flex>

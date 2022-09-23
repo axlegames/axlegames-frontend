@@ -37,7 +37,7 @@ const SideBarLayout = () => {
         <Button
           width={"100%"}
           variant={"ghost"}
-          _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+          _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
           justifyContent="flex-start"
         >
           Games
@@ -45,7 +45,7 @@ const SideBarLayout = () => {
         <Button
           width={"100%"}
           variant={"ghost"}
-          _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+          _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
           justifyContent="flex-start"
         >
           Tournment
@@ -53,7 +53,7 @@ const SideBarLayout = () => {
         <Button
           width={"100%"}
           variant={"ghost"}
-          _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+          _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
           justifyContent="flex-start"
         >
           Staking
@@ -61,7 +61,7 @@ const SideBarLayout = () => {
         <Button
           width={"100%"}
           variant={"ghost"}
-          _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+          _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
           justifyContent="flex-start"
         >
           Referral Program
@@ -82,7 +82,7 @@ const SideBarLayout = () => {
         <Button
           width={"100%"}
           variant={"ghost"}
-          _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+          _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
           justifyContent="flex-start"
         >
           AxleVerse
@@ -90,7 +90,7 @@ const SideBarLayout = () => {
         <Button
           width={"100%"}
           variant={"ghost"}
-          _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+          _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
           justifyContent="flex-start"
         >
           Market Place
@@ -98,7 +98,7 @@ const SideBarLayout = () => {
         <Button
           width={"100%"}
           variant={"ghost"}
-          _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+          _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
           justifyContent="flex-start"
         >
           About Us
