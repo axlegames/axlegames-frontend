@@ -62,7 +62,7 @@ const HighLightsLayout = () => {
               borderRadius={{ lg: "2xl" }}
             />
             <Box
-              bg={theme.fgColor}
+              bg={theme.primaryColor}
               px={{ base: "4" }}
               py={{ base: "2" }}
               top={0}
@@ -81,7 +81,7 @@ const HighLightsLayout = () => {
             </Box>
             <Button
               borderRadius={{ base: "2xl" }}
-              bg={theme.bgColor}
+              bg={theme.primaryColor}
               color={theme.highLightColor}
               fontWeight={"bold"}
               size={{ base: "md", xl: "lg" }}

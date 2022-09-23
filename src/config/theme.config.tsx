@@ -1,6 +1,6 @@
 export const theme = {
-  bgColor: "#2b2d42",
-  fgColor: "#8d99ae",
+  bgColor: "black",
+  fgColor: "#2b2d42",
   secondaryColor: "#",
   primaryColor: "#ef233c",
   highLightColor: "#edf2f4",

@@ -177,23 +177,26 @@ const GamesLayout = () => {
         url={gameConfig.url}
       />
       <Box
-        bgColor={theme.bgColor}
+        bgColor={theme.fgColor}
         display={"flex"}
         p={{ base: "0", md: "8", xl: "16" }}
         rowGap={"2rem"}
         flexDirection="column"
         borderRadius={"2xl"}
-        color={theme.fgColor}
+        color={theme.primaryColor}
       >
         <Flex flexDirection={"column"} p={{ base: "2" }}>
           <Text fontSize={"3xl"} fontWeight="bold">
             Welcome to Axle
           </Text>
-          <Text fontWeight={"bold"}>Web3 Games, NFT, Community & Earnings</Text>
+          <Text color={theme.highLightColor} fontWeight={"bold"}>
+            Web3 Games, NFT, Community & Earnings
+          </Text>
         </Flex>
         <Flex flexDirection={"column"}>
           <Box
-            bgColor={theme.secondaryColor}
+            bgColor={theme.primaryColor}
+            color={theme.highLightColor}
             fontWeight="bold"
             p={{ base: "4" }}
             borderTopRadius={"2xl"}
@@ -204,7 +207,7 @@ const GamesLayout = () => {
             <Text>Axle Web3 Games</Text>
           </Box>
           <Box
-            bgColor={theme.secondaryColor}
+            bgColor={theme.primaryColor}
             p={{ base: "4" }}
             borderBottomRadius={"2xl"}
             borderTopRightRadius={{ base: "2xl" }}

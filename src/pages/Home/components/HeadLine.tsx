@@ -6,7 +6,7 @@ const HeadLine = () => {
   return (
     <Box
       bg={theme.fgColor}
-      color={theme.primaryColor}
+      color={theme.bgColor}
       maxHeight="10vh"
       fontFamily="quicksand"
       px={{ base: "12" }}
@@ -18,16 +18,16 @@ const HeadLine = () => {
     >
       <Button
         _hover={{
-          color: theme.bgColor,
-          bg: theme.highLightColor,
+          color: theme.primaryColor,
+          bg: theme.bgColor,
         }}
         borderRadius={"2xl"}
-        bg={theme.bgColor}
+        bg={theme.primaryColor}
         shadow="2xl"
       >
         <Flex columnGap={".5rem"}>
           <Text>Buy Axle</Text>
-          <SiEthereum color={theme.primaryColor} />
+          <SiEthereum color={theme.fgColor} />
         </Flex>
       </Button>
     </Box>
