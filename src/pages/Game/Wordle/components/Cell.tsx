@@ -14,7 +14,7 @@ const Cell = (props: any) => {
         return "green.500";
       }
     }
-    return props.letter !== "" ? theme.primaryColor : theme.fgColor;
+    return props.letter !== "" ? theme.highLightColor : theme.fgColor;
   };
 
   return (

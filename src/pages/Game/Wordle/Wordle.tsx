@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { theme } from "../../../config/theme.config";
 import Grid from "./components/Grid";
@@ -31,6 +31,8 @@ const Wordle = () => {
     false,
   ]);
 
+  const toast = useToast();
+
   const [currentGuess, setCurrentGuess] = useState("");
   const [currentRow, setCurrentRow] = useState(0);
 
@@ -53,6 +55,16 @@ const Wordle = () => {
   };
 
   const onEnter = () => {
+    if (currentGuess.length === 0) {
+      return toast({
+        title: "Not enough letters",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+
     if (currentRow < 5 && currentGuess.length === 5) {
       // onenter flip the keys
       let _completedRows = completedRows;
@@ -65,6 +77,14 @@ const Wordle = () => {
       setCurrentGuess("");
       setCompletedRows(_completedRows);
       setGameStatus(_currentGameStatus);
+    } else {
+      return toast({
+        title: "Not enough letters",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+        position: "top",
+      });
     }
   };
 

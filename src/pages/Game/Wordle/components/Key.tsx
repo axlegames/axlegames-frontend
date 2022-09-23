@@ -2,14 +2,14 @@ import { Box } from "@chakra-ui/react";
 import { theme } from "../../../../config/theme.config";
 
 const Key = (props: any) => {
-  const shadow = `0px -4px 0px 4px ${theme.fgColor}, 0px 0px 0px 4px ${theme.secondaryColor}`;
-  const highLightShadow = `0px 0px 0px 0px ${theme.bgColor}, 0px 0px 0px 0px ${theme.fgColor}`;
+  const shadow = `0px -4px 0px 4px ${theme.bgColor}, 0px 0px 0px 4px ${theme.highLightColor}`;
+  const highLightShadow = `0px 0px 0px 0px ${theme.highLightColor}, 0px 0px 0px 0px ${theme.bgColor}`;
 
   return (
     <Box
       onClick={() => props.onKeyPress(props.letter)}
       display={"flex"}
-      fontSize={{ base: "12" }}
+      fontSize={{ base: "12", md: "16", lg: "18", xl: "20" }}
       fontWeight="bolder"
       flexDirection="column"
       alignItems={"center"}
@@ -18,7 +18,7 @@ const Key = (props: any) => {
       width={{ base: "5", sm: "8", md: "12" }}
       bg={theme.fgColor}
       borderRadius={{ base: props.gotHit ? "lg" : "sm" }}
-      border={props.gotHit ? `3px solid ${theme.secondaryColor}` : "none"}
+      border={props.gotHit ? `3px solid ${theme.highLightColor}` : "none"}
       color={theme.highLightColor}
       boxShadow={props.gotHit ? highLightShadow : shadow}
       _active={{

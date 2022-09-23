@@ -1,9 +1,10 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { theme } from "../../../../config/theme.config";
 import Cell from "../components/Cell";
 
 const HowToPlayModal = (props: any) => {
   return (
-    <Box>
+    <Box color={theme.bgColor}>
       <Flex direction={"column"} rowGap="1rem" py={{ base: "4" }}>
         <Text>Guess the WORDLE in 6 tries.</Text>
         <Text>

@@ -177,13 +177,13 @@ const GamesLayout = () => {
         url={gameConfig.url}
       />
       <Box
-        bgColor={theme.fgColor}
+        bgColor={theme.bgColor}
         display={"flex"}
         p={{ base: "0", md: "8", xl: "16" }}
         rowGap={"2rem"}
         flexDirection="column"
         borderRadius={"2xl"}
-        color="#fbd6d2"
+        color={theme.fgColor}
       >
         <Flex flexDirection={"column"} p={{ base: "2" }}>
           <Text fontSize={"3xl"} fontWeight="bold">
@@ -223,17 +223,12 @@ const GamesLayout = () => {
                 <GridItem
                   position={"relative"}
                   key={index}
-                  w="100%"
-                  h="52"
                   backgroundSize={"cover"}
                   backgroundRepeat={"no-repeat"}
                   borderRadius={"2xl"}
                 >
                   <Image
-                    w="100%"
-                    h="52"
                     zIndex={0}
-                    position={"absolute"}
                     src={images[index]}
                     borderRadius={"2xl"}
                     _hover={{
@@ -246,14 +241,10 @@ const GamesLayout = () => {
                     justifySelf="center"
                     alignSelf={"center"}
                     position="absolute"
-                    zIndex={1}
+                    zIndex={2}
+                    top="0"
                   >
-                    <Box
-                      p="2"
-                      m="2"
-                      bg={theme.secondaryColor}
-                      borderRadius={"md"}
-                    >
+                    <Box p="2" m="2" bg={theme.bgColor} borderRadius={"md"}>
                       <Text zIndex={2} fontWeight={"bold"} fontSize="smaller">
                         {gridGames[index]}
                       </Text>
@@ -282,9 +273,9 @@ const GamesLayout = () => {
                         variant={"ghost"}
                         _hover={{
                           color: theme.bgColor,
-                          bg: theme.highLightColor,
+                          bg: theme.fgColor,
                         }}
-                        bg={theme.secondaryColor}
+                        bg={theme.bgColor}
                         onClick={() => openModal(grid, index)}
                       >
                         <Box>Play Now</Box>

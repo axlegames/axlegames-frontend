@@ -15,7 +15,7 @@ const Navbar = () => {
       shadow={"dark-lg"}
       fontFamily={"quicksand"}
       fontWeight="bold"
-      bg={theme.secondaryColor}
+      bg={theme.fgColor}
       width="100%"
       py={{ base: "2" }}
       px={{ base: "3" }}
