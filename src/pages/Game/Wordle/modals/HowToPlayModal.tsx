@@ -4,7 +4,7 @@ import Cell from "../components/Cell";
 
 const HowToPlayModal = (props: any) => {
   return (
-    <Box color={theme.bgColor}>
+    <Box color={theme.highLightColor}>
       <Flex direction={"column"} rowGap="1rem" py={{ base: "4" }}>
         <Text>Guess the WORDLE in 6 tries.</Text>
         <Text>
@@ -25,7 +25,7 @@ const HowToPlayModal = (props: any) => {
         rowGap={"1rem"}
       >
         <Text>Examples</Text>
-        <Flex justifyContent={"center"}>
+        <Flex color={theme.fgColor} justifyContent={"center"}>
           <Cell
             isCurrentRowCompleted={true}
             keyPresence={"correct"}
@@ -37,7 +37,7 @@ const HowToPlayModal = (props: any) => {
           <Cell isCurrentRowCompleted={true} keyPresence={""} letter="Y" />
         </Flex>
         <Text>The letter W is in the word and in the correct spot.</Text>
-        <Flex justifyContent={"center"}>
+        <Flex color={theme.fgColor} justifyContent={"center"}>
           <Cell isCurrentRowCompleted={true} keyPresence={""} letter="P" />
           <Cell
             isCurrentRowCompleted={true}
@@ -49,7 +49,7 @@ const HowToPlayModal = (props: any) => {
           <Cell isCurrentRowCompleted={true} keyPresence={""} letter="S" />
         </Flex>
         <Text>The letter I is in the word but in the wrong spot.</Text>
-        <Flex justifyContent={"center"}>
+        <Flex color={theme.fgColor} justifyContent={"center"}>
           <Cell isCurrentRowCompleted={true} keyPresence={""} letter="V" />
           <Cell
             isCurrentRowCompleted={true}

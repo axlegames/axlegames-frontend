@@ -18,7 +18,7 @@ const MenuModal = (props: any) => {
       <ModalContent
         borderRadius={"xl"}
         bg={theme.fgColor}
-        color={theme.bgColor}
+        color={theme.highLightColor}
         fontFamily={"quicksand"}
         fontWeight="bold"
       >
