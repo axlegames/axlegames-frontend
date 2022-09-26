@@ -4,7 +4,6 @@ import { theme } from "../../config/theme.config";
 import HeadLine from "./components/HeadLine";
 
 import GamesLayout from "./layouts/GamesLayout";
-import HighLightsLayout from "./layouts/HighLightsLayout";
 import HowToPlayLayout from "./layouts/HowToPlayLayout";
 import StatsLayout from "./layouts/StatsLayout";
 import SideBarLayout from "./layouts/SideBarLayout";
@@ -34,7 +33,6 @@ const Home = () => {
           <Flex display={{ base: "flex", lg: "none" }}>
             <MobileNavbarLayout />
           </Flex>
-          <HighLightsLayout />
           <GamesLayout />
           <HowToPlayLayout />
           <StatsLayout />

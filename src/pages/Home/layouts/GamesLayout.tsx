@@ -13,6 +13,7 @@ import { theme } from "../../../config/theme.config";
 
 import GameEntryModal from "../modals/GameEntryModal";
 import { AxleGame, AxleGames, HomeServices } from "../HomeServices";
+import GameOneBanner from "../../../assets/home/highlight/banners/banner.jpg";
 
 const GamesLayout = () => {
   useEffect(() => {
@@ -74,6 +75,15 @@ const GamesLayout = () => {
             Web3 Games, NFT, Community & Earnings
           </Text>
         </Flex>
+        <Box
+          display={"flex"}
+          columnGap="1rem"
+          alignItems="center"
+          justifyContent={"start"}
+        >
+          <Image borderRadius={"2xl"} height={156} src={GameOneBanner} />
+          <Image borderRadius={"2xl"} height={156} src={GameOneBanner} />
+        </Box>
         <Flex flexDirection={"column"}>
           <Box
             bgColor={theme.bgColor}

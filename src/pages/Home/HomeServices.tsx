@@ -1,8 +1,8 @@
 import axios from "axios";
 
 import Absurdle from "../../assets/home/highlight/games/absurdle.png";
-import AnitWordle from "../../assets/home/highlight/games/anti_wordle.png";
-import CrossWordle from "../../assets/home/highlight/games/cross_wordle.png";
+import AnitWordle from "../../assets/home/highlight/games/anti-wordle.png";
+import CrossWordle from "../../assets/home/highlight/games/cross-wordle.png";
 import Framed from "../../assets/home/highlight/games/framed.png";
 import Hurdle from "../../assets/home/highlight/games/hurdle.png";
 
@@ -14,10 +14,10 @@ import Redrctle from "../../assets/home/highlight/games/redrctle.png";
 import Semantle from "../../assets/home/highlight/games/semantle.png";
 import SpellBound from "../../assets/home/highlight/games/spellbound.png";
 import Waffle from "../../assets/home/highlight/games/waffle.png";
-import WordScramble from "../../assets/home/highlight/games/word_scramble.png";
-import Wordle5 from "../../assets/home/highlight/games/wordle5.png";
-import Wordle7 from "../../assets/home/highlight/games/wordle7.png";
-import Wordle3 from "../../assets/home/highlight/games/wordle3.png";
+import WordScramble from "../../assets/home/highlight/games/word-scramble.png";
+import Wordle5 from "../../assets/home/highlight/games/wordle-5.png";
+import Wordle7 from "../../assets/home/highlight/games/wordle-7.png";
+import Wordle3 from "../../assets/home/highlight/games/wordle-6.png";
 
 export interface AxleGame {
   id: string;
