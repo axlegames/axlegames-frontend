@@ -6,17 +6,34 @@ import Wordle from "./pages/Game/Wordle/Wordle";
 import Signin from "./pages/Auth/Signin";
 import Signup from "./pages/Auth/Signup";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
+import { useEffect, useState } from "react";
+import Page403 from "./pages/Auth/Page403";
+import PrivateRoute from "./config/protected.router";
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/wordle" element={<Wordle />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-      </Routes>
-    </Router>
-  </ChakraProvider>
-);
+export const App = () => {
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem("username");
+    if (user) setIsAuth(true);
+    else setIsAuth(false);
+  }, [isAuth]);
+
+  return (
+    <ChakraProvider theme={theme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/wordle-5"
+            element={<PrivateRoute element={Wordle} isAuth={isAuth} />}
+          />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/403" element={<Page403 />} />
+        </Routes>
+      </Router>
+    </ChakraProvider>
+  );
+};

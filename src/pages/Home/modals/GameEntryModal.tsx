@@ -20,7 +20,7 @@ const GameEntryModal = (props: any) => {
   const navigate = useNavigate();
 
   function goToPage() {
-    navigate(props.url);
+    navigate(props.link);
   }
 
   return (
@@ -33,14 +33,14 @@ const GameEntryModal = (props: any) => {
         fontFamily={"quicksand"}
         fontWeight="bold"
       >
-        <ModalHeader fontSize={"5xl"}> {props.title} </ModalHeader>
+        <ModalHeader fontSize={"5xl"}> {props.name} </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box>
-            <Text>{props.content}</Text>
+            <Text>{props.description}</Text>
           </Box>
           <Divider my="8"></Divider>
-          {props.gridItem === 1 ? (
+          {props.isActive ? (
             <Flex direction={"column"} rowGap="2rem">
               <EntryCard
                 fee={0}

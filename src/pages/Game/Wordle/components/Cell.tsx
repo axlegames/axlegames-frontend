@@ -4,15 +4,9 @@ import { theme } from "../../../../config/theme.config";
 const Cell = (props: any) => {
   const validate = () => {
     if (props.isCurrentRowCompleted) {
-      if (props.keyPresence === "absent") {
-        return "red.400";
-      }
-      if (props.keyPresence === "present") {
-        return "yellow.500";
-      }
-      if (props.keyPresence === "correct") {
-        return "green.500";
-      }
+      if (props.keyPresence === "absent") return "red.400";
+      if (props.keyPresence === "present") return "yellow.500";
+      if (props.keyPresence === "correct") return "green.500";
     }
     return props.letter !== "" ? theme.highLightColor : theme.fgColor;
   };

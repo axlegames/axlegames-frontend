@@ -1,8 +1,26 @@
 import { theme } from "../../../config/theme.config";
 import { SiEthereum } from "react-icons/si/index";
 import { Box, Flex, Text, Button } from "@chakra-ui/react";
+import * as nearAPI from "near-api-js";
+const { connect, keyStores, WalletConnection } = nearAPI;
 
 const HeadLine = () => {
+  const connectWallet = async () => {
+    const connectionConfig = {
+      networkId: "testnet",
+      keyStore: new keyStores.BrowserLocalStorageKeyStore(),
+      nodeUrl: "https://rpc.testnet.near.org",
+      walletUrl: "https://wallet.testnet.near.org",
+      helperUrl: "https://helper.testnet.near.org",
+      explorerUrl: "https://explorer.testnet.near.org",
+    };
+    // connect to NEAR
+    const nearConnection = await connect(connectionConfig);
+    // create wallet connection
+    const wallet = new WalletConnection(nearConnection, "testapp");
+    if (!wallet.isSignedIn()) return wallet.requestSignIn({});
+  };
+
   return (
     <Box
       bg={theme.fgColor}
@@ -24,6 +42,7 @@ const HeadLine = () => {
         borderRadius={"2xl"}
         bg={theme.primaryColor}
         shadow="2xl"
+        onClick={connectWallet}
       >
         <Flex columnGap={".5rem"}>
           <Text>Buy Axle</Text>
