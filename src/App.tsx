@@ -8,7 +8,7 @@ import Signup from "./pages/Auth/Signup";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import { useEffect, useState } from "react";
 import Page403 from "./pages/Auth/Page403";
-import PrivateRoute from "./config/protected.router";
+// import PrivateRoute from "./config/protected.router";
 
 export const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -24,10 +24,7 @@ export const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/wordle-5"
-            element={<PrivateRoute element={Wordle} isAuth={isAuth} />}
-          />
+          <Route path="/wordle-5" element={<Wordle />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

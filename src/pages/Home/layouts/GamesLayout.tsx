@@ -26,6 +26,26 @@ const GamesLayout = () => {
       });
   }, []);
 
+  const colors = [
+    "#8BBCCC",
+    "#31C6D4",
+    "#00FFD1",
+    "#E1FFB1",
+    "#FCFFB2",
+    "#C7F2A4",
+    "#F8EDE3",
+    "#AEBDCA",
+    "#FFE3E1",
+    "#FFE6F7",
+    "#FF9494",
+    "#FBF2CF",
+    "#C6EBC5",
+    "#FFE9A0",
+    "#EEF1FF",
+    "#ABD9FF",
+    "#B7C4CF",
+  ];
+
   const [axleGames, setAxleGames] = useState<AxleGames>({ axleGames: [] });
   const [gameModal, setGameModal] = useState(false);
   const [gameConfig, setGameConfig] = useState({
@@ -141,9 +161,10 @@ const GamesLayout = () => {
                     <Box
                       p="2"
                       m="2"
-                      color={theme.highLightColor}
-                      bg={theme.bgColor}
+                      color={theme.bgColor}
+                      bg={colors[index]}
                       borderRadius={"md"}
+                      opacity={0.9}
                     >
                       <Text zIndex={2} fontWeight={"bold"} fontSize="smaller">
                         {axleGame.name}
@@ -163,6 +184,7 @@ const GamesLayout = () => {
                         px={"3"}
                         py="2"
                         borderRadius={"md"}
+                        opacity={0.8}
                       >
                         <Text color={theme.highLightColor} fontWeight={"bold"}>
                           Coming Soon
@@ -178,10 +200,11 @@ const GamesLayout = () => {
                           bg: theme.bgColor,
                         }}
                         bg={theme.bgColor}
+                        opacity={0.8}
                         color={theme.highLightColor}
                         onClick={() => openModal(axleGame, index)}
                       >
-                        <Box>Play Now</Box>
+                        Play Now{" "}
                       </Button>
                     </Box>
                   )}
