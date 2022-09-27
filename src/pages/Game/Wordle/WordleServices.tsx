@@ -1,17 +1,13 @@
 import axios from "axios";
-import { rendlePrefix, headers } from "../../../config";
+import { headers, axlegamesPrefix } from "../../../config";
 
 const token = headers() ?? "";
 
 export class WordleServices {
   static enterContest = async (data: any) =>
-    await axios.post(`${rendlePrefix}/enter`, data, token);
-  static saveRendleGame = async (data: any) =>
-    await axios.post(`${rendlePrefix}/save`, data, token);
-  static getContestantStatus = async (data: any) =>
-    await axios.post(`${rendlePrefix}/game/status`, data, token);
+    await axios.post(`${axlegamesPrefix}/enter-contest`, data, token);
   static validateUpdateGuess = async (data: any) =>
-    await axios.post(`${rendlePrefix}/game/word/validate`, data, token);
+    await axios.post(`${axlegamesPrefix}/validate-word`, data, token);
 
   static getStatusWord = (word: string): string[] => {
     const solution = "akash";

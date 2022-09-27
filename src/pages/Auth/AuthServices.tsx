@@ -1,5 +1,5 @@
 import axios from "axios";
-import { userPrefix, headers, walletPrefix } from "../../config";
+import { userPrefix, headers } from "../../config";
 
 export class AuthServices {
   static register = async (data: any) =>
@@ -25,9 +25,6 @@ export class AuthServices {
     localStorage.setItem("session", new Date(Date.now()).toString());
     localStorage.setItem("username", data.username);
   };
-
-  static getWallet = async (data: any) =>
-    await axios.post(`${walletPrefix}`, data, headers());
 
   static setWalletAddress = async (data: any) =>
     await axios.post(`${userPrefix}/set-wallet-address`, data, headers());

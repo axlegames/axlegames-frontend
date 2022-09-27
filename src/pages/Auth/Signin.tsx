@@ -35,7 +35,10 @@ const Signin = () => {
     onSubmit: (values: any) => {
       AuthServices.login(values)
         .then((res: any) => handleLoginSuccess(res.data))
-        .catch((err: any) => handleLoginFailure());
+        .catch((err: any) => {
+          console.log(err);
+          handleLoginFailure();
+        });
     },
   });
 

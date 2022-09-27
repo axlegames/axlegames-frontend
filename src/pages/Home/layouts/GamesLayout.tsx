@@ -194,6 +194,7 @@ const GamesLayout = () => {
                   ) : (
                     <Box position={"absolute"} bottom="2" right={"2"}>
                       <Button
+                        size={"sm"}
                         variant={"ghost"}
                         _hover={{
                           color: theme.primaryColor,
