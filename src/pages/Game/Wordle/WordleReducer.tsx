@@ -1,12 +1,14 @@
-import { WordleServices } from "./WordleServices";
-
 export enum KEY_ACTION {
   ON_ENTER,
   ON_DELETE,
   ON_KEY_PRESS,
+  ON_INIT,
 }
 interface Payload {
   key: string;
+  guessesStatus: string[];
+  gameState: Array<Array<string>>;
+  gameStatus: Array<Array<string>>;
 }
 interface Action {
   type: KEY_ACTION;
@@ -20,7 +22,7 @@ export interface WordleState {
   currentRow: number;
 }
 
-export let initState: WordleState = {
+export const initState: WordleState = {
   gameState: [
     ["", "", "", "", ""],
     ["", "", "", "", ""],
@@ -40,8 +42,37 @@ export let initState: WordleState = {
   currentRow: 0,
 };
 
+const createEmptyArrays = (number: number) => {
+  const array = [];
+  for (let i = 0; i < number; i++) array.push("");
+  return array;
+};
+
 export const reducer = (state: WordleState, action: Action): WordleState => {
   switch (action.type) {
+    case KEY_ACTION.ON_INIT:
+      let game = state;
+      const filled = action.payload.gameState.length;
+      const empty = 5 - filled;
+
+      let completedRows = state.completedRows;
+      for (let j = 0; j < filled; j++) completedRows[j] = true;
+
+      const gameState = [...action.payload.gameState];
+      const gameStatus = [...action.payload.gameStatus];
+
+      for (let i = 0; i < empty; i++) {
+        const emptyRow = createEmptyArrays(5);
+        gameState.push(emptyRow);
+        gameStatus.push(emptyRow);
+      }
+
+      game.currentRow = filled;
+      game.completedRows = completedRows;
+      game.gameState = gameState;
+      game.gameStatus = gameStatus;
+
+      return game;
     case KEY_ACTION.ON_KEY_PRESS:
       if (state.currentGuess.length < 5) {
         console.log("hee");
@@ -70,11 +101,8 @@ export const reducer = (state: WordleState, action: Action): WordleState => {
         // onenter flip the keys
         let _completedRows = state.completedRows;
         _completedRows[state.currentRow] = true;
-
         let _currentGameStatus = state.gameStatus;
-        _currentGameStatus[state.currentRow] = WordleServices.getStatusWord(
-          state.currentGuess
-        );
+        _currentGameStatus[state.currentRow] = action.payload.guessesStatus;
         return {
           ...state,
           currentRow: state.currentRow + 1,

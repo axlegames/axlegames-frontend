@@ -3,31 +3,44 @@ import { headers, axlegamesPrefix } from "../../../config";
 
 const token = headers() ?? "";
 
-export class WordleServices {
-  static enterContest = async (data: any) =>
-    await axios.post(`${axlegamesPrefix}/enter-contest`, data, token);
-  static validateUpdateGuess = async (data: any) =>
-    await axios.post(`${axlegamesPrefix}/validate-word`, data, token);
+interface Status {
+  wordList: Array<Array<string>>;
+  gameStatus: Array<Array<string>>;
+  hasGameState: boolean;
+}
 
-  static getStatusWord = (word: string): string[] => {
-    const solution = "akash";
-    const status: string[] = [];
-    for (let i = 0; i < solution.length; i++) {
-      if (solution[i] === word[i]) status.push("correct");
-      else {
-        const letterStatus = this.checkIsPresentOrAbsent(solution, word[i]);
-        status.push(letterStatus);
-      }
-    }
-    return status;
+interface GuessStatus {
+  guessStatus?: string[];
+  isWinningWord?: boolean;
+  inValidWord?: boolean;
+}
+
+export class WordleServices {
+  static enterContest = async (data: any) => {
+    return await axios.post(`${axlegamesPrefix}enter-contest`, data, token);
   };
 
-  static checkIsPresentOrAbsent = (
-    solution: string,
-    letter: string
-  ): string => {
-    for (let i = 0; i < solution.length; i++)
-      if (solution[i] === letter) return "present";
-    return "absent";
+  static getGameState = async (data: any): Promise<Status> => {
+    return await (
+      await axios.post(`${axlegamesPrefix}status`, data, token)
+    ).data;
+  };
+
+  static cleanGameState = async (data: any) => {
+    return await axios.post(`${axlegamesPrefix}clean`, data, token);
+  };
+
+  static validateUpdateGuess = async (data: any): Promise<GuessStatus> => {
+    const resp = await axios.post(
+      `${axlegamesPrefix}validate-word`,
+      data,
+      token
+    );
+    console.log(resp);
+    return {
+      inValidWord: resp.data.inValidWord,
+      guessStatus: resp.data.guessStatus,
+      isWinningWord: resp.data.isWinningWord,
+    };
   };
 }

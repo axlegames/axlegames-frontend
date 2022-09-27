@@ -49,6 +49,7 @@ const GamesLayout = () => {
   const [axleGames, setAxleGames] = useState<AxleGames>({ axleGames: [] });
   const [gameModal, setGameModal] = useState(false);
   const [gameConfig, setGameConfig] = useState({
+    _id: "",
     name: "",
     description: "",
     isActive: false,
@@ -58,6 +59,7 @@ const GamesLayout = () => {
 
   function openModal(axleGame: AxleGame, index: number) {
     setGameConfig({
+      _id: axleGame._id,
       name: axleGame.name,
       description: axleGame.description,
       link: axleGame.link,
@@ -75,6 +77,7 @@ const GamesLayout = () => {
         name={gameConfig.name}
         isActive={gameConfig.isActive}
         index={gameConfig.index}
+        _id={gameConfig._id}
         description={gameConfig.description}
         link={gameConfig.link}
       />

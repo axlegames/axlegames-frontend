@@ -20,7 +20,7 @@ import Wordle7 from "../../assets/home/highlight/games/wordle-7.png";
 import Wordle3 from "../../assets/home/highlight/games/wordle-6.png";
 
 export interface AxleGame {
-  id: string;
+  _id: string;
   isActive: boolean;
   name: string;
   description: string;

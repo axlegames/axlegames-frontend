@@ -15,12 +15,27 @@ import {
 import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
 import { theme } from "../../../config/theme.config";
+import { WordleServices } from "../../Game/Wordle/WordleServices";
 
 const GameEntryModal = (props: any) => {
   const navigate = useNavigate();
 
   function goToPage() {
-    navigate(props.link);
+    WordleServices.enterContest({
+      gameTypeId: props._id,
+      userId: localStorage.getItem("userId"),
+    })
+      .then((res) => {
+        if (res.data.error) {
+          console.log("COMPLETE CURRENT GAME");
+          return;
+        }
+        const link = `${props.link}/${res.data.axleContest}/${res.data._id}`;
+        navigate(link);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
