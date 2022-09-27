@@ -1,8 +1,8 @@
-let SERVER = "DEV";
+let SERVER = "PROD";
 let URL = "";
 
 if (SERVER === "DEV") URL = "http://localhost:5000";
-if (SERVER === "PROD") URL = "https://api.renderverse.io";
+if (SERVER === "PROD") URL = "https://api.axlegames.io";
 
 const axlegamesPrefix = URL + "/axlegames/api/v1/";
 const userPrefix = axlegamesPrefix + "users";
