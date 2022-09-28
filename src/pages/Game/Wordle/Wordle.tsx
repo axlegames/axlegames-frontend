@@ -13,7 +13,7 @@ import MenuModal from "./modals/MenuModal";
 import HowToPlayModal from "./modals/HowToPlayModal";
 
 import { WordleServices } from "./WordleServices";
-import { KEY_ACTION, initState, reducer } from "./WordleReducer";
+import { KEY_ACTION, initState, reducer, WordleState } from "./WordleReducer";
 
 const Wordle = () => {
   const [isWon, setIsWon] = useState(false);
@@ -35,17 +35,30 @@ const Wordle = () => {
           if (game.isWinningWord) setIsWon(true);
           else setIsLost(true);
         }
-        if (game.hasGameState) {
-          dispatch({
-            type: KEY_ACTION.ON_INIT,
-            payload: {
-              guessesStatus: [],
-              key: "",
-              gameState: game.wordList,
-              gameStatus: game.gameStatus,
-            },
-          });
-        }
+        const initState: WordleState = {
+          gameState: WordleServices.createInitState(
+            game.guessLength,
+            game.wordLength
+          ),
+          gameStatus: WordleServices.createInitState(
+            game.guessLength,
+            game.wordLength
+          ),
+          completedRows: WordleServices.initRows(game.guessLength),
+          currentGuess: "",
+          currentRow: 0,
+        };
+        dispatch({
+          type: KEY_ACTION.ON_INIT,
+          payload: {
+            guessesStatus: [],
+            key: "",
+            gameState: [],
+            gameStatus: [],
+            currentState: initState,
+          },
+        });
+
         return setStart(false);
       })
       .catch((err) => console.log(err));

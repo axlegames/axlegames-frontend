@@ -9,6 +9,8 @@ interface Status {
   hasGameState: boolean;
   isWinningWord?: boolean;
   isGameCompeted: boolean;
+  wordLength: number;
+  guessLength: number;
 }
 
 interface GuessStatus {
@@ -44,5 +46,27 @@ export class WordleServices {
       guessStatus: resp.data.guessStatus,
       isWinningWord: resp.data.isWinningWord,
     };
+  };
+
+  static generateEmptyRows = (noOfRows: number): string[] => {
+    const rows: string[] = [];
+    for (let i = 0; i < noOfRows; i++) rows.push("");
+    return rows;
+  };
+
+  static initRows = (guessLength: number): boolean[] => {
+    const rows = [];
+    for (let i = 0; i < guessLength; i++) rows.push(false);
+    return rows;
+  };
+
+  static createInitState = (
+    guessLength: number,
+    wordLength: number
+  ): Array<Array<string>> => {
+    const words: Array<Array<string>> = [];
+    for (let i = 0; i < guessLength; i++)
+      words.push(this.generateEmptyRows(wordLength));
+    return words;
   };
 }

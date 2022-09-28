@@ -24,10 +24,7 @@ export const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/wordle-5/:contestId/:gameStateId"
-            element={<Wordle />}
-          />
+          <Route path="/:type/:contestId/:gameStateId" element={<Wordle />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
