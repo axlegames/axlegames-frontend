@@ -1,32 +1,42 @@
-import { Box, useToast } from "@chakra-ui/react";
 import { useEffect, useReducer, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { Box, useToast } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
+
 import Grid from "./components/Grid";
-import KeyBoard from "./components/Keyboard";
 import Navbar from "./components/Navbar";
+import KeyBoard from "./components/Keyboard";
+
+import WonModal from "./modals/WonModal";
 import LostModal from "./modals/LostModal";
 import MenuModal from "./modals/MenuModal";
-import WonModal from "./modals/WonModal";
-import { KEY_ACTION, initState, reducer } from "./WordleReducer";
+import HowToPlayModal from "./modals/HowToPlayModal";
+
 import { WordleServices } from "./WordleServices";
+import { KEY_ACTION, initState, reducer } from "./WordleReducer";
 
 const Wordle = () => {
   const [isWon, setIsWon] = useState(false);
   const [isLost, setIsLost] = useState(false);
+  const [start, setStart] = useState(true);
 
   const toast = useToast();
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initState);
 
   const { contestId, gameStateId } = useParams();
 
-  useEffect(() => {
+  const initStateFromServer = () => {
     WordleServices.getGameState({
       userId: localStorage.getItem("userId"),
     })
       .then((game) => {
+        if (game.isGameCompeted) {
+          if (game.isWinningWord) setIsWon(true);
+          else setIsLost(true);
+        }
         if (game.hasGameState) {
-          return dispatch({
+          dispatch({
             type: KEY_ACTION.ON_INIT,
             payload: {
               guessesStatus: [],
@@ -36,8 +46,17 @@ const Wordle = () => {
             },
           });
         }
+        return setStart(false);
       })
       .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    return () => {
+      setStart(true);
+      setIsWon(false);
+      setIsLost(false);
+    };
   }, []);
 
   const onKeyPress = (key: string) => {
@@ -62,13 +81,12 @@ const Wordle = () => {
         position: "top",
       });
     }
-    let data = {
-      word: state.currentGuess,
-      contestId: contestId,
-      gameStateId: gameStateId,
-    };
     const { guessStatus, inValidWord, isWinningWord } =
-      await WordleServices.validateUpdateGuess(data);
+      await WordleServices.validateUpdateGuess({
+        word: state.currentGuess,
+        contestId: contestId,
+        gameStateId: gameStateId,
+      });
     if (inValidWord) {
       return toast({
         title: "Invalid Word",
@@ -78,7 +96,6 @@ const Wordle = () => {
         position: "top",
       });
     }
-
     dispatch({
       type: KEY_ACTION.ON_ENTER,
       payload: {
@@ -88,20 +105,14 @@ const Wordle = () => {
         gameStatus: state.gameStatus,
       },
     });
-    console.log(isWinningWord);
-
     if (state.currentRow === 4 || isWinningWord) {
-      WordleServices.cleanGameState({
+      await WordleServices.cleanGameState({
         userId: localStorage.getItem("userId"),
-      }).then((resp) => {
-        setTimeout(() => {
-          if (isWinningWord) {
-            setIsWon(true);
-          } else {
-            setIsLost(true);
-          }
-        }, 1500);
       });
+      setTimeout(() => {
+        if (isWinningWord) setIsWon(true);
+        else setIsLost(true);
+      }, 1500);
     }
   };
 
@@ -120,14 +131,22 @@ const Wordle = () => {
     <Box>
       <Navbar />
       <MenuModal
-        isOpen={isWon}
-        children={<WonModal />}
-        close={() => setIsWon(false)}
+        title={"How To Play?"}
+        isOpen={start}
+        children={<HowToPlayModal />}
+        close={() => initStateFromServer()}
       />
       <MenuModal
+        title={"Hooray!"}
+        isOpen={isWon}
+        children={<WonModal />}
+        close={() => navigate("/")}
+      />
+      <MenuModal
+        title={"Oh oh!"}
         isOpen={isLost}
         children={<LostModal />}
-        close={() => setIsLost(false)}
+        close={() => navigate("/")}
       />
       <Box
         display={"flex"}

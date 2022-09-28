@@ -7,6 +7,8 @@ interface Status {
   wordList: Array<Array<string>>;
   gameStatus: Array<Array<string>>;
   hasGameState: boolean;
+  isWinningWord?: boolean;
+  isGameCompeted: boolean;
 }
 
 interface GuessStatus {
