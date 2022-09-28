@@ -27,7 +27,6 @@ const GameEntryModal = (props: any) => {
     })
       .then((res) => {
         if (res.data.error) {
-          console.log("COMPLETE CURRENT GAME");
           return;
         }
         const link = `${props.link}/${res.data.axleContest}/${res.data._id}`;

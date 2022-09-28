@@ -62,7 +62,6 @@ const Signup = () => {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
       AuthServices.register(values)
         .then((res) => handleRequest(res.data))
         .catch((err) =>

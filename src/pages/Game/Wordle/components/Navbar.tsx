@@ -7,7 +7,7 @@ import MenuModal from "../modals/MenuModal";
 import HowToPlayModal from "../modals/HowToPlayModal";
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = (props: any) => {
   const [howToPlayModal, setHowToPlayModal] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ const Navbar = () => {
         <Flex columnGap={{ base: ".8rem" }} alignItems={"center"}>
           <AiOutlineMenu size={26} />
           <Text textAlign={"center"} fontSize={{ base: "2xl" }}>
-            Wordle#5
+            {props.title}
           </Text>
         </Flex>
 

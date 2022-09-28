@@ -1,20 +1,17 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import { theme } from "../../../../config/theme.config";
+
 import Cell from "../components/Cell";
+import { getExample } from "./HowToPlayData";
 
 const HowToPlayModal = (props: any) => {
+  const example = getExample(props.game);
   return (
     <Box color={theme.highLightColor}>
       <Flex direction={"column"} rowGap="1rem" py={{ base: "4" }}>
-        <Text>Guess the WORDLE in 6 tries.</Text>
-        <Text>
-          Each guess must be a valid 5-letter word. Hit the enter button to
-          submit.
-        </Text>
-        <Text>
-          After each guess, the color of the tiles will change to show how close
-          your guess was to the word.
-        </Text>
+        <Text>{example.main}</Text>
+        <Text>{example.sub}</Text>
+        <Text>{example.text}</Text>
       </Flex>
       <Divider></Divider>
       <Flex
@@ -26,46 +23,38 @@ const HowToPlayModal = (props: any) => {
       >
         <Text>Examples</Text>
         <Flex color={theme.fgColor} justifyContent={"center"}>
-          <Cell
-            isCurrentRowCompleted={true}
-            keyPresence={"correct"}
-            letter="W"
-          />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="E" />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="A" />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="R" />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="Y" />
+          {example[1].map((wordle, index) => (
+            <Cell
+              key={index}
+              isCurrentRowCompleted={wordle.isCompleted}
+              keyPresence={wordle.keyPresence}
+              letter={wordle.letter}
+            />
+          ))}
         </Flex>
-        <Text>The letter W is in the word and in the correct spot.</Text>
+        <Text>{example.example1}</Text>
         <Flex color={theme.fgColor} justifyContent={"center"}>
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="P" />
-          <Cell
-            isCurrentRowCompleted={true}
-            keyPresence={"present"}
-            letter="I"
-          />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="L" />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="L" />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="S" />
+          {example[2].map((wordle, index) => (
+            <Cell
+              key={index}
+              isCurrentRowCompleted={wordle.isCompleted}
+              keyPresence={wordle.keyPresence}
+              letter={wordle.letter}
+            />
+          ))}
         </Flex>
-        <Text>The letter I is in the word but in the wrong spot.</Text>
+        <Text>{example.example2}</Text>
         <Flex color={theme.fgColor} justifyContent={"center"}>
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="V" />
-          <Cell
-            isCurrentRowCompleted={true}
-            keyPresence={"absent"}
-            letter="A"
-          />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="U" />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="G" />
-          <Cell isCurrentRowCompleted={true} keyPresence={""} letter="E" />
+          {example[3].map((wordle, index) => (
+            <Cell
+              key={index}
+              isCurrentRowCompleted={wordle.isCompleted}
+              keyPresence={wordle.keyPresence}
+              letter={wordle.letter}
+            />
+          ))}
         </Flex>
-        <Text>The letter U is not in the word in any spot.</Text>
-      </Flex>
-      <Divider />
-      <Flex py={{ base: "4" }} direction={"column"} textAlign="center">
-        <Text>A new WORDLE will be available each day!</Text>
-        <Text>Never miss a Wordle. Sign up for our daily reminder email.</Text>
+        <Text>{example.example3}</Text>
       </Flex>
     </Box>
   );

@@ -30,7 +30,7 @@ export class WordleServices {
     ).data;
   };
 
-  static cleanGameState = async (data: any) => {
+  static cleanGameState = async (data: any): Promise<void> => {
     return await axios.post(`${axlegamesPrefix}clean`, data, token);
   };
 
@@ -40,7 +40,6 @@ export class WordleServices {
       data,
       token
     );
-    console.log(resp);
     return {
       inValidWord: resp.data.inValidWord,
       guessStatus: resp.data.guessStatus,

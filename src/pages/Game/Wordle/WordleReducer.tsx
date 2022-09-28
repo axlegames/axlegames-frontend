@@ -3,6 +3,7 @@ export enum KEY_ACTION {
   ON_DELETE,
   ON_KEY_PRESS,
   ON_INIT,
+  ON_FETCH,
 }
 interface Payload {
   key: string;
@@ -10,6 +11,8 @@ interface Payload {
   gameState: Array<Array<string>>;
   gameStatus: Array<Array<string>>;
   currentState?: WordleState;
+  wordLength?: number;
+  guessLength?: number;
 }
 interface Action {
   type: KEY_ACTION;
@@ -21,6 +24,8 @@ export interface WordleState {
   completedRows: boolean[];
   currentGuess: string;
   currentRow: number;
+  guessLength: number;
+  wordlength: number;
 }
 
 export const initState: WordleState = {
@@ -41,14 +46,45 @@ export const initState: WordleState = {
   completedRows: [false, false, false, false, false],
   currentGuess: "",
   currentRow: 0,
+  guessLength: 5,
+  wordlength: 5,
+};
+
+const createEmptyArrays = (number: number) => {
+  const array = [];
+  for (let i = 0; i < number; i++) array.push("");
+  return array;
 };
 
 export const reducer = (state: WordleState, action: Action): WordleState => {
   switch (action.type) {
+    case KEY_ACTION.ON_FETCH:
+      let game = state;
+      const filled = action.payload.gameState.length;
+      const unfilled = action.payload.guessLength ?? 5;
+      const empty = unfilled - filled;
+      let completedRows = state.completedRows;
+      for (let j = 0; j < filled; j++) completedRows[j] = true;
+      const gameState = [...action.payload.gameState];
+      const gameStatus = [...action.payload.gameStatus];
+
+      for (let i = 0; i < empty; i++) {
+        const emptyRow = createEmptyArrays(action.payload.wordLength ?? 5);
+        gameState.push(emptyRow);
+        gameStatus.push(emptyRow);
+      }
+      game.wordlength = action.payload.wordLength ?? 5;
+      game.guessLength = action.payload.guessLength ?? 5;
+      game.currentRow = filled;
+      game.completedRows = completedRows;
+      game.gameState = gameState;
+      game.gameStatus = gameStatus;
+      return game;
     case KEY_ACTION.ON_INIT:
+      console.log(action.payload.currentState);
       return action.payload.currentState ?? initState;
     case KEY_ACTION.ON_KEY_PRESS:
-      if (state.currentGuess.length < state.gameState.length) {
+      if (state.currentGuess.length < state.wordlength) {
         // setting current guess
         let _currentGuess = state.currentGuess + action.payload.key;
         state.currentGuess = _currentGuess;
@@ -70,9 +106,15 @@ export const reducer = (state: WordleState, action: Action): WordleState => {
       return { ...state };
 
     case KEY_ACTION.ON_ENTER:
+      console.log(
+        state.wordlength,
+        state.guessLength,
+        state.currentRow,
+        state.currentGuess.length
+      );
       if (
-        state.currentRow < state.gameState.length &&
-        state.currentGuess.length === state.gameState.length
+        state.currentRow < state.guessLength &&
+        state.currentGuess.length === state.wordlength
       ) {
         // onenter flip the keys
         let _completedRows = state.completedRows;

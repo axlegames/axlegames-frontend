@@ -24,7 +24,7 @@ const Wordle = () => {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initState);
 
-  const { contestId, gameStateId } = useParams();
+  const { contestId, gameStateId, game } = useParams();
 
   const initStateFromServer = () => {
     WordleServices.getGameState({
@@ -35,7 +35,25 @@ const Wordle = () => {
           if (game.isWinningWord) setIsWon(true);
           else setIsLost(true);
         }
+
+        if (game.wordList.length > 0) {
+          dispatch({
+            type: KEY_ACTION.ON_FETCH,
+            payload: {
+              guessesStatus: [],
+              key: "",
+              gameState: game.wordList,
+              gameStatus: game.gameStatus,
+              guessLength: game.guessLength,
+              wordLength: game.wordLength,
+            },
+          });
+          return setStart(false);
+        }
+
         const initState: WordleState = {
+          guessLength: game.guessLength,
+          wordlength: game.wordLength,
           gameState: WordleServices.createInitState(
             game.guessLength,
             game.wordLength
@@ -58,7 +76,6 @@ const Wordle = () => {
             currentState: initState,
           },
         });
-
         return setStart(false);
       })
       .catch((err) => console.log(err));
@@ -85,7 +102,7 @@ const Wordle = () => {
   };
 
   const onEnter = async () => {
-    if (state.currentGuess.length < 5) {
+    if (state.currentGuess.length < state.wordlength) {
       return toast({
         title: "Not enough letters",
         status: "warning",
@@ -118,7 +135,7 @@ const Wordle = () => {
         gameStatus: state.gameStatus,
       },
     });
-    if (state.currentRow === 4 || isWinningWord) {
+    if (state.currentRow === state.guessLength - 1 || isWinningWord) {
       await WordleServices.cleanGameState({
         userId: localStorage.getItem("userId"),
       });
@@ -142,11 +159,11 @@ const Wordle = () => {
 
   return (
     <Box>
-      <Navbar />
+      <Navbar title={game} />
       <MenuModal
         title={"How To Play?"}
         isOpen={start}
-        children={<HowToPlayModal />}
+        children={<HowToPlayModal game={game} />}
         close={() => initStateFromServer()}
       />
       <MenuModal
