@@ -18,6 +18,7 @@ import WordScramble from "../../assets/home/highlight/games/word-scramble.png";
 import Wordle5 from "../../assets/home/highlight/games/wordle-5.png";
 import Wordle7 from "../../assets/home/highlight/games/wordle-7.png";
 import Wordle3 from "../../assets/home/highlight/games/wordle-6.png";
+import { axlegamesPrefix } from "../../config";
 
 export interface AxleGame {
   _id: string;
@@ -53,9 +54,7 @@ export class HomeServices {
       Waffle,
       WordScramble,
     ];
-    const response = await axios.get(
-      "http://localhost:5000/axlegames/api/v1/get-games"
-    );
+    const response = await axios.get(`${axlegamesPrefix}get-games`);
     let axleGames: AxleGames = response.data;
     console.log(axleGames);
     for (let i = 0; i < axleGames.axleGames.length; i++)
