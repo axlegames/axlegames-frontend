@@ -62,7 +62,10 @@ export const reducer = (state: WordleState, action: Action): WordleState => {
       const filled = action.payload.gameState.length;
       const unfilled = action.payload.guessLength ?? 5;
       const empty = unfilled - filled;
+
       let completedRows = state.completedRows;
+      for (let i = 0; i < filled; i++) completedRows[i] = true;
+
       for (let j = 0; j < filled; j++) completedRows[j] = true;
       const gameState = [...action.payload.gameState];
       const gameStatus = [...action.payload.gameStatus];
@@ -74,19 +77,18 @@ export const reducer = (state: WordleState, action: Action): WordleState => {
       }
       const wordlength = action.payload.wordLength ?? 5;
       const guessLength = action.payload.guessLength ?? 5;
-      const currentRow = filled;
 
       return {
         ...state,
-        wordlength: wordlength,
-        guessLength: guessLength,
-        currentRow: currentRow,
-        completedRows: completedRows,
         gameState: gameState,
         gameStatus: gameStatus,
+        completedRows: completedRows,
+        currentGuess: "",
+        currentRow: filled,
+        wordlength: wordlength,
+        guessLength: guessLength,
       };
     case KEY_ACTION.ON_INIT:
-      console.log(action.payload.currentState);
       return action.payload.currentState ?? initState;
     case KEY_ACTION.ON_KEY_PRESS:
       if (state.currentGuess.length < state.wordlength) {

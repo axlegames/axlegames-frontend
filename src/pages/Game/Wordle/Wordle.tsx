@@ -26,33 +26,32 @@ const Wordle = () => {
   const [state, dispatch] = useReducer(reducer, initState);
 
   const fectchState = (game: Status) => {
-    if (game.wordList.length > 0) {
-      dispatch({
-        type: KEY_ACTION.ON_FETCH,
-        payload: {
-          guessesStatus: [],
-          key: "",
-          gameState: game.wordList,
-          gameStatus: game.gameStatus,
-          guessLength: game.guessLength,
-          wordLength: game.wordLength,
-        },
-      });
-      return;
-    }
+    dispatch({
+      type: KEY_ACTION.ON_FETCH,
+      payload: {
+        guessesStatus: [],
+        key: "",
+        gameState: game.wordList,
+        gameStatus: game.gameStatus,
+        guessLength: game.guessLength,
+        wordLength: game.wordLength,
+      },
+    });
   };
 
   const initializeState = (game: Status) => {
-    const emptyState = WordleServices.createInitState(
-      game.guessLength,
-      game.wordLength
-    );
     const completedRows = WordleServices.initRows(game.guessLength);
     const initState: WordleState = {
       guessLength: game.guessLength,
       wordlength: game.wordLength,
-      gameState: emptyState,
-      gameStatus: emptyState,
+      gameState: WordleServices.createInitState(
+        game.guessLength,
+        game.wordLength
+      ),
+      gameStatus: WordleServices.createInitState(
+        game.guessLength,
+        game.wordLength
+      ),
       completedRows: completedRows,
       currentGuess: "",
       currentRow: 0,
@@ -75,8 +74,9 @@ const Wordle = () => {
         if (game.isGameCompeted)
           if (game.isWinningWord) setIsWon(true);
           else setIsLost(true);
-        fectchState(game);
-        initializeState(game);
+
+        if (game.wordList.length > 0) fectchState(game);
+        else initializeState(game);
       })
       .catch((err) => console.log(err));
     return () => {

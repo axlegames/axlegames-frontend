@@ -101,6 +101,8 @@ const GamesLayout = () => {
           display={"flex"}
           columnGap="1rem"
           alignItems="center"
+          flexDirection={{ base: "column", lg: "row" }}
+          rowGap={{ base: "3rem", lg: "0" }}
           justifyContent={"start"}
         >
           <Image
@@ -115,18 +117,42 @@ const GamesLayout = () => {
           />
         </Box>
         <Flex flexDirection={"column"}>
-          <Box
-            bgColor={theme.bgColor}
-            color={theme.highLightColor}
-            fontWeight="bold"
-            p={{ base: "4" }}
-            borderTopRadius={"2xl"}
-            width={{ base: "80%", md: "60%", lg: "30%", xl: "20%" }}
-            borderTopLeftRadius={{ base: "2xl" }}
-            textAlign="center"
-          >
-            <Text>Axle Web3 Games</Text>
-          </Box>
+          <Flex justifyContent={"space-between"}>
+            <Box
+              bgColor={theme.bgColor}
+              color={theme.highLightColor}
+              fontWeight="bold"
+              p={{ base: "4" }}
+              borderTopRadius={"2xl"}
+              width={{ base: "80%", md: "60%", lg: "40%", xl: "35%" }}
+              borderTopLeftRadius={{ base: "2xl" }}
+              textAlign="center"
+            >
+              <Box
+                fontSize={{ base: "xl" }}
+                display={"flex"}
+                justifyContent="center"
+                columnGap={"1rem"}
+              >
+                <Text>Axle</Text>
+                <Text color={theme.primaryColor}>Web3 Games</Text>
+              </Box>
+            </Box>
+            <Box
+              borderRadius={"2xl"}
+              mb={2}
+              bg={theme.bgColor}
+              width={"60%"}
+              display={{ base: "none", xl: "flex" }}
+              justifyContent="space-evenly"
+              alignItems="center"
+            >
+              <Box textDecoration={`underline`}>Single Player</Box>
+              <Box>Multi Player</Box>
+              <Box>Tournaments</Box>
+              <Box>Streaming</Box>
+            </Box>
+          </Flex>
           <Box
             bgColor={theme.bgColor}
             p={{ base: "4" }}
