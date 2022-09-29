@@ -59,7 +59,6 @@ const createEmptyArrays = (number: number) => {
 export const reducer = (state: WordleState, action: Action): WordleState => {
   switch (action.type) {
     case KEY_ACTION.ON_FETCH:
-      let game = state;
       const filled = action.payload.gameState.length;
       const unfilled = action.payload.guessLength ?? 5;
       const empty = unfilled - filled;
@@ -73,13 +72,19 @@ export const reducer = (state: WordleState, action: Action): WordleState => {
         gameState.push(emptyRow);
         gameStatus.push(emptyRow);
       }
-      game.wordlength = action.payload.wordLength ?? 5;
-      game.guessLength = action.payload.guessLength ?? 5;
-      game.currentRow = filled;
-      game.completedRows = completedRows;
-      game.gameState = gameState;
-      game.gameStatus = gameStatus;
-      return game;
+      const wordlength = action.payload.wordLength ?? 5;
+      const guessLength = action.payload.guessLength ?? 5;
+      const currentRow = filled;
+
+      return {
+        ...state,
+        wordlength: wordlength,
+        guessLength: guessLength,
+        currentRow: currentRow,
+        completedRows: completedRows,
+        gameState: gameState,
+        gameStatus: gameStatus,
+      };
     case KEY_ACTION.ON_INIT:
       console.log(action.payload.currentState);
       return action.payload.currentState ?? initState;

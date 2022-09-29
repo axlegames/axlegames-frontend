@@ -3,7 +3,7 @@ import { headers, axlegamesPrefix } from "../../../config";
 
 const token = headers() ?? "";
 
-interface Status {
+export interface Status {
   wordList: Array<Array<string>>;
   gameStatus: Array<Array<string>>;
   hasGameState: boolean;
@@ -13,7 +13,7 @@ interface Status {
   guessLength: number;
 }
 
-interface GuessStatus {
+export interface GuessStatus {
   guessStatus?: string[];
   isWinningWord?: boolean;
   inValidWord?: boolean;

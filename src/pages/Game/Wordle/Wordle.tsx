@@ -10,80 +10,76 @@ import KeyBoard from "./components/Keyboard";
 import WonModal from "./modals/WonModal";
 import LostModal from "./modals/LostModal";
 import MenuModal from "./modals/MenuModal";
-import HowToPlayModal from "./modals/HowToPlayModal";
 
-import { WordleServices } from "./WordleServices";
+import { WordleServices, Status } from "./WordleServices";
 import { KEY_ACTION, initState, reducer, WordleState } from "./WordleReducer";
 
 const Wordle = () => {
+  const toast = useToast();
+
   const [isWon, setIsWon] = useState(false);
   const [isLost, setIsLost] = useState(false);
-  const [start, setStart] = useState(true);
 
-  const toast = useToast();
   const navigate = useNavigate();
-  const [state, dispatch] = useReducer(reducer, initState);
-
   const { contestId, gameStateId, game } = useParams();
 
-  const initStateFromServer = () => {
-    WordleServices.getGameState({
-      userId: localStorage.getItem("userId"),
-    })
-      .then((game) => {
-        if (game.isGameCompeted) {
-          if (game.isWinningWord) setIsWon(true);
-          else setIsLost(true);
-        }
+  const [state, dispatch] = useReducer(reducer, initState);
 
-        if (game.wordList.length > 0) {
-          dispatch({
-            type: KEY_ACTION.ON_FETCH,
-            payload: {
-              guessesStatus: [],
-              key: "",
-              gameState: game.wordList,
-              gameStatus: game.gameStatus,
-              guessLength: game.guessLength,
-              wordLength: game.wordLength,
-            },
-          });
-          return setStart(false);
-        }
-
-        const initState: WordleState = {
+  const fectchState = (game: Status) => {
+    if (game.wordList.length > 0) {
+      dispatch({
+        type: KEY_ACTION.ON_FETCH,
+        payload: {
+          guessesStatus: [],
+          key: "",
+          gameState: game.wordList,
+          gameStatus: game.gameStatus,
           guessLength: game.guessLength,
-          wordlength: game.wordLength,
-          gameState: WordleServices.createInitState(
-            game.guessLength,
-            game.wordLength
-          ),
-          gameStatus: WordleServices.createInitState(
-            game.guessLength,
-            game.wordLength
-          ),
-          completedRows: WordleServices.initRows(game.guessLength),
-          currentGuess: "",
-          currentRow: 0,
-        };
-        dispatch({
-          type: KEY_ACTION.ON_INIT,
-          payload: {
-            guessesStatus: [],
-            key: "",
-            gameState: [],
-            gameStatus: [],
-            currentState: initState,
-          },
-        });
-        return setStart(false);
-      })
-      .catch((err) => console.log(err));
+          wordLength: game.wordLength,
+        },
+      });
+      return;
+    }
+  };
+
+  const initializeState = (game: Status) => {
+    const emptyState = WordleServices.createInitState(
+      game.guessLength,
+      game.wordLength
+    );
+    const completedRows = WordleServices.initRows(game.guessLength);
+    const initState: WordleState = {
+      guessLength: game.guessLength,
+      wordlength: game.wordLength,
+      gameState: emptyState,
+      gameStatus: emptyState,
+      completedRows: completedRows,
+      currentGuess: "",
+      currentRow: 0,
+    };
+    dispatch({
+      type: KEY_ACTION.ON_INIT,
+      payload: {
+        guessesStatus: [],
+        key: "",
+        gameState: [],
+        gameStatus: [],
+        currentState: initState,
+      },
+    });
   };
 
   useEffect(() => {
+    WordleServices.getGameState({ userId: localStorage.getItem("userId") })
+      .then((game) => {
+        if (game.isGameCompeted)
+          if (game.isWinningWord) setIsWon(true);
+          else setIsLost(true);
+        fectchState(game);
+        initializeState(game);
+      })
+      .catch((err) => console.log(err));
     return () => {
-      setStart(true);
       setIsWon(false);
       setIsLost(false);
     };
@@ -160,12 +156,6 @@ const Wordle = () => {
   return (
     <Box>
       <Navbar title={game} />
-      <MenuModal
-        title={"How To Play?"}
-        isOpen={start}
-        children={<HowToPlayModal game={game} />}
-        close={() => initStateFromServer()}
-      />
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
