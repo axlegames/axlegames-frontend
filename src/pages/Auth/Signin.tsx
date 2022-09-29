@@ -8,7 +8,9 @@ import { useState } from "react";
 import { AuthServices } from "./AuthServices";
 import { useFormik } from "formik";
 import FormMessage from "./componetns/FormMessage";
-import GoogleLogin from "react-google-login";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+
+import { theme } from "../../config/theme.config";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -64,7 +66,9 @@ const Signin = () => {
 
   return (
     <Form>
-      <Text fontSize={{ base: "4xl" }}>Sign In</Text>
+      <Text color={theme.primaryColor} fontSize={{ base: "4xl" }}>
+        Login
+      </Text>
       <FormMessage message={status.message} error={status.error} />
       <FormField
         name="username"
@@ -98,14 +102,9 @@ const Signin = () => {
       >
         <FormButton onClick={() => form.handleSubmit()} label="Sign in" />
         <Text fontWeight={"bolder"}>OR</Text>
-        <GoogleLogin
-          clientId={
-            "461311621504-7qc2ioaio08dvv3f2q2f5l25rm0ct0to.apps.googleusercontent.com"
-          }
-          onFailure={() => {}}
-          onSuccess={handleGoogleLogin}
-          theme="dark"
-        />
+        <GoogleOAuthProvider clientId="1059713289873-mnr4ecn113umdpe68k2a9but136dnde6.apps.googleusercontent.com">
+          <GoogleLogin onError={() => {}} onSuccess={handleGoogleLogin} />
+        </GoogleOAuthProvider>
         <FormLink
           action={() => navigate("/signup")}
           label="Don't have account? Signup"

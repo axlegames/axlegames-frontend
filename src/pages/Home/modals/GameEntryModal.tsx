@@ -21,20 +21,23 @@ const GameEntryModal = (props: any) => {
   const navigate = useNavigate();
 
   function goToPage() {
-    WordleServices.enterContest({
-      gameTypeId: props._id,
-      userId: localStorage.getItem("userId"),
-    })
-      .then((res) => {
-        if (res.data.error) {
-          return;
-        }
-        const link = `${props.link}/${res.data.axleContest}/${res.data._id}`;
-        navigate(link);
+    const user = localStorage.getItem("userId");
+    if (user)
+      return WordleServices.enterContest({
+        gameTypeId: props._id,
+        userId: localStorage.getItem("userId"),
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          if (res.data.error) {
+            return;
+          }
+          const link = `${props.link}/${res.data.axleContest}/${res.data._id}`;
+          navigate(link);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    return navigate("/login");
   }
 
   return (

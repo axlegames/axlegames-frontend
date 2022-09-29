@@ -4,7 +4,7 @@ import { theme } from "../../../config/theme.config";
 const FormLink = (props: any) => {
   return (
     <Button
-      color={theme.secondaryColor}
+      color={theme.primaryColor}
       _active={{ color: theme.highLightColor }}
       variant={"link"}
       onClick={props.action}

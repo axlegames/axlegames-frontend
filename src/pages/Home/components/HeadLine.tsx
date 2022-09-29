@@ -1,54 +1,16 @@
+import { Box, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-import { SiEthereum } from "react-icons/si/index";
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
-import * as nearAPI from "near-api-js";
-const { connect, keyStores, WalletConnection } = nearAPI;
 
 const HeadLine = () => {
-  const connectWallet = async () => {
-    const connectionConfig = {
-      networkId: "testnet",
-      keyStore: new keyStores.BrowserLocalStorageKeyStore(),
-      nodeUrl: "https://rpc.testnet.near.org",
-      walletUrl: "https://wallet.testnet.near.org",
-      helperUrl: "https://helper.testnet.near.org",
-      explorerUrl: "https://explorer.testnet.near.org",
-    };
-    // connect to NEAR
-    const nearConnection = await connect(connectionConfig);
-    // create wallet connection
-    const wallet = new WalletConnection(nearConnection, "testapp");
-    if (!wallet.isSignedIn()) return wallet.requestSignIn({});
-  };
-
   return (
     <Box
-      bg={theme.fgColor}
+      fontFamily={"quicksand"}
+      fontWeight="bold"
+      bg={theme.primaryColor}
       color={theme.bgColor}
-      maxHeight="10vh"
-      fontFamily="quicksand"
-      px={{ base: "12" }}
-      py={{ base: "4" }}
-      fontWeight={"bold"}
-      alignItems="center"
-      justifyContent={{ lg: "flex-end" }}
-      display={{ base: "none", lg: "flex" }}
+      justifyContent="center"
     >
-      <Button
-        _hover={{
-          color: theme.primaryColor,
-          bg: theme.bgColor,
-        }}
-        borderRadius={"2xl"}
-        bg={theme.primaryColor}
-        shadow="2xl"
-        onClick={connectWallet}
-      >
-        <Flex columnGap={".5rem"}>
-          <Text>Buy Axle</Text>
-          <SiEthereum color={theme.fgColor} />
-        </Flex>
-      </Button>
+      <Text textAlign={"center"}>Axle games launch soon</Text>
     </Box>
   );
 };

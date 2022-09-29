@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import { AuthServices } from "./AuthServices";
 import { useState } from "react";
 import FormError from "./componetns/FormError";
+import { theme } from "../../config/theme.config";
 
 const isValidUsername = (username: string) => /^[a-z0-9]{6}$/.test(username);
 const isValidEmail = (email: string) =>
@@ -83,7 +84,9 @@ const Signup = () => {
   return (
     <Form>
       <FormMessage message={status.message} error={status.error} />
-      <Text fontSize={{ base: "4xl" }}>Sign Up</Text>
+      <Text color={theme.primaryColor} fontSize={{ base: "4xl" }}>
+        Sign Up
+      </Text>
       <FormField
         placeHolder="Name"
         value={form.values.name}
@@ -158,7 +161,10 @@ const Signup = () => {
         <FormButton onClick={() => form.handleSubmit()} label="Sign up" />
 
         <FormLink
-          action={() => navigate("/signin")}
+          action={() => {
+            navigate("/login");
+            window.location.reload();
+          }}
           label="Already have an account? Sign in"
         />
       </Flex>

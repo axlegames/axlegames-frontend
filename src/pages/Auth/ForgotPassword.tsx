@@ -28,7 +28,7 @@ const ForgotPassword = () => {
       >
         <FormButton onClick={() => null} label="Send password reset link" />
         <FormLink
-          action={() => navigate("/signin")}
+          action={() => navigate("/login")}
           label="Already have an account? Sign in"
         />
       </Flex>

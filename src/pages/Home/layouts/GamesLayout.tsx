@@ -13,6 +13,7 @@ import { theme } from "../../../config/theme.config";
 
 import GameEntryModal from "../modals/GameEntryModal";
 import { AxleGame, AxleGames, HomeServices } from "../HomeServices";
+import GamesLayoutBarTile from "../components/GameLayoutBarTile";
 
 const GamesLayout = () => {
   useEffect(() => {
@@ -124,15 +125,16 @@ const GamesLayout = () => {
               fontWeight="bold"
               p={{ base: "4" }}
               borderTopRadius={"2xl"}
-              width={{ base: "80%", md: "60%", lg: "40%", xl: "35%" }}
               borderTopLeftRadius={{ base: "2xl" }}
               textAlign="center"
+              pr={{ base: "8", xl: "16" }}
+              pl={{ base: "6" }}
             >
               <Box
                 fontSize={{ base: "xl" }}
                 display={"flex"}
-                justifyContent="center"
-                columnGap={"1rem"}
+                justifyContent="flex-start"
+                columnGap={".5rem"}
               >
                 <Text>Axle</Text>
                 <Text color={theme.primaryColor}>Web3 Games</Text>
@@ -140,17 +142,15 @@ const GamesLayout = () => {
             </Box>
             <Box
               borderRadius={"2xl"}
-              mb={2}
               bg={theme.bgColor}
-              width={"60%"}
-              display={{ base: "none", xl: "flex" }}
-              justifyContent="space-evenly"
-              alignItems="center"
+              display={"flex"}
+              columnGap=".25rem"
+              mb={2}
             >
-              <Box textDecoration={`underline`}>Single Player</Box>
-              <Box>Multi Player</Box>
-              <Box>Tournaments</Box>
-              <Box>Streaming</Box>
+              <GamesLayoutBarTile isActive={true} title={"Single Player"} />
+              <GamesLayoutBarTile isActive={false} title={"Multi Player"} />
+              <GamesLayoutBarTile isActive={false} title={"Tournaments"} />
+              <GamesLayoutBarTile isActive={false} title={"Streaming"} />
             </Box>
           </Flex>
           <Box

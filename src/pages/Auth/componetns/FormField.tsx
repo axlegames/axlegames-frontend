@@ -13,7 +13,7 @@ interface FormFieldInterface {
 
 const FormField = (props: FormFieldInterface) => {
   return (
-    <FormControl bg={theme.fgColor}>
+    <FormControl color={theme.primaryColor} bg={theme.fgColor}>
       <FormLabel fontWeight="bold">{props.label}</FormLabel>
       <Input
         placeholder={props.placeHolder}

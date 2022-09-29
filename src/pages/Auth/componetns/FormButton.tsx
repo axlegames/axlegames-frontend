@@ -15,7 +15,7 @@ const FormButton = (props: FormButtonInterface) => {
         bg: theme.highLightColor,
       }}
       bg={theme.bgColor}
-      color={theme.highLightColor}
+      color={theme.primaryColor}
       mx={"4"}
       width="64"
       size={"lg"}
