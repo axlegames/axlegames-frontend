@@ -13,7 +13,6 @@ import { theme } from "../../../config/theme.config";
 
 import GameEntryModal from "../modals/GameEntryModal";
 import { AxleGame, AxleGames, HomeServices } from "../HomeServices";
-import GameOneBanner from "../../../assets/home/highlight/banners/banner.jpg";
 
 const GamesLayout = () => {
   useEffect(() => {
