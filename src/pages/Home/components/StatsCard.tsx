@@ -17,11 +17,11 @@ const StatsCard = (props: any) => {
         justifyContent={{ base: "center" }}
         bg={theme.bgColor}
         p={{ base: "4" }}
-        borderRadius={{ base: "2xl" }}
+        borderRadius={{ base: "sm" }}
         textAlign={{ base: "center" }}
       >
         <Image
-          borderRadius={{ base: "48vh" }}
+          borderRadius={{ base: "50%" }}
           w={{ base: "48" }}
           mb={{ base: "4" }}
           src={props.img}

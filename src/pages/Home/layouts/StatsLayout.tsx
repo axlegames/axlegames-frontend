@@ -4,25 +4,19 @@ import { theme } from "../../../config/theme.config";
 import { GiPodiumWinner } from "react-icons/gi/index";
 import { ImCool } from "react-icons/im/index";
 
-import GameOnePic from "../../../assets/home/highlight/banners/banner.jpg";
-import GameTwoPic from "../../../assets/home/highlight/banners/banner.jpg";
-
-import GameThreePic from "../../../assets/home/highlight/banners/banner.jpg";
-import GameFourPic from "../../../assets/home/highlight/banners/banner.jpg";
-
 import StatsCard from "../components/StatsCard";
 
 const StatsLayout = () => {
   const games = [
     {
-      game: "Jetpack Joyride",
-      img: GameOnePic,
+      game: "Wordle 5",
+      img: "https://axlegames.s3.ap-south-1.amazonaws.com/wordle-5.png",
       category: "Sessions",
       value: "1002",
     },
     {
-      game: "Major Mahayem",
-      img: GameTwoPic,
+      game: "Wordle 6",
+      img: "https://axlegames.s3.ap-south-1.amazonaws.com/wordle-6.png",
       category: "Sessions",
       value: "1292",
     },
@@ -31,13 +25,13 @@ const StatsLayout = () => {
   const winners = [
     {
       game: "Akash Madduru",
-      img: GameThreePic,
+      img: "https://axlegames.s3.ap-south-1.amazonaws.com/lewdle.png",
       category: "Wins",
       value: "200",
     },
     {
-      game: "Levi Ackerman",
-      img: GameFourPic,
+      game: "Levi Schovi",
+      img: "https://axlegames.s3.ap-south-1.amazonaws.com/lookdle.png",
       category: "Wins",
       value: "242",
     },
