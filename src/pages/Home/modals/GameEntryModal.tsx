@@ -16,9 +16,12 @@ import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
 import { theme } from "../../../config/theme.config";
 import { WordleServices } from "../../Game/Wordle/WordleServices";
+import { useState } from "react";
+import Dialog from "./Dailog";
 
 const GameEntryModal = (props: any) => {
   const navigate = useNavigate();
+  const [dialog, setDialog] = useState(false);
 
   function goToPage() {
     const user = localStorage.getItem("userId");
@@ -29,7 +32,7 @@ const GameEntryModal = (props: any) => {
       })
         .then((res) => {
           if (res.data.error) {
-            return;
+            return setDialog(true);
           }
           const link = `${props.link}/${res.data.axleContest}/${res.data._id}`;
           navigate(link);
@@ -50,6 +53,12 @@ const GameEntryModal = (props: any) => {
         fontFamily={"quicksand"}
         fontWeight="bold"
       >
+        <Dialog
+          title={"Warning"}
+          description={`your are currently playing another game, finsih it and come back again.`}
+          open={dialog}
+          close={() => setDialog(false)}
+        />
         <ModalHeader fontSize={"5xl"}> {props.name} </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
