@@ -4,18 +4,29 @@ import FormButton from "./componetns/FormButton";
 import FormLink from "./componetns/FormLink";
 import { useNavigate } from "react-router";
 import Form from "./componetns/Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthServices } from "./AuthServices";
 import { useFormik } from "formik";
 import FormMessage from "./componetns/FormMessage";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script";
 
 import { theme } from "../../config/theme.config";
 
 const Signin = () => {
   const navigate = useNavigate();
+  const clientId = `1059713289873-mnr4ecn113umdpe68k2a9but136dnde6.apps.googleusercontent.com`;
 
   const [status, setStatus] = useState({ message: "", error: false });
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    };
+    gapi.load("client:auth2", initClient);
+  }, [clientId]);
 
   const handleLoginSuccess = (data: any) => {
     AuthServices.createSession(data);
@@ -28,21 +39,6 @@ const Signin = () => {
       setStatus({ error: false, message: "" });
     }, 5000);
   };
-
-  const handleLoginFailure = () =>
-    setStatus({ error: true, message: "Internal Server Errror" });
-
-  const form = useFormik({
-    initialValues: { username: "", password: "" },
-    onSubmit: (values: any) => {
-      AuthServices.login(values)
-        .then((res: any) => handleLoginSuccess(res.data))
-        .catch((err: any) => {
-          console.log(err);
-          handleLoginFailure();
-        });
-    },
-  });
 
   const handleGoogleLogin = (data: any) => {
     const tokenData = { token: data.tokenId };
@@ -63,6 +59,22 @@ const Signin = () => {
       });
     }, 5000);
   };
+
+  const handleLoginFailure = () => {
+    setStatus({ error: true, message: "Internal Server Errror" });
+  };
+
+  const form = useFormik({
+    initialValues: { username: "", password: "" },
+    onSubmit: (values: any) => {
+      AuthServices.login(values)
+        .then((res: any) => handleLoginSuccess(res.data))
+        .catch((err: any) => {
+          console.log(err);
+          handleLoginFailure();
+        });
+    },
+  });
 
   return (
     <Form>
@@ -102,9 +114,13 @@ const Signin = () => {
       >
         <FormButton onClick={() => form.handleSubmit()} label="Sign in" />
         <Text fontWeight={"bolder"}>OR</Text>
-        <GoogleOAuthProvider clientId="1059713289873-mnr4ecn113umdpe68k2a9but136dnde6.apps.googleusercontent.com">
-          <GoogleLogin onError={() => {}} onSuccess={handleGoogleLogin} />
-        </GoogleOAuthProvider>
+        <GoogleLogin
+          clientId={clientId}
+          buttonText="Sign in with Google"
+          onSuccess={handleGoogleLogin}
+          onFailure={handleLoginFailure}
+          cookiePolicy={"single_host_origin"}
+        />
         <FormLink
           action={() => navigate("/signup")}
           label="Don't have account? Signup"

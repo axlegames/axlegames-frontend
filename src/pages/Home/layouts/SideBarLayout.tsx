@@ -10,15 +10,12 @@ import { HiUsers, HiGlobe, HiCash } from "react-icons/hi/index";
 import { BiLogOut } from "react-icons/bi/index";
 
 import SideBarCard from "../components/SideBarCard";
+import IsNotLoggedIn from "../../../config/isNotLoggedIn";
 
 const SideBarLayout = () => {
   const navigate = useNavigate();
   const signin = () => {
     navigate("/login");
-    window.location.reload();
-  };
-  const signout = () => {
-    localStorage.clear();
     window.location.reload();
   };
   return (
@@ -53,26 +50,7 @@ const SideBarLayout = () => {
       </SideBarCard>
 
       <Flex justifyContent={"center"}>
-        {localStorage.getItem("userId") ? (
-          <Button
-            _hover={{
-              color: theme.primaryColor,
-              bg: theme.bgColor,
-            }}
-            bg={theme.primaryColor}
-            shadow="2xl"
-            onClick={signout}
-          >
-            <Flex
-              columnGap={"0.5rem"}
-              alignItems={"center"}
-              justifyContent="space-evenly"
-            >
-              <BiLogOut size={28} />
-              <Text>Logout</Text>
-            </Flex>
-          </Button>
-        ) : (
+        <IsNotLoggedIn>
           <Button
             _hover={{
               color: theme.primaryColor,
@@ -91,7 +69,7 @@ const SideBarLayout = () => {
               <Text>Login</Text>
             </Flex>
           </Button>
-        )}
+        </IsNotLoggedIn>
       </Flex>
     </Box>
   );
