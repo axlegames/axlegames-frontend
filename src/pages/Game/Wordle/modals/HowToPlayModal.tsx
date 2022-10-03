@@ -26,6 +26,7 @@ const HowToPlayModal = (props: any) => {
           {example[1].map((wordle, index) => (
             <Cell
               key={index}
+              index={index}
               isCurrentRowCompleted={wordle.isCompleted}
               keyPresence={wordle.keyPresence}
               letter={wordle.letter}
@@ -37,6 +38,7 @@ const HowToPlayModal = (props: any) => {
           {example[2].map((wordle, index) => (
             <Cell
               key={index}
+              index={index}
               isCurrentRowCompleted={wordle.isCompleted}
               keyPresence={wordle.keyPresence}
               letter={wordle.letter}
@@ -47,6 +49,7 @@ const HowToPlayModal = (props: any) => {
         <Flex color={theme.fgColor} justifyContent={"center"}>
           {example[3].map((wordle, index) => (
             <Cell
+              index={index}
               key={index}
               isCurrentRowCompleted={wordle.isCompleted}
               keyPresence={wordle.keyPresence}

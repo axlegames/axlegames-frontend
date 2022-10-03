@@ -111,7 +111,7 @@ const KeyBoard = (props: any) => {
                 }, 250);
               }
             }
-          props.onKeyPress(key);
+          props.onKeyPress(key.toUpperCase());
         }
       }
     };

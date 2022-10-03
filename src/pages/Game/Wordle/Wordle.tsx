@@ -109,7 +109,7 @@ const Wordle = () => {
     }
     const { guessStatus, inValidWord, isWinningWord } =
       await WordleServices.validateUpdateGuess({
-        word: state.currentGuess,
+        word: state.currentGuess.toLowerCase(),
         contestId: contestId,
         gameStateId: gameStateId,
       });

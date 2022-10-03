@@ -1,7 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import { theme } from "../../../../config/theme.config";
 
-const Cell = (props: any) => {
+interface Props {
+  letter: string;
+  isCurrentRowCompleted: boolean;
+  keyPresence: string;
+  index: number;
+}
+
+const Cell = (props: Props) => {
   const validate = () => {
     if (props.isCurrentRowCompleted) {
       if (props.keyPresence === "absent") return "red.400";

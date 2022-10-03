@@ -47,8 +47,9 @@ const Navbar = () => {
           position={"absolute"}
           bottom="-300%"
           rowGap={".5rem"}
+          maxWidth={"200px"}
         >
-          <Text fontFamily={"quicksand"} fontSize="2xl">
+          <Text fontFamily={"quicksand"}>
             Welcome, {localStorage.getItem("username")}
           </Text>
 
@@ -60,12 +61,9 @@ const Navbar = () => {
             bg={theme.primaryColor}
             shadow="2xl"
             onClick={signout}
+            justifyContent="flex-start"
           >
-            <Flex
-              columnGap={"0.5rem"}
-              alignItems={"center"}
-              justifyContent="space-evenly"
-            >
+            <Flex columnGap={"0.5rem"} alignItems={"center"}>
               <BiUser size={28} />
               <Text>Profile</Text>
             </Flex>
@@ -78,12 +76,9 @@ const Navbar = () => {
             bg={theme.primaryColor}
             shadow="2xl"
             onClick={signout}
+            justifyContent="flex-start"
           >
-            <Flex
-              columnGap={"0.5rem"}
-              alignItems={"center"}
-              justifyContent="space-evenly"
-            >
+            <Flex columnGap={"0.5rem"} alignItems={"center"}>
               <BiCog size={28} />
               <Text>Settings</Text>
             </Flex>
@@ -97,12 +92,9 @@ const Navbar = () => {
             bg={theme.primaryColor}
             shadow="2xl"
             onClick={signout}
+            justifyContent="flex-start"
           >
-            <Flex
-              columnGap={"0.5rem"}
-              alignItems={"center"}
-              justifyContent="space-evenly"
-            >
+            <Flex columnGap={"0.5rem"} alignItems={"center"}>
               <BiLogOut size={28} />
               <Text>Logout</Text>
             </Flex>

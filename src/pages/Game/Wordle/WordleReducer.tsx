@@ -113,12 +113,6 @@ export const reducer = (state: WordleState, action: Action): WordleState => {
       return { ...state };
 
     case KEY_ACTION.ON_ENTER:
-      console.log(
-        state.wordlength,
-        state.guessLength,
-        state.currentRow,
-        state.currentGuess.length
-      );
       if (
         state.currentRow < state.guessLength &&
         state.currentGuess.length === state.wordlength
