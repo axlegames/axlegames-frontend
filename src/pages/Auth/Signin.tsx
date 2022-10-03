@@ -12,6 +12,8 @@ import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
 
 import { theme } from "../../config/theme.config";
+import Dialog from "./Dialog";
+import Signup from "./Signup";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -76,8 +78,18 @@ const Signin = () => {
     },
   });
 
+  const [open, setOpen] = useState(false);
+  const signup = () => {
+    setOpen(true);
+  };
+
   return (
     <Form>
+      <Dialog
+        isOpen={open}
+        close={() => setOpen(!open)}
+        children={<Signup />}
+      />
       <Text color={theme.primaryColor} fontSize={{ base: "4xl" }}>
         Login
       </Text>
@@ -121,10 +133,7 @@ const Signin = () => {
           onFailure={handleLoginFailure}
           cookiePolicy={"single_host_origin"}
         />
-        <FormLink
-          action={() => navigate("/signup")}
-          label="Don't have account? Signup"
-        />
+        <FormLink action={() => signup()} label="Don't have account? Signup" />
       </Flex>
     </Form>
   );

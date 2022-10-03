@@ -2,7 +2,7 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import { AiOutlineRight } from "react-icons/ai";
 
-const HowToPlayLayout = () => {
+const HowToPlayView = () => {
   return (
     <Box
       minH={{ base: "90vh" }}
@@ -48,4 +48,4 @@ const HowToPlayLayout = () => {
   );
 };
 
-export default HowToPlayLayout;
+export default HowToPlayView;

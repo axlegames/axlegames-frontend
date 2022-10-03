@@ -88,7 +88,13 @@ const GameEntryModal = (props: any) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button size="sm" colorScheme="blue" mr={3} onClick={props.close}>
+          <Button
+            size="sm"
+            width={"32"}
+            colorScheme="blue"
+            mr={3}
+            onClick={props.close}
+          >
             Close
           </Button>
         </ModalFooter>

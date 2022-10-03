@@ -11,7 +11,7 @@ const EntryCard = (props: any) => (
       <Grid
         templateColumns="1fr 1fr 2fr"
         alignItems={"center"}
-        fontSize={"small"}
+        fontSize={"md"}
         gap={6}
       >
         <GridItem>
@@ -36,11 +36,12 @@ const EntryCard = (props: any) => (
                 variant={"ghost"}
                 color="black"
                 bg={"green.400"}
+                w={"32"}
               >
                 Play
               </Button>
             ) : (
-              <Button size="sm" color="black">
+              <Button size="sm" width={"32"} color="black">
                 coming soon
               </Button>
             )}
@@ -50,7 +51,7 @@ const EntryCard = (props: any) => (
     </Box>
     {props.isLive ? (
       <Box borderBottomRadius={"lg"} boxShadow="md" p="2">
-        <Text>{props.players} + playing now</Text>
+        <Text fontSize={"smaller"}>{props.players} + playing now</Text>
       </Box>
     ) : null}
   </Box>

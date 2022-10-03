@@ -1,16 +1,16 @@
 import { Box, Flex, Button, Image } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
+import { theme } from "../../../../config/theme.config";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai/index";
 import { useState } from "react";
-import Logo from "../../../assets/home/logos/logo.png";
+import Logo from "../../../../assets/home/logos/logo.png";
 
-const MobileNavbarLayout = () => {
+const MobileNavbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <Box
       width={"100%"}
-      display={"flex"}
+      display={{ base: "flex", lg: "none" }}
       flexDirection="column"
       fontFamily={"quicksand"}
       boxShadow="dark-lg"
@@ -145,4 +145,4 @@ const MobileNavbarLayout = () => {
   );
 };
 
-export default MobileNavbarLayout;
+export default MobileNavbar;

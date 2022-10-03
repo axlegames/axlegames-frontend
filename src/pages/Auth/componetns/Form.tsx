@@ -5,9 +5,6 @@ import { theme } from "../../../config/theme.config";
 const Form = (props: any) => {
   return (
     <Flex
-      p={{ base: "6" }}
-      maxHeight="100vh"
-      minHeight="100vh"
       direction="row"
       justifyContent="center"
       alignItems={"center"}

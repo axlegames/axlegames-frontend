@@ -14,7 +14,9 @@ interface FormFieldInterface {
 const FormField = (props: FormFieldInterface) => {
   return (
     <FormControl color={theme.primaryColor} bg={theme.fgColor}>
-      <FormLabel fontWeight="bold">{props.label}</FormLabel>
+      <FormLabel fontWeight="bold">
+        {props.label[0].toUpperCase() + props.label.slice(1)}
+      </FormLabel>
       <Input
         placeholder={props.placeHolder}
         id={props.name}

@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
+import { theme } from "../../../../config/theme.config";
 
-const GamesLayoutBarTile = (props: any) => {
+const GameBarTile = (props: any) => {
   return (
     <Button
       size={"sm"}
@@ -20,4 +20,4 @@ const GamesLayoutBarTile = (props: any) => {
   );
 };
 
-export default GamesLayoutBarTile;
+export default GameBarTile;

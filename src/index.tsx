@@ -4,14 +4,16 @@ import * as ReactDOM from "react-dom/client";
 import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from "./reportWebVitals";
 
+import { MetaMaskProvider } from "metamask-react";
+
 const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
 const root = ReactDOM.createRoot(container);
 root.render(
-  <div>
+  <MetaMaskProvider>
     <ColorModeScript />
     <App />
-  </div>
+  </MetaMaskProvider>
 );
 
 // If you want your app to work offline and load faster, you can change

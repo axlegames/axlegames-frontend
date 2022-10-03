@@ -2,22 +2,22 @@ import { Box, Flex, Button, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import Logo from "../../../assets/home/logos/logo.png";
 
-import { useNavigate } from "react-router";
-import SideBarButton from "../components/SideBarButton";
+import SideBarButton from "../components/sidebar/SideBarButton";
 
 import { MdGamepad, MdStore, MdInfo, MdList } from "react-icons/md/index";
 import { HiUsers, HiGlobe, HiCash } from "react-icons/hi/index";
 import { BiLogOut } from "react-icons/bi/index";
 
-import SideBarCard from "../components/SideBarCard";
+import SideBarCard from "../components/sidebar/SideBarCard";
 import IsNotLoggedIn from "../../../config/isNotLoggedIn";
+import Dialog from "../../Auth/Dialog";
+import Signin from "../../Auth/Signin";
+
+import { useState } from "react";
 
 const SideBarLayout = () => {
-  const navigate = useNavigate();
-  const signin = () => {
-    navigate("/login");
-    window.location.reload();
-  };
+  const [open, setOpen] = useState(false);
+  const signin = () => setOpen(true);
   return (
     <Box
       fontFamily={"quicksand"}
@@ -32,9 +32,12 @@ const SideBarLayout = () => {
       rowGap={"1rem"}
       py="8"
     >
-      <Flex direction={"column"} justifyContent="center" fontSize="3xl">
-        <Image height={20} px={{ base: "12" }} src={Logo}></Image>
-      </Flex>
+      <Dialog
+        isOpen={open}
+        close={() => setOpen(!open)}
+        children={<Signin />}
+      />
+      <Image p={2} src={Logo}></Image>
 
       <SideBarCard>
         <SideBarButton title={"Games"} icon={<MdGamepad size={32} />} />
@@ -49,16 +52,23 @@ const SideBarLayout = () => {
         <SideBarButton title={"About Us"} icon={<MdInfo size={32} />} />
       </SideBarCard>
 
-      <Flex justifyContent={"center"}>
+      <Flex
+        flexDirection={"column"}
+        alignItems="center"
+        justifyContent={"center"}
+      >
         <IsNotLoggedIn>
           <Button
             _hover={{
-              color: theme.primaryColor,
-              bg: theme.bgColor,
+              color: theme.bgColor,
+              bg: theme.primaryColor,
             }}
-            bg={theme.primaryColor}
+            bg={theme.fgColor}
             shadow="2xl"
+            transition={"all 100ms ease-in"}
             onClick={signin}
+            size="lg"
+            width={"80%"}
           >
             <Flex
               columnGap={".5rem"}

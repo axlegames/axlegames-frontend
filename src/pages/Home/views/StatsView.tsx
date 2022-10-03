@@ -6,7 +6,7 @@ import { ImCool } from "react-icons/im/index";
 
 import StatsCard from "../components/StatsCard";
 
-const StatsLayout = () => {
+const StatsView = () => {
   const games = [
     {
       game: "Wordle 5",
@@ -113,4 +113,4 @@ const StatsLayout = () => {
   );
 };
 
-export default StatsLayout;
+export default StatsView;

@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
+import { theme } from "../../../../config/theme.config";
 
 const SideBarButton = (props: any) => {
   return (

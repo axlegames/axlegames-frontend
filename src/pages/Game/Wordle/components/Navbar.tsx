@@ -1,14 +1,18 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { AiOutlineMenu, AiOutlineQuestion } from "react-icons/ai/index";
+import { AiOutlineQuestion } from "react-icons/ai/index";
+
+import { BiArrowBack } from "react-icons/bi/index";
 import { IoMdSettings } from "react-icons/io/index";
 import { ImStatsDots } from "react-icons/im/index";
 import { theme } from "../../../../config/theme.config";
 import MenuModal from "../modals/MenuModal";
 import HowToPlayModal from "../modals/HowToPlayModal";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Navbar = (props: any) => {
   const [howToPlayModal, setHowToPlayModal] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -29,20 +33,22 @@ const Navbar = (props: any) => {
         children={<HowToPlayModal></HowToPlayModal>}
       />
       <Flex alignItems={"center"} justifyContent={{ base: "space-between" }}>
+        <Flex>
+          <BiArrowBack onClick={() => navigate("/")} size={42} />
+        </Flex>
         <Flex columnGap={{ base: ".8rem" }} alignItems={"center"}>
-          <AiOutlineMenu size={26} />
-          <Text textAlign={"center"} fontSize={{ base: "2xl" }}>
-            {props.title}
+          <Text textAlign={"center"} fontSize={{ base: "2xl", lg: "4xl" }}>
+            {props.title.replace("-", "#")}
           </Text>
         </Flex>
 
         <Flex columnGap={{ base: "2" }}>
           <AiOutlineQuestion
             onClick={() => setHowToPlayModal(true)}
-            size={26}
+            size={30}
           />
-          <ImStatsDots size={26} />
-          <IoMdSettings size={26} />
+          <ImStatsDots size={30} />
+          <IoMdSettings size={30} />
         </Flex>
       </Flex>
     </Box>

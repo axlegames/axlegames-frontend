@@ -1,20 +1,17 @@
-import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { theme } from "../../config/theme.config";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbars/Navbar";
+import MobileNavbar from "./components/navbars/MobileNavbar";
 
-import GamesLayout from "./layouts/GamesLayout";
-import HowToPlayLayout from "./layouts/HowToPlayLayout";
-import StatsLayout from "./layouts/StatsLayout";
+import HomeLayout from "./layouts/HomeLayout";
 import SideBarLayout from "./layouts/SideBarLayout";
-import MobileNavbarLayout from "./layouts/MobileNavbarLayout";
-import HeadLine from "./components/HeadLine";
 
 const Home = () => {
   return (
     <Box maxHeight={"100vh"} overflowY="hidden" bg={theme.bgColor}>
-      <HeadLine />
       <Navbar />
+      <MobileNavbar />
       <Grid
         templateColumns={{
           base: "1fr",
@@ -30,14 +27,8 @@ const Home = () => {
         >
           <SideBarLayout />;
         </GridItem>
-
         <GridItem maxHeight={"90vh"} overflowY={"scroll"}>
-          <Flex display={{ base: "flex", lg: "none" }}>
-            <MobileNavbarLayout />
-          </Flex>
-          <GamesLayout />
-          <HowToPlayLayout />
-          <StatsLayout />
+          <HomeLayout />
         </GridItem>
       </Grid>
     </Box>

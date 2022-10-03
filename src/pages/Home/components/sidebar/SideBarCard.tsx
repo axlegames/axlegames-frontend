@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
+import { theme } from "../../../../config/theme.config";
 
 const SideBarCard = (props: any) => {
   return (
