@@ -1,4 +1,4 @@
-import { Box, Flex, Button, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import Logo from "../../../assets/home/logos/logo.png";
 
@@ -15,9 +15,18 @@ import Signin from "../../Auth/Signin";
 
 import { useState } from "react";
 
-const SideBarLayout = () => {
+interface SideBarProps {
+  open: boolean;
+  onOpen: Function;
+  onClose: Function;
+}
+
+const SideBarLayout = (props: SideBarProps) => {
   const [open, setOpen] = useState(false);
-  const signin = () => setOpen(true);
+  const signin = () => {
+    if (localStorage.getItem("address")) return setOpen(true);
+    return props.onOpen();
+  };
   return (
     <Box
       fontFamily={"quicksand"}
@@ -33,6 +42,7 @@ const SideBarLayout = () => {
       py="8"
     >
       <Dialog
+        size="md"
         isOpen={open}
         close={() => setOpen(!open)}
         children={<Signin />}
@@ -42,7 +52,7 @@ const SideBarLayout = () => {
       <SideBarCard>
         <SideBarButton title={"Games"} icon={<MdGamepad size={32} />} />
         <SideBarButton title={"Tournment"} icon={<MdList size={32} />} />
-        <SideBarButton title={"Staking"} icon={<HiCash size={32} />} />
+        <SideBarButton title={"Rewards"} icon={<HiCash size={32} />} />
         <SideBarButton title={"Referrals"} icon={<HiUsers size={32} />} />
       </SideBarCard>
 
@@ -52,35 +62,40 @@ const SideBarLayout = () => {
         <SideBarButton title={"About Us"} icon={<MdInfo size={32} />} />
       </SideBarCard>
 
-      <Flex
-        flexDirection={"column"}
-        alignItems="center"
-        justifyContent={"center"}
-      >
-        <IsNotLoggedIn>
-          <Button
-            _hover={{
-              color: theme.bgColor,
-              bg: theme.primaryColor,
-            }}
-            bg={theme.fgColor}
-            shadow="2xl"
-            transition={"all 100ms ease-in"}
-            onClick={signin}
-            size="lg"
-            width={"80%"}
+      <IsNotLoggedIn>
+        <Box
+          alignSelf={"center"}
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems="center"
+          justifyContent={"center"}
+          bg={theme.primaryColor}
+          color={theme.bgColor}
+          boxShadow={`0px 0px 16px ${theme.primaryColor}`}
+          transition={"all 100ms ease-in"}
+          onClick={signin}
+          maxWidth={{ lg: "240px" }}
+          minWidth={{ lg: "240px" }}
+          height={"12"}
+          borderRadius="xl"
+          _hover={{
+            boxShadow: `0px 0px 0px ${theme.bgColor}`,
+          }}
+        >
+          <Flex
+            columnGap={"1rem"}
+            alignItems={"center"}
+            justifyContent="flex-start"
+            width={"100%"}
+            px={4}
           >
-            <Flex
-              columnGap={".5rem"}
-              alignItems={"center"}
-              justifyContent="space-evenly"
-            >
-              <BiLogOut size={28} />
-              <Text>Login</Text>
+            <Flex alignItems={"center"} px={4} columnGap={"1rem"}>
+              <BiLogOut size={32} />
+              <Text fontSize={"20"}>Login</Text>
             </Flex>
-          </Button>
-        </IsNotLoggedIn>
-      </Flex>
+          </Flex>
+        </Box>
+      </IsNotLoggedIn>
     </Box>
   );
 };

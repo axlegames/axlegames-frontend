@@ -2,7 +2,6 @@ import { Flex, Text } from "@chakra-ui/react";
 import FormField from "./componetns/FormField";
 import FormButton from "./componetns/FormButton";
 import FormLink from "./componetns/FormLink";
-import { useNavigate } from "react-router";
 import Form from "./componetns/Form";
 import { useEffect, useState } from "react";
 import { AuthServices } from "./AuthServices";
@@ -10,19 +9,22 @@ import { useFormik } from "formik";
 import FormMessage from "./componetns/FormMessage";
 import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script";
+import GoogleLogo from "../../assets/logos/google.svg";
+import "./index.css";
 
 import { theme } from "../../config/theme.config";
+
 import Dialog from "./Dialog";
 import Signup from "./Signup";
+import ForgotPassword from "./ForgotPassword";
 
 const Signin = () => {
-  const navigate = useNavigate();
   const clientId = `1059713289873-mnr4ecn113umdpe68k2a9but136dnde6.apps.googleusercontent.com`;
 
   const [status, setStatus] = useState({ message: "", error: false });
   useEffect(() => {
     const initClient = () => {
-      gapi.client.init({
+      gapi.auth2.init({
         clientId: clientId,
         scope: "",
       });
@@ -35,7 +37,7 @@ const Signin = () => {
     if (data.error) setStatus({ error: data.error, message: data.message });
     else {
       AuthServices.createSession(data);
-      navigate("/");
+      window.location.reload();
     }
     setTimeout(() => {
       setStatus({ error: false, message: "" });
@@ -50,7 +52,7 @@ const Signin = () => {
         setStatus({ error: res.data.error, message: res.data.message });
         if (!res.data.error) {
           AuthServices.createSession(res.data);
-          navigate("/");
+          window.location.reload();
         }
       })
       .catch((err) => console.log(err));
@@ -78,17 +80,24 @@ const Signin = () => {
     },
   });
 
-  const [open, setOpen] = useState(false);
-  const signup = () => {
-    setOpen(true);
-  };
+  const [signupModal, setSignupModal] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
+
+  const signup = () => setSignupModal(true);
 
   return (
     <Form>
       <Dialog
-        isOpen={open}
-        close={() => setOpen(!open)}
-        children={<Signup />}
+        size="md"
+        isOpen={signupModal}
+        close={() => setSignupModal(false)}
+        children={<Signup close={() => setSignupModal(false)} />}
+      />
+      <Dialog
+        size="md"
+        isOpen={forgotPassword}
+        close={() => setForgotPassword(false)}
+        children={<ForgotPassword close={() => setForgotPassword(false)} />}
       />
       <Text color={theme.primaryColor} fontSize={{ base: "4xl" }}>
         Login
@@ -114,7 +123,7 @@ const Signin = () => {
       />
       <Flex py={{ base: "2" }} justifyContent={"flex-end"}>
         <FormLink
-          action={() => navigate("/forgot-password")}
+          action={() => setForgotPassword(true)}
           label="Forgot Password?"
         />
       </Flex>
@@ -127,11 +136,21 @@ const Signin = () => {
         <FormButton onClick={() => form.handleSubmit()} label="Sign in" />
         <Text fontWeight={"bolder"}>OR</Text>
         <GoogleLogin
+          style={{ width: "100%" }}
           clientId={clientId}
           buttonText="Sign in with Google"
           onSuccess={handleGoogleLogin}
           onFailure={handleLoginFailure}
           cookiePolicy={"single_host_origin"}
+          render={(renderProps) => (
+            <button
+              onClick={renderProps.onClick}
+              className="google_login_button"
+            >
+              <img src={GoogleLogo} height="32px" width={"32px"} alt="google" />
+              Login with Google
+            </button>
+          )}
         />
         <FormLink action={() => signup()} label="Don't have account? Signup" />
       </Flex>

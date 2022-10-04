@@ -2,7 +2,6 @@ import { Box, Button, GridItem, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../../config/theme.config";
 
 const GameCard = (props: any) => {
-  console.log(props);
   return (
     <GridItem
       position={"relative"}

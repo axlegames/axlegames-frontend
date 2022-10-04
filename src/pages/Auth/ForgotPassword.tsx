@@ -1,13 +1,10 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { useNavigate } from "react-router";
 import Form from "./componetns/Form";
 import FormButton from "./componetns/FormButton";
 import FormField from "./componetns/FormField";
 import FormLink from "./componetns/FormLink";
 
-const ForgotPassword = () => {
-  const navigate = useNavigate();
-
+const ForgotPassword = (props: any) => {
   return (
     <Form>
       <Text fontSize={{ base: "4xl" }}>Forgot Password</Text>
@@ -28,7 +25,7 @@ const ForgotPassword = () => {
       >
         <FormButton onClick={() => null} label="Send password reset link" />
         <FormLink
-          action={() => navigate("/login")}
+          action={() => props.close()}
           label="Already have an account? Sign in"
         />
       </Flex>

@@ -1,5 +1,4 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { useNavigate } from "react-router";
 import Form from "./componetns/Form";
 import FormButton from "./componetns/FormButton";
 import FormField from "./componetns/FormField";
@@ -36,9 +35,7 @@ const validate = (values: any) => {
   return errors;
 };
 
-const Signup = () => {
-  const navigate = useNavigate();
-
+const Signup = (props: any) => {
   const handleRequest = (data: any) => {
     setStatus({
       error: data.error,
@@ -47,9 +44,7 @@ const Signup = () => {
     });
     if (!data.error) {
       form.resetForm();
-      setTimeout(() => {
-        navigate("/login");
-      }, 3500);
+      setTimeout(() => {}, 3500);
     }
   };
 
@@ -161,10 +156,7 @@ const Signup = () => {
         <FormButton onClick={() => form.handleSubmit()} label="Sign up" />
 
         <FormLink
-          action={() => {
-            navigate("/login");
-            window.location.reload();
-          }}
+          action={() => props.close()}
           label="Already have an account? Sign in"
         />
       </Flex>

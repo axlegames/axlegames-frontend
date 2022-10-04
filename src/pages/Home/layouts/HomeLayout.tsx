@@ -1,14 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import GamesView from "../views/GamesView";
 import HowToPlayView from "../views/HowToPlayView";
-import StatsView from "../views/StatsView";
+import Footer from "../views/Footer";
 
 const HomeLayout = () => {
   return (
     <Box>
       <GamesView />
       <HowToPlayView />
-      <StatsView />
+      <Footer />
     </Box>
   );
 };

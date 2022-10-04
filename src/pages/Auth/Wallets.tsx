@@ -1,5 +1,10 @@
-import { Box, Button, Divider, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../config/theme.config";
+
+import NEAR from "../../assets/logos/NEAR.svg";
+import MetaMask from "../../assets/logos/metamask.svg";
+import WalletConnect from "../../assets/logos/walletconnect.svg";
+import TrustWallet from "../../assets/logos/trustwallet.svg";
 
 const Wallets = (props: any) => {
   return (
@@ -14,15 +19,31 @@ const Wallets = (props: any) => {
       <Text p={4} textAlign={"center"} fontSize={"3xl"}>
         Wallet
       </Text>
+      <WalletButton
+        disabled={false}
+        click={props.connectToNEAR}
+        img={NEAR}
+        label="NEAR"
+      />
+      <Divider my={8} />
       <Flex
-        flexDirection="column"
         alignItems="center"
         justifyContent={"center"}
         width={"100%"}
-        rowGap=".6rem"
+        columnGap=".6rem"
       >
-        <WalletButton click={props.connectToNEAR} label="NEAR" />
-        <WalletButton click={props.connectToMetaMask} label="Metamask" />
+        <WalletButton
+          click={props.connectToMetaMask}
+          img={MetaMask}
+          label="Metamask"
+          disabled={false}
+        />
+        <WalletButton
+          img={WalletConnect}
+          label="WalletConnect"
+          disabled={true}
+        />
+        <WalletButton img={TrustWallet} label="TrustWallet" disabled={true} />
       </Flex>
       {props.isConnected ? (
         <Box>
@@ -39,25 +60,28 @@ const Wallets = (props: any) => {
 
 const WalletButton = (props: any) => {
   return (
-    <Button
+    <Box
       justifyContent={"left"}
-      px={5}
-      size={"lg"}
-      variant={"outline"}
+      px={3}
+      py={6}
       width={"100%"}
       borderRadius={"xl"}
       bg={theme.fgColor}
+      opacity={props.disabled ? 0.5 : 1}
       color={theme.primaryColor}
-      py={3}
       _hover={{
-        bg: theme.primaryColor,
-        color: theme.bgColor,
+        bg: !props.disabled ? theme.primaryColor : "",
+        color: !props.disabled ? theme.bgColor : "",
       }}
       fontSize={"xl"}
       onClick={props.click}
+      shadow="dark-lg"
     >
-      {props.label}
-    </Button>
+      <Flex alignItems={"center"} direction={"column"} justifyContent="center">
+        <Image height={"12"} width="12" src={props.img}></Image>
+        <Text> {props.label}</Text>
+      </Flex>
+    </Box>
   );
 };
 

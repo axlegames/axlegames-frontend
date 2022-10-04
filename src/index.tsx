@@ -4,16 +4,26 @@ import * as ReactDOM from "react-dom/client";
 import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from "./reportWebVitals";
 
-import { MetaMaskProvider } from "metamask-react";
+import { getDefaultProvider } from "ethers";
+import { DAppProvider, Mainnet, Goerli } from "@usedapp/core";
+
+const config = {
+  readOnlyChainId: Mainnet.chainId,
+  readOnlyUrls: {
+    [Mainnet.chainId]: getDefaultProvider("mainnet"),
+    [Goerli.chainId]: getDefaultProvider("goerli"),
+  },
+};
 
 const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
 const root = ReactDOM.createRoot(container);
+
 root.render(
-  <MetaMaskProvider>
+  <DAppProvider config={config}>
     <ColorModeScript />
     <App />
-  </MetaMaskProvider>
+  </DAppProvider>
 );
 
 // If you want your app to work offline and load faster, you can change

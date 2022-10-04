@@ -9,7 +9,11 @@ import { theme } from "../../config/theme.config";
 
 const Dialog = (props: any) => {
   return (
-    <Modal isOpen={props.isOpen} onClose={props.close}>
+    <Modal
+      size={props.size ?? "sm"}
+      isOpen={props.isOpen}
+      onClose={props.close}
+    >
       <ModalOverlay />
       <ModalContent
         borderRadius={"xl"}

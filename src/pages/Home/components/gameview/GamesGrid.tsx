@@ -36,6 +36,7 @@ const GamesGrid = (props: any) => {
       >
         {props.axleGames.map((axleGame: any, index: number) => (
           <GameCard
+            key={index}
             index={index}
             axleGame={axleGame}
             colors={colors}

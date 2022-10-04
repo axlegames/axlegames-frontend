@@ -6,11 +6,25 @@ import MobileNavbar from "./components/navbars/MobileNavbar";
 
 import HomeLayout from "./layouts/HomeLayout";
 import SideBarLayout from "./layouts/SideBarLayout";
+import { createContext, useState } from "react";
+
+export const WalletContext = createContext(false);
 
 const Home = () => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Box maxHeight={"100vh"} overflowY="hidden" bg={theme.bgColor}>
-      <Navbar />
+    <Box
+      maxHeight={"100vh"}
+      overflowX="hidden"
+      overflowY="hidden"
+      bg={theme.bgColor}
+    >
+      <Navbar
+        open={open}
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
+      />
       <MobileNavbar />
       <Grid
         templateColumns={{
@@ -25,7 +39,12 @@ const Home = () => {
           display={{ base: "none", lg: "flex" }}
           justifyContent="center"
         >
-          <SideBarLayout />;
+          <SideBarLayout
+            open={open}
+            onOpen={() => setOpen(true)}
+            onClose={() => setOpen(false)}
+          />
+          ;
         </GridItem>
         <GridItem maxHeight={"90vh"} overflowY={"scroll"}>
           <HomeLayout />
