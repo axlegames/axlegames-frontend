@@ -60,6 +60,7 @@ const Navbar = (props: NavbarProps) => {
     });
     setWallet(wallet);
     setDetails({ logo: NEAR, label: "NEAR" });
+    localStorage.setItem("address", account);
     props.onClose();
   };
 
@@ -71,6 +72,7 @@ const Navbar = (props: NavbarProps) => {
       isConnected: true,
     });
     setDetails({ logo: ETH, label: "ETH" });
+    localStorage.setItem("address", account!);
     props.onClose();
   };
 
@@ -99,17 +101,18 @@ const Navbar = (props: NavbarProps) => {
       isConnected: account ? true : false,
     });
     setDetails({ logo: ETH, label: "ETH" });
+    localStorage.setItem("address", account!);
   }, [account]);
 
   useEffect(() => {
     const account = searchParams.get("account_id");
-
     if (account) {
       setUser({
         account: account,
         isConnected: account ? true : false,
         balance: "0",
       });
+      localStorage.setItem("address", account!);
     }
     setDetails({ logo: NEAR, label: "NEAR" });
   }, [searchParams, setSearchParams]);
@@ -125,7 +128,8 @@ const Navbar = (props: NavbarProps) => {
       columnGap="1rem"
       display={{ base: "none", lg: "flex" }}
       gridTemplateColumns={"repeat(2, 1fr)"}
-      p={4}
+      p={2}
+      shadow="lg"
     >
       <Dialog
         size="2xl"
@@ -176,18 +180,21 @@ const Navbar = (props: NavbarProps) => {
 
         <IsLoggedIn>
           <Box
+            display={"flex"}
+            alignItems={"center"}
             onMouseEnter={() => setOpenDropDown(true)}
             cursor={"pointer"}
-            border={"3px"}
             borderStyle="solid"
-            borderColor={theme.primaryColor}
-            borderRadius={"50%"}
             bg={theme.fgColor}
-            boxShadow={`
-        1px 1px 3px ${theme.primaryColor}`}
           >
-            <AiOutlineUser color={theme.primaryColor} size={32} />
+            <Box
+              borderRadius={"3xl"}
+              boxShadow={`0px 0px 8px ${theme.primaryColor}`}
+            >
+              <AiOutlineUser color={theme.primaryColor} size={38} />
+            </Box>
           </Box>
+
           <UserDropDown
             openDropDown={openDropDown}
             setOpenDropDown={(t: boolean) => setOpenDropDown(t)}

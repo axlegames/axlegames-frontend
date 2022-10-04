@@ -19,13 +19,13 @@ const UserDropDown = (props: any) => {
         px={4}
         py={4}
         borderRadius={"lg"}
-        bg={theme.primaryColor}
+        bg={theme.fgColor}
         position={"absolute"}
         bottom="-300%"
         rowGap={".5rem"}
         maxWidth={"200px"}
       >
-        <Text fontFamily={"quicksand"}>
+        <Text color={theme.primaryColor} fontFamily={"quicksand"}>
           Welcome, {localStorage.getItem("username")}
         </Text>
 

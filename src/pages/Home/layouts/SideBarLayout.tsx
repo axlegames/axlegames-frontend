@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import Logo from "../../../assets/home/logos/logo.png";
 
@@ -6,7 +6,6 @@ import SideBarButton from "../components/sidebar/SideBarButton";
 
 import { MdGamepad, MdStore, MdInfo, MdList } from "react-icons/md/index";
 import { HiUsers, HiGlobe, HiCash } from "react-icons/hi/index";
-import { BiLogOut } from "react-icons/bi/index";
 
 import SideBarCard from "../components/sidebar/SideBarCard";
 import IsNotLoggedIn from "../../../config/isNotLoggedIn";
@@ -14,6 +13,7 @@ import Dialog from "../../Auth/Dialog";
 import Signin from "../../Auth/Signin";
 
 import { useState } from "react";
+import { useToast } from "@chakra-ui/react";
 
 interface SideBarProps {
   open: boolean;
@@ -22,10 +22,29 @@ interface SideBarProps {
 }
 
 const SideBarLayout = (props: SideBarProps) => {
+  const toast = useToast();
+
   const [open, setOpen] = useState(false);
+
   const signin = () => {
-    if (localStorage.getItem("address")) return setOpen(true);
-    return props.onOpen();
+    const address = localStorage.getItem("address");
+    console.log(address);
+    if (
+      !address ||
+      address === null ||
+      address === "null" ||
+      address === "undefined"
+    )
+      return toast({
+        title: "Connect Wallet",
+        description: "Please connect your wallet before login",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+
+    return setOpen(true);
   };
   return (
     <Box
@@ -47,6 +66,7 @@ const SideBarLayout = (props: SideBarProps) => {
         close={() => setOpen(!open)}
         children={<Signin />}
       />
+
       <Image p={2} src={Logo}></Image>
 
       <SideBarCard>
@@ -71,7 +91,7 @@ const SideBarLayout = (props: SideBarProps) => {
           justifyContent={"center"}
           bg={theme.primaryColor}
           color={theme.bgColor}
-          boxShadow={`0px 0px 16px ${theme.primaryColor}`}
+          boxShadow={`0px 0px 8px ${theme.primaryColor}`}
           transition={"all 100ms ease-in"}
           onClick={signin}
           maxWidth={{ lg: "240px" }}
@@ -82,18 +102,7 @@ const SideBarLayout = (props: SideBarProps) => {
             boxShadow: `0px 0px 0px ${theme.bgColor}`,
           }}
         >
-          <Flex
-            columnGap={"1rem"}
-            alignItems={"center"}
-            justifyContent="flex-start"
-            width={"100%"}
-            px={4}
-          >
-            <Flex alignItems={"center"} px={4} columnGap={"1rem"}>
-              <BiLogOut size={32} />
-              <Text fontSize={"20"}>Login</Text>
-            </Flex>
-          </Flex>
+          <Text fontSize={"20"}>Join DApp</Text>
         </Box>
       </IsNotLoggedIn>
     </Box>

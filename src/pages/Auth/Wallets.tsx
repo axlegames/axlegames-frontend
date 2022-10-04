@@ -19,12 +19,14 @@ const Wallets = (props: any) => {
       <Text p={4} textAlign={"center"} fontSize={"3xl"}>
         Wallet
       </Text>
-      <WalletButton
-        disabled={false}
-        click={props.connectToNEAR}
-        img={NEAR}
-        label="NEAR"
-      />
+      <Box width="30%">
+        <WalletButton
+          disabled={false}
+          click={props.connectToNEAR}
+          img={NEAR}
+          label="NEAR"
+        />
+      </Box>
       <Divider my={8} />
       <Flex
         alignItems="center"
@@ -46,8 +48,7 @@ const Wallets = (props: any) => {
         <WalletButton img={TrustWallet} label="TrustWallet" disabled={true} />
       </Flex>
       {props.isConnected ? (
-        <Box>
-          <Divider my={6} width="80%" />
+        <Box pt={8}>
           <ConnectedWallet
             disconnect={props.disconnect}
             address={props.address}
@@ -66,11 +67,11 @@ const WalletButton = (props: any) => {
       py={6}
       width={"100%"}
       borderRadius={"xl"}
-      bg={theme.fgColor}
+      bg={theme.highLightColor}
       opacity={props.disabled ? 0.5 : 1}
       color={theme.primaryColor}
       _hover={{
-        bg: !props.disabled ? theme.primaryColor : "",
+        bg: !props.disabled ? theme.secondaryColor : "",
         color: !props.disabled ? theme.bgColor : "",
       }}
       fontSize={"xl"}
