@@ -54,12 +54,6 @@ const Signin = () => {
         }
       })
       .catch((err) => console.log(err));
-    setTimeout(() => {
-      setStatus({
-        error: false,
-        message: "",
-      });
-    }, 5000);
   };
 
   const handleLoginFailure = () => {
