@@ -9,7 +9,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 
-import { theme } from "../../../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 
 const MenuModal = (props: any) => {
   return (

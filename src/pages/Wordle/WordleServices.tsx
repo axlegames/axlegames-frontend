@@ -1,5 +1,5 @@
 import axios from "axios";
-import { headers, axlegamesPrefix } from "../../../config";
+import { headers, axlegamesPrefix } from "../../config";
 
 const token = headers() ?? "";
 

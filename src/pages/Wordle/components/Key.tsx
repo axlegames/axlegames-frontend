@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { theme } from "../../../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 
 const Key = (props: any) => {
   const shadow = `0px -4px 0px 4px ${theme.bgColor}, 0px 0px 0px 4px ${theme.highLightColor}`;

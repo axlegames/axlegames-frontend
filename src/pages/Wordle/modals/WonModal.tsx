@@ -1,10 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
-import { theme } from "../../../../config/theme.config";
-
+import { theme } from "../../../config/theme.config";
 import Lottie from "lottie-react";
-import Lost from "../../../../assets/wordle/lottie/little-boy-crying.json";
+import Won from "../../../assets/wordle/lottie/little-boy-with-thumbs-up.json";
 
-const LostModal = (props: any) => {
+const WonModal = (props: any) => {
   return (
     <Box
       display={"flex"}
@@ -15,10 +14,10 @@ const LostModal = (props: any) => {
       color={theme.highLightColor}
     >
       <Box maxW={"xs"} maxH={"xs"}>
-        <Lottie animationData={Lost} loop={false} />
+        <Lottie animationData={Won} loop={false} />
       </Box>
-      <Text fontSize="2xl">Oh! better luck next time</Text>
+      <Text fontSize="2xl">Congrats! you have won</Text>
     </Box>
   );
 };
-export default LostModal;
+export default WonModal;

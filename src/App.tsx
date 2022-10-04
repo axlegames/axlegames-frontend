@@ -2,7 +2,7 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home/Home";
-import Wordle from "./pages/Game/Wordle/Wordle";
+import Wordle from "./pages/Wordle/Wordle";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import { useEffect, useState } from "react";
 import Page403 from "./pages/Auth/Page403";

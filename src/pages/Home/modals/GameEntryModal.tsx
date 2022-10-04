@@ -15,7 +15,7 @@ import {
 import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
 import { theme } from "../../../config/theme.config";
-import { WordleServices } from "../../Game/Wordle/WordleServices";
+import { WordleServices } from "../../Wordle/WordleServices";
 import { useState } from "react";
 import Dialog from "./Dailog";
 

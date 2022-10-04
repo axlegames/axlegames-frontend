@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Box, useToast } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
+import { theme } from "../../config/theme.config";
 
 import Grid from "./components/Grid";
 import Navbar from "./components/Navbar";

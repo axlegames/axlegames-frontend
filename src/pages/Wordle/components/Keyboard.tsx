@@ -1,5 +1,5 @@
 import { Box, Flex, useToast } from "@chakra-ui/react";
-import { theme } from "../../../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 // import { TiBackspaceOutline } from "react-icons/ti/index";
 // import { AiOutlineEnter } from "react-icons/ai/index";
 import { useEffect, useState } from "react";

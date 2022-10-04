@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import { theme } from "../../../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 import Cell from "./Cell";
 
 const Grid = (props: any) => {

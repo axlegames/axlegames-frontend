@@ -4,7 +4,7 @@ import { AiOutlineQuestion } from "react-icons/ai/index";
 import { BiArrowBack } from "react-icons/bi/index";
 import { IoMdSettings } from "react-icons/io/index";
 import { ImStatsDots } from "react-icons/im/index";
-import { theme } from "../../../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 import MenuModal from "../modals/MenuModal";
 import HowToPlayModal from "../modals/HowToPlayModal";
 import { useState } from "react";
