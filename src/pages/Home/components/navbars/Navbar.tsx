@@ -175,6 +175,7 @@ const Navbar = (props: NavbarProps) => {
             label={details.label}
             address={user.account}
             balance={user.balance}
+            disconnect={disconnect}
           />
         )}
 
@@ -189,9 +190,9 @@ const Navbar = (props: NavbarProps) => {
           >
             <Box
               borderRadius={"3xl"}
-              boxShadow={`0px 0px 8px ${theme.primaryColor}`}
+              boxShadow={`0px 0px 8px ${theme.secondaryColor}`}
             >
-              <AiOutlineUser color={theme.primaryColor} size={38} />
+              <AiOutlineUser color={theme.secondaryColor} size={38} />
             </Box>
           </Box>
 

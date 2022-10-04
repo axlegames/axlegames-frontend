@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import Logo from "../../../assets/home/logos/logo.png";
 
@@ -14,6 +14,8 @@ import Signin from "../../Auth/Signin";
 
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
+import IsLoggedIn from "../../../config/isLoggedIn";
+import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 
 interface SideBarProps {
   open: boolean;
@@ -24,11 +26,15 @@ interface SideBarProps {
 const SideBarLayout = (props: SideBarProps) => {
   const toast = useToast();
 
+  const signout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   const [open, setOpen] = useState(false);
 
   const signin = () => {
     const address = localStorage.getItem("address");
-    console.log(address);
     if (
       !address ||
       address === null ||
@@ -46,6 +52,40 @@ const SideBarLayout = (props: SideBarProps) => {
 
     return setOpen(true);
   };
+
+  const HighLightButton = (props: any) => {
+    return (
+      <Box
+        alignSelf={"center"}
+        display={"flex"}
+        alignItems="center"
+        justifyContent={"center"}
+        bg={theme.primaryColor}
+        color={theme.bgColor}
+        boxShadow={`0px 0px 8px ${theme.primaryColor}`}
+        transition={"all 100ms ease-in"}
+        onClick={props.click}
+        maxWidth={{ lg: "240px" }}
+        minWidth={{ lg: "240px" }}
+        height={"12"}
+        borderRadius="xl"
+        cursor={"pointer"}
+        _hover={{
+          boxShadow: `0px 0px 0px ${theme.bgColor}`,
+        }}
+      >
+        <Flex
+          justifyContent={"space-evenly"}
+          columnGap=".4rem"
+          alignItems="center"
+        >
+          <props.icon size={32} color={theme.bgColor}></props.icon>
+          <Text fontSize={"20"}>{props.title}</Text>
+        </Flex>
+      </Box>
+    );
+  };
+
   return (
     <Box
       fontFamily={"quicksand"}
@@ -83,28 +123,19 @@ const SideBarLayout = (props: SideBarProps) => {
       </SideBarCard>
 
       <IsNotLoggedIn>
-        <Box
-          alignSelf={"center"}
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems="center"
-          justifyContent={"center"}
-          bg={theme.primaryColor}
-          color={theme.bgColor}
-          boxShadow={`0px 0px 8px ${theme.primaryColor}`}
-          transition={"all 100ms ease-in"}
-          onClick={signin}
-          maxWidth={{ lg: "240px" }}
-          minWidth={{ lg: "240px" }}
-          height={"12"}
-          borderRadius="xl"
-          _hover={{
-            boxShadow: `0px 0px 0px ${theme.bgColor}`,
-          }}
-        >
-          <Text fontSize={"20"}>Join DApp</Text>
-        </Box>
+        <HighLightButton
+          icon={AiOutlineLogin}
+          title="Join DApp"
+          click={signin}
+        />
       </IsNotLoggedIn>
+      <IsLoggedIn>
+        <HighLightButton
+          icon={AiOutlineLogout}
+          title="Logout"
+          click={signout}
+        />
+      </IsLoggedIn>
     </Box>
   );
 };

@@ -48,8 +48,6 @@ const Signin = () => {
     const tokenData = { token: data.tokenId };
     AuthServices.loginGoogle(tokenData)
       .then((res: any) => {
-        console.log(res.data);
-        setStatus({ error: res.data.error, message: res.data.message });
         if (!res.data.error) {
           AuthServices.createSession(res.data);
           window.location.reload();

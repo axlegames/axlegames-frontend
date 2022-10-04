@@ -1,11 +1,16 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { theme } from "../../../../config/theme.config";
 
 const WalletDetails = (props: any) => {
   const balance = (Number(props.balance) / 10 ** 24).toFixed(2);
+  const [open, setOpen] = useState(false);
   return (
     <Box
-      onClick={props.close}
+      pos={"relative"}
+      zIndex={3000}
+      cursor={"pointer"}
+      onClick={() => setOpen(true)}
       py={2}
       px={4}
       mx={4}
@@ -33,6 +38,50 @@ const WalletDetails = (props: any) => {
           </Text>
         </Flex>
       </Flex>
+
+      <Box
+        borderRadius={"md"}
+        my={4}
+        display={open ? "flex" : "none"}
+        bg={theme.secondaryColor}
+        width={"220px"}
+        mx={"auto"}
+        left={0}
+        right={0}
+        position={"absolute"}
+        justifyContent="center"
+        flexDirection={"column"}
+        p={3}
+        rowGap=".5rem"
+      >
+        <Box
+          p={6}
+          display={"flex"}
+          justifyContent="center"
+          flexDirection={"column"}
+          alignItems="center"
+          bg={theme.bgColor}
+          color={theme.primaryColor}
+          borderRadius="md"
+        >
+          <Text fontSize={"sm"}>Your wallet balance</Text>
+          <Text fontSize={"lg"}>
+            {balance} {props.label}
+          </Text>
+        </Box>
+        <Button
+          _hover={{
+            bg: theme.secondaryColor,
+            color: theme.bgColor,
+          }}
+          color={theme.primaryColor}
+          bg={theme.bgColor}
+          variant={"outline"}
+          onClick={props.disconnect}
+        >
+          Disconnect
+        </Button>
+      </Box>
     </Box>
   );
 };

@@ -1,6 +1,5 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-import { AiOutlineRight } from "react-icons/ai";
 
 const HowToPlayView = () => {
   return (
@@ -28,22 +27,6 @@ const HowToPlayView = () => {
         more. Answer simple questions and win huge prizes (in crypto!). Don’t
         settle for enough. Go for more!
       </Text>
-      <Flex justifyContent={"center"}>
-        <Button
-          size={{ base: "md", lg: "lg" }}
-          variant={"ghost"}
-          bg={theme.primaryColor}
-          _hover={{
-            color: theme.primaryColor,
-            bg: theme.fgColor,
-          }}
-        >
-          <Flex alignItems={{ base: "center" }} columnGap={{ base: ".5rem" }}>
-            <Text>Try Now</Text>
-            <AiOutlineRight color={theme.highLightColor} />
-          </Flex>
-        </Button>
-      </Flex>
     </Box>
   );
 };

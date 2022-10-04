@@ -19,7 +19,7 @@ const GameCard = (props: any) => {
           transition: "200ms all ease-in",
         }}
       />
-      <Box
+      {/* <Box
         display={"flex"}
         justifySelf="center"
         alignSelf={"center"}
@@ -39,7 +39,7 @@ const GameCard = (props: any) => {
             {props.axleGame.name}
           </Text>
         </Box>
-      </Box>
+      </Box> */}
 
       {!props.axleGame.isActive ? (
         <Box position={"absolute"} fontSize="smaller" bottom="2" right={"2"}>
