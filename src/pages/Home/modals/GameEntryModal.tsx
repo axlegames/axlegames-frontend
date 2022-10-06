@@ -11,6 +11,7 @@ import {
   Divider,
   Flex,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,7 @@ import { useState } from "react";
 import Dialog from "./Dailog";
 
 const GameEntryModal = (props: any) => {
+  const toast = useToast();
   const navigate = useNavigate();
   const [dialog, setDialog] = useState(false);
 
@@ -40,7 +42,14 @@ const GameEntryModal = (props: any) => {
         .catch((err) => {
           console.log(err);
         });
-    return navigate("/login");
+    return toast({
+      title: "Login",
+      description: "Please login before playing game",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
   }
 
   return (

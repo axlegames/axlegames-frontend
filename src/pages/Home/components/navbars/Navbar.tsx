@@ -16,6 +16,7 @@ import WalletDetails from "./WalletDetails";
 import NEAR from "../../../../assets/logos/NEAR.svg";
 import ETH from "../../../../assets/logos/ETH.svg";
 
+import { formatEther } from "@ethersproject/units";
 import { useEtherBalance, useEthers } from "@usedapp/core";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -69,7 +70,7 @@ const Navbar = (props: NavbarProps) => {
     activateBrowserWallet();
     setUser({
       account: account?.toString() ?? "",
-      balance: etherBalance?.toString() ?? "0",
+      balance: formatEther(etherBalance ?? 1).toString(),
       isConnected: account ? true : false,
     });
     setDetails({ logo: ETH, label: "ETH" });
@@ -98,17 +99,19 @@ const Navbar = (props: NavbarProps) => {
   useEffect(() => {
     setUser({
       account: account?.toString() ?? "",
-      balance: "0",
+      balance: formatEther(etherBalance ?? 1).toString(),
       isConnected: account ? true : false,
     });
     setDetails({ logo: ETH, label: "ETH" });
     localStorage.setItem("address", account!);
-  }, [account]);
+  }, [account, etherBalance]);
 
   useEffect(() => {
     const account = searchParams.get("account_id");
-    if (account) connectToNEAR();
-    setDetails({ logo: NEAR, label: "NEAR" });
+    if (account) {
+      connectToNEAR();
+      setDetails({ logo: NEAR, label: "NEAR" });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, setSearchParams]);
 

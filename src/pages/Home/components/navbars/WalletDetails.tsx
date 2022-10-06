@@ -3,7 +3,12 @@ import { useState } from "react";
 import { theme } from "../../../../config/theme.config";
 
 const WalletDetails = (props: any) => {
-  const balance = (Number(props.balance) / 10 ** 24).toFixed(2);
+  let balance: any = 0;
+
+  if (props.address[0] === "0")
+    balance = (Number(props.balance) / 10 ** 24).toFixed(2);
+  else balance = (Number(props.balance) / 10 ** 12).toFixed(2);
+
   const [open, setOpen] = useState(false);
   return (
     <Box
