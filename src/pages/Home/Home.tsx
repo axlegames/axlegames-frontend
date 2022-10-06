@@ -12,16 +12,9 @@ export const WalletContext = createContext(false);
 
 const Home = () => {
   const [open, setOpen] = useState(false);
-  const [scrollUp, setScrollUp] = useState(false);
+  const scrollUpFun = () => ref.current.scroll({ top: 0, behavior: "smooth" });
 
-  const ref = useRef(null);
-
-  const scrollUpFun = () => {
-    setScrollUp(true);
-    setTimeout(() => {
-      setScrollUp(false);
-    }, 2000);
-  };
+  const ref = useRef<any>(null);
 
   return (
     <Box
@@ -56,8 +49,8 @@ const Home = () => {
             scrollTop={() => scrollUpFun()}
           />
         </GridItem>
-        <GridItem maxHeight={"90vh"} overflowY={"scroll"}>
-          <HomeLayout ref={ref} scrollUp={scrollUp} />
+        <GridItem ref={ref} maxHeight={"90vh"} overflowY={"scroll"}>
+          <HomeLayout />
         </GridItem>
       </Grid>
     </Box>

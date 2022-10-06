@@ -3,7 +3,7 @@ import { theme } from "../../../../config/theme.config";
 
 import GameBarTile from "./GameBarTile";
 
-const GameNavbar = () => {
+const GameNavbar = (props: any) => {
   return (
     <Flex justifyContent={"space-between"}>
       <Box
@@ -34,9 +34,21 @@ const GameNavbar = () => {
         columnGap=".25rem"
         mb={2}
       >
-        <GameBarTile isActive={true} title={"Single Player"} />
-        <GameBarTile isActive={false} title={"Multi Player"} />
-        <GameBarTile isActive={false} title={"Tournaments"} />
+        <GameBarTile
+          onClick={() => props.onClick(0)}
+          isActive={props.page === 0 ? true : false}
+          title={"Single Player"}
+        />
+        <GameBarTile
+          onClick={() => props.onClick(1)}
+          isActive={props.page === 1 ? true : false}
+          title={"Multi Player"}
+        />
+        <GameBarTile
+          onClick={() => props.onClick(2)}
+          isActive={props.page === 2 ? true : false}
+          title={"Tournaments"}
+        />
       </Box>
     </Flex>
   );

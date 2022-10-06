@@ -71,7 +71,7 @@ const Footer = () => {
         <Box
           boxShadow={`0px 0px 6px ${theme.primaryColor}`}
           right={{ base: "0", xl: "-10%" }}
-          bottom={{ base: "-20%", xl: "-30%" }}
+          bottom={{ base: "-40%", xl: "-30%" }}
           borderRadius="xl"
           position={"absolute"}
           bg={theme.fgColor}
@@ -119,7 +119,7 @@ const Footer = () => {
         <Box
           boxShadow={`0px 0px 6px ${theme.secondaryColor}`}
           left={{ base: 0, xl: "-10%" }}
-          top={{ base: "-20%", xl: "-30%" }}
+          top={{ base: "-40%", xl: "-30%" }}
           borderRadius="xl"
           position={"absolute"}
           bg={theme.fgColor}

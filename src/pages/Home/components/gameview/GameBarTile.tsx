@@ -14,6 +14,7 @@ const GameBarTile = (props: any) => {
       display={{ base: "none", xl: "flex" }}
       justifyContent="space-evenly"
       alignItems="center"
+      onClick={props.onClick}
     >
       {props.title}
     </Button>

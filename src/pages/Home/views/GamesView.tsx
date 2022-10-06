@@ -6,6 +6,7 @@ import { theme } from "../../../config/theme.config";
 import GameEntryModal from "../modals/GameEntryModal";
 import { AxleGame, AxleGames, HomeServices } from "../HomeServices";
 import GameNavbar from "../components/gameview/GameNavbar";
+
 import GamesGrid from "../components/gameview/GamesGrid";
 import GameBanner from "../components/gameview/GameBanner";
 
@@ -43,6 +44,24 @@ const GamesView = () => {
     setGameModal(true);
   }
 
+  const [page, setPage] = useState(0);
+
+  useEffect(() => {
+    if (page === 1 || page === 2) {
+      let games = axleGames.axleGames;
+      games[0].isActive = false;
+      games[1].isActive = false;
+      games[2].isActive = false;
+      setAxleGames({ axleGames: games });
+    } else {
+      let games = axleGames.axleGames;
+      games[0].isActive = true;
+      games[1].isActive = true;
+      games[2].isActive = true;
+      setAxleGames({ axleGames: games });
+    }
+  }, [page]);
+
   return (
     <Box fontFamily={"quicksand"} marginY={{ lg: "2rem" }}>
       <GameEntryModal
@@ -64,7 +83,7 @@ const GamesView = () => {
         color={theme.primaryColor}
       >
         <GameBanner />
-        <GameNavbar />
+        <GameNavbar onClick={(p: number) => setPage(p)} page={page} />
         <GamesGrid openModal={openModal} axleGames={axleGames.axleGames} />
       </Flex>
     </Box>
