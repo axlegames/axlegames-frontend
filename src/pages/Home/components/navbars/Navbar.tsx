@@ -108,7 +108,7 @@ const Navbar = (props: NavbarProps) => {
 
   useEffect(() => {
     const account = searchParams.get("account_id");
-    if (account) {
+    if (account !== null) {
       connectToNEAR();
       setDetails({ logo: NEAR, label: "NEAR" });
     }

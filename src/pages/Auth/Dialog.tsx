@@ -7,12 +7,19 @@ import {
 } from "@chakra-ui/react";
 import { theme } from "../../config/theme.config";
 
-const Dialog = (props: any) => {
+interface Props {
+  isOpen: boolean;
+  close: Function;
+  children: any;
+  size?: string;
+}
+
+const Dialog = (props: Props) => {
   return (
     <Modal
       size={props.size ?? "sm"}
       isOpen={props.isOpen}
-      onClose={props.close}
+      onClose={() => props.close()}
     >
       <ModalOverlay />
       <ModalContent

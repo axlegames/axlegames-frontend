@@ -18,12 +18,17 @@ import { useNavigate } from "react-router-dom";
 import { theme } from "../../../config/theme.config";
 import { WordleServices } from "../../Wordle/WordleServices";
 import { useState } from "react";
+
 import Dialog from "./Dailog";
+import AuthDialog from "../../Auth/Dialog";
+import Signin from "../../Auth/Signin";
 
 const GameEntryModal = (props: any) => {
   const toast = useToast();
   const navigate = useNavigate();
+
   const [dialog, setDialog] = useState(false);
+  const [loginDialog, setLoginDialog] = useState(false);
 
   function goToPage() {
     const user = localStorage.getItem("userId");
@@ -42,14 +47,17 @@ const GameEntryModal = (props: any) => {
         .catch((err) => {
           console.log(err);
         });
-    return toast({
-      title: "Login",
-      description: "Please login before playing game",
-      status: "warning",
-      duration: 5000,
-      isClosable: true,
-      position: "top",
-    });
+    const address = localStorage.getItem("address");
+    if (!address || address === "undefined" || address === "null")
+      return toast({
+        title: "Connect Wallet",
+        description: "Connect with your wallet",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    return setLoginDialog(true);
   }
 
   return (
@@ -67,6 +75,12 @@ const GameEntryModal = (props: any) => {
           description={`your are currently playing another game, finsih it and come back again.`}
           open={dialog}
           close={() => setDialog(false)}
+        />
+        <AuthDialog
+          children={<Signin />}
+          isOpen={loginDialog}
+          close={() => setLoginDialog(false)}
+          size="md"
         />
         <ModalHeader fontSize={"5xl"}> {props.name} </ModalHeader>
         <ModalCloseButton />

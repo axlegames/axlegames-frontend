@@ -3,11 +3,19 @@ import { useState } from "react";
 import { theme } from "../../../../config/theme.config";
 
 const WalletDetails = (props: any) => {
-  let balance: any = 0;
-
-  if (props.address[0] === "0")
-    balance = (Number(props.balance) / 10 ** 24).toFixed(2);
-  else balance = (Number(props.balance) / 10 ** 12).toFixed(2);
+  const Balance = () => {
+    if (props.address[0] !== "0")
+      return (
+        <Text>
+          {(Number(props.balance) / 10 ** 24).toFixed(2)} {props.label}
+        </Text>
+      );
+    return (
+      <Text>
+        {Number(props.balance).toFixed(3)} {props.label}
+      </Text>
+    );
+  };
 
   const [open, setOpen] = useState(false);
   return (
@@ -38,9 +46,7 @@ const WalletDetails = (props: any) => {
               props.address.length
             )}
           </Text>
-          <Text fontSize={"small"}>
-            {balance} {props.label}
-          </Text>
+          <Balance />
         </Flex>
       </Flex>
 
@@ -70,9 +76,7 @@ const WalletDetails = (props: any) => {
           borderRadius="md"
         >
           <Text fontSize={"sm"}>Your wallet balance</Text>
-          <Text fontSize={"lg"}>
-            {balance} {props.label}
-          </Text>
+          <Balance />
         </Box>
         <Button
           _hover={{

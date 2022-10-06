@@ -13,7 +13,6 @@ export const WalletContext = createContext(false);
 const Home = () => {
   const [open, setOpen] = useState(false);
   const scrollUpFun = () => ref.current.scroll({ top: 0, behavior: "smooth" });
-
   const ref = useRef<any>(null);
 
   return (

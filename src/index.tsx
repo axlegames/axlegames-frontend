@@ -5,12 +5,11 @@ import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from "./reportWebVitals";
 
 import { getDefaultProvider } from "ethers";
-import { DAppProvider, Mainnet, Goerli } from "@usedapp/core";
+import { DAppProvider, Goerli } from "@usedapp/core";
 
 const config = {
-  readOnlyChainId: Mainnet.chainId,
+  readOnlyChainId: Goerli.chainId,
   readOnlyUrls: {
-    [Mainnet.chainId]: getDefaultProvider("mainnet"),
     [Goerli.chainId]: getDefaultProvider("goerli"),
   },
 };
