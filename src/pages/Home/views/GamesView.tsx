@@ -11,16 +11,6 @@ import GamesGrid from "../components/gameview/GamesGrid";
 import GameBanner from "../components/gameview/GameBanner";
 
 const GamesView = () => {
-  useEffect(() => {
-    HomeServices.getAxleGames()
-      .then((axleGames) => {
-        setAxleGames(axleGames);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
   const [axleGames, setAxleGames] = useState<AxleGames>({ axleGames: [] });
   const [gameModal, setGameModal] = useState(false);
   const [gameConfig, setGameConfig] = useState({
@@ -54,13 +44,15 @@ const GamesView = () => {
       games[2].isActive = false;
       setAxleGames({ axleGames: games });
     } else {
-      let games = axleGames.axleGames;
-      games[0].isActive = true;
-      games[1].isActive = true;
-      games[2].isActive = true;
-      setAxleGames({ axleGames: games });
+      HomeServices.getAxleGames()
+        .then((axleGames) => {
+          setAxleGames(axleGames);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }, [page]);
+  }, [axleGames.axleGames, page]);
 
   return (
     <Box fontFamily={"quicksand"} marginY={{ lg: "2rem" }}>
