@@ -183,12 +183,14 @@ const Navbar = (props: NavbarProps) => {
           <Box
             display={"flex"}
             alignItems={"center"}
-            onMouseEnter={() => setOpenDropDown(true)}
             cursor={"pointer"}
             borderStyle="solid"
             bg={theme.fgColor}
           >
             <Box
+              zIndex={3000}
+              cursor="pointer"
+              onClick={() => setOpenDropDown(true)}
               borderRadius={"3xl"}
               boxShadow={`0px 0px 8px ${theme.secondaryColor}`}
             >

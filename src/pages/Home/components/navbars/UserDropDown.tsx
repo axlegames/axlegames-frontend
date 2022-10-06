@@ -14,8 +14,6 @@ const UserDropDown = (props: any) => {
         zIndex={200}
         display={"flex"}
         flexDirection="column"
-        onMouseEnter={() => props.setOpenDropDown(true)}
-        onMouseLeave={() => props.setOpenDropDown(false)}
         px={4}
         py={4}
         borderRadius={"lg"}

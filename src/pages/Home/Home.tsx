@@ -6,12 +6,22 @@ import MobileNavbar from "./components/navbars/MobileNavbar";
 
 import HomeLayout from "./layouts/HomeLayout";
 import SideBarLayout from "./layouts/SideBarLayout";
-import { createContext, useState } from "react";
+import { createContext, useRef, useState } from "react";
 
 export const WalletContext = createContext(false);
 
 const Home = () => {
   const [open, setOpen] = useState(false);
+  const [scrollUp, setScrollUp] = useState(false);
+
+  const ref = useRef(null);
+
+  const scrollUpFun = () => {
+    setScrollUp(true);
+    setTimeout(() => {
+      setScrollUp(false);
+    }, 2000);
+  };
 
   return (
     <Box
@@ -43,11 +53,11 @@ const Home = () => {
             open={open}
             onOpen={() => setOpen(true)}
             onClose={() => setOpen(false)}
+            scrollTop={() => scrollUpFun()}
           />
-          ;
         </GridItem>
         <GridItem maxHeight={"90vh"} overflowY={"scroll"}>
-          <HomeLayout />
+          <HomeLayout ref={ref} scrollUp={scrollUp} />
         </GridItem>
       </Grid>
     </Box>

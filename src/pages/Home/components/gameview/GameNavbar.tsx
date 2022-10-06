@@ -37,7 +37,6 @@ const GameNavbar = () => {
         <GameBarTile isActive={true} title={"Single Player"} />
         <GameBarTile isActive={false} title={"Multi Player"} />
         <GameBarTile isActive={false} title={"Tournaments"} />
-        <GameBarTile isActive={false} title={"Streaming"} />
       </Box>
     </Flex>
   );

@@ -21,6 +21,7 @@ interface SideBarProps {
   open: boolean;
   onOpen: Function;
   onClose: Function;
+  scrollTop: Function;
 }
 
 const SideBarLayout = (props: SideBarProps) => {
@@ -107,7 +108,13 @@ const SideBarLayout = (props: SideBarProps) => {
         children={<Signin />}
       />
 
-      <Image p={2} src={Logo}></Image>
+      <Image
+        zIndex={30000}
+        cursor={"pointer"}
+        onClick={() => props.scrollTop()}
+        p={2}
+        src={Logo}
+      ></Image>
 
       <SideBarCard>
         <SideBarButton title={"Games"} icon={<MdGamepad size={32} />} />
