@@ -36,7 +36,6 @@
     "react-dom": "^18.1.0",
     "react-google-login": "^5.2.2",
     "react-icons": "^3.0.0",
-    "react-onclickoutside": "^6.12.2",
     "react-router": "^6.4.0",
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",

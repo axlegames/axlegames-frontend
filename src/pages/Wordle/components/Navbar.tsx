@@ -34,21 +34,30 @@ const Navbar = (props: any) => {
       />
       <Flex alignItems={"center"} justifyContent={{ base: "space-between" }}>
         <Flex>
-          <BiArrowBack onClick={() => navigate("/")} size={42} />
+          <BiArrowBack
+            cursor={"pointer"}
+            onClick={() => navigate("/")}
+            size={42}
+          />
         </Flex>
         <Flex columnGap={{ base: ".8rem" }} alignItems={"center"}>
-          <Text textAlign={"center"} fontSize={{ base: "2xl", lg: "4xl" }}>
+          <Text
+            cursor={"pointer"}
+            textAlign={"center"}
+            fontSize={{ base: "2xl", lg: "4xl" }}
+          >
             {props.title.replace("-", " #")}
           </Text>
         </Flex>
 
         <Flex columnGap={{ base: "2" }}>
           <AiOutlineQuestion
+            cursor={"pointer"}
             onClick={() => setHowToPlayModal(true)}
             size={30}
           />
-          <ImStatsDots size={30} />
-          <IoMdSettings size={30} />
+          <ImStatsDots cursor={"pointer"} size={30} />
+          <IoMdSettings cursor={"pointer"} size={30} />
         </Flex>
       </Flex>
     </Box>

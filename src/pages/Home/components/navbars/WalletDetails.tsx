@@ -1,18 +1,28 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { theme } from "../../../../config/theme.config";
 
 const WalletDetails = (props: any) => {
+  const ref = useRef<any>();
+
+  useEffect(() => {
+    function handleClickOutside(event: Event) {
+      if (ref.current && !ref.current.contains(event.target)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
   const Balance = () => {
+    let balance = props.balance;
     if (props.address[0] !== "0")
-      return (
-        <Text>
-          {(Number(props.balance) / 10 ** 24).toFixed(2)} {props.label}
-        </Text>
-      );
+      balance = (Number(props.balance) / 10 ** 24).toFixed(2);
+    balance = Number(balance).toFixed(3);
     return (
       <Text>
-        {Number(props.balance).toFixed(3)} {props.label}
+        {balance} {props.label}
       </Text>
     );
   };
@@ -51,6 +61,7 @@ const WalletDetails = (props: any) => {
       </Flex>
 
       <Box
+        ref={ref}
         borderRadius={"md"}
         my={4}
         display={open ? "flex" : "none"}

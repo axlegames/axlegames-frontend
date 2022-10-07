@@ -5,7 +5,7 @@ import Logo from "../../../assets/home/logos/logo.png";
 import SideBarButton from "../components/sidebar/SideBarButton";
 
 import { MdGamepad, MdStore, MdInfo, MdList } from "react-icons/md/index";
-import { HiUsers, HiGlobe, HiCash } from "react-icons/hi/index";
+import { HiUsers, HiGlobe, HiCash, HiUser } from "react-icons/hi/index";
 
 import SideBarCard from "../components/sidebar/SideBarCard";
 import IsNotLoggedIn from "../../../config/isNotLoggedIn";
@@ -121,6 +121,9 @@ const SideBarLayout = (props: SideBarProps) => {
         <SideBarButton title={"Tournment"} icon={<MdList size={32} />} />
         <SideBarButton title={"Rewards"} icon={<HiCash size={32} />} />
         <SideBarButton title={"Referrals"} icon={<HiUsers size={32} />} />
+        <IsLoggedIn>
+          <SideBarButton title={"Profile"} icon={<HiUser size={32} />} />
+        </IsLoggedIn>
       </SideBarCard>
 
       <SideBarCard>

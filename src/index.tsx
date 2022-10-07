@@ -4,14 +4,34 @@ import * as ReactDOM from "react-dom/client";
 import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from "./reportWebVitals";
 
-import { getDefaultProvider } from "ethers";
-import { DAppProvider, Goerli } from "@usedapp/core";
+import { Config, DAppProvider, DEFAULT_SUPPORTED_CHAINS } from "@usedapp/core";
 
-const config = {
-  readOnlyChainId: Goerli.chainId,
-  readOnlyUrls: {
-    [Goerli.chainId]: getDefaultProvider("goerli"),
+import { Chain } from "@usedapp/core";
+
+export const TutorialChain: Chain = {
+  chainId: 97,
+  chainName: "BSC Testnet",
+  isTestChain: true,
+  isLocalChain: false,
+  multicallAddress: "0x6e5BB1a5Ad6F68A8D7D6A5e47750eC15773d6042",
+  getExplorerAddressLink: (address: string) =>
+    `https://testnet.bscscan.com/address/${address}`,
+  getExplorerTransactionLink: (transactionHash: string) =>
+    `https://testnet.bscscan.com/tx/${transactionHash}`,
+  rpcUrl: "https://data-seed-prebsc-1-s1.binance.org:8545",
+  blockExplorerUrl: "https://testnet.bscscan.com",
+  nativeCurrency: {
+    name: "BNB",
+    symbol: "BNB",
+    decimals: 18,
   },
+};
+const config: Config = {
+  readOnlyChainId: TutorialChain.chainId,
+  readOnlyUrls: {
+    [TutorialChain.chainId]: "https://data-seed-prebsc-1-s1.binance.org:8545",
+  },
+  networks: [...DEFAULT_SUPPORTED_CHAINS, TutorialChain],
 };
 
 const container = document.getElementById("root");

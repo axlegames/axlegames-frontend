@@ -1,13 +1,9 @@
 import { theme } from "../../../../config/theme.config";
 import { useEffect, useState } from "react";
-import { Box, Text, Button, Grid, GridItem } from "@chakra-ui/react";
-
-import { AiOutlineUser } from "react-icons/ai/index";
-import IsLoggedIn from "../../../../config/isLoggedIn";
+import { Text, Button, Grid, GridItem } from "@chakra-ui/react";
 
 import Dialog from "../../../Auth/dialogs/Dialog";
 import WalletsDialog from "../../../Auth/dialogs/WalletsDialog";
-import UserDropDown from "./UserDropDown";
 
 import { NearConnectionServices } from "../../connections/NearConnection";
 
@@ -46,7 +42,6 @@ const Navbar = (props: NavbarProps) => {
     logo: "",
   });
   const [wallet, setWallet] = useState<any>({});
-  const [openDropDown, setOpenDropDown] = useState(false);
 
   const { activateBrowserWallet, deactivate, account } = useEthers();
   const etherBalance = useEtherBalance(account);
@@ -73,6 +68,8 @@ const Navbar = (props: NavbarProps) => {
       balance: formatEther(etherBalance ?? 1).toString(),
       isConnected: account ? true : false,
     });
+
+    console.log(account);
     setDetails({ logo: ETH, label: "ETH" });
     localStorage.setItem("address", account!);
     props.onClose();
@@ -104,6 +101,7 @@ const Navbar = (props: NavbarProps) => {
     });
     setDetails({ logo: ETH, label: "ETH" });
     localStorage.setItem("address", account!);
+    console.log(account);
   }, [account, etherBalance]);
 
   useEffect(() => {
@@ -176,31 +174,6 @@ const Navbar = (props: NavbarProps) => {
             disconnect={disconnect}
           />
         )}
-
-        <IsLoggedIn>
-          <Box
-            display={"flex"}
-            alignItems={"center"}
-            cursor={"pointer"}
-            borderStyle="solid"
-            bg={theme.fgColor}
-          >
-            <Box
-              zIndex={3000}
-              cursor="pointer"
-              onClick={() => setOpenDropDown(true)}
-              borderRadius={"3xl"}
-              boxShadow={`0px 0px 8px ${theme.secondaryColor}`}
-            >
-              <AiOutlineUser color={theme.secondaryColor} size={38} />
-            </Box>
-          </Box>
-
-          <UserDropDown
-            openDropDown={openDropDown}
-            setOpenDropDown={(t: boolean) => setOpenDropDown(t)}
-          />
-        </IsLoggedIn>
       </GridItem>
 
       <GridItem position={"absolute"} width="100%" justifyContent={"center"}>
