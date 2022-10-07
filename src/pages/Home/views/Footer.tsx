@@ -13,6 +13,7 @@ import { SiDiscord } from "react-icons/si";
 const Icon = (props: any) => {
   return (
     <Box
+      cursor={"pointer"}
       transition={`100ms all ease-in`}
       _hover={{
         transform: "scale(1.1)",
