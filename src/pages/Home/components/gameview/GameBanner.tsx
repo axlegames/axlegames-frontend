@@ -9,7 +9,7 @@ const GameBanner = (props: any) => {
           Welcome to Axle
         </Text>
         <Text color={theme.highLightColor} fontWeight={"bold"}>
-          Web3 Games, NFT, Community & Earnings
+          A skill based web3 gaming platform
         </Text>
       </Flex>
       <Box

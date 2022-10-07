@@ -4,8 +4,15 @@ import Logo from "../../../assets/home/logos/logo.png";
 
 import SideBarButton from "../components/sidebar/SideBarButton";
 
-import { MdGamepad, MdStore, MdInfo, MdList } from "react-icons/md/index";
-import { HiUsers, HiGlobe, HiCash, HiUser } from "react-icons/hi/index";
+import { MdGamepad, MdStore, MdInfo } from "react-icons/md/index";
+import {
+  HiHome,
+  HiUsers,
+  HiGlobe,
+  HiCash,
+  HiUser,
+  HiOutlineDocument,
+} from "react-icons/hi/index";
 
 import SideBarCard from "../components/sidebar/SideBarCard";
 import IsNotLoggedIn from "../../../config/isNotLoggedIn";
@@ -32,7 +39,6 @@ const SideBarLayout = (props: SideBarProps) => {
     localStorage.clear();
     window.location.reload();
   };
-  console.log(isMobile);
 
   const [open, setOpen] = useState(false);
 
@@ -151,8 +157,7 @@ const SideBarLayout = (props: SideBarProps) => {
       ></Image>
 
       <SideBarCard>
-        <SideBarButton title={"Games"} icon={<MdGamepad size={32} />} />
-        <SideBarButton title={"Tournment"} icon={<MdList size={32} />} />
+        <SideBarButton title={"Home"} icon={<HiHome size={32} />} />
         <SideBarButton title={"Rewards"} icon={<HiCash size={32} />} />
         <SideBarButton title={"Referrals"} icon={<HiUsers size={32} />} />
         <SideBarButton
@@ -165,6 +170,16 @@ const SideBarLayout = (props: SideBarProps) => {
       <SideBarCard>
         <SideBarButton title={"AxleVerse"} icon={<HiGlobe size={32} />} />
         <SideBarButton title={"Marketplace"} icon={<MdStore size={32} />} />
+        <a
+          href="https://axlegames.s3.ap-south-1.amazonaws.com/Axlegames.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <SideBarButton
+            title={"Pitch-Deck"}
+            icon={<HiOutlineDocument size={32} />}
+          />
+        </a>
         <SideBarButton title={"About Us"} icon={<MdInfo size={32} />} />
       </SideBarCard>
 
