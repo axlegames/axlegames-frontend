@@ -12,6 +12,7 @@ import {
   Flex,
   Button,
   useToast,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
@@ -30,6 +31,8 @@ const GameEntryModal = (props: any) => {
   const [dialog, setDialog] = useState(false);
   const [loginDialog, setLoginDialog] = useState(false);
 
+  const [isMobile] = useMediaQuery("(max-width: 600px)");
+
   function goToPage() {
     const user = localStorage.getItem("userId");
     if (user)
@@ -47,16 +50,19 @@ const GameEntryModal = (props: any) => {
         .catch((err) => {
           console.log(err);
         });
-    const address = localStorage.getItem("address");
-    if (!address || address === "undefined" || address === "null")
-      return toast({
-        title: "Connect Wallet",
-        description: "Connect with your wallet",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
+
+    if (!isMobile) {
+      const address = localStorage.getItem("address");
+      if (!address || address === "undefined" || address === "null")
+        return toast({
+          title: "Connect Wallet",
+          description: "Connect with your wallet",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+    }
     return setLoginDialog(true);
   }
 

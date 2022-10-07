@@ -4,7 +4,7 @@ import { theme } from "../../../../config/theme.config";
 const GameBanner = (props: any) => {
   return (
     <Box pb={16}>
-      <Flex flexDirection={"column"} p={{ base: "2" }}>
+      <Flex flexDirection={"column"} py={{ base: "8" }} px={{ base: "4" }}>
         <Text fontSize={"3xl"} fontWeight="bold">
           Welcome to Axle
         </Text>
@@ -17,7 +17,7 @@ const GameBanner = (props: any) => {
         columnGap="1rem"
         alignItems="center"
         flexDirection={{ base: "column", lg: "row" }}
-        rowGap={{ base: "3rem", lg: "0" }}
+        rowGap={{ base: "1rem", lg: "0" }}
         justifyContent={"start"}
       >
         <Image

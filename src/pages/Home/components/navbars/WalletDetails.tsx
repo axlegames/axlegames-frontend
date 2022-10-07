@@ -65,7 +65,7 @@ const WalletDetails = (props: any) => {
         borderRadius={"md"}
         my={4}
         display={open ? "flex" : "none"}
-        bg={theme.secondaryColor}
+        bg={theme.bgColor}
         width={"220px"}
         mx={"auto"}
         left={0}
@@ -82,8 +82,8 @@ const WalletDetails = (props: any) => {
           justifyContent="center"
           flexDirection={"column"}
           alignItems="center"
-          bg={theme.bgColor}
-          color={theme.primaryColor}
+          bg={theme.fgColor}
+          color={theme.secondaryColor}
           borderRadius="md"
         >
           <Text fontSize={"sm"}>Your wallet balance</Text>
@@ -91,10 +91,10 @@ const WalletDetails = (props: any) => {
         </Box>
         <Button
           _hover={{
-            bg: theme.secondaryColor,
-            color: theme.bgColor,
+            bg: theme.fgColor,
+            color: theme.secondaryColor,
           }}
-          color={theme.primaryColor}
+          color={theme.secondaryColor}
           bg={theme.bgColor}
           variant={"outline"}
           onClick={props.disconnect}

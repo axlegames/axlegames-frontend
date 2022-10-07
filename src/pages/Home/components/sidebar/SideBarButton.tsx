@@ -4,6 +4,7 @@ import { theme } from "../../../../config/theme.config";
 const SideBarButton = (props: any) => {
   return (
     <Button
+      size={{ base: "sm" }}
       width={"100%"}
       variant={"ghost"}
       _hover={{ color: theme.primaryColor, bg: theme.bgColor }}

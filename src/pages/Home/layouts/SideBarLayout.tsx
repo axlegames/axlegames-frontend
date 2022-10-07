@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, useMediaQuery } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import Logo from "../../../assets/home/logos/logo.png";
 
@@ -25,17 +25,34 @@ interface SideBarProps {
 }
 
 const SideBarLayout = (props: SideBarProps) => {
+  const [isMobile] = useMediaQuery("(max-width: 600px)");
   const toast = useToast();
 
   const signout = () => {
     localStorage.clear();
     window.location.reload();
   };
+  console.log(isMobile);
 
   const [open, setOpen] = useState(false);
 
   const signin = () => {
     const address = localStorage.getItem("address");
+    console.log("hello");
+    console.log(isMobile);
+
+    if (isMobile) {
+      const isLoggedIn = localStorage.getItem("userId");
+      if (
+        !isLoggedIn ||
+        isLoggedIn === null ||
+        isLoggedIn === "null" ||
+        isLoggedIn === "undefined"
+      ) {
+        return setOpen(true);
+      }
+    }
+
     if (
       !address ||
       address === null ||
@@ -82,9 +99,9 @@ const SideBarLayout = (props: SideBarProps) => {
         boxShadow={`0px 0px 8px ${theme.primaryColor}`}
         transition={"all 100ms ease-in"}
         onClick={props.click}
-        maxWidth={{ lg: "240px" }}
-        minWidth={{ lg: "240px" }}
-        height={"12"}
+        maxWidth={{ lg: "236px" }}
+        minWidth={{ lg: "236px" }}
+        height={{ base: "12" }}
         borderRadius="xl"
         cursor={"pointer"}
         _hover={{
@@ -125,10 +142,11 @@ const SideBarLayout = (props: SideBarProps) => {
       />
 
       <Image
-        zIndex={30000}
+        zIndex={23600}
         cursor={"pointer"}
         onClick={() => props.scrollTop()}
-        p={2}
+        px={{ base: "8" }}
+        py={4}
         src={Logo}
       ></Image>
 

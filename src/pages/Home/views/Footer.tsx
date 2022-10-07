@@ -66,7 +66,7 @@ const Footer = () => {
         alignItems={{ base: "center" }}
         flexDirection={{ base: "column" }}
         rowGap={{ base: ".25rem" }}
-        minHeight={{ base: "36vh" }}
+        minHeight={{ base: "48vh" }}
         position={"relative"}
       >
         <Box

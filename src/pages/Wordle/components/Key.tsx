@@ -1,12 +1,17 @@
 import { Box } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
-const Key = (props: any) => {
+const Key = (props: {
+  letter: string;
+  onKeyPress: Function;
+  gotHit?: boolean;
+}) => {
   const shadow = `0px -4px 0px 4px ${theme.bgColor}, 0px 0px 0px 4px ${theme.highLightColor}`;
   const highLightShadow = `0px 0px 0px 0px ${theme.highLightColor}, 0px 0px 0px 0px ${theme.bgColor}`;
 
   return (
     <Box
+      cursor={"pointer"}
       onClick={() => props.onKeyPress(props.letter)}
       display={"flex"}
       fontSize={{ base: "12", md: "16", lg: "18", xl: "20" }}
@@ -27,7 +32,7 @@ const Key = (props: any) => {
         borderRadius: "lg",
       }}
     >
-      {props.letter}
+      {props.letter.toLowerCase()}
     </Box>
   );
 };
