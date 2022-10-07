@@ -30,11 +30,11 @@ const GameBanner = (props: any) => {
           height={172}
           src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
         />
-        <Image
+        {/* <Image
           borderRadius={"2xl"}
           height={172}
           src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_2.png"}
-        />
+        /> */}
       </Box>
     </Box>
   );
