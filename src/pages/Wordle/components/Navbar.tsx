@@ -38,7 +38,7 @@ const Navbar = (props: any) => {
         </Flex>
         <Flex columnGap={{ base: ".8rem" }} alignItems={"center"}>
           <Text textAlign={"center"} fontSize={{ base: "2xl", lg: "4xl" }}>
-            {props.title.replace("-", "#")}
+            {props.title.replace("-", " #")}
           </Text>
         </Flex>
 

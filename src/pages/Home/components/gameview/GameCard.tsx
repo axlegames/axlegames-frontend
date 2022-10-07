@@ -64,7 +64,7 @@ const GameCard = (props: any) => {
               color: theme.bgColor,
               bg: theme.primaryColor,
             }}
-            bg={"green.700"}
+            bg={"#499557"}
             opacity={0.9}
             color={theme.highLightColor}
             onClick={() => props.openModal(props.axleGame, props.index)}
