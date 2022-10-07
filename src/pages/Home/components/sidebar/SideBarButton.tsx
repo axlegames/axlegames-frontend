@@ -8,6 +8,7 @@ const SideBarButton = (props: any) => {
       variant={"ghost"}
       _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
       justifyContent="flex-start"
+      onClick={props.onClick}
     >
       <Flex alignItems={"center"} columnGap={"1rem"}>
         <Box>{props.icon}</Box>

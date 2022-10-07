@@ -50,8 +50,24 @@ const SideBarLayout = (props: SideBarProps) => {
         isClosable: true,
         position: "top",
       });
-
-    return setOpen(true);
+    const isLoggedIn = localStorage.getItem("userId");
+    if (
+      !isLoggedIn ||
+      isLoggedIn === null ||
+      isLoggedIn === "null" ||
+      isLoggedIn === "undefined"
+    ) {
+      return setOpen(true);
+    }
+    // redirect to profile once it was completed
+    return toast({
+      title: "Profile Page",
+      description: "Inprogress",
+      status: "info",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
   };
 
   const HighLightButton = (props: any) => {
@@ -121,9 +137,11 @@ const SideBarLayout = (props: SideBarProps) => {
         <SideBarButton title={"Tournment"} icon={<MdList size={32} />} />
         <SideBarButton title={"Rewards"} icon={<HiCash size={32} />} />
         <SideBarButton title={"Referrals"} icon={<HiUsers size={32} />} />
-        <IsLoggedIn>
-          <SideBarButton title={"Profile"} icon={<HiUser size={32} />} />
-        </IsLoggedIn>
+        <SideBarButton
+          onClick={signin}
+          title={"Profile"}
+          icon={<HiUser size={32} />}
+        />
       </SideBarCard>
 
       <SideBarCard>

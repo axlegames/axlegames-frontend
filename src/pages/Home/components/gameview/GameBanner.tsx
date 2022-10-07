@@ -4,11 +4,6 @@ import { theme } from "../../../../config/theme.config";
 const GameBanner = (props: any) => {
   return (
     <Box pb={16}>
-      <Box display={"flex"} justifyContent="flex-end">
-        <Text fontSize={"xl"} fontWeight="bold">
-          Welcome,{localStorage.getItem("username")}{" "}
-        </Text>
-      </Box>
       <Flex flexDirection={"column"} p={{ base: "2" }}>
         <Text fontSize={"3xl"} fontWeight="bold">
           Welcome to Axle
