@@ -4,7 +4,7 @@ import Logo from "../../../assets/home/logos/logo.png";
 
 import SideBarButton from "../components/sidebar/SideBarButton";
 
-import { MdGamepad, MdStore, MdInfo } from "react-icons/md/index";
+import { MdStore, MdInfo } from "react-icons/md/index";
 import {
   HiHome,
   HiUsers,
