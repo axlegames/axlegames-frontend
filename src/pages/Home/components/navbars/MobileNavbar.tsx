@@ -3,9 +3,14 @@ import { theme } from "../../../../config/theme.config";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai/index";
 import { useState } from "react";
 import Logo from "../../../../assets/home/logos/logo.png";
+import IsLoggedIn from "../../../../config/isLoggedIn";
 
 const MobileNavbar = () => {
   const [open, setOpen] = useState(false);
+  const signout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
 
   return (
     <Box
@@ -66,7 +71,7 @@ const MobileNavbar = () => {
         fontWeight="bold"
         color={theme.highLightColor}
         visibility={open ? "visible" : "hidden"}
-        height={open ? "100%" : "0"}
+        height={open ? "90vh" : "0"}
         flexDirection="column"
         justifyContent={"center"}
         alignItems="center"
@@ -99,7 +104,7 @@ const MobileNavbar = () => {
             variant={"ghost"}
             _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
           >
-            Staking
+            Rewards
           </Button>
           <Button
             variant={"ghost"}
@@ -107,6 +112,15 @@ const MobileNavbar = () => {
           >
             Referral Program
           </Button>
+          <IsLoggedIn>
+            <Button
+              onClick={signout}
+              variant={"ghost"}
+              _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+            >
+              Logout
+            </Button>
+          </IsLoggedIn>
         </Flex>
 
         <Flex

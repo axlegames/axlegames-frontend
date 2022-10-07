@@ -14,13 +14,13 @@ const Key = (props: {
       cursor={"pointer"}
       onClick={() => props.onKeyPress(props.letter)}
       display={"flex"}
-      fontSize={{ base: "12", md: "16", lg: "18", xl: "20" }}
+      fontSize={{ base: "18", md: "16", lg: "18", xl: "20" }}
       fontWeight="bolder"
       flexDirection="column"
       alignItems={"center"}
       justifyContent="center"
-      height={{ base: "5", sm: "8", md: "12" }}
-      width={{ base: "5", sm: "8", md: "12" }}
+      height={{ base: "6", sm: "8", md: "12" }}
+      width={{ base: "6", sm: "8", md: "12" }}
       bg={theme.fgColor}
       borderRadius={{ base: props.gotHit ? "lg" : "sm" }}
       border={props.gotHit ? `3px solid ${theme.highLightColor}` : "none"}

@@ -49,7 +49,7 @@ const Footer = () => {
       justifyContent={"center"}
       alignItems="center"
       flexDirection={"column"}
-      rowGap={{ base: "5rem" }}
+      rowGap={{ base: "12rem", md: "5rem" }}
       mb={16}
     >
       <Box
@@ -139,7 +139,7 @@ const Footer = () => {
           </Flex>
         </Box>
       </Box>
-      <Text color={theme.primaryColor}>Copyright 2022 © Axle Games</Text>
+      <Text color={theme.secondaryColor}>Copyright 2022 © Axle Games</Text>
     </Flex>
   );
 };
