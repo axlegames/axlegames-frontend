@@ -9,7 +9,7 @@ import { HiUsers, HiGlobe, HiCash } from "react-icons/hi/index";
 
 import SideBarCard from "../components/sidebar/SideBarCard";
 import IsNotLoggedIn from "../../../config/isNotLoggedIn";
-import Dialog from "../../Auth/Dialog";
+import Dialog from "../../Auth/dialogs/Dialog";
 import Signin from "../../Auth/Signin";
 
 import { useState } from "react";

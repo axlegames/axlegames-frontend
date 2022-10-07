@@ -5,11 +5,11 @@ import { Box, Text, Button, Grid, GridItem } from "@chakra-ui/react";
 import { AiOutlineUser } from "react-icons/ai/index";
 import IsLoggedIn from "../../../../config/isLoggedIn";
 
-import Dialog from "../../../Auth/Dialog";
-import Wallets from "../../../Auth/Wallets";
+import Dialog from "../../../Auth/dialogs/Dialog";
+import WalletsDialog from "../../../Auth/dialogs/WalletsDialog";
 import UserDropDown from "./UserDropDown";
 
-import { NearConnectionServices } from "./connections/NearConnection";
+import { NearConnectionServices } from "../../connections/NearConnection";
 
 import WalletDetails from "./WalletDetails";
 
@@ -132,7 +132,7 @@ const Navbar = (props: NavbarProps) => {
       <Dialog
         size="2xl"
         children={
-          <Wallets
+          <WalletsDialog
             isConnected={user.isConnected}
             disconnect={disconnect}
             address={user.account}

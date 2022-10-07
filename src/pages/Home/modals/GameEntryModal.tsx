@@ -20,7 +20,7 @@ import { WordleServices } from "../../Wordle/WordleServices";
 import { useState } from "react";
 
 import Dialog from "./Dailog";
-import AuthDialog from "../../Auth/Dialog";
+import AuthDialog from "../../Auth/dialogs/Dialog";
 import Signin from "../../Auth/Signin";
 
 const GameEntryModal = (props: any) => {

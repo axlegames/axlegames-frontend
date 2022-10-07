@@ -14,7 +14,7 @@ import "./index.css";
 
 import { theme } from "../../config/theme.config";
 
-import Dialog from "./Dialog";
+import Dialog from "./dialogs/Dialog";
 import Signup from "./Signup";
 import ForgotPassword from "./ForgotPassword";
 

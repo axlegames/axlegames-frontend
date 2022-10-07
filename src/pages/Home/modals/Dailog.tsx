@@ -12,9 +12,16 @@ import {
 } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
-const Dialog = (props: any) => {
+interface Props {
+  open: boolean;
+  close: Function;
+  title: string;
+  description: string;
+}
+
+const Dialog = (props: Props) => {
   return (
-    <Modal isCentered={true} isOpen={props.open} onClose={props.close}>
+    <Modal isCentered={true} isOpen={props.open} onClose={() => props.close()}>
       <ModalOverlay />
       <ModalContent
         borderRadius={"xl"}
@@ -30,7 +37,12 @@ const Dialog = (props: any) => {
           <Divider my="8"></Divider>
         </ModalBody>
         <ModalFooter>
-          <Button size="sm" colorScheme="blue" mr={3} onClick={props.close}>
+          <Button
+            size="sm"
+            colorScheme="blue"
+            mr={3}
+            onClick={() => props.close()}
+          >
             Close
           </Button>
         </ModalFooter>

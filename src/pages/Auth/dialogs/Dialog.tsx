@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { theme } from "../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 
 interface Props {
   isOpen: boolean;

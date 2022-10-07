@@ -1,12 +1,12 @@
 import { Box, Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
-import { theme } from "../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 
-import NEAR from "../../assets/logos/NEAR.svg";
-import MetaMask from "../../assets/logos/metamask.svg";
-import WalletConnect from "../../assets/logos/walletconnect.svg";
-import TrustWallet from "../../assets/logos/trustwallet.svg";
+import NEAR from "../../../assets/logos/NEAR.svg";
+import MetaMask from "../../../assets/logos/metamask.svg";
+import WalletConnect from "../../../assets/logos/walletconnect.svg";
+import TrustWallet from "../../../assets/logos/trustwallet.svg";
 
-const Wallets = (props: any) => {
+const WalletsDialog = (props: any) => {
   return (
     <Box
       flexDirection={"column"}
@@ -108,4 +108,4 @@ const ConnectedWallet = (props: any) => {
   );
 };
 
-export default Wallets;
+export default WalletsDialog;
