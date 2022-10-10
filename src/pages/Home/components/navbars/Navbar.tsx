@@ -1,6 +1,6 @@
 import { theme } from "../../../../config/theme.config";
 import { useEffect, useState } from "react";
-import { Text, Button, Grid, GridItem } from "@chakra-ui/react";
+import { Button, Grid, GridItem } from "@chakra-ui/react";
 
 import Dialog from "../../../Auth/dialogs/Dialog";
 import WalletsDialog from "../../../Auth/dialogs/WalletsDialog";
