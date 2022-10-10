@@ -39,6 +39,7 @@ const WalletDetails = (props: any) => {
       mx={4}
       bg={theme.bgColor}
       borderRadius="xl"
+      boxShadow={`0px 0px 4px ${theme.primaryColor}`}
     >
       <Flex
         justifyContent={"space-evenly"}

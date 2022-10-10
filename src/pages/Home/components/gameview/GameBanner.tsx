@@ -7,7 +7,7 @@ const GameBanner = (props: any) => {
     <Box pb={16}>
       <Flex flexDirection={"column"} py={{ base: "8" }} px={{ base: "4" }}>
         <Text fontSize={"3xl"} fontWeight="bold">
-          Welcome to AxleGames
+          Welcome to Axle Games
         </Text>
         <Text color={theme.highLightColor} fontWeight={"bold"}>
           A skill-based web3 gaming platform
@@ -44,7 +44,22 @@ const GameBanner = (props: any) => {
         px={"6"}
         borderRadius="2xl"
       >
-        <Carousel style={{ borderRadius: "2vh" }} autoplay={true}>
+        <Carousel
+          defaultControlsConfig={{
+            nextButtonStyle: {
+              display: "none",
+            },
+            prevButtonStyle: {
+              display: "none",
+            },
+            pagingDotsStyle: {
+              marginLeft: ".3rem",
+              marginRight: ".3rem",
+            },
+          }}
+          style={{ borderRadius: "2vh" }}
+          autoplay={true}
+        >
           <Box
             width={"100%"}
             display={"flex"}

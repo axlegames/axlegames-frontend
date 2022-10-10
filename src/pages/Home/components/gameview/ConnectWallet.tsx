@@ -133,14 +133,15 @@ const ConnectWallet = (props: WalletDialogProps) => {
             _hover={{
               color: theme.primaryColor,
               bg: theme.bgColor,
+              boxShadow: `0px 0px 4px ${theme.primaryColor}`,
             }}
             zIndex={2000}
             color={theme.bgColor}
             onClick={() => props.onOpen()}
             borderRadius={"2xl"}
             bg={theme.primaryColor}
-            shadow="2xl"
             style={{ cursor: "pointer" }}
+            boxShadow={`0px 0px 4px ${theme.primaryColor}`}
           >
             Connect Wallet
           </Button>

@@ -32,7 +32,7 @@ const MobileNavbar = () => {
         alignItems={"center"}
       >
         <Flex alignItems={"center"} columnGap=".5rem">
-          <Image maxH={"5vh"} src={Logo}></Image>
+          <Image maxH={"6vh"} src={Logo}></Image>
         </Flex>
         <Box
           onClick={() => setOpen(!open)}
@@ -48,7 +48,7 @@ const MobileNavbar = () => {
                 transition: "100ms all ease-in",
               }}
               color={theme.highLightColor}
-              size={42}
+              size={32}
             />
           ) : (
             <AiOutlineMenu
@@ -57,7 +57,7 @@ const MobileNavbar = () => {
                 transition: "100ms all ease-in",
               }}
               color={theme.highLightColor}
-              size={42}
+              size={32}
             />
           )}
         </Box>
@@ -92,13 +92,7 @@ const MobileNavbar = () => {
             variant={"ghost"}
             _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
           >
-            Games
-          </Button>
-          <Button
-            variant={"ghost"}
-            _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
-          >
-            Tournment
+            Home
           </Button>
           <Button
             variant={"ghost"}
@@ -110,7 +104,13 @@ const MobileNavbar = () => {
             variant={"ghost"}
             _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
           >
-            Referral Program
+            Referral
+          </Button>
+          <Button
+            variant={"ghost"}
+            _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+          >
+            Profile
           </Button>
           <IsLoggedIn>
             <Button
@@ -146,6 +146,18 @@ const MobileNavbar = () => {
           >
             Market Place
           </Button>
+          <a
+            href="https://axlegames.s3.ap-south-1.amazonaws.com/Axlegames.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button
+              variant={"ghost"}
+              _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
+            >
+              Pitch-Deck
+            </Button>
+          </a>
           <Button
             variant={"ghost"}
             _hover={{ color: theme.bgColor, bg: theme.highLightColor }}
