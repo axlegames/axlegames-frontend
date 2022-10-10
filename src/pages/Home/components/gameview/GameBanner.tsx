@@ -45,6 +45,8 @@ const GameBanner = (props: any) => {
         borderRadius="2xl"
       >
         <Carousel
+          wrapAround={true}
+          autoplayInterval={3000}
           defaultControlsConfig={{
             nextButtonStyle: {
               display: "none",
@@ -59,6 +61,8 @@ const GameBanner = (props: any) => {
           }}
           style={{ borderRadius: "2vh" }}
           autoplay={true}
+          animation="zoom"
+          autoplayReverse={true}
         >
           <Box
             width={"100%"}
