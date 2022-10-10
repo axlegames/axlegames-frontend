@@ -7,10 +7,10 @@ const GameBanner = (props: any) => {
     <Box pb={16}>
       <Flex flexDirection={"column"} py={{ base: "8" }} px={{ base: "4" }}>
         <Text fontSize={"3xl"} fontWeight="bold">
-          Welcome to Axle
+          Welcome to AxleGames
         </Text>
         <Text color={theme.highLightColor} fontWeight={"bold"}>
-          A skill based web3 gaming platform
+          A skill-based web3 gaming platform
         </Text>
       </Flex>
       <Box
