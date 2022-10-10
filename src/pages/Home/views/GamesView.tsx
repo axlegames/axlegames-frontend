@@ -55,7 +55,7 @@ const GamesView = () => {
   }, [axleGames.axleGames, page]);
 
   return (
-    <Box fontFamily={"quicksand"} marginY={{ lg: "2rem" }}>
+    <Box fontFamily={"quicksand"} marginBottom={{ lg: "2rem" }}>
       <GameEntryModal
         open={gameModal}
         close={() => setGameModal(false)}

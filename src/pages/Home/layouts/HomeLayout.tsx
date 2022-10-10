@@ -5,7 +5,7 @@ import Footer from "../views/Footer";
 
 const HomeLayout = () => {
   return (
-    <Box py={2}>
+    <Box pb={2}>
       <GamesView />
       <HowToPlayView />
       <Footer />

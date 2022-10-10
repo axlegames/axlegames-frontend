@@ -16,17 +16,7 @@ const Home = () => {
   const ref = useRef<any>(null);
 
   return (
-    <Box
-      maxHeight={"100vh"}
-      overflowX="hidden"
-      overflowY="hidden"
-      bg={theme.bgColor}
-    >
-      <Navbar
-        open={open}
-        onOpen={() => setOpen(true)}
-        onClose={() => setOpen(false)}
-      />
+    <Box maxHeight={"100vh"} overflowX="hidden" bg={theme.bgColor}>
       <MobileNavbar />
       <Grid
         templateColumns={{
@@ -35,7 +25,6 @@ const Home = () => {
         }}
       >
         <GridItem
-          overflowY={"hidden"}
           maxWidth="380px"
           minWidth={"360px"}
           display={{ base: "none", lg: "flex" }}
@@ -48,7 +37,12 @@ const Home = () => {
             scrollTop={() => scrollUpFun()}
           />
         </GridItem>
-        <GridItem ref={ref} maxHeight={"90vh"} overflowY={"scroll"}>
+        <GridItem ref={ref}>
+          <Navbar
+            open={open}
+            onOpen={() => setOpen(true)}
+            onClose={() => setOpen(false)}
+          />
           <HomeLayout />
         </GridItem>
       </Grid>

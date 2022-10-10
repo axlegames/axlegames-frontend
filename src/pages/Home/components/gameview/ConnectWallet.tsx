@@ -1,20 +1,18 @@
-import { theme } from "../../../../config/theme.config";
+import { Box, Button } from "@chakra-ui/react";
+import { useEtherBalance, useEthers } from "@usedapp/core";
+import { formatEther } from "ethers/lib/utils";
 import { useEffect, useState } from "react";
-import { Text, Button, Grid, GridItem } from "@chakra-ui/react";
-
-import Dialog from "../../../Auth/dialogs/Dialog";
-import WalletsDialog from "../../../Auth/dialogs/WalletsDialog";
-
+import { useNavigate } from "react-router";
+import { useSearchParams } from "react-router-dom";
 import { NearConnectionServices } from "../../connections/NearConnection";
-
-import WalletDetails from "./WalletDetails";
 
 import NEAR from "../../../../assets/logos/NEAR.svg";
 import ETH from "../../../../assets/logos/ETH.svg";
 
-import { formatEther } from "@ethersproject/units";
-import { useEtherBalance, useEthers } from "@usedapp/core";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import Dialog from "../../../Auth/dialogs/Dialog";
+import WalletsDialog from "../../../Auth/dialogs/WalletsDialog";
+import { theme } from "../../../../config/theme.config";
+import WalletDetails from "../navbars/WalletDetails";
 
 interface Props {
   account: string;
@@ -22,13 +20,13 @@ interface Props {
   isConnected: boolean;
 }
 
-interface NavbarProps {
+interface WalletDialogProps {
   open: boolean;
   onOpen: Function;
   onClose: Function;
 }
 
-const Navbar = (props: NavbarProps) => {
+const ConnectWallet = (props: WalletDialogProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -114,15 +112,7 @@ const Navbar = (props: NavbarProps) => {
   }, [searchParams, setSearchParams]);
 
   return (
-    <Grid
-      position={"relative"}
-      bg={theme.bgColor}
-      color={theme.bgColor}
-      fontFamily="quicksand"
-      fontWeight={"bold"}
-      display={{ base: "none", lg: "flex" }}
-      p={2}
-    >
+    <Box>
       <Dialog
         size="2xl"
         children={
@@ -137,14 +127,7 @@ const Navbar = (props: NavbarProps) => {
         isOpen={props.open}
         close={props.onClose}
       />
-      <GridItem
-        width={"100%"}
-        justifyContent={"flex-end"}
-        columnGap={"1rem"}
-        display={"flex"}
-        flexDirection="row"
-        pr={"6"}
-      >
+      <Box justifyContent={"flex-end"} display={"flex"}>
         {!user.isConnected ? (
           <Button
             _hover={{
@@ -152,6 +135,7 @@ const Navbar = (props: NavbarProps) => {
               bg: theme.bgColor,
             }}
             zIndex={2000}
+            color={theme.bgColor}
             onClick={() => props.onOpen()}
             borderRadius={"2xl"}
             bg={theme.primaryColor}
@@ -170,9 +154,9 @@ const Navbar = (props: NavbarProps) => {
             disconnect={disconnect}
           />
         )}
-      </GridItem>
-    </Grid>
+      </Box>
+    </Box>
   );
 };
 
-export default Navbar;
+export default ConnectWallet;

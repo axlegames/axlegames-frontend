@@ -134,11 +134,11 @@ const SideBarLayout = (props: SideBarProps) => {
       maxWidth={{ lg: "240px" }}
       minWidth={{ lg: "240px" }}
       maxHeight="100%"
-      minH={"90vh"}
+      minH={"100vh"}
       display={"flex"}
       flexDirection="column"
       rowGap={"1rem"}
-      py="8"
+      py="3"
     >
       <Dialog
         size="md"
