@@ -1,18 +1,15 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
-import { theme } from "../../config/theme.config";
-
-import Navbar from "./components/navbars/Navbar";
-import MobileNavbar from "./components/navbars/MobileNavbar";
-
-import HomeLayout from "./layouts/HomeLayout";
-import SideBarLayout from "./layouts/SideBarLayout";
 import { useRef, useState } from "react";
+import { theme } from "../../config/theme.config";
+import MobileNavbar from "../Home/components/navbars/MobileNavbar";
+import Navbar from "../Home/components/navbars/Navbar";
+import SideBarLayout from "../Home/layouts/SideBarLayout";
+import GameInView from "./GameInView";
 
-const Home = () => {
+const GameInLayout = (props: any) => {
   const [open, setOpen] = useState(false);
   const scrollUpFun = () => ref.current.scroll({ top: 0, behavior: "smooth" });
   const ref = useRef<any>(null);
-
   return (
     <Box maxHeight={"100vh"} overflowX="hidden" bg={theme.bgColor}>
       <MobileNavbar />
@@ -41,11 +38,11 @@ const Home = () => {
             onOpen={() => setOpen(true)}
             onClose={() => setOpen(false)}
           />
-          <HomeLayout />
+          <GameInView />
         </GridItem>
       </Grid>
     </Box>
   );
 };
 
-export default Home;
+export default GameInLayout;

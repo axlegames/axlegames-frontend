@@ -23,6 +23,7 @@ import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import IsLoggedIn from "../../../config/isLoggedIn";
 import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
+import { useNavigate } from "react-router";
 
 interface SideBarProps {
   open: boolean;
@@ -34,6 +35,7 @@ interface SideBarProps {
 const SideBarLayout = (props: SideBarProps) => {
   const [isMobile] = useMediaQuery("(max-width: 600px)");
   const toast = useToast();
+  const navigate = useNavigate();
 
   const signout = () => {
     localStorage.clear();
@@ -157,9 +159,17 @@ const SideBarLayout = (props: SideBarProps) => {
       ></Image>
 
       <SideBarCard>
-        <SideBarButton title={"Home"} icon={<HiHome size={32} />} />
+        <SideBarButton
+          onClick={() => navigate("/")}
+          title={"Home"}
+          icon={<HiHome size={32} />}
+        />
         <SideBarButton title={"Rewards"} icon={<HiCash size={32} />} />
-        <SideBarButton title={"Referrals"} icon={<HiUsers size={32} />} />
+        <SideBarButton
+          onClick={() => navigate("/gamein")}
+          title={"Gamein"}
+          icon={<HiUsers size={32} />}
+        />
         <SideBarButton
           onClick={signin}
           title={"Profile"}

@@ -6,6 +6,7 @@ import Wordle from "./pages/Wordle/Wordle";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import { useEffect, useState } from "react";
 import Page403 from "./pages/Auth/Page403";
+import GameInLayout from "./pages/GameIn/GameInLayout";
 // import PrivateRoute from "./config/protected.router";
 
 export const App = () => {
@@ -22,6 +23,7 @@ export const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/gamein" element={<GameInLayout />} />
           <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/403" element={<Page403 />} />
