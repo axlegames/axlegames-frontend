@@ -4,9 +4,11 @@ import { theme } from "../../config/theme.config";
 import Navbar from "./components/navbars/Navbar";
 import MobileNavbar from "./components/navbars/MobileNavbar";
 
-import HomeLayout from "./layouts/HomeLayout";
 import SideBarLayout from "./layouts/SideBarLayout";
 import { useRef, useState } from "react";
+import GamesView from "./views/GamesView";
+import HowToPlayView from "./views/HowToPlayView";
+import Footer from "./views/Footer";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
@@ -14,7 +16,7 @@ const Home = () => {
   const ref = useRef<any>(null);
 
   return (
-    <Box maxHeight={"100vh"} overflowX="hidden" bg={theme.bgColor}>
+    <Box maxHeight={"100vh"} overflow="hidden" bg={theme.bgColor}>
       <MobileNavbar />
       <Grid
         templateColumns={{
@@ -35,13 +37,15 @@ const Home = () => {
             scrollTop={() => scrollUpFun()}
           />
         </GridItem>
-        <GridItem ref={ref}>
+        <GridItem maxH={"100vh"} overflowY="scroll" ref={ref}>
           <Navbar
             open={open}
             onOpen={() => setOpen(true)}
             onClose={() => setOpen(false)}
           />
-          <HomeLayout />
+          <GamesView />
+          <HowToPlayView />
+          <Footer />
         </GridItem>
       </Grid>
     </Box>

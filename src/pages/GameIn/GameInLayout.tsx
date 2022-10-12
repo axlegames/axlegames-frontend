@@ -11,7 +11,7 @@ const GameInLayout = (props: any) => {
   const scrollUpFun = () => ref.current.scroll({ top: 0, behavior: "smooth" });
   const ref = useRef<any>(null);
   return (
-    <Box maxHeight={"100vh"} overflowX="hidden" bg={theme.bgColor}>
+    <Box maxHeight={"100vh"} overflow="hidden" bg={theme.bgColor}>
       <MobileNavbar />
       <Grid
         templateColumns={{
@@ -32,7 +32,7 @@ const GameInLayout = (props: any) => {
             scrollTop={() => scrollUpFun()}
           />
         </GridItem>
-        <GridItem ref={ref}>
+        <GridItem maxH={"100vh"} overflowY="scroll" ref={ref}>
           <Navbar
             open={open}
             onOpen={() => setOpen(true)}

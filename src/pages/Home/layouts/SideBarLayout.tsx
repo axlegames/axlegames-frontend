@@ -161,6 +161,7 @@ const SideBarLayout = (props: SideBarProps) => {
       <SideBarCard>
         <SideBarButton
           onClick={() => navigate("/")}
+          link={"/"}
           title={"Home"}
           icon={<HiHome size={32} />}
         />
@@ -168,6 +169,7 @@ const SideBarLayout = (props: SideBarProps) => {
         <SideBarButton
           onClick={() => navigate("/gamein")}
           title={"Gamein"}
+          link="/gamein"
           icon={<HiUsers size={32} />}
         />
         <SideBarButton
@@ -184,6 +186,7 @@ const SideBarLayout = (props: SideBarProps) => {
           href="https://axlegames.s3.ap-south-1.amazonaws.com/Axlegames.pdf"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ width: "100%" }}
         >
           <SideBarButton
             title={"Pitch-Deck"}

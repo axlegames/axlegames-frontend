@@ -1,15 +1,25 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { useLocation } from "react-router";
 import { theme } from "../../../../config/theme.config";
 
 const SideBarButton = (props: any) => {
+  const location = useLocation();
+  const isActive = props.link === location.pathname;
+
+  const variant = isActive ? "solid" : "ghost";
+  const color = isActive ? theme.primaryColor : theme.secondaryColor;
+  const bg = isActive ? theme.bgColor : theme.fgColor;
+
   return (
     <Button
-      size={{ base: "sm" }}
+      bg={bg}
+      color={color}
       width={"100%"}
-      variant={"ghost"}
-      _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
-      justifyContent="flex-start"
+      variant={variant}
+      size={{ base: "sm" }}
       onClick={props.onClick}
+      justifyContent="flex-start"
+      _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
     >
       <Flex alignItems={"center"} columnGap={"1rem"}>
         <Box>{props.icon}</Box>

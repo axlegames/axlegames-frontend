@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { Box, Flex } from "@chakra-ui/react";
-
 import { theme } from "../../../config/theme.config";
+import { Box, Flex } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
-import GameEntryModal from "../modals/GameEntryModal";
-import { AxleGame, AxleGames, HomeServices } from "../HomeServices";
 import GameNavbar from "../components/gameview/GameNavbar";
-
 import GamesGrid from "../components/gameview/GamesGrid";
 import GameBanner from "../components/gameview/GameBanner";
+import GameEntryModal from "../modals/GameEntryModal";
+
+import { AxleGame, AxleGames, HomeServices } from "../HomeServices";
 
 const GamesView = () => {
   const [axleGames, setAxleGames] = useState<AxleGames>({ axleGames: [] });
@@ -66,15 +65,16 @@ const GamesView = () => {
         description={gameConfig.description}
         link={gameConfig.link}
       />
+
+      <GameBanner />
       <Flex
         bgColor={theme.fgColor}
         display={"flex"}
-        p={{ base: "0", md: "8", xl: "16" }}
+        p={{ base: "4" }}
         flexDirection="column"
         borderRadius={"2xl"}
         color={theme.primaryColor}
       >
-        <GameBanner />
         <GameNavbar onClick={(p: number) => setPage(p)} page={page} />
         <GamesGrid openModal={openModal} axleGames={axleGames.axleGames} />
       </Flex>

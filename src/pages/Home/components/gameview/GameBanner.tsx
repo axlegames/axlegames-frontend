@@ -4,17 +4,21 @@ import Carousel from "nuka-carousel/lib/carousel";
 
 const GameBanner = (props: any) => {
   return (
-    <Box pb={16}>
-      <Flex flexDirection={"column"} py={{ base: "8" }} px={{ base: "4" }}>
-        <Text fontSize={"3xl"} fontWeight="bold">
+    <Box color={theme.primaryColor} pb={16}>
+      <Flex flexDirection={"column"} p={{ base: "4" }}>
+        <Text fontSize={{ base: "3xl", lg: "5xl" }} fontWeight="bold">
           Welcome to Axle Games
         </Text>
-        <Text color={theme.highLightColor} fontWeight={"bold"}>
+        <Text
+          fontSize={{ base: "xl", lg: "3xl" }}
+          color={theme.highLightColor}
+          fontWeight={"bold"}
+        >
           A skill-based web3 gaming platform
         </Text>
       </Flex>
       <Box
-        display={{ base: "none", md: "flex" }}
+        display={{ base: "none", "2xl": "flex" }}
         columnGap="1rem"
         alignItems="center"
         flexDirection={{ base: "row" }}
@@ -22,23 +26,18 @@ const GameBanner = (props: any) => {
         justifyContent={"start"}
       >
         <Image
+          height={"320px"}
           borderRadius={"2xl"}
-          height={172}
           src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
         />
         <Image
+          height={"320px"}
           borderRadius={"2xl"}
-          height={172}
           src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
         />
-        {/* <Image
-          borderRadius={"2xl"}
-          height={172}
-          src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_2.png"}
-        /> */}
       </Box>
       <Box
-        display={{ base: "flex", md: "none" }}
+        display={{ base: "flex", "2xl": "none" }}
         justifyContent="center"
         alignItems={"center"}
         px={"6"}
@@ -64,15 +63,9 @@ const GameBanner = (props: any) => {
           animation="zoom"
           autoplayReverse={true}
         >
-          <Box
-            width={"100%"}
-            display={"flex"}
-            alignSelf={"center"}
-            justifySelf="center"
-          >
+          <Box display={"flex"} alignSelf={"center"} justifySelf="center">
             <Image
               borderRadius={"2xl"}
-              height={{ md: 172 }}
               src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
             />
           </Box>
@@ -80,16 +73,9 @@ const GameBanner = (props: any) => {
           <Box display={"flex"} alignSelf={"center"} justifySelf="center">
             <Image
               borderRadius={"2xl"}
-              height={{ md: 172 }}
               src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
             />
           </Box>
-
-          {/* <Image
-          borderRadius={"2xl"}
-          height={172}
-          src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_2.png"}
-        /> */}
         </Carousel>
       </Box>
     </Box>
