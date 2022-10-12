@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Image, Input, Text } from "@chakra-ui/react";
-import Logo from "../../../assets/home/logos/logo.png";
+import Icon from "../../../assets/home/logos/icon.png";
 import { theme } from "../../../config/theme.config";
 
 const Tag = (props: any) => {
@@ -27,7 +27,7 @@ const PreSale = (props: any) => {
         direction={"column"}
         rowGap="1rem"
       >
-        <Image p={8} src={Logo} />
+        <Image p={8} src={Icon} />
         <Box textAlign={"center"}>
           <Text>Join the GAMEIN Presale</Text>
           <Text fontWeight={"normal"} fontSize="sm">

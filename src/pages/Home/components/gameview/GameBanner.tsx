@@ -1,16 +1,16 @@
 import { Box, Flex, Text, Image } from "@chakra-ui/react";
 import { theme } from "../../../../config/theme.config";
-import Carousel from "nuka-carousel/lib/carousel";
+// import Carousel from "nuka-carousel/lib/carousel";
 
 const GameBanner = (props: any) => {
   return (
     <Box color={theme.primaryColor} pb={16}>
       <Flex flexDirection={"column"} p={{ base: "4" }}>
-        <Text fontSize={{ base: "3xl", lg: "5xl" }} fontWeight="bold">
+        <Text fontSize={{ base: "1xl", lg: "3xl" }} fontWeight="bold">
           Welcome to Axle Games
         </Text>
         <Text
-          fontSize={{ base: "xl", lg: "3xl" }}
+          fontSize={{ base: "md", lg: "xl" }}
           color={theme.highLightColor}
           fontWeight={"bold"}
         >
@@ -18,7 +18,7 @@ const GameBanner = (props: any) => {
         </Text>
       </Flex>
       <Box
-        display={{ base: "none", "2xl": "flex" }}
+        display={{ base: "none", md: "flex" }}
         columnGap="1rem"
         alignItems="center"
         flexDirection={{ base: "row" }}
@@ -26,17 +26,27 @@ const GameBanner = (props: any) => {
         justifyContent={"start"}
       >
         <Image
-          height={"320px"}
+          width={{
+            base: "0",
+            lg: "320px",
+            xl: "420px",
+            "2xl": "640px",
+          }}
           borderRadius={"2xl"}
           src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
         />
         <Image
-          height={"320px"}
+          width={{
+            base: "0",
+            lg: "320px",
+            xl: "420px",
+            "2xl": "640px",
+          }}
           borderRadius={"2xl"}
           src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
         />
       </Box>
-      <Box
+      {/* <Box
         display={{ base: "flex", "2xl": "none" }}
         justifyContent="center"
         alignItems={"center"}
@@ -77,7 +87,7 @@ const GameBanner = (props: any) => {
             />
           </Box>
         </Carousel>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

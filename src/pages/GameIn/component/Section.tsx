@@ -1,36 +1,33 @@
-import { Button, Divider, Flex, Text } from "@chakra-ui/react";
+import { Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { theme } from "../../../config/theme.config";
 import Dialog from "../dialog/Dialog";
 import PreSale from "../dialog/PreSale";
 import Tag from "./Tag";
+import Timer from "../../../assets/gamein/timer.png";
 
 const Section = () => {
   const [open, setOpen] = useState(false);
   const token = [
     {
-      name: "name",
-      value: "Axle",
+      name: "Name",
+      value: "Axle Games",
     },
     {
-      name: "ticker",
+      name: "Ticker",
       value: "$AXLE",
     },
     {
-      name: "total supply",
+      name: "Total supply",
       value: "500 million",
     },
     {
-      name: "type",
+      name: "Type",
       value: "BEP-20",
     },
     {
-      name: "sale",
+      name: "Sale",
       value: "200 million",
-    },
-    {
-      name: "circulation supply",
-      value: "63.5 million",
     },
   ];
 
@@ -47,63 +44,55 @@ const Section = () => {
         key={1}
         size={"lg"}
       />
+      <Image src={Timer} height={"80"} width={"80"} />
       <Flex
-        alignItems={"center"}
         my={{ base: "8" }}
         px={{ base: "8" }}
         color={theme.primaryTextColor}
-        direction={"column"}
+        direction={"row"}
         textAlign={"left"}
         fontWeight="bold"
         rowGap={{ base: "4" }}
+        columnGap={{ base: "4" }}
         minW={{ lg: "30vw" }}
         maxW={{ lg: "30vw" }}
       >
-        <Text>
-          Start You Web3 gaming and in-Game NFT journey with GAMEIN Token by
-          GameInfinity Start You Web3 gaming and in-Game NFT journey with GAMEIN
-          Token by GameInfinity Start You Web3 gaming and in-Game NFT journey
-          with GAMEIN Token by GameInfinity Start You Web3 gaming and in-Game
-          NFT journey with GAMEIN Token by GameInfinity with GAMEIN Token by
-          GameInfinity Start
-        </Text>
-        <Text>
-          Start You Web3 gaming and in-Game NFT journey with GAMEIN Token by
-          GameInfinity
-        </Text>
         <Flex
-          width="100%"
-          alignItems={"flex-start"}
-          justifyContent={"flex-start"}
+          color={theme.primaryTextColor}
+          direction="column"
+          bg={theme.fgColor}
+          borderRadius="2xl"
+          px={{ base: "6" }}
+          pt={{ base: "6" }}
+          fontWeight="bold"
+          m={{ base: "4" }}
+          minW={{ base: "32vw", lg: "25vw" }}
         >
-          <Button onClick={() => setOpen(true)} size="lg">
-            Join Presale
-          </Button>
+          <Text fontSize={{ base: "2xl", xl: "3xl" }}>Token Information</Text>
+          <Divider />
+          <Flex my={4} rowGap={".5rem"} direction={"column"}>
+            {token.map((t, i) => (
+              <Tag name={t.name} value={t.value} />
+            ))}
+            <Flex
+              pt={{ base: "4" }}
+              columnGap={"1rem"}
+              width="100%"
+              justifyContent={"center"}
+            >
+              <Button
+                bg={theme.primaryColor}
+                color={"#ffffff"}
+                size="sm"
+                onClick={() => setOpen(true)}
+              >
+                Buy now
+              </Button>
+
+              <Button size="sm">Contract</Button>
+            </Flex>
+          </Flex>
         </Flex>
-      </Flex>
-      <Flex
-        color={theme.primaryTextColor}
-        direction="column"
-        bg={theme.fgColor}
-        borderRadius="2xl"
-        p={{ base: "6" }}
-        fontWeight="bold"
-        m={{ base: "4" }}
-        minW={{ base: "32vw", lg: "25vw" }}
-      >
-        <Text fontSize={{ base: "2xl", xl: "3xl" }}>Token Information</Text>
-        <Divider />
-        <Flex my={4} rowGap={".5rem"} direction={"column"}>
-          {token.map((t, i) => (
-            <Tag name={t.name} value={t.value} />
-          ))}
-        </Flex>
-        <Divider />
-        <Text fontSize={{ base: "2xl", xl: "3xl" }}>Contact Address</Text>
-        <Text
-          fontWeight={"normal"}
-          fontSize={{ base: "sm", xl: "md" }}
-        >{`< To be updated soon >`}</Text>
       </Flex>
     </Flex>
   );
