@@ -1,10 +1,10 @@
-import { Box, Flex, Text, Image } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Grid } from "@chakra-ui/react";
 import { theme } from "../../../../config/theme.config";
 // import Carousel from "nuka-carousel/lib/carousel";
 
 const GameBanner = (props: any) => {
   return (
-    <Box color={theme.primaryColor} pb={16}>
+    <Box maxW={"100%"} overflowX="hidden" color={theme.primaryColor} pb={16}>
       <Flex flexDirection={"column"} p={{ base: "4" }}>
         <Text fontSize={{ base: "1xl", lg: "3xl" }} fontWeight="bold">
           Welcome to Axle Games
@@ -17,35 +17,30 @@ const GameBanner = (props: any) => {
           A skill-based web3 gaming platform
         </Text>
       </Flex>
-      <Box
-        display={{ base: "none", md: "flex" }}
+
+      <Grid
+        templateColumns={"1fr 1fr"}
+        position={"relative"}
+        borderRadius={"2xl"}
+        display={{ base: "none", md: "grid" }}
         columnGap="1rem"
-        alignItems="center"
-        flexDirection={{ base: "row" }}
-        rowGap={{ base: "1rem", lg: "0" }}
-        justifyContent={"start"}
+        overflowX={"hidden"}
       >
         <Image
-          width={{
-            base: "0",
-            lg: "320px",
-            xl: "420px",
-            "2xl": "640px",
-          }}
+          maxW={"100%"}
+          width="auto"
+          height={"auto"}
           borderRadius={"2xl"}
           src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
         />
         <Image
-          width={{
-            base: "0",
-            lg: "320px",
-            xl: "420px",
-            "2xl": "640px",
-          }}
+          width="auto"
+          height={"auto"}
+          maxW={"100%"}
           borderRadius={"2xl"}
           src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
         />
-      </Box>
+      </Grid>
       {/* <Box
         display={{ base: "flex", "2xl": "none" }}
         justifyContent="center"
