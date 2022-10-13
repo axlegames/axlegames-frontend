@@ -4,9 +4,9 @@ import { theme } from "../../../config/theme.config";
 import Dialog from "../dialog/Dialog";
 import PreSale from "../dialog/PreSale";
 import Tag from "./Tag";
-import Timer from "../../../assets/gamein/timer.png";
+import Timer from "../../../assets/gamein/banner.png";
 
-const Section = () => {
+const AxleInfo = () => {
   const [open, setOpen] = useState(false);
   const token = [
     {
@@ -33,9 +33,10 @@ const Section = () => {
 
   return (
     <Flex
-      justifyContent={"space-evenly"}
+      justifyContent={"center"}
       alignItems={"center"}
-      direction={{ base: "column", lg: "row" }}
+      p={8}
+      direction={{ base: "column", xl: "row" }}
     >
       <Dialog
         close={() => setOpen(false)}
@@ -44,7 +45,13 @@ const Section = () => {
         key={1}
         size={"lg"}
       />
-      <Image src={Timer} height={"80"} width={"80"} />
+      <Image
+        onClick={() => setOpen(true)}
+        height={400}
+        src={Timer}
+        borderRadius="xl"
+        cursor={"pointer"}
+      />
       <Flex
         my={{ base: "8" }}
         px={{ base: "8" }}
@@ -52,10 +59,6 @@ const Section = () => {
         direction={"row"}
         textAlign={"left"}
         fontWeight="bold"
-        rowGap={{ base: "4" }}
-        columnGap={{ base: "4" }}
-        minW={{ lg: "30vw" }}
-        maxW={{ lg: "30vw" }}
       >
         <Flex
           color={theme.primaryTextColor}
@@ -66,7 +69,8 @@ const Section = () => {
           pt={{ base: "6" }}
           fontWeight="bold"
           m={{ base: "4" }}
-          minW={{ base: "32vw", lg: "25vw" }}
+          minW={"30vw"}
+          width="100%"
         >
           <Text fontSize={{ base: "2xl", xl: "3xl" }}>Token Information</Text>
           <Divider />
@@ -98,4 +102,4 @@ const Section = () => {
   );
 };
 
-export default Section;
+export default AxleInfo;

@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Image, Grid } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Grid, GridItem } from "@chakra-ui/react";
 import { theme } from "../../../../config/theme.config";
 // import Carousel from "nuka-carousel/lib/carousel";
 
@@ -17,30 +17,32 @@ const GameBanner = (props: any) => {
           A skill-based web3 gaming platform
         </Text>
       </Flex>
-
       <Grid
-        templateColumns={"1fr 1fr"}
+        marginRight="auto"
+        width={"80%"}
+        padding={{ md: "4" }}
         position={"relative"}
-        borderRadius={"2xl"}
+        overflowX={"hidden"}
+        templateColumns={"1fr 1fr"}
         display={{ base: "none", md: "grid" }}
         columnGap="1rem"
-        overflowX={"hidden"}
       >
-        <Image
-          maxW={"100%"}
-          width="auto"
-          height={"auto"}
-          borderRadius={"2xl"}
-          src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
-        />
-        <Image
-          width="auto"
-          height={"auto"}
-          maxW={"100%"}
-          borderRadius={"2xl"}
-          src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
-        />
+        <GridItem>
+          <Image
+            borderRadius={"3xl"}
+            width={"100%"}
+            src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
+          />
+        </GridItem>
+        <GridItem>
+          <Image
+            borderRadius={"3xl"}
+            width={"100%"}
+            src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
+          />
+        </GridItem>
       </Grid>
+
       {/* <Box
         display={{ base: "flex", "2xl": "none" }}
         justifyContent="center"

@@ -15,7 +15,7 @@ const data = [
   {
     img: ChargeUp,
     title: "ChargeUp",
-    content: "Use $AXLE tokens to power up and boost rewards on axle games",
+    content: "Use $AXLE tokens to power up and boost your rewards",
   },
   {
     img: Compound,
@@ -42,20 +42,19 @@ const ContentGrid = () => {
         Utilities
       </Text>
       <Grid
-        templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+        templateColumns={{ base: "1fr", "2xl": "1fr 1fr" }}
         justifyContent="center"
         alignItems={"center"}
-        width={{ md: "70%", xl: "60%" }}
-        margin={{ base: "8", md: "auto" }}
-        rowGap="3rem"
-        columnGap={"3rem"}
+        width={{ md: "80%", xl: "70%" }}
+        margin={{ base: "4", md: "auto" }}
+        rowGap="1rem"
+        columnGap={"1rem"}
       >
         {data.map((d, i) => (
           <GridItem display={"flex"} justifyContent="center" key={i}>
             <Box
-              maxW={"920px"}
-              minW={"450px"}
               p={{ base: "8" }}
+              width={"100%"}
               bg={theme.fgColor}
               borderRadius="md"
               shadow={"lg"}

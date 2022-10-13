@@ -1,9 +1,9 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
-import WhitePaper from "../../../assets/gamein/whitepaper.png";
+import WP from "../../../assets/gamein/whitepaper.png";
 
-const Highlights = (props: any) => {
+const WhitePaper = (props: any) => {
   return (
     <Box
       display={"flex"}
@@ -20,10 +20,10 @@ const Highlights = (props: any) => {
         alignItems={"center"}
         columnGap={"2rem"}
         rowGap={"1rem"}
-        direction={{ base: "column", lg: "row" }}
+        direction={{ base: "column", xl: "row" }}
       >
         <Box p={{ base: "0", lg: "12" }}>
-          <Image width={"80"} src={WhitePaper} />
+          <Image maxWidth={"64"} width={"80"} src={WP} />
         </Box>
         <Flex rowGap={".5rem"} direction={"column"}>
           <Text color={theme.primaryTextColor} fontSize={"3xl"}>
@@ -42,4 +42,4 @@ const Highlights = (props: any) => {
   );
 };
 
-export default Highlights;
+export default WhitePaper;

@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
-const Header = () => {
+const AxleHeader = () => {
   return (
     <Flex
       my={{ base: "4" }}
@@ -11,8 +11,8 @@ const Header = () => {
       fontWeight="bold"
     >
       <Text fontSize={{ base: "xl", lg: "3xl" }}>Introducing Axle Token</Text>
-      {/* <Text fontSize={{ base: "lg", lg: "xl" }}>A web3 Gaming token</Text> */}
+      <Text fontSize={{ base: "lg", lg: "xl" }}>A web3 Gaming token</Text>
     </Flex>
   );
 };
-export default Header;
+export default AxleHeader;

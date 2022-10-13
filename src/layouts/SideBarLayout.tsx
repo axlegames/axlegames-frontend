@@ -1,28 +1,32 @@
 import { Box, Flex, Image, Text, useMediaQuery } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
-import Logo from "../../../assets/home/logos/logo.png";
+import { theme } from "../config/theme.config";
+import Logo from "../assets/home/logos/logo.png";
 
-import SideBarButton from "../components/sidebar/SideBarButton";
+import SideBarButton from "../pages/Home/components/sidebar/SideBarButton";
 
 import { MdStore, MdInfo } from "react-icons/md/index";
 import {
   HiHome,
-  HiUsers,
   HiGlobe,
   HiCash,
-  HiUser,
   HiOutlineDocument,
 } from "react-icons/hi/index";
 
-import SideBarCard from "../components/sidebar/SideBarCard";
-import IsNotLoggedIn from "../../../config/isNotLoggedIn";
-import Dialog from "../../Auth/dialogs/Dialog";
-import Signin from "../../Auth/Signin";
+import { BiCoin } from "react-icons/bi";
+
+import SideBarCard from "../pages/Home/components/sidebar/SideBarCard";
+import IsNotLoggedIn from "../config/isNotLoggedIn";
+import Dialog from "../pages/Auth/dialogs/Dialog";
+import Signin from "../pages/Auth/Signin";
 
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
-import IsLoggedIn from "../../../config/isLoggedIn";
-import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
+import IsLoggedIn from "../config/isLoggedIn";
+import {
+  AiOutlineDashboard,
+  AiOutlineLogin,
+  AiOutlineLogout,
+} from "react-icons/ai";
 import { useNavigate } from "react-router";
 
 interface SideBarProps {
@@ -167,15 +171,16 @@ const SideBarLayout = (props: SideBarProps) => {
         />
         <SideBarButton title={"Rewards"} icon={<HiCash size={32} />} />
         <SideBarButton
-          onClick={() => navigate("/gamein")}
-          title={"Gamein"}
-          link="/gamein"
-          icon={<HiUsers size={32} />}
+          onClick={() => navigate("/axle-token")}
+          title={"AXLE Token"}
+          link="/axle-token"
+          icon={<BiCoin size={32} />}
         />
         <SideBarButton
-          onClick={signin}
-          title={"Profile"}
-          icon={<HiUser size={32} />}
+          onClick={() => navigate("/dashboard")}
+          link="/dashboard"
+          title={"Dashboard"}
+          icon={<AiOutlineDashboard size={32} />}
         />
       </SideBarCard>
 
