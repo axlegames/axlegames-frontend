@@ -34,7 +34,14 @@ const WhitePaper = (props: any) => {
             to serve the best crypto project to all the participants.
           </Text>
           <Button mt="4" width={"44"}>
-            Economics Paper
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ width: "100%" }}
+              href="https://axlegames.s3.ap-south-1.amazonaws.com/AxleGames_EconomicsPaper.pdf"
+            >
+              Economics Paper
+            </a>
           </Button>
         </Flex>
       </Flex>

@@ -29,7 +29,7 @@ const data = [
   },
 ];
 
-const ContentGrid = () => {
+const UtilityGrid = () => {
   return (
     <Box>
       <Text
@@ -81,4 +81,4 @@ const ContentGrid = () => {
   );
 };
 
-export default ContentGrid;
+export default UtilityGrid;

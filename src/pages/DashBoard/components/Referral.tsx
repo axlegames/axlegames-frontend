@@ -29,7 +29,7 @@ const Referral = () => (
         <Text fontSize={"3xl"} color={theme.primaryTextColor}>
           Your Invites
         </Text>
-        <Text color={theme.secondaryTextColor}>See who is top on the list</Text>
+        <Text color={theme.secondaryColor}>See who is top on the list</Text>
       </Flex>
       <Button size="sm">View all</Button>
     </Flex>

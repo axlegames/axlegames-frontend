@@ -25,7 +25,7 @@ const Dashboard = () => {
           fontWeight="bold"
           color={theme.primaryTextColor}
         >
-          Hello Good Moring! akashmrc98
+          Welcome! akashmrc98
         </Text>
 
         <Flex rowGap={"1rem"} direction={"column"}>
