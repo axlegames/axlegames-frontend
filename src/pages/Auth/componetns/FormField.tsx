@@ -13,7 +13,7 @@ interface FormFieldInterface {
 
 const FormField = (props: FormFieldInterface) => {
   return (
-    <FormControl color={theme.primaryColor} bg={theme.fgColor}>
+    <FormControl color={theme.primaryTextColor} bg={theme.fgColor}>
       <FormLabel fontWeight="bold">
         {props.label[0].toUpperCase() + props.label.slice(1)}
       </FormLabel>

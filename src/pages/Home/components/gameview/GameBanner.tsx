@@ -4,9 +4,13 @@ import { theme } from "../../../../config/theme.config";
 
 const GameBanner = (props: any) => {
   return (
-    <Box maxW={"100%"} overflowX="hidden" color={theme.primaryColor} pb={16}>
+    <Box maxW={"100%"} overflowX="hidden" pb={16}>
       <Flex flexDirection={"column"} p={{ base: "4" }}>
-        <Text fontSize={{ base: "1xl", lg: "3xl" }} fontWeight="bold">
+        <Text
+          color={theme.primaryTextColor}
+          fontSize={{ base: "1xl", lg: "3xl" }}
+          fontWeight="bold"
+        >
           Welcome to Axle Games
         </Text>
         <Text

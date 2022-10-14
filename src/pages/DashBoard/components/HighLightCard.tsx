@@ -16,11 +16,11 @@ const HighLightCard = (props: any) => {
       fontWeight="bold"
     >
       <Flex alignItems={"center"} columnGap=".25rem" justifyContent={"center"}>
-        <Text color={theme.secondaryColor} fontSize={"sm"}>
+        <Text color={theme.secondaryTextColor} fontSize={"sm"}>
           {props.mainText}
         </Text>
         <BiInfoCircle
-          color={theme.secondaryColor}
+          color={theme.secondaryTextColor}
           style={{ cursor: "pointer" }}
         />
       </Flex>

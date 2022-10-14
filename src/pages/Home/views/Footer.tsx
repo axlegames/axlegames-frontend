@@ -32,7 +32,7 @@ const Icon = (props: any) => {
 const TextHeader = (props: any) => {
   return (
     <Text
-      color={props.primary ? theme.primaryColor : theme.secondaryColor}
+      color={props.primary ? theme.primaryTextColor : theme.secondaryTextColor}
       fontWeight={"bold"}
       fontSize={{ base: "md", lg: "lg", xl: "x", "2xl": "2xl" }}
     >
@@ -100,7 +100,7 @@ const Footer = () => {
           textAlign={"center"}
           fontSize={{ base: "md", lg: "lg", xl: "xl" }}
           p={{ base: "8" }}
-          color={theme.secondaryColor}
+          color={theme.secondaryTextColor}
         >
           Don't Miss Out On Any Updates! Join Our Mailing List Today And Learn
           Everything New About Axle Games. Yes, I'm In!
@@ -109,10 +109,10 @@ const Footer = () => {
           variant={"outline"}
           _hover={{
             color: theme.bgColor,
-            bg: theme.primaryColor,
+            bg: theme.primaryButtonColor,
           }}
           bg={theme.bgColor}
-          color={theme.primaryColor}
+          color={theme.primaryTextColor}
         >
           Join the Revolution
         </Button>
@@ -139,7 +139,7 @@ const Footer = () => {
           </Flex>
         </Box>
       </Box>
-      <Text color={theme.secondaryColor}>Copyright 2022 © Axle Games</Text>
+      <Text color={theme.secondaryTextColor}>Copyright 2022 © Axle Games</Text>
     </Flex>
   );
 };

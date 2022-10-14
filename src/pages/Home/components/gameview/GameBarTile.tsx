@@ -9,8 +9,8 @@ const GameBarTile = (props: any) => {
       width="100%"
       borderRadius={"2xl"}
       px={{ base: "6" }}
-      bg={props.isActive ? theme.primaryColor : theme.bgColor}
-      color={props.isActive ? theme.bgColor : theme.primaryColor}
+      bg={props.isActive ? theme.primaryButtonColor : theme.bgColor}
+      color={props.isActive ? theme.bgColor : theme.primaryTextColor}
       display={{ base: "none", xl: "flex" }}
       justifyContent="space-evenly"
       alignItems="center"

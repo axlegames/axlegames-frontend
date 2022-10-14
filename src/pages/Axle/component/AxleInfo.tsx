@@ -4,7 +4,6 @@ import { theme } from "../../../config/theme.config";
 import Dialog from "../dialog/Dialog";
 import PreSale from "../dialog/PreSale";
 import Tag from "./Tag";
-import Timer from "../../../assets/gamein/banner.png";
 
 const AxleInfo = () => {
   const [open, setOpen] = useState(false);
@@ -48,7 +47,7 @@ const AxleInfo = () => {
       <Image
         onClick={() => setOpen(true)}
         height={400}
-        src={Timer}
+        src={"https://axlegames.s3.ap-south-1.amazonaws.com/axle_poster.png"}
         borderRadius="xl"
         cursor={"pointer"}
       />
@@ -85,7 +84,7 @@ const AxleInfo = () => {
               justifyContent={"center"}
             >
               <Button
-                bg={theme.primaryColor}
+                bg={theme.primaryButtonColor}
                 color={"#ffffff"}
                 size="sm"
                 onClick={() => setOpen(true)}

@@ -33,8 +33,13 @@ const ProfileCard = () => {
         <Text>22 following</Text>
       </Flex>
       <Flex justifyContent={"center"} columnGap=".5rem">
-        <Button>Copy Link</Button>
-        <Button onClick={() => navigate("/profile")}>View Profile</Button>
+        <Button bg={theme.secondaryButtonColor}>Copy Link</Button>
+        <Button
+          bg={theme.primaryButtonColor}
+          onClick={() => navigate("/profile")}
+        >
+          View Profile
+        </Button>
       </Flex>
     </Flex>
   );

@@ -106,9 +106,9 @@ const SideBarLayout = (props: SideBarProps) => {
         display={"flex"}
         alignItems="center"
         justifyContent={"center"}
-        bg={theme.primaryColor}
+        bg={theme.primaryButtonColor}
         color={theme.bgColor}
-        boxShadow={`0px 0px 8px ${theme.primaryColor}`}
+        boxShadow={`0px 0px 8px ${theme.primaryButtonColor}`}
         transition={"all 100ms ease-in"}
         onClick={props.click}
         maxWidth={{ lg: "236px" }}

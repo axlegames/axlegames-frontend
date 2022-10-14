@@ -15,7 +15,9 @@ const Cell = (props: Props) => {
       if (props.keyPresence === "present") return "yellow.500";
       if (props.keyPresence === "correct") return "green.500";
     }
-    return props.letter !== "" ? theme.secondaryColor : theme.highLightColor;
+    return props.letter !== ""
+      ? theme.secondaryTextColor
+      : theme.highLightColor;
   };
 
   return (

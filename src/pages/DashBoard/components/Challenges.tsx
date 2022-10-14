@@ -58,7 +58,12 @@ const Challenges = () => (
           <Text fontSize={"sm"} color={theme.secondaryTextColor}>
             {t.task}
           </Text>
-          <Button mb={2} size="sm">
+          <Button
+            bg={theme.secondaryButtonColor}
+            color={theme.secondaryTwoTextColor}
+            mb={2}
+            size="sm"
+          >
             {t.buttonText}
           </Button>
         </Flex>

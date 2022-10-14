@@ -31,7 +31,13 @@ const Referral = () => (
         </Text>
         <Text color={theme.secondaryColor}>See who is top on the list</Text>
       </Flex>
-      <Button size="sm">View all</Button>
+      <Button
+        bg={theme.secondaryButtonColor}
+        color={theme.primaryTextColor}
+        size="sm"
+      >
+        View all
+      </Button>
     </Flex>
     <TableContainer aria-expanded="false" my={4}>
       <Table color={theme.secondaryTextColor} variant="unstyled" size="md">

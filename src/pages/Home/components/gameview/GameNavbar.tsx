@@ -8,7 +8,6 @@ const GameNavbar = (props: any) => {
     <Flex justifyContent={"space-between"}>
       <Box
         bgColor={theme.bgColor}
-        color={theme.highLightColor}
         fontWeight="bold"
         p={{ base: "4" }}
         borderTopRadius={"2xl"}
@@ -23,8 +22,8 @@ const GameNavbar = (props: any) => {
           justifyContent="flex-start"
           columnGap={".5rem"}
         >
-          <Text>Axle</Text>
-          <Text color={theme.primaryColor}>Web3 Games</Text>
+          <Text color={theme.secondaryTextColor}>Axle</Text>
+          <Text color={theme.primaryTextColor}>Web3 Games</Text>
         </Box>
       </Box>
       <Box

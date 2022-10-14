@@ -91,7 +91,7 @@ const Signin = () => {
         close={() => setForgotPassword(false)}
         children={<ForgotPassword close={() => setForgotPassword(false)} />}
       />
-      <Text color={theme.primaryColor} fontSize={{ base: "4xl" }}>
+      <Text color={theme.primaryTextColor} fontSize={{ base: "4xl" }}>
         Login
       </Text>
       <FormMessage message={status.message} error={status.error} />
