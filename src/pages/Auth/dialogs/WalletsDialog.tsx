@@ -69,9 +69,9 @@ const WalletButton = (props: any) => {
       borderRadius={"xl"}
       bg={theme.highLightColor}
       opacity={props.disabled ? 0.5 : 1}
-      color={theme.primaryColor}
+      color={theme.primaryMiscColor}
       _hover={{
-        bg: !props.disabled ? theme.secondaryColor : "",
+        bg: !props.disabled ? theme.secondaryMiscColor : "",
         color: !props.disabled ? theme.bgColor : "",
       }}
       fontSize={"xl"}
@@ -98,7 +98,7 @@ const ConnectedWallet = (props: any) => {
       <Button
         size="sm"
         variant={"outline"}
-        color={theme.primaryColor}
+        color={theme.primaryButtonColor}
         bg={theme.bgColor}
         onClick={props.disconnect}
       >

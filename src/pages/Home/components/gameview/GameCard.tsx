@@ -62,7 +62,7 @@ const GameCard = (props: any) => {
             variant={"ghost"}
             _hover={{
               color: theme.bgColor,
-              bg: theme.primaryColor,
+              bg: theme.primaryMiscColor,
             }}
             bg={"#499557"}
             opacity={0.9}

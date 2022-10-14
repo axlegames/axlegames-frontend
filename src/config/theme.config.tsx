@@ -2,14 +2,14 @@ export const theme = {
   bgColor: "#061E37",
   fgColor: "#0A325C",
 
-  primaryColor: "#EB6612",
-  secondaryColor: "#7EB2F1",
+  primaryMiscColor: "#EB6612",
+  secondaryMiscColor: "#7EB2F1",
 
   primaryButtonColor: "#EB6612",
-  secondaryButtonColor: "blue",
+  secondaryButtonColor: "#372948",
 
   secondaryTextColor: "#8989D1",
-  secondaryTwoTextColor: "orange",
+  secondaryTwoTextColor: "#EA047E",
 
   highLightColor: "#edf2f4",
 

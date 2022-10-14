@@ -22,10 +22,10 @@ const FormInput = (props: any) => {
       <Input
         outline="none"
         border="none"
-        boxShadow={`0px 0px 3px ${theme.primaryColor}`}
+        boxShadow={`0px 0px 3px ${theme.primaryMiscColor}`}
         bg={theme.fgColor}
         size="lg"
-        color={theme.secondaryColor}
+        color={theme.secondaryTextColor}
       ></Input>
     </FormControl>
   );
@@ -85,7 +85,7 @@ const Profile = () => {
             alignItems="center"
             rowGap={"1rem"}
           >
-            <Box bg={theme.primaryColor} p={2} borderRadius="xl">
+            <Box bg={theme.primaryMiscColor} p={2} borderRadius="xl">
               <Text>Choose Avatar</Text>
             </Box>
             <Box bg={theme.fgColor} p={4} borderRadius="xl">

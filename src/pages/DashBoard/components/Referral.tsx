@@ -29,11 +29,11 @@ const Referral = () => (
         <Text fontSize={"3xl"} color={theme.primaryTextColor}>
           Your Invites
         </Text>
-        <Text color={theme.secondaryColor}>See who is top on the list</Text>
+        <Text color={theme.secondaryTextColor}>See who is top on the list</Text>
       </Flex>
       <Button
         bg={theme.secondaryButtonColor}
-        color={theme.primaryTextColor}
+        color={theme.secondaryTwoTextColor}
         size="sm"
       >
         View all
@@ -49,17 +49,17 @@ const Referral = () => (
           </Tr>
         </Thead>
         <Tbody>
-          <Tr boxShadow={`0px 2px 1px ${theme.secondaryColor}`}>
+          <Tr boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
             <Td>roberm2</Td>
             <Td>0x1S211202242r921...</Td>
             <Td>200 Axle</Td>
           </Tr>
-          <Tr boxShadow={`0px 2px 1px ${theme.secondaryColor}`}>
+          <Tr boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
             <Td>jhoncf4</Td>
             <Td>0x0921222242r92d8...</Td>
             <Td>200 Axle</Td>
           </Tr>
-          <Tr boxShadow={`0px 2px 1px ${theme.secondaryColor}`}>
+          <Tr boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
             <Td>altowolt8</Td>
             <Td>0x21102242r92d444...</Td>
             <Td>200 Axle</Td>
@@ -75,11 +75,11 @@ const Referral = () => (
       fontWeight="bold"
     >
       <Flex columnGap={".2rem"} alignItems={"center"}>
-        <Text color={theme.secondaryColor}>Referral Link</Text>
+        <Text color={theme.secondaryTwoTextColor}>Referral Link</Text>
         <BiCopy
           size={28}
           style={{ cursor: "pointer" }}
-          color={theme.secondaryTextColor}
+          color={theme.secondaryTwoTextColor}
         />
       </Flex>
       <Text color={theme.primaryTextColor} fontSize="sm">

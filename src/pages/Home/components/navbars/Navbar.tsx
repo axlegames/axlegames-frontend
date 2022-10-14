@@ -148,13 +148,13 @@ const Navbar = (props: NavbarProps) => {
         {!user.isConnected ? (
           <Button
             _hover={{
-              color: theme.primaryColor,
+              color: theme.primaryTextColor,
               bg: theme.bgColor,
             }}
             zIndex={2000}
             onClick={() => props.onOpen()}
             borderRadius={"2xl"}
-            bg={theme.primaryColor}
+            bg={theme.primaryMiscColor}
             shadow="2xl"
             style={{ cursor: "pointer" }}
           >

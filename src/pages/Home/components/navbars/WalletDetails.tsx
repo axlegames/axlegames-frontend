@@ -39,7 +39,7 @@ const WalletDetails = (props: any) => {
       mx={4}
       bg={theme.bgColor}
       borderRadius="xl"
-      boxShadow={`0px 0px 4px ${theme.primaryColor}`}
+      boxShadow={`0px 0px 4px ${theme.primaryMiscColor}`}
     >
       <Flex
         justifyContent={"space-evenly"}
@@ -84,7 +84,7 @@ const WalletDetails = (props: any) => {
           flexDirection={"column"}
           alignItems="center"
           bg={theme.fgColor}
-          color={theme.secondaryColor}
+          color={theme.secondaryMiscColor}
           borderRadius="md"
         >
           <Text fontSize={"sm"}>Your wallet balance</Text>
@@ -93,9 +93,9 @@ const WalletDetails = (props: any) => {
         <Button
           _hover={{
             bg: theme.fgColor,
-            color: theme.secondaryColor,
+            color: theme.secondaryTextColor,
           }}
-          color={theme.secondaryColor}
+          color={theme.secondaryTextColor}
           bg={theme.bgColor}
           variant={"outline"}
           onClick={props.disconnect}

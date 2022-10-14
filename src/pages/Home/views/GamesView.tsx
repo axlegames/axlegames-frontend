@@ -73,7 +73,7 @@ const GamesView = () => {
         p={{ base: "4" }}
         flexDirection="column"
         borderRadius={"2xl"}
-        color={theme.primaryColor}
+        color={theme.primaryTextColor}
       >
         <GameNavbar onClick={(p: number) => setPage(p)} page={page} />
         <GamesGrid openModal={openModal} axleGames={axleGames.axleGames} />

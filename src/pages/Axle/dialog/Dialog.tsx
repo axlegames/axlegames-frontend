@@ -23,7 +23,7 @@ const Dialog = (props: Props) => {
     >
       <ModalOverlay />
       <ModalContent
-        boxShadow={`0px 0px 4px ${theme.primaryColor}`}
+        boxShadow={`0px 0px 4px ${theme.primaryMiscColor}`}
         borderRadius={"xl"}
         bg={theme.fgColor}
         color={theme.highLightColor}

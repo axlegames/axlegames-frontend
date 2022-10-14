@@ -7,7 +7,7 @@ const SideBarButton = (props: any) => {
   const isActive = props.link === location.pathname;
 
   const variant = isActive ? "solid" : "ghost";
-  const color = isActive ? theme.primaryColor : theme.secondaryColor;
+  const color = isActive ? theme.primaryTextColor : theme.secondaryTextColor;
   const bg = isActive ? theme.bgColor : theme.fgColor;
 
   return (
@@ -19,7 +19,7 @@ const SideBarButton = (props: any) => {
       size={{ base: "sm" }}
       onClick={props.onClick}
       justifyContent="flex-start"
-      _hover={{ color: theme.primaryColor, bg: theme.bgColor }}
+      _hover={{ color: theme.primaryTextColor, bg: theme.bgColor }}
     >
       <Flex alignItems={"center"} columnGap={"1rem"}>
         <Box>{props.icon}</Box>

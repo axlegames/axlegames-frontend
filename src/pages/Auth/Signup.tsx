@@ -79,7 +79,7 @@ const Signup = (props: any) => {
   return (
     <Form>
       <FormMessage message={status.message} error={status.error} />
-      <Text color={theme.primaryColor} fontSize={{ base: "4xl" }}>
+      <Text color={theme.primaryTextColor} fontSize={{ base: "4xl" }}>
         Sign Up
       </Text>
       <FormField

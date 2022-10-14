@@ -28,7 +28,7 @@ const Key = (props: {
       boxShadow={props.gotHit ? highLightShadow : shadow}
       _active={{
         boxShadow: highLightShadow,
-        border: `3px solid ${theme.secondaryColor}`,
+        border: `3px solid ${theme.secondaryMiscColor}`,
         borderRadius: "lg",
       }}
     >

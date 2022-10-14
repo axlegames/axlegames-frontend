@@ -19,8 +19,16 @@ const LiveGameCard = (props: any) => {
         {props.title}
       </Text>
       <Flex columnGap={".5rem"}>
-        <Button size="sm">Play now</Button>
-        <Button size="sm">Game History</Button>
+        <Button color={theme.bgColor} bg={theme.primaryButtonColor} size="sm">
+          Play now
+        </Button>
+        <Button
+          color={theme.secondaryTwoTextColor}
+          bg={theme.secondaryButtonColor}
+          size="sm"
+        >
+          Game History
+        </Button>
       </Flex>
     </Box>
   );

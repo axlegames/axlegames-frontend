@@ -22,7 +22,9 @@ const Icon = (props: any) => {
       {
         <props.children
           size={42}
-          color={props.primary ? theme.primaryColor : theme.secondaryColor}
+          color={
+            props.primary ? theme.primaryMiscColor : theme.secondaryMiscColor
+          }
         />
       }{" "}
     </Box>
@@ -70,7 +72,7 @@ const Footer = () => {
         position={"relative"}
       >
         <Box
-          boxShadow={`0px 0px 6px ${theme.primaryColor}`}
+          boxShadow={`0px 0px 6px ${theme.primaryMiscColor}`}
           right={{ base: "0", xl: "-10%" }}
           bottom={{ base: "-40%", xl: "-30%" }}
           borderRadius="xl"
@@ -118,7 +120,7 @@ const Footer = () => {
         </Button>
 
         <Box
-          boxShadow={`0px 0px 6px ${theme.secondaryColor}`}
+          boxShadow={`0px 0px 6px ${theme.secondaryMiscColor}`}
           left={{ base: 0, xl: "-10%" }}
           top={{ base: "-40%", xl: "-30%" }}
           borderRadius="xl"
