@@ -3,7 +3,6 @@ import { theme } from "../../config/theme.config";
 import MainLayout from "../../layouts/MainLayout";
 import ProfileCard from "./components/ProfileCard";
 import Rewards from "./components/Rewards";
-import LiveGames from "./sections/LiveGames";
 import Referral from "./components/Referral";
 import Challenges from "./components/Challenges";
 import GameHistory from "./components/GameHistory";

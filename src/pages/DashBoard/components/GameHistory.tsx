@@ -10,7 +10,6 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { BiCopy } from "react-icons/bi";
 import { theme } from "../../../config/theme.config";
 
 const GameHistory = () => (
