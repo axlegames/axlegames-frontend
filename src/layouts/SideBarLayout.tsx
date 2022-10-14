@@ -28,6 +28,14 @@ import {
   AiOutlineLogout,
 } from "react-icons/ai";
 import { useNavigate } from "react-router";
+import {
+  FaDiscord,
+  FaFacebook,
+  FaInstagram,
+  FaMedium,
+  FaTelegram,
+  FaTwitter,
+} from "react-icons/fa";
 
 interface SideBarProps {
   open: boolean;
@@ -215,6 +223,19 @@ const SideBarLayout = (props: SideBarProps) => {
           click={signout}
         />
       </IsLoggedIn>
+      <Box p={2} borderRadius="lg" bg={theme.fgColor}>
+        <Text fontSize={"sm"} fontWeight="normal">
+          Join Community
+        </Text>
+        <Flex my={2} color={theme.primaryButtonColor} columnGap={".25rem"}>
+          <FaFacebook size={26} style={{ cursor: "pointer" }} />
+          <FaTwitter size={26} style={{ cursor: "pointer" }} />
+          <FaTelegram size={26} style={{ cursor: "pointer" }} />
+          <FaMedium size={26} style={{ cursor: "pointer" }} />
+          <FaDiscord size={26} style={{ cursor: "pointer" }} />
+          <FaInstagram size={26} style={{ cursor: "pointer" }} />
+        </Flex>
+      </Box>
     </Box>
   );
 };

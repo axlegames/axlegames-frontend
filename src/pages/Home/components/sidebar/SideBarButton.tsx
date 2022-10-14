@@ -12,6 +12,7 @@ const SideBarButton = (props: any) => {
 
   return (
     <Button
+      py={"5"}
       bg={bg}
       color={color}
       width={"100%"}
