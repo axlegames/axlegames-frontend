@@ -5,11 +5,11 @@ const SideBarCard = (props: any) => {
   return (
     <Flex
       bg={theme.fgColor}
-      p={"4"}
+      p={"2"}
       borderRadius="2xl"
       direction={"column"}
       alignItems="flex-start"
-      rowGap={".5rem"}
+      rowGap={".25rem"}
     >
       {props.children}
     </Flex>
