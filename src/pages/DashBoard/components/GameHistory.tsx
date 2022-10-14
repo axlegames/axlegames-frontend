@@ -10,9 +10,10 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { BiCopy } from "react-icons/bi";
 import { theme } from "../../../config/theme.config";
 
-const Referral = () => (
+const GameHistory = () => (
   <Flex
     justifyContent={"flex-start"}
     shadow="xl"
@@ -26,9 +27,8 @@ const Referral = () => (
     <Flex justifyContent={"space-between"}>
       <Flex fontWeight={"bold"} direction={"column"}>
         <Text fontSize={"3xl"} color={theme.primaryTextColor}>
-          Your Invites
+          Game History
         </Text>
-        <Text color={theme.secondaryTextColor}>See who is top on the list</Text>
       </Flex>
       <Button
         bg={theme.secondaryButtonColor}
@@ -42,30 +42,43 @@ const Referral = () => (
       <Table color={theme.secondaryTextColor} variant="unstyled" size="md">
         <Thead>
           <Tr>
-            <Th>Username</Th>
-            <Th>Address</Th>
+            <Th>Game</Th>
+            <Th>Fee</Th>
             <Th>Reward</Th>
           </Tr>
         </Thead>
         <Tbody>
           <Tr boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
-            <Td>roberm2</Td>
-            <Td>0x1S211202242r921...</Td>
-            <Td>200 Axle</Td>
+            <Td>Wordle #5</Td>
+            <Td>100 $Axle</Td>
+            <Td>200 $Axle</Td>
+          </Tr>
+
+          <Tr boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
+            <Td>Wordle #7</Td>
+            <Td>100 $Axle</Td>
+            <Td>200 $Axle</Td>
+          </Tr>
+
+          <Tr boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
+            <Td>Wordle #6</Td>
+            <Td>100 $Axle</Td>
+            <Td>200 $Axle</Td>
           </Tr>
           <Tr boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
-            <Td>jhoncf4</Td>
-            <Td>0x0921222242r92d8...</Td>
-            <Td>200 Axle</Td>
+            <Td>Wordle #7</Td>
+            <Td>100 $Axle</Td>
+            <Td>200 $Axle</Td>
           </Tr>
+
           <Tr boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
-            <Td>altowolt8</Td>
-            <Td>0x21102242r92d444...</Td>
-            <Td>200 Axle</Td>
+            <Td>Wordle #6</Td>
+            <Td>100 $Axle</Td>
+            <Td>200 $Axle</Td>
           </Tr>
         </Tbody>
       </Table>
     </TableContainer>
   </Flex>
 );
-export default Referral;
+export default GameHistory;

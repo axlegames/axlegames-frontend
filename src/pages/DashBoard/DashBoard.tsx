@@ -6,6 +6,8 @@ import Rewards from "./components/Rewards";
 import LiveGames from "./sections/LiveGames";
 import Referral from "./components/Referral";
 import Challenges from "./components/Challenges";
+import GameHistory from "./components/GameHistory";
+import ReferralText from "./components/ReferralText";
 
 const Dashboard = () => {
   return (
@@ -32,7 +34,7 @@ const Dashboard = () => {
           <Grid
             columnGap={"1rem"}
             rowGap={"1rem"}
-            templateColumns={{ base: "1fr", lg: "1fr 2fr", xl: "1fr 3fr" }}
+            templateColumns={{ base: "1fr", lg: "1fr 1fr" }}
           >
             <ProfileCard />
             <Rewards />
@@ -46,9 +48,19 @@ const Dashboard = () => {
             borderRadius="2xl"
           >
             <Challenges />
-            <Referral />
+            <GameHistory />
           </Grid>
-          <LiveGames />
+
+          <Grid
+            templateColumns={{ base: "0", sm: "1fr", xl: "2fr 1fr" }}
+            display={{ base: "none", sm: "grid" }}
+            columnGap="1rem"
+            rowGap="1rem"
+            borderRadius="2xl"
+          >
+            <Referral />
+            <ReferralText />
+          </Grid>
         </Flex>
       </Box>
     </MainLayout>
