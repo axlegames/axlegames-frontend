@@ -1,4 +1,11 @@
-import { Box, Flex, Image, Text, useMediaQuery } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  Image,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { theme } from "../config/theme.config";
 import Logo from "../assets/home/logos/logo.png";
 
@@ -28,14 +35,22 @@ import {
   AiOutlineLogout,
 } from "react-icons/ai";
 import { useNavigate } from "react-router";
-import {
-  FaDiscord,
-  FaFacebook,
-  FaInstagram,
-  FaMedium,
-  FaTelegram,
-  FaTwitter,
-} from "react-icons/fa";
+
+import Facebook from "../assets/socials/facebook.png";
+import Instagram from "../assets/socials/instagram.png";
+import LinkedIn from "../assets/socials/linkedin.png";
+import Twitter from "../assets/socials/twitter.png";
+import Telegram from "../assets/socials/telegram.png";
+import Discord from "../assets/socials/discord.png";
+
+const images = [
+  { img: Facebook, url: "" },
+  { img: Instagram, url: "https://www.instagram.com/axlegames/" },
+  { img: LinkedIn, url: "" },
+  { img: Twitter, url: "https://twitter.com/AxleGames" },
+  { img: Telegram, url: "https://t.me/axlegames_en" },
+  { img: Discord, url: "" },
+];
 
 interface SideBarProps {
   open: boolean;
@@ -193,7 +208,11 @@ const SideBarLayout = (props: SideBarProps) => {
       </SideBarCard>
 
       <SideBarCard>
-        <SideBarButton title={"AxleVerse"} icon={<HiGlobe size={32} />} />
+        <SideBarButton
+          isCommingSoon={true}
+          title={"AxleVerse"}
+          icon={<HiGlobe size={32} />}
+        />
         <SideBarButton title={"Marketplace"} icon={<MdStore size={32} />} />
         <a
           href="https://axlegames.s3.ap-south-1.amazonaws.com/Axlegames.pdf"
@@ -223,17 +242,23 @@ const SideBarLayout = (props: SideBarProps) => {
           click={signout}
         />
       </IsLoggedIn>
-      <Box p={2} borderRadius="lg" bg={theme.fgColor}>
-        <Text fontSize={"sm"} fontWeight="normal">
+      <Box p={2} borderRadius="lg">
+        <Text opacity={"0.5"} fontSize={"sm"}>
           Join Community
         </Text>
-        <Flex my={2} color={theme.primaryButtonColor} columnGap={".25rem"}>
-          <FaFacebook size={26} style={{ cursor: "pointer" }} />
-          <FaTwitter size={26} style={{ cursor: "pointer" }} />
-          <FaTelegram size={26} style={{ cursor: "pointer" }} />
-          <FaMedium size={26} style={{ cursor: "pointer" }} />
-          <FaDiscord size={26} style={{ cursor: "pointer" }} />
-          <FaInstagram size={26} style={{ cursor: "pointer" }} />
+
+        <Divider my={1} />
+        <Flex my={2} color={theme.primaryButtonColor} columnGap={".5rem"}>
+          {images.map((p, i) => (
+            <a target="_blank" rel="noopener noreferrer" href={p.url}>
+              <Image
+                width={"8"}
+                src={p.img}
+                key={i}
+                style={{ cursor: "pointer" }}
+              />
+            </a>
+          ))}
         </Flex>
       </Box>
     </Box>

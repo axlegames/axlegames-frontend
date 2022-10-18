@@ -1,5 +1,7 @@
 import { Flex, Grid } from "@chakra-ui/react";
 import HighLightCard from "./HighLightCard";
+import { HiBriefcase } from "react-icons/hi";
+import { MdAccountBalance, MdPeople, MdLocalOffer } from "react-icons/md";
 
 const Rewards = () => {
   return (
@@ -17,10 +19,26 @@ const Rewards = () => {
         height="100%"
         width={"100%"}
       >
-        <HighLightCard mainText="Staking Reward" subText="100 $AXLE" />
-        <HighLightCard mainText="Bonus Reward" subText="210 $AXLE" />
-        <HighLightCard mainText="Referral Reward" subText="80 $AXLE" />
-        <HighLightCard mainText="Current Balance" subText="340 $AXLE" />
+        <HighLightCard
+          icon={HiBriefcase}
+          mainText="Staking Reward"
+          subText="100 $AXLE"
+        />
+        <HighLightCard
+          icon={MdLocalOffer}
+          mainText="Bonus Reward"
+          subText="210 $AXLE"
+        />
+        <HighLightCard
+          icon={MdPeople}
+          mainText="Referral Reward"
+          subText="80 $AXLE"
+        />
+        <HighLightCard
+          icon={MdAccountBalance}
+          mainText="Current Balance"
+          subText="340 $AXLE"
+        />
       </Grid>
     </Flex>
   );

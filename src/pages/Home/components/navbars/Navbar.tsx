@@ -15,6 +15,16 @@ import ETH from "../../../../assets/logos/ETH.svg";
 import { formatEther } from "@ethersproject/units";
 import { useEtherBalance, useEthers } from "@usedapp/core";
 import { useNavigate, useSearchParams } from "react-router-dom";
+// import { ethers } from "ethers";
+
+// import axleTokenABI from "../../../../abi/AxleToken.json";
+// import axleSwapTokenABI from "../../../../abi/AxleSwap.json";
+
+declare global {
+  interface Window {
+    ethereum: import("ethers").providers.ExternalProvider;
+  }
+}
 
 interface Props {
   account: string;
@@ -43,8 +53,27 @@ const Navbar = (props: NavbarProps) => {
   });
   const [wallet, setWallet] = useState<any>({});
 
-  const { activateBrowserWallet, deactivate, account } = useEthers();
+  const { activateBrowserWallet, deactivate, account, chainId } = useEthers();
   const etherBalance = useEtherBalance(account);
+
+  // const [balance, setBalance] = useState(0);
+
+  // async function buyAxle() {
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const signer = provider.getSigner();
+  //   const address = await signer.getAddress();
+  //   const presale = new ethers.Contract(
+  //     "0x59403f7035b5e773e0183D32e9Fc881Ec95De6B2",
+  //     axleSwapTokenABI.abi,
+  //     signer
+  //   );
+  //   console.log(address);
+  //   console.log(presale);
+  // }
+
+  useEffect(() => {
+    // buyAxle();
+  }, []);
 
   const connectToNEAR = async () => {
     const wallet = await NearConnectionServices.connectWallet();
@@ -61,7 +90,14 @@ const Navbar = (props: NavbarProps) => {
     props.onClose();
   };
 
+  const getSymbol = (chainId: number) => {
+    if (chainId === 97) {
+      return "BNB";
+    } else return "ETH";
+  };
+
   const connectToMetaMask = async () => {
+    console.log(chainId);
     activateBrowserWallet();
     setUser({
       account: account?.toString() ?? "",
@@ -69,8 +105,8 @@ const Navbar = (props: NavbarProps) => {
       isConnected: account ? true : false,
     });
 
-    console.log(account);
-    setDetails({ logo: ETH, label: "ETH" });
+    const label = getSymbol(chainId || 0);
+    setDetails({ logo: ETH, label: label });
     localStorage.setItem("address", account!);
     props.onClose();
   };
@@ -99,10 +135,9 @@ const Navbar = (props: NavbarProps) => {
       balance: formatEther(etherBalance ?? 1).toString(),
       isConnected: account ? true : false,
     });
-    setDetails({ logo: ETH, label: "ETH" });
+    setDetails({ logo: ETH, label: getSymbol(chainId || 0) });
     localStorage.setItem("address", account!);
-    console.log(account);
-  }, [account, etherBalance]);
+  }, [account, etherBalance, chainId]);
 
   useEffect(() => {
     const account = searchParams.get("account_id");

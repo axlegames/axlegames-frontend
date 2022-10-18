@@ -15,6 +15,7 @@ const HighLightCard = (props: any) => {
       rowGap={".15rem"}
       fontWeight="bold"
     >
+      <props.icon size={46} color={theme.secondaryMiscColor} />
       <Flex alignItems={"center"} columnGap=".25rem" justifyContent={"center"}>
         <Text color={theme.secondaryTextColor} fontSize={{ xl: "xl" }}>
           {props.mainText}

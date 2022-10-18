@@ -3,31 +3,33 @@ import { theme } from "../../../config/theme.config";
 import {
   FaTelegram,
   FaMedium,
-  FaFacebook,
   FaTwitter,
   FaLinkedin,
+  FaInstagram,
 } from "react-icons/fa";
 
 import { SiDiscord } from "react-icons/si";
 
 const Icon = (props: any) => {
   return (
-    <Box
-      cursor={"pointer"}
-      transition={`100ms all ease-in`}
-      _hover={{
-        transform: "scale(1.1)",
-      }}
-    >
-      {
-        <props.children
-          size={42}
-          color={
-            props.primary ? theme.primaryMiscColor : theme.secondaryMiscColor
-          }
-        />
-      }{" "}
-    </Box>
+    <a href={props.url} target="_blank" rel="noopener noreferrer">
+      <Box
+        cursor={"pointer"}
+        transition={`100ms all ease-in`}
+        _hover={{
+          transform: "scale(1.1)",
+        }}
+      >
+        {
+          <props.children
+            size={42}
+            color={
+              props.primary ? theme.primaryMiscColor : theme.secondaryMiscColor
+            }
+          />
+        }{" "}
+      </Box>
+    </a>
   );
 };
 
@@ -92,9 +94,17 @@ const Footer = () => {
             alignItems="center"
             columnGap={"2rem"}
           >
-            <Icon primary={true} children={FaTelegram} />
+            <Icon
+              primary={true}
+              url="https://t.me/axlegames_en"
+              children={FaTelegram}
+            />
             <Icon primary={true} children={SiDiscord} />
-            <Icon primary={true} children={FaFacebook} />
+            <Icon
+              primary={true}
+              url="https://www.instagram.com/axlegames/"
+              children={FaInstagram}
+            />
           </Flex>
         </Box>
 
@@ -137,7 +147,7 @@ const Footer = () => {
           <Flex display="flex" alignItems="center" columnGap={"2rem"}>
             <Icon children={FaMedium} />
             <Icon children={FaLinkedin} />
-            <Icon children={FaTwitter} />
+            <Icon url="https://twitter.com/AxleGames" children={FaTwitter} />
           </Flex>
         </Box>
       </Box>
