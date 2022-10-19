@@ -27,7 +27,7 @@ const ProfileCard = () => {
         maxW={"32"}
         src={Logo}
       />
-      <Text color={theme.primaryTextColor}>(akashmrc98)</Text>
+      <Text color={theme.primaryTwoTextColor}>(akashmrc98)</Text>
       <Flex color={theme.secondaryTextColor} columnGap="1rem">
         <Text>11 followers</Text>
         <Text>22 following</Text>
@@ -35,12 +35,12 @@ const ProfileCard = () => {
       <Flex justifyContent={"center"} columnGap=".5rem">
         <Button
           color={theme.secondaryTwoTextColor}
-          bg={theme.secondaryButtonColor}
+          bg={theme.ternaryButtonColor}
         >
           Copy Link
         </Button>
         <Button
-          bg={theme.primaryButtonColor}
+          bg={theme.secondaryButtonColor}
           onClick={() => navigate("/profile")}
         >
           View Profile

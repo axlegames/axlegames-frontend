@@ -56,7 +56,7 @@ const Referral = () => {
             </Text>
           </Flex>
           <Button
-            bg={theme.secondaryButtonColor}
+            bg={theme.ternaryButtonColor}
             color={theme.secondaryTwoTextColor}
             size="sm"
           >
@@ -104,7 +104,7 @@ const Referral = () => {
       >
         <Box>
           <Flex columnGap={".2rem"} alignItems={"center"}>
-            <Text color={theme.secondaryTwoTextColor}>Referral Link</Text>
+            <Text color={theme.primaryTextColor}>Referral Link</Text>
             <BiCopy
               size={28}
               style={{ cursor: "pointer" }}
@@ -119,15 +119,15 @@ const Referral = () => {
 
         <Box borderRadius={"lg"} p={4} bg={theme.fgColor}>
           <Text color={theme.secondaryTextColor}>
-            125 $AXLE Tokens per friend
+            125 AXLE Tokens per friend
           </Text>
           <Box width="100%" my={2} bg={theme.bgColor} p={2} borderRadius="lg">
-            <Text color={theme.primaryTextColor} fontSize="12px">
+            <Text color={theme.primaryTwoTextColor} fontSize="12px">
               https://axlegames.io/auth/?ref=akashmrc98
             </Text>
           </Box>
           <Button
-            bg={theme.secondaryButtonColor}
+            bg={theme.ternaryButtonColor}
             color={theme.secondaryTwoTextColor}
           >
             Copy

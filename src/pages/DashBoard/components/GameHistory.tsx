@@ -26,7 +26,7 @@ const GameHistory = () => {
     },
     {
       game: "Wordle #5",
-      fee: "0x21102242r92d444",
+      fee: "100",
       reward: "200",
     },
     {
@@ -64,7 +64,7 @@ const GameHistory = () => {
           </Text>
         </Flex>
         <Button
-          bg={theme.secondaryButtonColor}
+          bg={theme.ternaryButtonColor}
           color={theme.secondaryTwoTextColor}
           size="sm"
         >
@@ -85,10 +85,10 @@ const GameHistory = () => {
               <Tr key={i} boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
                 <Td> {d.game}</Td>
                 <Td visibility={{ base: "hidden", md: "visible" }}>
-                  {d.fee} $Axle
+                  {d.fee} AXLE
                 </Td>
                 <Td visibility={{ base: "hidden", md: "visible" }}>
-                  {d.reward} $Axle
+                  {d.reward} AXLE
                 </Td>
               </Tr>
             ))}
