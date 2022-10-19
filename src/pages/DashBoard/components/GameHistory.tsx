@@ -10,6 +10,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { ThemeContext } from "@emotion/react";
 import { theme } from "../../../config/theme.config";
 
 const GameHistory = () => {
@@ -73,19 +74,19 @@ const GameHistory = () => {
           color={theme.secondaryTextColor}
           variant="simple"
         >
-          <Thead boxShadow={`0px 0px 350px 30px ${theme.primaryTwoTextColor}`}>
+          <Thead boxShadow={`0px 0px 0px 0px ${theme.primaryTwoTextColor}`}>
             <Tr>
-              <Th color={theme.secondaryTwoTextColor}>Game</Th>
+              <Th color={theme.secondaryTwoTextColor} fontSize={"md"}>Game</Th>
               <Th
                 color={theme.secondaryTwoTextColor}
-                fontWeight="bold"
+                fontSize={"md"}
                 visibility={{ base: "hidden", md: "visible" }}
               >
                 Fee
               </Th>
               <Th
                 color={theme.secondaryTwoTextColor}
-                fontWeight="bold"
+                fontSize={"md"}
                 visibility={{ base: "hidden", md: "visible" }}
               >
                 Reward
@@ -94,7 +95,11 @@ const GameHistory = () => {
           </Thead>
           <Tbody>
             {data.map((d, i) => (
-              <Tr key={i}>
+              <Tr 
+               key={i} 
+               borderTop={`2px solid ${theme.primaryTwoTextColor}`}
+               borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
+               >
                 <Td> {d.game}</Td>
                 <Td visibility={{ base: "hidden", md: "visible" }}>
                   {d.fee} AXLE

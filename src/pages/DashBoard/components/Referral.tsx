@@ -64,9 +64,7 @@ const Referral = () => {
         </Flex>
         <TableContainer aria-expanded="false" my={4}>
           <Table color={theme.secondaryTextColor} variant="simple">
-            <Thead
-              boxShadow={`0px 0px 350px 30px ${theme.primaryTwoTextColor}`}
-            >
+            <Thead>
               <Tr>
                 <Th color={theme.secondaryTwoTextColor} fontWeight="bold">
                   Username
@@ -89,13 +87,18 @@ const Referral = () => {
             </Thead>
             <Tbody fontWeight={"bold"}>
               {data.map((d, i) => (
-                <Tr key={i}>
+                
+                <Tr
+                borderTop={`2px solid ${theme.primaryTwoTextColor}`}
+                borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
+                
+key={i}>
                   <Td>{d.username}</Td>
                   <Td visibility={{ base: "hidden", md: "visible" }}>
                     {d.address}...
                   </Td>
                   <Td visibility={{ base: "hidden", md: "visible" }}>
-                    {d.reward} Axle
+                    {d.reward} AXLE
                   </Td>
                 </Tr>
               ))}

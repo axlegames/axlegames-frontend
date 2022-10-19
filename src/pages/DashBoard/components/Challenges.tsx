@@ -36,7 +36,7 @@ const Challenges = () => (
     <Text
       px={4}
       fontWeight={"bold"}
-      fontSize={"2xl"}
+      fontSize={"3xl"}
       color={theme.primaryTextColor}
     >
       Complete & Earn
