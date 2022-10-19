@@ -12,7 +12,7 @@ const Dashboard = () => {
     <MainLayout>
       <Text
         px={6}
-        fontSize={"2xl"}
+        fontSize={"3xl"}
         fontWeight="bold"
         color={theme.primaryTextColor}
       >

@@ -22,22 +22,22 @@ const Rewards = () => {
         <HighLightCard
           icon={HiBriefcase}
           mainText="Staking Reward"
-          subText="100 $AXLE"
+          subText="100 AXLE"
         />
         <HighLightCard
           icon={MdLocalOffer}
           mainText="Bonus Reward"
-          subText="210 $AXLE"
+          subText="210 AXLE"
         />
         <HighLightCard
           icon={MdPeople}
           mainText="Referral Reward"
-          subText="80 $AXLE"
+          subText="80 AXLE"
         />
         <HighLightCard
           icon={MdAccountBalance}
           mainText="Current Balance"
-          subText="340 $AXLE"
+          subText="340 AXLE"
         />
       </Grid>
     </Flex>
