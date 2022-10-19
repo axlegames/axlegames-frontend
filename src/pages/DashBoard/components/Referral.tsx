@@ -12,7 +12,6 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { BiCopy } from "react-icons/bi";
 import { theme } from "../../../config/theme.config";
 
 const Referral = () => {
@@ -64,24 +63,33 @@ const Referral = () => {
           </Button>
         </Flex>
         <TableContainer aria-expanded="false" my={4}>
-          <Table
-            color={theme.secondaryTextColor}
-            variant="unstyled"
-            size={{ base: "md" }}
-          >
-            <Thead>
+          <Table color={theme.secondaryTextColor} variant="simple">
+            <Thead
+              boxShadow={`0px 0px 350px 30px ${theme.primaryTwoTextColor}`}
+            >
               <Tr>
-                <Th>Username</Th>
-                <Th visibility={{ base: "hidden", md: "visible" }}>Address</Th>
-                <Th visibility={{ base: "hidden", md: "visible" }}>Reward</Th>
+                <Th color={theme.secondaryTwoTextColor} fontWeight="bold">
+                  Username
+                </Th>
+                <Th
+                  color={theme.secondaryTwoTextColor}
+                  fontWeight="bold"
+                  visibility={{ base: "hidden", md: "visible" }}
+                >
+                  Address
+                </Th>
+                <Th
+                  color={theme.secondaryTwoTextColor}
+                  fontWeight="bold"
+                  visibility={{ base: "hidden", md: "visible" }}
+                >
+                  Reward
+                </Th>
               </Tr>
             </Thead>
-            <Tbody>
+            <Tbody fontWeight={"bold"}>
               {data.map((d, i) => (
-                <Tr
-                  key={i}
-                  boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}
-                >
+                <Tr key={i}>
                   <Td>{d.username}</Td>
                   <Td visibility={{ base: "hidden", md: "visible" }}>
                     {d.address}...
@@ -103,14 +111,9 @@ const Referral = () => {
         rowGap={".5rem"}
       >
         <Box>
-          <Flex columnGap={".2rem"} alignItems={"center"}>
-            <Text color={theme.primaryTextColor}>Referral Link</Text>
-            <BiCopy
-              size={28}
-              style={{ cursor: "pointer" }}
-              color={theme.secondaryTwoTextColor}
-            />
-          </Flex>
+          <Text fontSize={"3xl"} color={theme.primaryTextColor}>
+            Referral Link
+          </Text>
 
           <Text color={theme.secondaryTextColor} fontSize="sm">
             See who is on your top list.

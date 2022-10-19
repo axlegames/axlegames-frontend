@@ -39,11 +39,6 @@ const GameHistory = () => {
       fee: "100",
       reward: "200",
     },
-    {
-      game: "Wordle #7",
-      fee: "100",
-      reward: "300",
-    },
   ];
 
   return (
@@ -72,17 +67,34 @@ const GameHistory = () => {
         </Button>
       </Flex>
       <TableContainer aria-expanded="false" my={4}>
-        <Table color={theme.secondaryTextColor} variant="unstyled" size="md">
-          <Thead>
+        <Table
+          fontFamily={"quicksand"}
+          fontWeight="bold"
+          color={theme.secondaryTextColor}
+          variant="simple"
+        >
+          <Thead boxShadow={`0px 0px 350px 30px ${theme.primaryTwoTextColor}`}>
             <Tr>
-              <Th>Game</Th>
-              <Th visibility={{ base: "hidden", md: "visible" }}>Fee</Th>
-              <Th visibility={{ base: "hidden", md: "visible" }}>Reward</Th>
+              <Th color={theme.secondaryTwoTextColor}>Game</Th>
+              <Th
+                color={theme.secondaryTwoTextColor}
+                fontWeight="bold"
+                visibility={{ base: "hidden", md: "visible" }}
+              >
+                Fee
+              </Th>
+              <Th
+                color={theme.secondaryTwoTextColor}
+                fontWeight="bold"
+                visibility={{ base: "hidden", md: "visible" }}
+              >
+                Reward
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
             {data.map((d, i) => (
-              <Tr key={i} boxShadow={`0px 2px 1px ${theme.secondaryTextColor}`}>
+              <Tr key={i}>
                 <Td> {d.game}</Td>
                 <Td visibility={{ base: "hidden", md: "visible" }}>
                   {d.fee} AXLE

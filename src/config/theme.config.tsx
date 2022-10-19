@@ -6,9 +6,8 @@ export const theme = {
   secondaryMiscColor: "#7EB2F1",
 
   primaryButtonColor: "#EB6612", //bright orange
-  secondaryButtonColor: "#F18541",//light orange 
+  secondaryButtonColor: "#F18541", //light orange
   ternaryButtonColor: "#372948", // dark button
-
 
   secondaryTextColor: "#D4D3DA", //white
   secondaryTwoTextColor: "#FD5EB3", // light pink

@@ -43,8 +43,8 @@ const Challenges = () => (
     </Text>
     {challenges.map((t, i) => (
       <Box
-        borderRadius="xl"
-        boxShadow={`-1px 1px 1px ${theme.primaryTwoTextColor}`}
+        borderRadius="lg"
+        boxShadow={`-2px 2px 1px ${theme.primaryTwoTextColor}`}
         key={i}
       >
         <Flex
@@ -55,9 +55,7 @@ const Challenges = () => (
           px={4}
           py={1}
         >
-          <Text fontSize={"sm"} color={theme.secondaryTextColor}>
-            {t.task}
-          </Text>
+          <Text color={theme.secondaryTextColor}>{t.task}</Text>
           <Button
             bg={theme.ternaryButtonColor}
             color={theme.secondaryTwoTextColor}
