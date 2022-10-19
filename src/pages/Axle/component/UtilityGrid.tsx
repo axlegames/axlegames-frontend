@@ -55,7 +55,7 @@ const UtilityGrid = () => {
             <Box
               p={{ base: "8" }}
               width={"100%"}
-              bg={theme.bgColor}
+              bg={theme.fgColor}
               borderRadius="md"
               shadow={"lg"}
               fontWeight="bold"

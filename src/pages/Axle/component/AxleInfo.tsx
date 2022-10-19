@@ -62,7 +62,7 @@ const AxleInfo = () => {
       >
         <Flex
           direction="column"
-          bg={theme.bgColor}
+          bg={theme.fgColor}
           borderRadius="2xl"
           px={{ base: "6" }}
           pt={{ base: "6" }}
@@ -74,6 +74,7 @@ const AxleInfo = () => {
           <Text
             color={theme.primaryTextColor}
             fontSize={{ base: "2xl", xl: "3xl" }}
+            textAlign="center"
           >
             Token Information
           </Text>
