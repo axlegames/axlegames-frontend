@@ -43,6 +43,7 @@ const AxleInfo = () => {
       templateColumns={{ base: "1fr", xl: "1fr 1fr" }}
       alignItems={"center"}
       p={8}
+      borderRadius="xl"
     >
       <Dialog
         close={() => setOpen(false)}
@@ -69,7 +70,7 @@ const AxleInfo = () => {
       >
         <Flex
           direction="column"
-          bg={theme.fgColor}
+          bg={theme.bgColor}
           borderRadius="2xl"
           px={{ base: "6" }}
           pt={{ base: "6" }}
@@ -84,7 +85,6 @@ const AxleInfo = () => {
           >
             Token Information
           </Text>
-          <Divider />
           <Flex my={4} rowGap={".5rem"} direction={"column"}>
             {token.map((t, i) => (
               <Tag name={t.name} value={t.value} />

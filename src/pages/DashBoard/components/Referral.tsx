@@ -101,7 +101,7 @@ const Referral = () => {
             <Tbody fontWeight={"bold"}>
               {data.map((d, i) => (
                 <Tr
-                  borderBottom={`3px solid ${theme.primaryTwoTextColor}`}
+                  borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
                   borderLeft="none"
                   borderRight={"none"}
                   borderTop="none"

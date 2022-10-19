@@ -108,7 +108,7 @@ const GameHistory = () => {
             {data.map((d, i) => (
               <Tr
                 key={i}
-                borderBottom={`3px solid ${theme.primaryTwoTextColor}`}
+                borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
                 borderLeft="none"
                 borderRight={"none"}
                 borderTop="none"

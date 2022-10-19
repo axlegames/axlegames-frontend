@@ -21,10 +21,16 @@ const WhitePaper = (props: any) => {
         rowGap={"1rem"}
         direction={{ base: "column", xl: "row" }}
       >
-        <Box p={{ base: "0", lg: "12" }}>
+        <Box bg={theme.bgColor} borderRadius="xl" p={{ base: "0", lg: "12" }}>
           <Image maxWidth={"64"} width={"80"} src={WP} />
         </Box>
-        <Flex rowGap={".5rem"} direction={"column"}>
+        <Flex
+          p={8}
+          bg={theme.bgColor}
+          borderRadius="xl"
+          rowGap={".5rem"}
+          direction={"column"}
+        >
           <Text color={theme.primaryTextColor} fontSize={"3xl"}>
             Finest designed gaming and NFT Project
           </Text>
