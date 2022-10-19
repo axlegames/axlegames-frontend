@@ -3,9 +3,50 @@ todo
 -> profile page ui [done]
 -> axle page ui [done]
 -> home page ui [not done]
--> responsive tables and challenges in dashboard  [done]
+-> responsive tables and challenges in dashboard [done]
 -> research of profile page [pending]
 -> build profile page [pending]
+
+Backend
+
+-> GameHistory
+create game history
+-> as soon as game completes
+-> update gameStatus
+-> irrespective of game type history should contain all game results
+
+getters =>
+getGameHistory(userId)
+<= getters
+
+Class GameResult {
+userId string
+contestId string
+isWon bool
+completedIn float
+noTriesTaken int
+}
+
+GameHistory {
+userId string
+gameResult Array<GameHistory>
+}
+Game History <-
+
+-> RewardsNBalance
+Class Transcation{
+walletId string
+transcationType enum (challenge/staking/bonus/referral)
+type enum (debit/credit)
+amount float
+}
+getters =>
+listTransactions(walletId)
+listTransactions(transactionType, walletId)
+listTransactions(walletId, type)
+<= getters
+
+RewardNBalance <-
 
 future
 -> ethers send transaction
