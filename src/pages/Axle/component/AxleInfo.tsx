@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  Grid,
-  Image,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { theme } from "../../../config/theme.config";
 import Dialog from "../dialog/Dialog";
