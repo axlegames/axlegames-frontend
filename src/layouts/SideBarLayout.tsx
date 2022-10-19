@@ -250,7 +250,7 @@ const SideBarLayout = (props: SideBarProps) => {
         <Divider my={1} />
         <Flex my={2} color={theme.primaryButtonColor} columnGap={".5rem"}>
           {images.map((p, i) => (
-            <a target="_blank" rel="noopener noreferrer" href={p.url}>
+            <a key={i} target="_blank" rel="noopener noreferrer" href={p.url}>
               <Image
                 width={"8"}
                 src={p.img}
