@@ -34,7 +34,7 @@ const Referral = () => {
   ];
   return (
     <Grid
-      templateColumns={{ base: "1fr", xl: "2fr 1fr" }}
+      templateColumns={{ base: "1fr", xl: "2fr 1.2fr" }}
       columnGap="3rem"
       justifyContent={"space-between"}
       rowGap={"1rem"}
@@ -43,6 +43,7 @@ const Referral = () => {
       borderRadius={"xl"}
       bg={theme.bgColor}
       aria-expanded="false"
+      display={{ base: "none", md: "grid" }}
     >
       <Flex direction="column" justifyContent={"flex-start"}>
         <Flex justifyContent={"space-between"}>
@@ -65,21 +66,33 @@ const Referral = () => {
         <TableContainer aria-expanded="false" my={4}>
           <Table color={theme.secondaryTextColor} variant="simple">
             <Thead>
-              <Tr>
-                <Th color={theme.secondaryTwoTextColor} fontWeight="bold">
+              <Tr
+                borderBottom={"none"}
+                borderLeft="none"
+                borderRight={"none"}
+                borderTop="none"
+              >
+                <Th
+                  fontSize={"md"}
+                  color={theme.secondaryTwoTextColor}
+                  fontFamily="quicksand"
+                  fontWeight="bold"
+                >
                   Username
                 </Th>
                 <Th
+                  fontSize={"md"}
                   color={theme.secondaryTwoTextColor}
+                  fontFamily="quicksand"
                   fontWeight="bold"
-                  visibility={{ base: "hidden", md: "visible" }}
                 >
                   Address
                 </Th>
                 <Th
+                  fontSize={"md"}
                   color={theme.secondaryTwoTextColor}
+                  fontFamily="quicksand"
                   fontWeight="bold"
-                  visibility={{ base: "hidden", md: "visible" }}
                 >
                   Reward
                 </Th>
@@ -87,19 +100,16 @@ const Referral = () => {
             </Thead>
             <Tbody fontWeight={"bold"}>
               {data.map((d, i) => (
-                
                 <Tr
-                borderTop={`2px solid ${theme.primaryTwoTextColor}`}
-                borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
-                
-key={i}>
+                  borderBottom={`3px solid ${theme.primaryTwoTextColor}`}
+                  borderLeft="none"
+                  borderRight={"none"}
+                  borderTop="none"
+                  key={i}
+                >
                   <Td>{d.username}</Td>
-                  <Td visibility={{ base: "hidden", md: "visible" }}>
-                    {d.address}...
-                  </Td>
-                  <Td visibility={{ base: "hidden", md: "visible" }}>
-                    {d.reward} AXLE
-                  </Td>
+                  <Td>{d.address}...</Td>
+                  <Td>{d.reward} AXLE</Td>
                 </Tr>
               ))}
             </Tbody>
@@ -107,12 +117,7 @@ key={i}>
         </TableContainer>
       </Flex>
 
-      <Flex
-        visibility={{ base: "hidden", md: "visible" }}
-        direction={"column"}
-        fontWeight="bold"
-        rowGap={".5rem"}
-      >
+      <Flex direction={"column"} fontWeight="bold" rowGap={".5rem"}>
         <Box>
           <Text fontSize={"3xl"} color={theme.primaryTextColor}>
             Referral Link
@@ -128,8 +133,9 @@ key={i}>
             125 AXLE Tokens per friend
           </Text>
           <Box width="100%" my={2} bg={theme.bgColor} p={2} borderRadius="lg">
-            <Text color={theme.primaryTwoTextColor} fontSize="12px">
-              https://axlegames.io/auth/?ref=akashmrc98
+            <Text color={theme.primaryTwoTextColor}>
+              https://axlegames.io/auth/?ref=
+              {localStorage.getItem("username") ?? ""}
             </Text>
           </Box>
           <Button

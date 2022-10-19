@@ -10,7 +10,6 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { ThemeContext } from "@emotion/react";
 import { theme } from "../../../config/theme.config";
 
 const GameHistory = () => {
@@ -52,6 +51,7 @@ const GameHistory = () => {
       p={4}
       bg={theme.bgColor}
       aria-expanded="false"
+      display={{ base: "none", md: "flex" }}
     >
       <Flex justifyContent={"space-between"}>
         <Flex fontWeight={"bold"} direction={"column"}>
@@ -74,20 +74,31 @@ const GameHistory = () => {
           color={theme.secondaryTextColor}
           variant="simple"
         >
-          <Thead boxShadow={`0px 0px 0px 0px ${theme.primaryTwoTextColor}`}>
-            <Tr>
-              <Th color={theme.secondaryTwoTextColor} fontSize={"md"}>Game</Th>
+          <Thead>
+            <Tr
+              borderBottom="none"
+              borderLeft="none"
+              borderRight={"none"}
+              borderTop="none"
+            >
               <Th
+                fontFamily="quicksand"
                 color={theme.secondaryTwoTextColor}
                 fontSize={"md"}
-                visibility={{ base: "hidden", md: "visible" }}
+              >
+                Game
+              </Th>
+              <Th
+                fontFamily="quicksand"
+                color={theme.secondaryTwoTextColor}
+                fontSize={"md"}
               >
                 Fee
               </Th>
               <Th
+                fontFamily="quicksand"
                 color={theme.secondaryTwoTextColor}
                 fontSize={"md"}
-                visibility={{ base: "hidden", md: "visible" }}
               >
                 Reward
               </Th>
@@ -95,18 +106,16 @@ const GameHistory = () => {
           </Thead>
           <Tbody>
             {data.map((d, i) => (
-              <Tr 
-               key={i} 
-               borderTop={`2px solid ${theme.primaryTwoTextColor}`}
-               borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
-               >
+              <Tr
+                key={i}
+                borderBottom={`3px solid ${theme.primaryTwoTextColor}`}
+                borderLeft="none"
+                borderRight={"none"}
+                borderTop="none"
+              >
                 <Td> {d.game}</Td>
-                <Td visibility={{ base: "hidden", md: "visible" }}>
-                  {d.fee} AXLE
-                </Td>
-                <Td visibility={{ base: "hidden", md: "visible" }}>
-                  {d.reward} AXLE
-                </Td>
+                <Td>{d.fee} AXLE</Td>
+                <Td>{d.reward} AXLE</Td>
               </Tr>
             ))}
           </Tbody>

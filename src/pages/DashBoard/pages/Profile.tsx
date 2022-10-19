@@ -22,17 +22,17 @@ import { ProfileService } from "./ProfileService";
 const FormInput = (props: any) => {
   return (
     <FormControl my={4}>
-      <FormLabel fontWeight={"bold"} color={theme.primaryTextColor}>
+      <FormLabel fontWeight={"bold"} color={theme.primaryTwoTextColor}>
         {props.label}
       </FormLabel>
       <Input
         outline="none"
         border="none"
-        boxShadow={`0px 0px 3px ${theme.primaryMiscColor}`}
+        boxShadow={`0px 0px 3px ${theme.ternaryButtonColor}`}
         bg={theme.fgColor}
         onChange={props.onChange}
+        color={theme.primaryTwoTextColor}
         size="lg"
-        color={theme.secondaryTextColor}
         fontWeight="bold"
         value={props.value}
         name={props.name}
@@ -63,7 +63,6 @@ const Profile = () => {
       createdOn: "",
     },
     onSubmit: (values: any) => {
-      console.log(values);
       ProfileService.updateProfile({
         ...values,
         userId: localStorage.getItem("userId") ?? "",
@@ -124,18 +123,14 @@ const Profile = () => {
         borderRadius="2xl"
         m={4}
       >
-        <Stack textAlign={"center"}>
-          <Text color={theme.primaryTextColor} fontSize={"2xl"}>
+        <Stack my={4} textAlign={"center"}>
+          <Text color={theme.primaryTextColor} fontSize={"3xl"}>
             Update Public Profile Details
           </Text>
-          <Text color={theme.secondaryTextColor} fontSize={"md"}>
+          <Text color={theme.primaryTwoTextColor} fontSize={"xl"}>
             Edit your GI - Gamer Profile Details
           </Text>
         </Stack>
-
-        <Text color={theme.primaryTextColor} fontSize="xl" p={2}>
-          Update Personal Details
-        </Text>
 
         <Grid
           templateColumns={{
@@ -233,20 +228,32 @@ const Profile = () => {
             alignItems="center"
             rowGap={"1rem"}
           >
-            <Box bg={theme.primaryMiscColor} p={2} borderRadius="xl">
-              <Text>Choose Avatar</Text>
+            <Box bg={theme.ternaryButtonColor} p={2} borderRadius="xl">
+              <Text color={theme.primaryTwoTextColor}>Choose Avatar</Text>
             </Box>
             <Box bg={theme.fgColor} p={4} borderRadius="xl">
               <Image width={"32"} src={Logo} />
             </Box>
-            <Button>Upload</Button>
+            <Button
+              bg={theme.ternaryButtonColor}
+              color={theme.secondaryTwoTextColor}
+              mb={2}
+            >
+              Upload
+            </Button>
           </Box>
         </Grid>
 
         <Flex p={5}>
-          <Button onClick={() => form.handleSubmit()}>Update</Button>
+          <Button
+            bg={theme.ternaryButtonColor}
+            color={theme.secondaryTwoTextColor}
+            onClick={() => form.handleSubmit()}
+          >
+            Update
+          </Button>
         </Flex>
-        <Divider my={4} />
+        <Divider mb={3} />
         <Flex direction={"column"}>
           <Text color={theme.primaryTextColor} fontSize="xl">
             Your Email ID

@@ -1,8 +1,11 @@
 todo
--> fix update profile route and link it with frontend side
--> responsive tables and challenges in dashboard
--> research of profile page
--> build profile page
+-> fix update profile route and link it with frontend side [done]
+-> profile page ui [done]
+-> axle page ui [done]
+-> home page ui [not done]
+-> responsive tables and challenges in dashboard  [done]
+-> research of profile page [pending]
+-> build profile page [pending]
 
 future
 -> ethers send transaction

@@ -5,13 +5,19 @@ const AxleHeader = () => {
   return (
     <Flex
       my={{ base: "4" }}
-      color={theme.primaryTextColor}
       direction={"column"}
       textAlign={"center"}
       fontWeight="bold"
     >
-      <Text fontSize={{ base: "xl", lg: "3xl" }}>Introducing Axle Token</Text>
-      <Text fontSize={{ base: "lg", lg: "xl" }}>A web3 Gaming token</Text>
+      <Text color={theme.primaryTextColor} fontSize={{ base: "xl", lg: "3xl" }}>
+        Introducing Axle Token
+      </Text>
+      <Text
+        color={theme.primaryTwoTextColor}
+        fontSize={{ base: "lg", lg: "xl" }}
+      >
+        A web3 Gaming token
+      </Text>
     </Flex>
   );
 };

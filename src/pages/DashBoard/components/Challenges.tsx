@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
 const challenges = [
@@ -47,11 +47,13 @@ const Challenges = () => (
         boxShadow={`-2px 2px 1px ${theme.primaryTwoTextColor}`}
         key={i}
       >
-        <Flex
+        <Grid
           fontWeight={"bold"}
           alignItems="center"
-          gridColumnGap={"3rem"}
+          gridColumnGap={"1rem"}
           justifyContent={"space-between"}
+          rowGap="1rem"
+          templateColumns={{ base: "1fr", md: "3fr 1fr" }}
           px={4}
           py={1}
         >
@@ -60,11 +62,10 @@ const Challenges = () => (
             bg={theme.ternaryButtonColor}
             color={theme.secondaryTwoTextColor}
             mb={2}
-            size="sm"
           >
             {t.buttonText}
           </Button>
-        </Flex>
+        </Grid>
       </Box>
     ))}
   </Flex>

@@ -66,10 +66,14 @@ const UtilityGrid = () => {
             >
               <Image width={{ base: "24" }} src={d.img} />
               <Flex direction={"column"}>
-                <Text fontSize={"xl"} color={theme.primaryTextColor}>
+                <Text fontSize={"xl"} color={theme.primaryTwoTextColor}>
                   {d.title}
                 </Text>
-                <Text fontSize={"md"} fontWeight="bold" color={`#ffffff`}>
+                <Text
+                  fontSize={"md"}
+                  fontWeight="bold"
+                  color={theme.secondaryTextColor}
+                >
                   {d.content}
                 </Text>
               </Flex>

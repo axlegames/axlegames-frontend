@@ -5,7 +5,7 @@ import { theme } from "../../../config/theme.config";
 const Tag = (props: any) => {
   return (
     <Flex
-      color={theme.secondaryTextColor}
+      color={theme.primaryTwoTextColor}
       direction={"row"}
       justifyContent="space-between"
       alignItems={"center"}
@@ -41,7 +41,7 @@ const PreSale = (props: any) => {
         <Text>Connected to: 0x94...2E8A ( Bal : 0.0000 BNB )</Text>
         <Input type={"number"}></Input>
         <Text>Min 0.1 BNB | Max 1.99 BNB</Text>
-        <Button color={theme.primaryButtonColor} variant={"outline"} size="sm">
+        <Button color={"black"} bg={theme.primaryButtonColor}>
           Buy now
         </Button>
       </Flex>

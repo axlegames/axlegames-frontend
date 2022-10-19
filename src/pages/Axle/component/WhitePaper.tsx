@@ -12,7 +12,6 @@ const WhitePaper = (props: any) => {
       color={theme.secondaryTextColor}
       p={{ base: "8" }}
       fontWeight="bold"
-      fontSize={"xl"}
       width={{ base: "100%", md: "80%" }}
       mx={{ base: "0", md: "auto" }}
     >
@@ -33,7 +32,12 @@ const WhitePaper = (props: any) => {
             GameInfinity project, tokenomics, roadmap and whitepaper is designed
             to serve the best crypto project to all the participants.
           </Text>
-          <Button mt="4" width={"44"}>
+          <Button
+            color={`black`}
+            bg={theme.primaryButtonColor}
+            mt="4"
+            width={"44"}
+          >
             <a
               target="_blank"
               rel="noopener noreferrer"

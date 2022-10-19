@@ -25,7 +25,6 @@ const Dashboard = () => {
         my={12}
         borderRadius="xl"
         fontFamily={"quicksand"}
-        pb={{ base: "40", xl: "6" }}
       >
         <Flex rowGap={"1rem"} direction={"column"}>
           <Grid
@@ -38,7 +37,7 @@ const Dashboard = () => {
           </Grid>
 
           <Grid
-            templateColumns={{ base: "1fr", xl: "1fr 1fr" }}
+            templateColumns={{ base: "1fr", "2xl": "1fr 1fr" }}
             columnGap="1rem"
             rowGap="1rem"
             borderRadius="2xl"

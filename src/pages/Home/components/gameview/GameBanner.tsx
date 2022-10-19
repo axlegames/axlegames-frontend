@@ -15,7 +15,7 @@ const GameBanner = (props: any) => {
         </Text>
         <Text
           fontSize={{ base: "md", lg: "xl" }}
-          color={theme.highLightColor}
+          color={theme.primaryTwoTextColor}
           fontWeight={"bold"}
         >
           A skill-based web3 gaming platform

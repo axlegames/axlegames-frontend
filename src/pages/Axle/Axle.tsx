@@ -9,13 +9,7 @@ import AxleHeader from "./component/AxleHeader";
 const Axle = () => {
   return (
     <MainLayout>
-      <Flex
-        py={12}
-        pb={{ base: "40", lg: "12" }}
-        direction={"column"}
-        rowGap="1rem"
-        fontFamily={"quicksand"}
-      >
+      <Flex direction={"column"} rowGap="1rem" fontFamily={"quicksand"}>
         <AxleHeader />
         <AxleInfo />
         <UtilityGrid />

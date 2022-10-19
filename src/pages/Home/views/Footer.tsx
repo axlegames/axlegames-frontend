@@ -118,13 +118,14 @@ const Footer = () => {
           Everything New About Axle Games. Yes, I'm In!
         </Text>
         <Button
-          variant={"outline"}
           _hover={{
-            color: theme.bgColor,
-            bg: theme.primaryButtonColor,
+            boxShadow: `0px 0px 0px ${theme.primaryButtonColor}`,
           }}
-          bg={theme.bgColor}
-          color={theme.primaryTextColor}
+          bg={theme.primaryButtonColor}
+          color={"black"}
+          boxShadow={`0px 0px 10px ${theme.primaryButtonColor}`}
+          borderRadius="xl"
+          size="lg"
         >
           Join the Revolution
         </Button>

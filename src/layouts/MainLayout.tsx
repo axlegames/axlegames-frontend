@@ -32,7 +32,13 @@ const MainLayout = (props: any) => {
             scrollTop={() => scrollUpFun()}
           />
         </GridItem>
-        <GridItem maxH={"100vh"} overflowY="scroll" ref={ref}>
+        <GridItem
+          py={12}
+          pb={{ base: "40", lg: "12" }}
+          maxH={"100vh"}
+          overflowY="scroll"
+          ref={ref}
+        >
           <Navbar
             open={open}
             onOpen={() => setOpen(true)}
