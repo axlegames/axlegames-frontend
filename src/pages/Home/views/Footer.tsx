@@ -119,11 +119,12 @@ const Footer = () => {
         </Text>
         <Button
           _hover={{
-            boxShadow: `0px 0px 0px ${theme.primaryButtonColor}`,
+            bg: theme.secondaryTextColor,
+            color: theme.secondaryTwoTextColor,
           }}
-          bg={theme.primaryButtonColor}
-          color={"black"}
-          boxShadow={`0px 0px 10px ${theme.primaryButtonColor}`}
+          bg={theme.bgColor}
+          color={theme.secondaryTwoTextColor}
+          boxShadow={`0px 0px 4px ${theme.secondaryTwoTextColor}`}
           borderRadius="xl"
           size="lg"
         >

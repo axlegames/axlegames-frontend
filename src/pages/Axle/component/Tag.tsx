@@ -4,15 +4,14 @@ import { theme } from "../../../config/theme.config";
 const Tag = (props: any) => {
   return (
     <Flex
-      color={theme.secondaryTextColor}
       direction={"row"}
       justifyContent="space-between"
       alignItems={"center"}
       columnGap={{ base: "3rem" }}
       fontSize={{ xl: "md" }}
     >
-      <Text>{props.name}</Text>
-      <Text>{props.value}</Text>
+      <Text color={theme.primaryTwoTextColor}>{props.name}</Text>
+      <Text color={theme.secondaryTextColor}>{props.value}</Text>
     </Flex>
   );
 };

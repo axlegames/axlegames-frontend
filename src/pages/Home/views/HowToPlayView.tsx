@@ -5,7 +5,7 @@ const HowToPlayView = () => {
   return (
     <Box
       minH={{ base: "90vh" }}
-      color={theme.highLightColor}
+      
       fontFamily={"quicksand"}
       fontWeight="bold"
       display={"flex"}
@@ -15,10 +15,11 @@ const HowToPlayView = () => {
       px={{ "2xl": "64" }}
       rowGap={{ base: "2rem" }}
     >
-      <Text fontSize={{ base: "4xl", md: "5xl", xl: "6xl" }} textAlign="center">
+      <Text color={theme.primaryTextColor} fontSize={{ base: "4xl", md: "5xl", xl: "6xl" }} textAlign="center">
         How To Play
       </Text>
       <Text
+      color={theme.secondaryTextColor}
         fontSize={{ base: "smaller", md: "medium", xl: "xl" }}
         textAlign={"center"}
       >

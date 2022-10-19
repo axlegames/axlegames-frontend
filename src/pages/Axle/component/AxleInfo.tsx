@@ -96,7 +96,7 @@ const AxleInfo = () => {
               justifyContent={"center"}
             >
               <Button
-                bg={theme.primaryButtonColor}
+                bg={theme.secondaryButtonColor}
                 onClick={() => setOpen(true)}
               >
                 Buy now

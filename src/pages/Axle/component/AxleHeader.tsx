@@ -13,7 +13,7 @@ const AxleHeader = () => {
         Introducing Axle Token
       </Text>
       <Text
-        color={theme.primaryTwoTextColor}
+        color={theme.secondaryTextColor}
         fontSize={{ base: "lg", lg: "xl" }}
       >
         A web3 Gaming token
