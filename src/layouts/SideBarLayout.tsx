@@ -1,4 +1,8 @@
 import {
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Divider,
   Flex,
@@ -73,8 +77,6 @@ const SideBarLayout = (props: SideBarProps) => {
 
   const signin = () => {
     const address = localStorage.getItem("address");
-    console.log("hello");
-    console.log(isMobile);
 
     if (isMobile) {
       const isLoggedIn = localStorage.getItem("userId");
@@ -214,18 +216,57 @@ const SideBarLayout = (props: SideBarProps) => {
           icon={<HiGlobe size={32} />}
         />
         <SideBarButton title={"Marketplace"} icon={<MdStore size={32} />} />
-        <a
-          href="https://axlegames.s3.ap-south-1.amazonaws.com/Axlegames.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ width: "100%" }}
-        >
-          <SideBarButton
-            title={"Pitch-Deck"}
-            icon={<HiOutlineDocument size={32} />}
-          />
-        </a>
+
         <SideBarButton title={"About Us"} icon={<MdInfo size={32} />} />
+
+        <Accordion width={"100%"} allowToggle allowMultiple>
+          <AccordionItem border={"none"} outline="none" width={"100%"}>
+            <AccordionButton
+              borderRadius={"md"}
+              width={"100%"}
+              justifyContent="flex-start"
+              _hover={{ color: theme.primaryTextColor, bg: theme.bgColor }}
+              position="relative"
+              fontSize={"sm"}
+              fontWeight="bold"
+            >
+              <Flex alignItems={"center"} columnGap={"1rem"}>
+                <Box>
+                  <HiOutlineDocument size={32} />
+                </Box>
+                <Text>{`Docs`}</Text>
+              </Flex>
+            </AccordionButton>
+            <AccordionPanel>
+              <Flex direction={"column"} rowGap=".25rem">
+                <a
+                  href="https://axlegames.s3.ap-south-1.amazonaws.com/Axlegames.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ width: "100%" }}
+                >
+                  {" "}
+                  <SideBarButton
+                    title={"Pitch-Deck"}
+                    icon={<HiOutlineDocument size={32} />}
+                  />
+                </a>
+                <a
+                  href="https://axlegames.s3.ap-south-1.amazonaws.com/Axlegames.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ width: "100%" }}
+                >
+                  {" "}
+                  <SideBarButton
+                    title={"Economics-Paper"}
+                    icon={<HiOutlineDocument size={32} />}
+                  />
+                </a>
+              </Flex>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
       </SideBarCard>
 
       <IsNotLoggedIn>

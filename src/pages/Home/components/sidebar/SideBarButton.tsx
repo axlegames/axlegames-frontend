@@ -23,20 +23,6 @@ const SideBarButton = (props: any) => {
       _hover={{ color: theme.primaryTextColor, bg: theme.bgColor }}
       position="relative"
     >
-      {/* {props.isCommingSoon ? (
-        <Text
-          bottom={0}
-          right="0"
-          top="0"
-          margin="auto"
-          fontWeight={"bold"}
-          color={theme.secondaryTwoTextColor}
-          fontSize={"12px"}
-          position={"absolute"}
-        >
-          (coming soon)
-        </Text>
-      ) : null} */}
       <Flex alignItems={"center"} columnGap={"1rem"}>
         <Box>{props.icon}</Box>
         <Text>{props.title}</Text>

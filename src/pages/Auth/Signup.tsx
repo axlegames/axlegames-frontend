@@ -55,6 +55,7 @@ const Signup = (props: any) => {
       password: "",
       username: "",
       confirmPassword: "",
+      referralCode: "",
     },
     validate,
     onSubmit: (values) => {
@@ -146,6 +147,15 @@ const Signup = (props: any) => {
       <FormError
         touched={form.touched.confirmPassword ?? false}
         name={form.errors.confirmPassword ?? ""}
+      />
+      <FormField
+        placeHolder="Referral Code"
+        value={form.values.referralCode}
+        onChange={form.handleChange}
+        name="referralCode"
+        label="Referral Code"
+        type="text"
+        isRequired={false}
       />
       <Flex
         rowGap={"1rem"}
