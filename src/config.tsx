@@ -6,6 +6,7 @@ if (SERVER === "PROD") URL = "https://api.axlegames.io";
 
 const axlegamesPrefix = URL + "/axlegames/api/v1/";
 const userPrefix = axlegamesPrefix + "users";
+const gamePrefix = axlegamesPrefix + "games";
 
 const headers = () => {
   return {
@@ -13,4 +14,4 @@ const headers = () => {
   };
 };
 
-export { URL, headers, userPrefix, axlegamesPrefix };
+export { URL, headers, userPrefix, axlegamesPrefix, gamePrefix };

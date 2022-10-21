@@ -7,6 +7,7 @@ const GameBanner = (props: any) => {
     <Box maxW={"100%"} overflowX="hidden" pb={16}>
       <Flex flexDirection={"column"} p={{ base: "4" }}>
         <Text
+          fontFamily={"quicksand"}
           color={theme.primaryTextColor}
           fontSize={{ base: "1xl", lg: "3xl" }}
           fontWeight="bold"
@@ -14,6 +15,7 @@ const GameBanner = (props: any) => {
           Welcome to Axle Games
         </Text>
         <Text
+          fontFamily={"quicksand"}
           fontSize={{ base: "md", lg: "xl" }}
           color={theme.secondaryTextColor}
           fontWeight={"bold"}

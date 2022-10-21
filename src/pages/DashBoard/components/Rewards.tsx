@@ -2,8 +2,25 @@ import { Flex, Grid } from "@chakra-ui/react";
 import HighLightCard from "./HighLightCard";
 import { HiBriefcase } from "react-icons/hi";
 import { MdAccountBalance, MdPeople, MdLocalOffer } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { DashBoardServices, RewardsModel } from "../DashBoardServices";
 
 const Rewards = () => {
+  const [reward, setReward] = useState<RewardsModel>({
+    balance: 0,
+    bonus: 0,
+    error: false,
+    referral: 0,
+    staking: 0,
+  });
+
+  useEffect(() => {
+    DashBoardServices.getRewardsAndBalance()
+      .then((res) => {
+        setReward(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <Flex direction={"column"}>
       <Grid
@@ -22,22 +39,22 @@ const Rewards = () => {
         <HighLightCard
           icon={HiBriefcase}
           mainText="Staking Reward"
-          subText="100 AXLE"
+          subText={`${reward.staking} AXLE`}
         />
         <HighLightCard
           icon={MdLocalOffer}
           mainText="Bonus Reward"
-          subText="210 AXLE"
+          subText={`${reward.bonus} AXLE`}
         />
         <HighLightCard
           icon={MdPeople}
           mainText="Referral Reward"
-          subText="80 AXLE"
+          subText={`${reward.referral} AXLE`}
         />
         <HighLightCard
           icon={MdAccountBalance}
           mainText="Current Balance"
-          subText="340 AXLE"
+          subText={`${reward.balance} AXLE`}
         />
       </Grid>
     </Flex>

@@ -9,29 +9,9 @@ todo
 
 Backend
 
--> GameHistory
-create game history
--> as soon as game completes
--> update gameStatus
--> irrespective of game type history should contain all game results
-
 getters =>
 getGameHistory(userId)
 <= getters
-
-Class GameResult {
-userId string
-contestId string
-isWon bool
-completedIn float
-noTriesTaken int
-}
-
-GameHistory {
-userId string
-gameResult Array<GameHistory>
-}
-Game History <-
 
 -> RewardsNBalance
 Class Transcation{

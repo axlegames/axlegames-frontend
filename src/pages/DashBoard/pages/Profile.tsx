@@ -22,7 +22,7 @@ import { ProfileService } from "./ProfileService";
 const FormInput = (props: any) => {
   return (
     <FormControl my={4}>
-      <FormLabel fontWeight={"bold"} color={theme.primaryTwoTextColor}>
+      <FormLabel fontWeight={"bold"} color={theme.secondaryTextColor}>
         {props.label}
       </FormLabel>
       <Input
@@ -31,7 +31,7 @@ const FormInput = (props: any) => {
         boxShadow={`0px 0px 3px ${theme.ternaryButtonColor}`}
         bg={theme.fgColor}
         onChange={props.onChange}
-        color={theme.primaryTwoTextColor}
+        color={theme.secondaryTextColor}
         size="lg"
         fontWeight="bold"
         value={props.value}

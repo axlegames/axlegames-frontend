@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { axlegamesPrefix } from "../../config";
+import { gamePrefix } from "../../config";
 
 export interface AxleGame {
   _id: string;
@@ -17,7 +17,7 @@ export interface AxleGames {
 
 export class HomeServices {
   static getAxleGames = async (): Promise<AxleGames> => {
-    const response = await axios.get(`${axlegamesPrefix}get-games`);
+    const response = await axios.get(`${gamePrefix}`);
     let axleGames: AxleGames = response.data;
     return axleGames;
   };

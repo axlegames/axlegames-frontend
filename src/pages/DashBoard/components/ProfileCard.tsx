@@ -27,11 +27,9 @@ const ProfileCard = () => {
         maxW={"32"}
         src={Logo}
       />
-      <Text color={theme.primaryTwoTextColor}>(akashmrc98)</Text>
-      <Flex color={theme.secondaryTextColor} columnGap="1rem">
-        <Text>11 followers</Text>
-        <Text>22 following</Text>
-      </Flex>
+      <Text color={theme.primaryTwoTextColor}>
+        ({localStorage.getItem("username")})
+      </Text>
       <Flex justifyContent={"center"} columnGap=".5rem">
         <Button
           color={theme.secondaryTwoTextColor}

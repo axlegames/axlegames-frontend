@@ -15,6 +15,7 @@ const Dashboard = () => {
         fontSize={"3xl"}
         fontWeight="bold"
         color={theme.primaryTextColor}
+        fontFamily={"quicksand"}
       >
         Welcome! akashmrc98
       </Text>

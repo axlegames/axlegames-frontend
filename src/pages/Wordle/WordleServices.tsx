@@ -1,5 +1,5 @@
 import axios from "axios";
-import { headers, axlegamesPrefix } from "../../config";
+import { headers, gamePrefix } from "../../config";
 
 const token = headers() ?? "";
 
@@ -21,22 +21,21 @@ export interface GuessStatus {
 
 export class WordleServices {
   static enterContest = async (data: any) => {
-    return await axios.post(`${axlegamesPrefix}enter-contest`, data, token);
+    return await axios.post(`${gamePrefix}/enter`, data, token);
   };
 
-  static getGameState = async (data: any): Promise<Status> => {
-    return await (
-      await axios.post(`${axlegamesPrefix}status`, data, token)
+  static getGameState = async (data: any): Promise<Status> =>
+    await (
+      await axios.post(`${gamePrefix}/status`, data, token)
     ).data;
-  };
 
-  static cleanGameState = async (data: any): Promise<void> => {
-    return await axios.post(`${axlegamesPrefix}clean`, data, token);
-  };
+  static cleanGameState = async (data: any): Promise<void> =>
+    await axios.post(`${gamePrefix}/clean`, data, token);
 
   static validateUpdateGuess = async (data: any): Promise<GuessStatus> => {
     const resp = await axios.post(
-      `${axlegamesPrefix}validate-word`,
+      `${gamePrefix}/validate/word`,
+
       data,
       token
     );
@@ -45,6 +44,24 @@ export class WordleServices {
       guessStatus: resp.data.guessStatus,
       isWinningWord: resp.data.isWinningWord,
     };
+  };
+
+  static saveGame = async (
+    userId: string,
+    contestId: string,
+    chances: number,
+    isWon: boolean
+  ) => {
+    return await axios.post(
+      `${gamePrefix}/save`,
+      {
+        userId,
+        contestId,
+        chances,
+        isWon,
+      },
+      token
+    );
   };
 
   static generateEmptyRows = (noOfRows: number): string[] => {

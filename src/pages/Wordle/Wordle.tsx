@@ -136,8 +136,27 @@ const Wordle = () => {
         userId: localStorage.getItem("userId"),
       });
       setTimeout(() => {
-        if (isWinningWord) setIsWon(true);
-        else setIsLost(true);
+        if (isWinningWord) {
+          setIsWon(true);
+          WordleServices.saveGame(
+            localStorage.getItem("userId") ?? "",
+            contestId ?? "",
+            state.currentRow + 1,
+            true
+          )
+            .then((r) => console.log(r))
+            .catch((e) => console.log(e));
+        } else {
+          setIsLost(true);
+          WordleServices.saveGame(
+            localStorage.getItem("userId") ?? "",
+            contestId ?? "",
+            state.currentRow + 1,
+            false
+          )
+            .then((r) => console.log(r))
+            .catch((e) => console.log(e));
+        }
       }, 1500);
     }
   };
