@@ -252,7 +252,7 @@ const SideBarLayout = (props: SideBarProps) => {
                   />
                 </a>
                 <a
-                  href="https://axlegames.s3.ap-south-1.amazonaws.com/Axlegames.pdf"
+                  href="https://axlegames.s3.ap-south-1.amazonaws.com/AxleGames_EconomicsPaper.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ width: "100%" }}
