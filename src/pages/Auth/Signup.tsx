@@ -37,6 +37,7 @@ const validate = (values: any) => {
 
 const Signup = (props: any) => {
   const handleRequest = (data: any) => {
+    console.log(data);
     setStatus({
       error: data.error,
       message: data.message,
