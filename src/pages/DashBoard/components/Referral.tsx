@@ -12,26 +12,21 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { theme } from "../../../config/theme.config";
+import { DashBoardServices, ReferralModel } from "../DashBoardServices";
 
 const Referral = () => {
-  const data = [
-    {
-      username: "roberm2",
-      address: "0x1S211202242r921",
-      reward: "200",
-    },
-    {
-      username: "jhoncf4",
-      address: "0x0921222242r92d8",
-      reward: "200",
-    },
-    {
-      username: "altowolt8",
-      address: "0x21102242r92d444",
-      reward: "200",
-    },
-  ];
+  useEffect(() => {
+    DashBoardServices.getReferralAndReferralCode().then((res) =>
+      setReferral(res)
+    );
+  }, []);
+  const [referral, setReferral] = useState<ReferralModel>({
+    referralCode: "",
+    referrals: [],
+  });
+
   return (
     <Grid
       templateColumns={{ base: "1fr", xl: "2fr 1.2fr" }}
@@ -78,16 +73,16 @@ const Referral = () => {
                   fontFamily="quicksand"
                   fontWeight="bold"
                 >
-                  Username
+                  Address
                 </Th>
-                <Th
+                {/* <Th
                   fontSize={"md"}
                   color={theme.secondaryTwoTextColor}
                   fontFamily="quicksand"
                   fontWeight="bold"
                 >
                   Address
-                </Th>
+                </Th> */}
                 <Th
                   fontSize={"md"}
                   color={theme.secondaryTwoTextColor}
@@ -99,7 +94,7 @@ const Referral = () => {
               </Tr>
             </Thead>
             <Tbody fontWeight={"bold"}>
-              {data.map((d, i) => (
+              {referral.referrals.map((d, i) => (
                 <Tr
                   borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
                   borderLeft="none"
@@ -107,9 +102,9 @@ const Referral = () => {
                   borderTop="none"
                   key={i}
                 >
-                  <Td>{d.username}</Td>
-                  <Td>{d.address}...</Td>
-                  <Td>{d.reward} AXLE</Td>
+                  <Td>{d}</Td>
+                  {/* <Td>{d}...</Td> */}
+                  <Td>{100} AXLE</Td>
                 </Tr>
               ))}
             </Tbody>
@@ -130,12 +125,11 @@ const Referral = () => {
 
         <Box borderRadius={"lg"} p={4} bg={theme.fgColor}>
           <Text color={theme.secondaryTextColor}>
-            125 AXLE Tokens per friend
+            100 AXLE Tokens per friend
           </Text>
           <Box width="100%" my={2} bg={theme.bgColor} p={2} borderRadius="lg">
             <Text color={theme.primaryTwoTextColor}>
-              https://axlegames.io/auth/?ref=
-              {localStorage.getItem("username") ?? ""}
+              {referral.referralCode}
             </Text>
           </Box>
           <Button
