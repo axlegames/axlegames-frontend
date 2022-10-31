@@ -5,7 +5,6 @@ import { theme } from "../../../config/theme.config";
 import { ethers } from "ethers";
 
 import axleTokenABI from "../../../abi/AxleToken.json";
-import axleSwapTokenABI from "../../../abi/AxleSwap.json";
 
 const Tag = (props: any) => {
   return (
@@ -44,27 +43,22 @@ const PreSale = (props: any) => {
 
   function preSale() {
     (async () => {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const address = await signer.getAddress();
+      // const provider = new ethers.providers.Web3Provider(window.ethereum);
+      // const signer = provider.getSigner();
+      // const address = await signer.getAddress();
       // const token = new ethers.Contract(
-      //   "0x2b1d9dc605ee28349e44617f9758712FCCDB0155",
+      //   "0x8eFe412d87dA0D4893762ddC4d958452b109d7D8",
       //   axleTokenABI.abi,
       //   signer
       // );
       // await token.approve(address, (bnb * 10 ** 18).toString(), {
       //   gasLimit: 210000,
       // });
-      const swap = new ethers.Contract(
-        "0xF82747c9D3Cfd339447b85d40b9cCCf0aDDDbCC0",
-        axleSwapTokenABI.abi,
-        signer
-      );
-      console.log(swap);
-      const p = await swap.presaleEther();
-      console.log(ethers.utils.formatEther(p));
-      const presale = await swap.preSale(address);
-      console.log(presale);
+      // console.log(swap);
+      // const p = await swap.presaleEther();
+      // console.log(ethers.utils.formatEther(p));
+      // const presale = await swap.preSale(address);
+      // console.log(presale);
     })();
   }
 
@@ -77,12 +71,7 @@ const PreSale = (props: any) => {
       axleTokenABI.abi,
       signer
     );
-    const swap = new ethers.Contract(
-      "0xF82747c9D3Cfd339447b85d40b9cCCf0aDDDbCC0",
-      axleSwapTokenABI.abi,
-      signer
-    );
-    if (token !== null && swap !== null) {
+    if (token !== null) {
       let balance = await token.balanceOf(address);
       balance = ethers.utils.formatEther(balance);
       setAddress(address);
