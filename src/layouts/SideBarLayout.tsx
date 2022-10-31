@@ -40,20 +40,16 @@ import {
 } from "react-icons/ai";
 import { useNavigate } from "react-router";
 
-import Facebook from "../assets/socials/facebook.png";
 import Instagram from "../assets/socials/instagram.png";
-import LinkedIn from "../assets/socials/linkedin.png";
 import Twitter from "../assets/socials/twitter.png";
 import Telegram from "../assets/socials/telegram.png";
 import Discord from "../assets/socials/discord.png";
 
 const images = [
-  { img: Facebook, url: "" },
   { img: Instagram, url: "https://www.instagram.com/axlegames/" },
-  { img: LinkedIn, url: "" },
   { img: Twitter, url: "https://twitter.com/AxleGames" },
   { img: Telegram, url: "https://t.me/axlegames_en" },
-  { img: Discord, url: "" },
+  { img: Discord, url: "https://discord.com/invite/ReHuTHVf" },
 ];
 
 interface SideBarProps {

@@ -15,10 +15,6 @@ import ETH from "../../../../assets/logos/ETH.svg";
 import { formatEther } from "@ethersproject/units";
 import { useEtherBalance, useEthers } from "@usedapp/core";
 import { useNavigate, useSearchParams } from "react-router-dom";
-// import { ethers } from "ethers";
-
-// import axleTokenABI from "../../../../abi/AxleToken.json";
-// import axleSwapTokenABI from "../../../../abi/AxleSwap.json";
 
 declare global {
   interface Window {
@@ -55,25 +51,6 @@ const Navbar = (props: NavbarProps) => {
 
   const { activateBrowserWallet, deactivate, account, chainId } = useEthers();
   const etherBalance = useEtherBalance(account);
-
-  // const [balance, setBalance] = useState(0);
-
-  // async function buyAxle() {
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const signer = provider.getSigner();
-  //   const address = await signer.getAddress();
-  //   const presale = new ethers.Contract(
-  //     "0x59403f7035b5e773e0183D32e9Fc881Ec95De6B2",
-  //     axleSwapTokenABI.abi,
-  //     signer
-  //   );
-  //   console.log(address);
-  //   console.log(presale);
-  // }
-
-  useEffect(() => {
-    // buyAxle();
-  }, []);
 
   const connectToNEAR = async () => {
     const wallet = await NearConnectionServices.connectWallet();

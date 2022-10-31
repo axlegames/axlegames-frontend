@@ -1,12 +1,6 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-import {
-  FaTelegram,
-  FaMedium,
-  FaTwitter,
-  FaLinkedin,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaTelegram, FaMedium, FaTwitter, FaInstagram } from "react-icons/fa";
 
 import { SiDiscord } from "react-icons/si";
 
@@ -99,7 +93,11 @@ const Footer = () => {
               url="https://t.me/axlegames_en"
               children={FaTelegram}
             />
-            <Icon primary={true} children={SiDiscord} />
+            <Icon
+              primary={true}
+              url="https://discord.com/invite/ReHuTHVf"
+              children={SiDiscord}
+            />
             <Icon
               primary={true}
               url="https://www.instagram.com/axlegames/"
@@ -148,7 +146,6 @@ const Footer = () => {
           <TextHeader primary={false} title={"Socials"} />
           <Flex display="flex" alignItems="center" columnGap={"2rem"}>
             <Icon children={FaMedium} />
-            <Icon children={FaLinkedin} />
             <Icon url="https://twitter.com/AxleGames" children={FaTwitter} />
           </Flex>
         </Box>
