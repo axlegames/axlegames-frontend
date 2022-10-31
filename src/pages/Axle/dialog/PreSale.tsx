@@ -67,7 +67,7 @@ const PreSale = (props: any) => {
     const signer = provider.getSigner();
     const address = await signer.getAddress();
     const token = new ethers.Contract(
-      "0x2b1d9dc605ee28349e44617f9758712FCCDB0155",
+      "0x8eFe412d87dA0D4893762ddC4d958452b109d7D8",
       axleTokenABI.abi,
       signer
     );
