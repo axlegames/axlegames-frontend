@@ -5,6 +5,7 @@ import { theme } from "../../../config/theme.config";
 import { ethers } from "ethers";
 
 import axleTokenABI from "../../../abi/AxleToken.json";
+import axlePresaleABI from "../../../abi/AxlePresale.json";
 
 const Tag = (props: any) => {
   return (
@@ -41,24 +42,39 @@ const PreSale = (props: any) => {
     setAxle(bnb * 0.12);
   }
 
+  const TOKEN_CONTRACT_ADDRESS = "0x4CAEC12488ccb5AE5625F3E2E7f2392E14ab8063";
+  const PRESALE_CONTRACT_ADDRESS = "0xdA8eFeE0944d37AE7ddEfeCa9D6D2f47663cf45e";
+
   function preSale() {
     (async () => {
-      // const provider = new ethers.providers.Web3Provider(window.ethereum);
-      // const signer = provider.getSigner();
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
       // const address = await signer.getAddress();
       // const token = new ethers.Contract(
-      //   "0x8eFe412d87dA0D4893762ddC4d958452b109d7D8",
+      //   TOKEN_CONTRACT_ADDRESS,
       //   axleTokenABI.abi,
       //   signer
       // );
-      // await token.approve(address, (bnb * 10 ** 18).toString(), {
-      //   gasLimit: 210000,
-      // });
-      // console.log(swap);
-      // const p = await swap.presaleEther();
-      // console.log(ethers.utils.formatEther(p));
-      // const presale = await swap.preSale(address);
-      // console.log(presale);
+      const presale = new ethers.Contract(
+        PRESALE_CONTRACT_ADDRESS,
+        axlePresaleABI.abi,
+        signer
+      );
+
+      const estimatedGasLimit = await presale.estimateGas.deposit();
+      console.log(estimatedGasLimit);
+
+      const approveTxUnsigned = await presale.populateTransaction.deposit();
+      console.log(approveTxUnsigned);
+
+      // approveTxUnsigned.chainId = 97;
+      // approveTxUnsigned.gasLimit = estimatedGasLimit;
+      // approveTxUnsigned.gasPrice = await provider.getGasPrice();
+
+      // const approveTxSigned = await signer.signTransaction(approveTxUnsigned);
+      // const submittedTx = await provider.sendTransaction(approveTxSigned);
+      // const approveReceipt = await submittedTx.wait();
+      // console.log(approveReceipt);
     })();
   }
 
@@ -67,10 +83,11 @@ const PreSale = (props: any) => {
     const signer = provider.getSigner();
     const address = await signer.getAddress();
     const token = new ethers.Contract(
-      "0x8eFe412d87dA0D4893762ddC4d958452b109d7D8",
+      TOKEN_CONTRACT_ADDRESS,
       axleTokenABI.abi,
       signer
     );
+
     if (token !== null) {
       let balance = await token.balanceOf(address);
       balance = ethers.utils.formatEther(balance);
