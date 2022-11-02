@@ -209,33 +209,34 @@ const PreSale = (props: any) => {
 
 export default PreSale;
 
-const d = {
-  hash: "0x5f1ffcaba99fa7a26602caf58e960fd6a2e11ae595ce6cefe90c23fcaf930497",
-  type: 0,
-  accessList: null,
-  blockHash: null,
-  blockNumber: null,
-  transactionIndex: null,
-  confirmations: 0,
-  from: "0x9423165E2390e5A543a6441432Bf7F9327Ef2E8A",
-  gasPrice: {
-    type: "BigNumber",
-    hex: "0x02540be400",
-  },
-  gasLimit: {
-    type: "BigNumber",
-    hex: "0x0100f4",
-  },
-  to: "0x39D371fdCaabAAc1a2a052acb2F36c5D19a2cD1f",
-  value: {
-    type: "BigNumber",
-    hex: "0x016345785d8a0000",
-  },
-  nonce: 34,
-  data: "0xd0e30db0",
-  r: "0x2ca805aa0041c434e2a440fc9d2b182120bab7e9408799a2461a3c1221220cc8",
-  s: "0x17b898de137eb52535a2d56f251bfa32543b1fa9b9a7ac0d67cc900c9c9ebb68",
-  v: 229,
-  creates: null,
-  chainId: 97,
-};
+// ref for success transction
+// const d = {
+//   hash: "0x5f1ffcaba99fa7a26602caf58e960fd6a2e11ae595ce6cefe90c23fcaf930497",
+//   type: 0,
+//   accessList: null,
+//   blockHash: null,
+//   blockNumber: null,
+//   transactionIndex: null,
+//   confirmations: 0,
+//   from: "0x9423165E2390e5A543a6441432Bf7F9327Ef2E8A",
+//   gasPrice: {
+//     type: "BigNumber",
+//     hex: "0x02540be400",
+//   },
+//   gasLimit: {
+//     type: "BigNumber",
+//     hex: "0x0100f4",
+//   },
+//   to: "0x39D371fdCaabAAc1a2a052acb2F36c5D19a2cD1f",
+//   value: {
+//     type: "BigNumber",
+//     hex: "0x016345785d8a0000",
+//   },
+//   nonce: 34,
+//   data: "0xd0e30db0",
+//   r: "0x2ca805aa0041c434e2a440fc9d2b182120bab7e9408799a2461a3c1221220cc8",
+//   s: "0x17b898de137eb52535a2d56f251bfa32543b1fa9b9a7ac0d67cc900c9c9ebb68",
+//   v: 229,
+//   creates: null,
+//   chainId: 97,
+// };
