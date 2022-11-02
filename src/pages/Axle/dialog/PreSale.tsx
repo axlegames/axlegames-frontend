@@ -5,7 +5,7 @@ import { theme } from "../../../config/theme.config";
 import { ethers } from "ethers";
 
 import axleTokenABI from "../../../abi/AxleToken.json";
-import axlePresaleABI from "../../../abi/AxlePresale.json";
+import axlePresaleABI from "../../../abi/TokenPresale.json";
 
 const Tag = (props: any) => {
   return (
@@ -28,22 +28,19 @@ const PreSale = (props: any) => {
   const [axle, setAxle] = useState(0);
   const [address, setAddress] = useState<string>("");
   const [balance, setBalance] = useState(0);
-  const [gasFees, setGasFees] = useState(2100000);
   // const [state, setState] = useState({
   //   blockHash: "",
   //   blockNumber: "",
   //   transactionHash: "",
   // });
-  console.log(gasFees);
-
   function onBnbChange(e: any) {
     const bnb = Number(e.target.value);
     setBnb(bnb);
     setAxle(bnb * 0.12);
   }
 
-  const TOKEN_CONTRACT_ADDRESS = "0x4CAEC12488ccb5AE5625F3E2E7f2392E14ab8063";
-  const PRESALE_CONTRACT_ADDRESS = "0xdA8eFeE0944d37AE7ddEfeCa9D6D2f47663cf45e";
+  const TOKEN_CONTRACT_ADDRESS = "0xE99AF61a80f524DFF1180FF38417c723623712a3";
+  const PRESALE_CONTRACT_ADDRESS = "0x0872C019C7e50eFaEA37746D692c7540b11Be199";
 
   function preSale() {
     (async () => {
@@ -60,21 +57,8 @@ const PreSale = (props: any) => {
         axlePresaleABI.abi,
         signer
       );
-
-      const estimatedGasLimit = await presale.estimateGas.deposit();
-      console.log(estimatedGasLimit);
-
-      const approveTxUnsigned = await presale.populateTransaction.deposit();
-      console.log(approveTxUnsigned);
-
-      // approveTxUnsigned.chainId = 97;
-      // approveTxUnsigned.gasLimit = estimatedGasLimit;
-      // approveTxUnsigned.gasPrice = await provider.getGasPrice();
-
-      // const approveTxSigned = await signer.signTransaction(approveTxUnsigned);
-      // const submittedTx = await provider.sendTransaction(approveTxSigned);
-      // const approveReceipt = await submittedTx.wait();
-      // console.log(approveReceipt);
+      const p = await presale.deposit();
+      console.log(p);
     })();
   }
 
@@ -93,7 +77,6 @@ const PreSale = (props: any) => {
       balance = ethers.utils.formatEther(balance);
       setAddress(address);
       setBalance(balance);
-      setGasFees(1000000);
     }
   }
 
@@ -138,9 +121,23 @@ const PreSale = (props: any) => {
           <Text></Text>
         </Flex>
         <Text>Min 0.1 BNB | Max 1.99 BNB</Text>
-        <Button onClick={preSale} color={"black"} bg={theme.primaryButtonColor}>
-          Buy now
-        </Button>
+        {address === "" ? (
+          <Button
+            onClick={preSale}
+            color={"black"}
+            bg={theme.primaryButtonColor}
+          >
+            Connect Wallet
+          </Button>
+        ) : (
+          <Button
+            onClick={preSale}
+            color={"black"}
+            bg={theme.primaryButtonColor}
+          >
+            Buy now
+          </Button>
+        )}
       </Flex>
     </Box>
   );

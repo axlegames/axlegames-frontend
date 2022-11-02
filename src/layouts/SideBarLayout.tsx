@@ -1,6 +1,7 @@
 import {
   Accordion,
   AccordionButton,
+  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box,
@@ -20,7 +21,8 @@ import {
   HiHome,
   HiGlobe,
   HiCash,
-  HiOutlineDocument,
+  HiOutlineViewList,
+  HiDocument,
 } from "react-icons/hi/index";
 
 import { BiCoin } from "react-icons/bi";
@@ -197,12 +199,15 @@ const SideBarLayout = (props: SideBarProps) => {
           link="/axle-token"
           icon={<BiCoin size={32} />}
         />
-        <SideBarButton
-          onClick={() => navigate("/dashboard")}
-          link="/dashboard"
-          title={"Dashboard"}
-          icon={<AiOutlineDashboard size={32} />}
-        />
+
+        <IsLoggedIn>
+          <SideBarButton
+            onClick={() => navigate("/dashboard")}
+            link="/dashboard"
+            title={"Dashboard"}
+            icon={<AiOutlineDashboard size={32} />}
+          />
+        </IsLoggedIn>
       </SideBarCard>
 
       <SideBarCard>
@@ -226,11 +231,19 @@ const SideBarLayout = (props: SideBarProps) => {
               fontSize={"sm"}
               fontWeight="bold"
             >
-              <Flex alignItems={"center"} columnGap={"1rem"}>
-                <Box>
-                  <HiOutlineDocument size={32} />
-                </Box>
-                <Text>{`Docs`}</Text>
+              <Flex
+                alignItems={"center"}
+                justifyContent="space-between"
+                width={"100%"}
+                columnGap={"1rem"}
+              >
+                <Flex alignItems={"center"} columnGap={"1rem"}>
+                  <Box>
+                    <HiOutlineViewList size={32} />
+                  </Box>
+                  <Text>{`Docs`}</Text>
+                </Flex>
+                <AccordionIcon />
               </Flex>
             </AccordionButton>
             <AccordionPanel>
@@ -244,7 +257,7 @@ const SideBarLayout = (props: SideBarProps) => {
                   {" "}
                   <SideBarButton
                     title={"Pitch-Deck"}
-                    icon={<HiOutlineDocument size={32} />}
+                    icon={<HiDocument size={32} />}
                   />
                 </a>
                 <a
@@ -256,7 +269,7 @@ const SideBarLayout = (props: SideBarProps) => {
                   {" "}
                   <SideBarButton
                     title={"Economics-Paper"}
-                    icon={<HiOutlineDocument size={32} />}
+                    icon={<HiDocument size={32} />}
                   />
                 </a>
               </Flex>

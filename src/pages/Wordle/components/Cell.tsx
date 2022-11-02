@@ -39,6 +39,7 @@ const Cell = (props: Props) => {
       transitionTimingFunction="ease-in"
       transitionProperty={"all"}
       borderRadius="md"
+      autoCapitalize="true"
     >
       {props.letter}
     </Box>

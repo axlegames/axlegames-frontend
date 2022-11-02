@@ -89,7 +89,7 @@ const Wordle = () => {
     return dispatch({
       type: KEY_ACTION.ON_KEY_PRESS,
       payload: {
-        key: key.toLowerCase(),
+        key: key.toUpperCase(),
         guessesStatus: [],
         gameState: state.gameState,
         gameStatus: state.gameStatus,

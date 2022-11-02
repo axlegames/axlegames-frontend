@@ -1,6 +1,5 @@
 import {
-  Button,
-  Flex,
+  Box,
   Table,
   TableContainer,
   Tbody,
@@ -10,67 +9,11 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { resourceLimits } from "worker_threads";
 import { theme } from "../../../config/theme.config";
-import { DashBoardServices, GameHistoryModel } from "../DashBoardServices";
-import DashBoardDialog from "../modal/DashBoardDialog";
-import GameHistoryModal from "../modal/GameHistoryModal";
 
-const GameHistory = () => {
-  const [history, setHistory] = useState<{ history: Array<GameHistoryModel> }>({
-    history: [],
-  });
-
-  const [tempHistory, setTempHistory] = useState<{
-    history: Array<GameHistoryModel>;
-  }>({
-    history: [],
-  });
-
-  useEffect(() => {
-    DashBoardServices.getGameHistory().then((res) => {
-      setHistory({ history: res });
-      setTempHistory({ history: res.slice(0, 6) });
-    });
-  }, []);
-
-  const [open, setOpen] = useState(false);
-
+const GameHistoryModal = (props: any) => {
   return (
-    <Flex
-      justifyContent={"flex-start"}
-      shadow="xl"
-      height={"100%"}
-      borderRadius={"xl"}
-      direction="column"
-      p={4}
-      bg={theme.bgColor}
-      aria-expanded="false"
-      display={{ base: "none", md: "flex" }}
-    >
-      <DashBoardDialog
-        isOpen={open}
-        close={() => setOpen(false)}
-        key={1}
-        size={"xl"}
-        children={<GameHistoryModal history={history.history} />}
-      />
-      <Flex justifyContent={"space-between"}>
-        <Flex fontWeight={"bold"} direction={"column"}>
-          <Text fontSize={"3xl"} color={theme.primaryTextColor}>
-            Your History
-          </Text>
-        </Flex>
-        <Button
-          bg={theme.ternaryButtonColor}
-          color={theme.secondaryTwoTextColor}
-          size="sm"
-          onClick={() => setOpen(true)}
-        >
-          View all
-        </Button>
-      </Flex>
+    <Box>
       <TableContainer aria-expanded="false" my={4}>
         <Table
           fontFamily={"quicksand"}
@@ -109,7 +52,7 @@ const GameHistory = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {tempHistory.history.map((d, i) => (
+            {props.history.map((d: any, i: number) => (
               <Tr
                 key={i}
                 borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
@@ -145,7 +88,8 @@ const GameHistory = () => {
           </Tbody>
         </Table>
       </TableContainer>
-    </Flex>
+    </Box>
   );
 };
-export default GameHistory;
+
+export default GameHistoryModal;

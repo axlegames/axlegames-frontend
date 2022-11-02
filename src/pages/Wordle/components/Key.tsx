@@ -12,7 +12,7 @@ const Key = (props: {
   return (
     <Box
       cursor={"pointer"}
-      onClick={() => props.onKeyPress(props.letter)}
+      onClick={() => props.onKeyPress(props.letter.toUpperCase())}
       display={"flex"}
       fontSize={{ base: "18", md: "16", lg: "18", xl: "20" }}
       fontWeight="bolder"
@@ -32,7 +32,7 @@ const Key = (props: {
         borderRadius: "lg",
       }}
     >
-      {props.letter.toLowerCase()}
+      {props.letter.toUpperCase()}
     </Box>
   );
 };
