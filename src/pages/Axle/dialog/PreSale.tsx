@@ -14,7 +14,7 @@ import { ethers } from "ethers";
 
 import axleTokenABI from "../../../abi/AxleToken.json";
 import axlePresaleABI from "../../../abi/TokenPresale.json";
-import { useEtherBalance } from "@usedapp/core";
+import { useEtherBalance, useEthers } from "@usedapp/core";
 
 const Tag = (props: any) => {
   return (
@@ -39,13 +39,16 @@ const PreSale = (props: any) => {
 
   const [balance, setBalance] = useState(0);
   const [axleBalance, setAxleBalance] = useState(0);
-
-  const etherBalance = useEtherBalance(address);
   // const [state, setState] = useState({
   //   blockHash: "",
   //   blockNumber: "",
   //   transactionHash: "",
   // });
+
+  const { activateBrowserWallet, isLoading } = useEthers();
+  const { chainId } = useEthers();
+  const etherBalance = useEtherBalance(address);
+
   function onBnbChange(e: any) {
     const bnb = Number(e.target.value);
     setBnb(bnb);
@@ -59,7 +62,19 @@ const PreSale = (props: any) => {
 
   function preSale() {
     (async () => {
-      if (bnb < 0.1) {
+      if (address === "") activateBrowserWallet();
+
+      if (chainId !== 97)
+        return toast({
+          title: "Warning",
+          description: "Connect to BSC Testnet, chain id 97",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+
+      if (bnb < 0.1)
         return toast({
           title: "Warning",
           description: "Minimum 0.1 BNB",
@@ -68,9 +83,8 @@ const PreSale = (props: any) => {
           isClosable: true,
           position: "top",
         });
-      }
 
-      if (bnb >= 1.98) {
+      if (bnb >= 1.98)
         return toast({
           title: "Warning",
           description: "Maximum 1.99 BNB",
@@ -79,7 +93,6 @@ const PreSale = (props: any) => {
           isClosable: true,
           position: "top",
         });
-      }
 
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
@@ -117,17 +130,18 @@ const PreSale = (props: any) => {
       axleTokenABI.abi,
       signer
     );
-
     if (token !== null) {
       const a: number =
         Number(ethers.utils.formatEther(await token.balanceOf(address))) || 0;
-      const b: number = Number(ethers.utils.formatEther(etherBalance || 0));
-      console.log(a);
       setAddress(address);
-      setBalance(b);
       setAxleBalance(a);
     }
   }
+
+  useEffect(() => {
+    const b: number = Number(ethers.utils.formatEther(etherBalance || 0));
+    setBalance(b);
+  }, [address, etherBalance]);
 
   useEffect(() => {
     initContracts();
@@ -155,7 +169,7 @@ const PreSale = (props: any) => {
         </Flex>
         <Flex direction={"column"}>
           <Text>Connected to {address}</Text>
-          <Text>Bal : {balance} BNB </Text>
+          <Text>Bal : {!isLoading ? `${balance}` : `...`} BNB </Text>
           <Text>Bal : {axleBalance} AXLE</Text>
         </Flex>
         <Input
@@ -194,3 +208,34 @@ const PreSale = (props: any) => {
 };
 
 export default PreSale;
+
+const d = {
+  hash: "0x5f1ffcaba99fa7a26602caf58e960fd6a2e11ae595ce6cefe90c23fcaf930497",
+  type: 0,
+  accessList: null,
+  blockHash: null,
+  blockNumber: null,
+  transactionIndex: null,
+  confirmations: 0,
+  from: "0x9423165E2390e5A543a6441432Bf7F9327Ef2E8A",
+  gasPrice: {
+    type: "BigNumber",
+    hex: "0x02540be400",
+  },
+  gasLimit: {
+    type: "BigNumber",
+    hex: "0x0100f4",
+  },
+  to: "0x39D371fdCaabAAc1a2a052acb2F36c5D19a2cD1f",
+  value: {
+    type: "BigNumber",
+    hex: "0x016345785d8a0000",
+  },
+  nonce: 34,
+  data: "0xd0e30db0",
+  r: "0x2ca805aa0041c434e2a440fc9d2b182120bab7e9408799a2461a3c1221220cc8",
+  s: "0x17b898de137eb52535a2d56f251bfa32543b1fa9b9a7ac0d67cc900c9c9ebb68",
+  v: 229,
+  creates: null,
+  chainId: 97,
+};
