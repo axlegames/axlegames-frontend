@@ -11,7 +11,6 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { resourceLimits } from "worker_threads";
 import { theme } from "../../../config/theme.config";
 import { DashBoardServices, GameHistoryModel } from "../DashBoardServices";
 import DashBoardDialog from "../modal/DashBoardDialog";
