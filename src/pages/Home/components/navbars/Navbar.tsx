@@ -74,7 +74,6 @@ const Navbar = (props: NavbarProps) => {
   };
 
   const connectToMetaMask = async () => {
-    console.log(chainId);
     activateBrowserWallet();
     setUser({
       account: account?.toString() ?? "",
@@ -99,6 +98,7 @@ const Navbar = (props: NavbarProps) => {
         isConnected: false,
       });
     } catch (error) {
+      console.log(error);
     } finally {
       localStorage.removeItem("address");
       navigate("/");

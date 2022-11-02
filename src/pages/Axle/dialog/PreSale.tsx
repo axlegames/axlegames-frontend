@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
 import Icon from "../../../assets/home/logos/icon.png";
-import { Box, Button, Flex, Image, Input, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Input,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import { ethers } from "ethers";
 
 import axleTokenABI from "../../../abi/AxleToken.json";
 import axlePresaleABI from "../../../abi/TokenPresale.json";
+import { useEtherBalance } from "@usedapp/core";
 
 const Tag = (props: any) => {
   return (
@@ -27,7 +36,11 @@ const PreSale = (props: any) => {
   const [bnb, setBnb] = useState(0);
   const [axle, setAxle] = useState(0);
   const [address, setAddress] = useState<string>("");
+
   const [balance, setBalance] = useState(0);
+  const [axleBalance, setAxleBalance] = useState(0);
+
+  const etherBalance = useEtherBalance(address);
   // const [state, setState] = useState({
   //   blockHash: "",
   //   blockNumber: "",
@@ -42,8 +55,32 @@ const PreSale = (props: any) => {
   const TOKEN_CONTRACT_ADDRESS = "0x9FE1eb84F87d83Ad87A532aD3ce034037039913B";
   const PRESALE_CONTRACT_ADDRESS = "0x39D371fdCaabAAc1a2a052acb2F36c5D19a2cD1f";
 
+  const toast = useToast();
+
   function preSale() {
     (async () => {
+      if (bnb < 0.1) {
+        return toast({
+          title: "Warning",
+          description: "Minimum 0.1 BNB",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+
+      if (bnb >= 1.98) {
+        return toast({
+          title: "Warning",
+          description: "Maximum 1.99 BNB",
+          status: "warning",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      }
+
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const presale = new ethers.Contract(
@@ -51,10 +88,23 @@ const PreSale = (props: any) => {
         axlePresaleABI.abi,
         signer
       );
-      console.log(presale);
       const options = { value: ethers.utils.parseEther(bnb.toString()) };
-      const p = await presale.deposit(options);
-      console.log(p);
+      try {
+        const p = await presale.deposit(options);
+        console.log(p);
+      } catch (err: any) {
+        if (err) {
+          const message = err.data.message;
+          return toast({
+            title: "Error",
+            description: message,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+          });
+        }
+      }
     })();
   }
 
@@ -69,10 +119,13 @@ const PreSale = (props: any) => {
     );
 
     if (token !== null) {
-      let balance = await token.balanceOf(address);
-      balance = ethers.utils.formatEther(balance);
+      const a: number =
+        Number(ethers.utils.formatEther(await token.balanceOf(address))) || 0;
+      const b: number = Number(ethers.utils.formatEther(etherBalance || 0));
+      console.log(a);
       setAddress(address);
-      setBalance(balance);
+      setBalance(b);
+      setAxleBalance(a);
     }
   }
 
@@ -103,6 +156,7 @@ const PreSale = (props: any) => {
         <Flex direction={"column"}>
           <Text>Connected to {address}</Text>
           <Text>Bal : {balance} BNB </Text>
+          <Text>Bal : {axleBalance} AXLE</Text>
         </Flex>
         <Input
           onChange={onBnbChange}
