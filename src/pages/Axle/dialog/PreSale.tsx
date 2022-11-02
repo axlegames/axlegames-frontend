@@ -55,6 +55,23 @@ const PreSale = (props: any) => {
     setAxle(bnb * 0.12);
   }
 
+  const connectWallet = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+    const token = new ethers.Contract(
+      TOKEN_CONTRACT_ADDRESS,
+      axleTokenABI.abi,
+      signer
+    );
+    if (token !== null) {
+      const a: number =
+        Number(ethers.utils.formatEther(await token.balanceOf(address))) || 0;
+      setAddress(address);
+      setAxleBalance(a);
+    }
+  };
+
   const TOKEN_CONTRACT_ADDRESS = "0x9FE1eb84F87d83Ad87A532aD3ce034037039913B";
   const PRESALE_CONTRACT_ADDRESS = "0x39D371fdCaabAAc1a2a052acb2F36c5D19a2cD1f";
 
@@ -121,32 +138,10 @@ const PreSale = (props: any) => {
     })();
   }
 
-  async function initContracts() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const address = await signer.getAddress();
-    const token = new ethers.Contract(
-      TOKEN_CONTRACT_ADDRESS,
-      axleTokenABI.abi,
-      signer
-    );
-    if (token !== null) {
-      const a: number =
-        Number(ethers.utils.formatEther(await token.balanceOf(address))) || 0;
-      setAddress(address);
-      setAxleBalance(a);
-    }
-  }
-
   useEffect(() => {
     const b: number = Number(ethers.utils.formatEther(etherBalance || 0));
     setBalance(b);
   }, [address, etherBalance]);
-
-  useEffect(() => {
-    initContracts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Box px={4} py={8}>
@@ -165,13 +160,15 @@ const PreSale = (props: any) => {
         </Box>
         <Flex direction={"column"}>
           <Tag name="Buy AXLE" value="1 AXLE = $ 0.0034" />
-          <Tag name="1 BNB = 80,000 AXLE" value="Listing price : $0.015" />
+          <Tag name="1 BNB = 8000 AXLE" value="Listing price : $0.015" />
         </Flex>
-        <Flex direction={"column"}>
-          <Text>Connected to {address}</Text>
-          <Text>Bal : {!isLoading ? `${balance}` : `...`} BNB </Text>
-          <Text>Bal : {axleBalance} AXLE</Text>
-        </Flex>
+        {address !== "" ? (
+          <Flex direction={"column"}>
+            <Text>Connected to {address}</Text>
+            <Text>BNB Bal : {!isLoading ? `${balance}` : `...`} </Text>
+            <Text>AXLE Bal : {axleBalance} </Text>
+          </Flex>
+        ) : null}
         <Input
           onChange={onBnbChange}
           max={1.99}
@@ -187,7 +184,7 @@ const PreSale = (props: any) => {
         <Text>Min 0.1 BNB | Max 1.99 BNB</Text>
         {address === "" ? (
           <Button
-            onClick={preSale}
+            onClick={connectWallet}
             color={"black"}
             bg={theme.primaryButtonColor}
           >
