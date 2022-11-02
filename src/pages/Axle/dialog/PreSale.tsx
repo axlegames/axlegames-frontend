@@ -101,7 +101,7 @@ const PreSale = (props: any) => {
           position: "top",
         });
 
-      if (bnb >= 1.98)
+      if (bnb >= 1.99)
         return toast({
           title: "Warning",
           description: "Maximum 1.99 BNB",
