@@ -16,6 +16,12 @@ import axleTokenABI from "../../../abi/AxleToken.json";
 import axlePresaleABI from "../../../abi/TokenPresale.json";
 import { useEtherBalance, useEthers } from "@usedapp/core";
 
+declare global {
+  interface Window {
+    ethereum: import("ethers").providers.ExternalProvider;
+  }
+}
+
 const Tag = (props: any) => {
   return (
     <Flex
@@ -56,20 +62,26 @@ const PreSale = (props: any) => {
   }
 
   const connectWallet = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const address = await signer.getAddress();
-    const token = new ethers.Contract(
-      TOKEN_CONTRACT_ADDRESS,
-      axleTokenABI.abi,
-      signer
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    window.ethereum.sendAsync!(
+      { method: "eth_requestAccounts", params: [] },
+      async (cb, err) => {
+        const signer = provider.getSigner();
+        const address = await signer.getAddress();
+        const token = new ethers.Contract(
+          TOKEN_CONTRACT_ADDRESS,
+          axleTokenABI.abi,
+          signer
+        );
+        if (token !== null) {
+          const a: number =
+            Number(ethers.utils.formatEther(await token.balanceOf(address))) ||
+            0;
+          setAddress(address);
+          setAxleBalance(a);
+        }
+      }
     );
-    if (token !== null) {
-      const a: number =
-        Number(ethers.utils.formatEther(await token.balanceOf(address))) || 0;
-      setAddress(address);
-      setAxleBalance(a);
-    }
   };
 
   const TOKEN_CONTRACT_ADDRESS = "0x9FE1eb84F87d83Ad87A532aD3ce034037039913B";
@@ -188,7 +200,7 @@ const PreSale = (props: any) => {
             color={"black"}
             bg={theme.primaryButtonColor}
           >
-            Connect Wallet
+            Connect Wallet & Buy
           </Button>
         ) : (
           <Button
