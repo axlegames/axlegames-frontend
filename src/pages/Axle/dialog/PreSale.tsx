@@ -39,25 +39,21 @@ const PreSale = (props: any) => {
     setAxle(bnb * 0.12);
   }
 
-  const TOKEN_CONTRACT_ADDRESS = "0xE99AF61a80f524DFF1180FF38417c723623712a3";
-  const PRESALE_CONTRACT_ADDRESS = "0x0872C019C7e50eFaEA37746D692c7540b11Be199";
+  const TOKEN_CONTRACT_ADDRESS = "0x9FE1eb84F87d83Ad87A532aD3ce034037039913B";
+  const PRESALE_CONTRACT_ADDRESS = "0x39D371fdCaabAAc1a2a052acb2F36c5D19a2cD1f";
 
   function preSale() {
     (async () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      // const address = await signer.getAddress();
-      // const token = new ethers.Contract(
-      //   TOKEN_CONTRACT_ADDRESS,
-      //   axleTokenABI.abi,
-      //   signer
-      // );
       const presale = new ethers.Contract(
         PRESALE_CONTRACT_ADDRESS,
         axlePresaleABI.abi,
         signer
       );
-      const p = await presale.deposit();
+      console.log(presale);
+      const options = { value: ethers.utils.parseEther(bnb.toString()) };
+      const p = await presale.deposit(options);
       console.log(p);
     })();
   }
