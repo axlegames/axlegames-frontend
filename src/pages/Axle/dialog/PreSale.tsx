@@ -34,7 +34,6 @@ const PreSale = (props: any) => {
   //   blockNumber: "",
   //   transactionHash: "",
   // });
-  console.log(gasFees);
 
   function onBnbChange(e: any) {
     const bnb = Number(e.target.value);
@@ -42,39 +41,22 @@ const PreSale = (props: any) => {
     setAxle(bnb * 0.12);
   }
 
-  const TOKEN_CONTRACT_ADDRESS = "0x4CAEC12488ccb5AE5625F3E2E7f2392E14ab8063";
-  const PRESALE_CONTRACT_ADDRESS = "0xdA8eFeE0944d37AE7ddEfeCa9D6D2f47663cf45e";
+  const TOKEN_CONTRACT_ADDRESS = "0x9FE1eb84F87d83Ad87A532aD3ce034037039913B";
+  const PRESALE_CONTRACT_ADDRESS = "0x39D371fdCaabAAc1a2a052acb2F36c5D19a2cD1f";
 
   function preSale() {
     (async () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      // const address = await signer.getAddress();
-      // const token = new ethers.Contract(
-      //   TOKEN_CONTRACT_ADDRESS,
-      //   axleTokenABI.abi,
-      //   signer
-      // );
       const presale = new ethers.Contract(
         PRESALE_CONTRACT_ADDRESS,
         axlePresaleABI.abi,
         signer
       );
-
-      const estimatedGasLimit = await presale.estimateGas.deposit();
-      console.log(estimatedGasLimit);
-
-      const approveTxUnsigned = await presale.populateTransaction.deposit();
-      console.log(approveTxUnsigned);
-
-      // approveTxUnsigned.chainId = 97;
-      // approveTxUnsigned.gasLimit = estimatedGasLimit;
-      // approveTxUnsigned.gasPrice = await provider.getGasPrice();
-
-      // const approveTxSigned = await signer.signTransaction(approveTxUnsigned);
-      // const submittedTx = await provider.sendTransaction(approveTxSigned);
-      // const approveReceipt = await submittedTx.wait();
-      // console.log(approveReceipt);
+      console.log(presale)
+      const options = { value: ethers.utils.parseEther(bnb.toString()) };
+      const p = await presale.deposit(options)
+      console.log(p)
     })();
   }
 
