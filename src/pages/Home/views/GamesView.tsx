@@ -51,7 +51,8 @@ const GamesView = () => {
           console.log(err);
         });
     }
-  }, [axleGames.axleGames, page]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   return (
     <Box fontFamily={"quicksand"} marginBottom={{ lg: "2rem" }}>

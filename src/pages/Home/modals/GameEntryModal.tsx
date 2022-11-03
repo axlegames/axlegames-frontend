@@ -18,11 +18,18 @@ import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
 import { theme } from "../../../config/theme.config";
 import { WordleServices } from "../../Wordle/WordleServices";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Dialog from "./Dailog";
 import AuthDialog from "../../Auth/dialogs/Dialog";
 import Signin from "../../Auth/Signin";
+import { AxleContests, HomeServices } from "../HomeServices";
+
+export enum GameStatus {
+  EXPIRED,
+  LIVE,
+  NEXT,
+}
 
 const GameEntryModal = (props: any) => {
   const toast = useToast();
@@ -32,8 +39,18 @@ const GameEntryModal = (props: any) => {
   const [loginDialog, setLoginDialog] = useState(false);
 
   const [isMobile] = useMediaQuery("(max-width: 600px)");
+  const [contest, setContests] = useState<AxleContests>();
 
-  function goToPage() {
+  useEffect(() => {
+    if (props.open) {
+      HomeServices.getAxleGameContest(props._id).then((res) => {
+        setContests(res);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.open]);
+
+  function enterContest() {
     const user = localStorage.getItem("userId");
     if (user)
       return WordleServices.enterContest({
@@ -97,16 +114,9 @@ const GameEntryModal = (props: any) => {
           <Divider my="8"></Divider>
           {props.isActive ? (
             <Flex direction={"column"} rowGap="2rem">
-              <EntryCard
-                fee={0}
-                prize={3}
-                players={10}
-                action={() => goToPage()}
-                isLive={true}
-              />
-              <EntryCard fee={10} prize={20} players={20} isLive={false} />
-              <EntryCard fee={15} prize={30} players={15} isLive={false} />
-              <EntryCard fee={20} prize={30} players={10} isLive={false} />
+              {contest?.axleContests.map((d, i) => (
+                <EntryCard key={i} {...d} action={enterContest} />
+              ))}
               <Divider />
             </Flex>
           ) : (
