@@ -73,6 +73,11 @@ const SideBarLayout = (props: SideBarProps) => {
 
   const [open, setOpen] = useState(false);
 
+  const clearConnectionAndChangeRoute = (route: string) => {
+    localStorage.removeItem("isWalletConnected");
+    navigate(route);
+  };
+
   const signin = () => {
     const address = localStorage.getItem("address");
 
@@ -187,14 +192,14 @@ const SideBarLayout = (props: SideBarProps) => {
 
       <SideBarCard>
         <SideBarButton
-          onClick={() => navigate("/")}
+          onClick={() => clearConnectionAndChangeRoute("/")}
           link={"/"}
           title={"Home"}
           icon={<HiHome size={32} />}
         />
         <SideBarButton title={"Rewards"} icon={<HiCash size={32} />} />
         <SideBarButton
-          onClick={() => navigate("/axle-token")}
+          onClick={() => clearConnectionAndChangeRoute("/axle-token")}
           title={"AXLE Token"}
           link="/axle-token"
           icon={<BiCoin size={32} />}
@@ -202,7 +207,7 @@ const SideBarLayout = (props: SideBarProps) => {
 
         <IsLoggedIn>
           <SideBarButton
-            onClick={() => navigate("/dashboard")}
+            onClick={() => clearConnectionAndChangeRoute("/dashboard")}
             link="/dashboard"
             title={"Dashboard"}
             icon={<AiOutlineDashboard size={32} />}

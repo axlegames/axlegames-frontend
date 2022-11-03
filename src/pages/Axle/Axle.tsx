@@ -1,5 +1,4 @@
 import { Flex } from "@chakra-ui/react";
-
 import MainLayout from "../../layouts/MainLayout";
 import UtilityGrid from "./component/UtilityGrid";
 import WhitePaper from "./component/WhitePaper";

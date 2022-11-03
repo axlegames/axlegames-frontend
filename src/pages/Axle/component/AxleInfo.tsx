@@ -6,7 +6,6 @@ import PreSale from "../dialog/PreSale";
 import Tag from "./Tag";
 
 const AxleInfo = () => {
-  const [open, setOpen] = useState(false);
   const token = [
     {
       name: "Name",
@@ -29,6 +28,8 @@ const AxleInfo = () => {
       value: "200 million",
     },
   ];
+
+  const [open, setOpen] = useState(false);
 
   return (
     <Grid

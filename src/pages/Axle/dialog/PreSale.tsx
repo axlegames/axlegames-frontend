@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Icon from "../../../assets/home/logos/icon.png";
 import {
   Box,
@@ -15,6 +14,10 @@ import { ethers } from "ethers";
 import axleTokenABI from "../../../abi/AxleToken.json";
 import axlePresaleABI from "../../../abi/TokenPresale.json";
 import { useEtherBalance, useEthers } from "@usedapp/core";
+
+import Dialog from "./Dialog";
+import TransactionSuccessDialog from "./TransactionSuccessDialog";
+import { useEffect, useState } from "react";
 
 declare global {
   interface Window {
@@ -45,6 +48,10 @@ const PreSale = (props: any) => {
 
   const [balance, setBalance] = useState(0);
   const [axleBalance, setAxleBalance] = useState(0);
+
+  const [success, setSuccess] = useState(false);
+  const [hash, setHash] = useState<string>("");
+
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
 
   provider.on("network", (newNetwork, oldNetwork) => {
@@ -77,7 +84,6 @@ const PreSale = (props: any) => {
 
   const connectWallet = async () => {
     try {
-      localStorage.setItem("isWalletConnected", "true");
       const signer = provider.getSigner();
       const address = await signer.getAddress();
       const token = new ethers.Contract(
@@ -90,6 +96,7 @@ const PreSale = (props: any) => {
           Number(ethers.utils.formatEther(await token.balanceOf(address))) || 0;
         setAddress(address);
         setAxleBalance(a);
+        localStorage.setItem("isWalletConnected", "true");
       }
     } catch (error: any) {
       window.ethereum.request({
@@ -159,8 +166,9 @@ const PreSale = (props: any) => {
       );
       const options = { value: ethers.utils.parseEther(bnb.toString()) };
       try {
-        const p = await presale.deposit(options);
-        console.log(p);
+        const { hash } = await presale.deposit(options);
+        setHash(hash);
+        setSuccess(true);
       } catch (err: any) {
         if (err) {
           const message = err.data.message;
@@ -184,6 +192,19 @@ const PreSale = (props: any) => {
 
   return (
     <Box px={4} py={8}>
+      <Dialog
+        close={() => setSuccess(false)}
+        children={
+          <TransactionSuccessDialog
+            hash={hash}
+            close={() => setSuccess(false)}
+            fee={100}
+          />
+        }
+        isOpen={success}
+        key={2}
+        size={"lg"}
+      />
       <Flex
         alignItems={"center"}
         justifyContent={"center"}
@@ -249,7 +270,7 @@ export default PreSale;
 // const d = {
 //   hash: "0x5f1ffcaba99fa7a26602caf58e960fd6a2e11ae595ce6cefe90c23fcaf930497",
 //   type: 0,
-//   accessList: null,
+//   accessList: null
 //   blockHash: null,
 //   blockNumber: null,
 //   transactionIndex: null,
