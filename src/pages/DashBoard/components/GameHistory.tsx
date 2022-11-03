@@ -2,6 +2,7 @@ import {
   Button,
   Flex,
   Table,
+  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -62,6 +63,7 @@ const GameHistory = () => {
           </Text>
         </Flex>
         <Button
+          display={history.history.length > 4 ? "block" : "none"}
           bg={theme.ternaryButtonColor}
           color={theme.secondaryTwoTextColor}
           size="sm"
@@ -142,6 +144,17 @@ const GameHistory = () => {
               </Tr>
             ))}
           </Tbody>
+          <TableCaption>
+            {tempHistory.history.length === 0 ? (
+              <Flex
+                width={"100%"}
+                justifyContent={"center"}
+                alignItems="center"
+              >
+                <Text textAlign={"center"}>No History</Text>
+              </Flex>
+            ) : null}
+          </TableCaption>
         </Table>
       </TableContainer>
     </Flex>

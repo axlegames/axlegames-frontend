@@ -70,6 +70,11 @@ const PreSale = (props: any) => {
     setAxle(bnb * 0.12);
   }
 
+  useEffect(() => {
+    connectWallet();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const connectWallet = async () => {
     try {
       const signer = provider.getSigner();

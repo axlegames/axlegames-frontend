@@ -4,6 +4,7 @@ import {
   Flex,
   Grid,
   Table,
+  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -54,6 +55,7 @@ const Referral = () => {
             bg={theme.ternaryButtonColor}
             color={theme.secondaryTwoTextColor}
             size="sm"
+            display={referral.referrals.length > 4 ? "block" : "none"}
           >
             View all
           </Button>
@@ -108,6 +110,17 @@ const Referral = () => {
                 </Tr>
               ))}
             </Tbody>
+            <TableCaption>
+              {referral.referrals.length === 0 ? (
+                <Flex
+                  width={"100%"}
+                  justifyContent={"center"}
+                  alignItems="center"
+                >
+                  <Text textAlign={"center"}>No History</Text>
+                </Flex>
+              ) : null}
+            </TableCaption>
           </Table>
         </TableContainer>
       </Flex>
