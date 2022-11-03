@@ -16,12 +16,6 @@ import { formatEther } from "@ethersproject/units";
 import { useEtherBalance, useEthers } from "@usedapp/core";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-declare global {
-  interface Window {
-    ethereum: import("ethers").providers.ExternalProvider;
-  }
-}
-
 interface Props {
   account: string;
   balance: string;

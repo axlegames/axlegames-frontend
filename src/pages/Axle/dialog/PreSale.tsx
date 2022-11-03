@@ -18,7 +18,7 @@ import { useEtherBalance, useEthers } from "@usedapp/core";
 
 declare global {
   interface Window {
-    ethereum: import("ethers").providers.ExternalProvider;
+    ethereum: any;
   }
 }
 
@@ -45,11 +45,20 @@ const PreSale = (props: any) => {
 
   const [balance, setBalance] = useState(0);
   const [axleBalance, setAxleBalance] = useState(0);
-  // const [state, setState] = useState({
-  //   blockHash: "",
-  //   blockNumber: "",
-  //   transactionHash: "",
-  // });
+  const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+
+  provider.on("network", (newNetwork, oldNetwork) => {
+    // When a Provider makes its initial connection, it emits a "network"
+    // event with a null oldNetwork along with the newNetwork. So, if the
+    // oldNetwork exists, it represents a changing network
+    if (oldNetwork) {
+      window.location.reload();
+    }
+  });
+
+  window.ethereum.on("accountsChanged", (accounts: any) =>
+    window.location.reload()
+  );
 
   const { activateBrowserWallet, isLoading } = useEthers();
   const { chainId } = useEthers();
@@ -62,26 +71,37 @@ const PreSale = (props: any) => {
   }
 
   const connectWallet = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    window.ethereum.sendAsync!(
-      { method: "eth_requestAccounts", params: [] },
-      async (cb, err) => {
-        const signer = provider.getSigner();
-        const address = await signer.getAddress();
-        const token = new ethers.Contract(
-          TOKEN_CONTRACT_ADDRESS,
-          axleTokenABI.abi,
-          signer
-        );
-        if (token !== null) {
-          const a: number =
-            Number(ethers.utils.formatEther(await token.balanceOf(address))) ||
-            0;
-          setAddress(address);
-          setAxleBalance(a);
-        }
+    try {
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      const token = new ethers.Contract(
+        TOKEN_CONTRACT_ADDRESS,
+        axleTokenABI.abi,
+        signer
+      );
+      if (token !== null) {
+        const a: number =
+          Number(ethers.utils.formatEther(await token.balanceOf(address))) || 0;
+        setAddress(address);
+        setAxleBalance(a);
       }
-    );
+    } catch (error: any) {
+      window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [
+          {
+            chainId: "0x61",
+            rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545"],
+            chainName: "BSC Testnet",
+            nativeCurrency: {
+              symbol: "BNB",
+              decimals: 18,
+            },
+            blockExplorerUrls: ["https://testnet.bscscan.com/"],
+          },
+        ],
+      });
+    }
   };
 
   const TOKEN_CONTRACT_ADDRESS = "0x9FE1eb84F87d83Ad87A532aD3ce034037039913B";
@@ -89,10 +109,9 @@ const PreSale = (props: any) => {
 
   const toast = useToast();
 
-  function preSale() {
+  function buyAxle() {
     (async () => {
       if (address === "") activateBrowserWallet();
-
       if (chainId !== 97)
         return toast({
           title: "Warning",
@@ -123,7 +142,9 @@ const PreSale = (props: any) => {
           position: "top",
         });
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum as ethers.providers.ExternalProvider
+      );
       const signer = provider.getSigner();
       const presale = new ethers.Contract(
         PRESALE_CONTRACT_ADDRESS,
@@ -204,7 +225,7 @@ const PreSale = (props: any) => {
           </Button>
         ) : (
           <Button
-            onClick={preSale}
+            onClick={buyAxle}
             color={"black"}
             bg={theme.primaryButtonColor}
           >
