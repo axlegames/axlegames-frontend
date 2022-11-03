@@ -67,16 +67,17 @@ const PreSale = (props: any) => {
   function onBnbChange(e: any) {
     const bnb = Number(e.target.value);
     setBnb(bnb);
-    setAxle(bnb * 0.12);
+    setAxle(bnb * 8000);
   }
 
   useEffect(() => {
-    connectWallet();
+    if (localStorage.getItem("isWalletConnected") === "true") connectWallet();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const connectWallet = async () => {
     try {
+      localStorage.setItem("isWalletConnected", "true");
       const signer = provider.getSigner();
       const address = await signer.getAddress();
       const token = new ethers.Contract(

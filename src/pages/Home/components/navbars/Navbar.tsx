@@ -95,6 +95,7 @@ const Navbar = (props: NavbarProps) => {
       console.log(error);
     } finally {
       localStorage.removeItem("address");
+      localStorage.removeItem("isWalletConnected");
       navigate("/");
       window.location.reload();
     }
