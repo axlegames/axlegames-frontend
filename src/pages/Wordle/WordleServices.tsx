@@ -19,9 +19,33 @@ export interface GuessStatus {
   inValidWord?: boolean;
 }
 
+export enum ENTRY_STATUS {
+  OK = "OK",
+  ALREADY_IN_GAME = "ALREADY_IN_GAME",
+  IN_SUFFICENT_FUNDS = "IN_SUFFICENT_FUNDS",
+  ALREADY_IN_OTHER_GAME = "ALREADY_IN_OTHER_GAME",
+  CONTEST_DOESNOT_EXIST = "CONTEST_DOESNOT_EXIST",
+  WALLET_DOESTNOT_EXIST = "WALLET_DOESTNOT_EXIST",
+  INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR",
+  ENTER_CONTEST = "ENTER_CONTEST",
+}
+
+export interface GameState {
+  _id: string;
+  user: string;
+  axleContest: string;
+  words: string[];
+}
+export interface EntryStatus {
+  status: ENTRY_STATUS;
+  gameState: GameState;
+}
+
 export class WordleServices {
-  static enterContest = async (data: any) => {
-    return await axios.post(`${gamePrefix}/enter`, data, token);
+  static enterContest = async (data: any): Promise<EntryStatus> => {
+    return await (
+      await axios.post(`${gamePrefix}/enter`, data, token)
+    ).data;
   };
 
   static getGameState = async (data: any): Promise<Status> =>

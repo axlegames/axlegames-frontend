@@ -17,29 +17,35 @@ import {
 import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
 import { theme } from "../../../config/theme.config";
-import { WordleServices } from "../../Wordle/WordleServices";
+import {
+  EntryStatus,
+  ENTRY_STATUS,
+  WordleServices,
+} from "../../Wordle/WordleServices";
 import { useEffect, useState } from "react";
 
 import Dialog from "./Dailog";
 import AuthDialog from "../../Auth/dialogs/Dialog";
 import Signin from "../../Auth/Signin";
 import { AxleContests, HomeServices } from "../HomeServices";
-
-export enum GameStatus {
-  EXPIRED,
-  LIVE,
-  NEXT,
-}
+import ConfirmDialog from "./ConfirmDialog";
+import { GameType } from "../enums/contests.enum";
 
 const GameEntryModal = (props: any) => {
   const toast = useToast();
   const navigate = useNavigate();
 
   const [dialog, setDialog] = useState(false);
+  const [confirm, setConfirm] = useState(false);
   const [loginDialog, setLoginDialog] = useState(false);
+  const [message, setMessage] = useState("");
+  const [contest, setContest] = useState({
+    _id: "",
+    fee: 0,
+  });
 
   const [isMobile] = useMediaQuery("(max-width: 600px)");
-  const [contest, setContests] = useState<AxleContests>();
+  const [contests, setContests] = useState<AxleContests>();
 
   useEffect(() => {
     if (props.open) {
@@ -50,23 +56,80 @@ const GameEntryModal = (props: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
 
-  function enterContest() {
+  const handleEntryStatus = (res: EntryStatus, fee: number) => {
+    const status = res.status.valueOf().toString();
+    const toString = (entryStatus: ENTRY_STATUS): string => {
+      return entryStatus.valueOf().toString();
+    };
+    if (status === toString(ENTRY_STATUS.OK)) {
+      setMessage(`Confirm entry, will deduct, ${fee}`);
+      setDialog(false);
+      return setConfirm(true);
+    }
+    if (status === toString(ENTRY_STATUS.ALREADY_IN_OTHER_GAME)) {
+      setMessage(
+        "Your are already playing another game, please finish it and come back"
+      );
+      return setDialog(true);
+    }
+    if (status === toString(ENTRY_STATUS.CONTEST_DOESNOT_EXIST)) {
+      setMessage("Invalid Entry");
+      return setDialog(true);
+    }
+    if (status === toString(ENTRY_STATUS.IN_SUFFICENT_FUNDS)) {
+      setMessage("Insufficent Funds");
+      return setDialog(true);
+    }
+    if (status === toString(ENTRY_STATUS.WALLET_DOESTNOT_EXIST)) {
+      setMessage("Unauthorized Access");
+      return setDialog(true);
+    }
+    if (
+      status === toString(ENTRY_STATUS.ALREADY_IN_GAME) ||
+      status === toString(ENTRY_STATUS.ENTER_CONTEST)
+    ) {
+      const gameStateId = res.gameState._id;
+      const contestId = res.gameState.axleContest;
+      setDialog(false);
+      setConfirm(false);
+      return navigate(`${props.link}/${contestId}/${gameStateId}`);
+    }
+  };
+
+  function enterContest(d: any, confirm: boolean) {
+    let fee = 0;
+    let _id = d?._id;
+
+    if (
+      d?.gameType.valueOf().toString() === GameType.CONTEST.valueOf().toString()
+    ) {
+      fee = d.axleContestInfo?.entryFee || contest.fee;
+    }
+
     const user = localStorage.getItem("userId");
-    if (user)
+
+    if (confirm === true) {
+      _id = contest._id;
+      fee = contest.fee;
+    } else {
+      setContest({
+        _id: d._id,
+        fee: fee,
+      });
+    }
+    if (confirm) setConfirm(false);
+    if (user) {
       return WordleServices.enterContest({
-        gameTypeId: props._id,
+        contestId: _id,
         userId: localStorage.getItem("userId"),
+        confirm: confirm,
       })
-        .then((res) => {
-          if (res.data.error) {
-            return setDialog(true);
-          }
-          const link = `${props.link}/${res.data.axleContest}/${res.data._id}`;
-          navigate(link);
-        })
+        .then((res) => handleEntryStatus(res, fee))
         .catch((err) => {
           console.log(err);
+          // return setDialog(true);
         });
+    }
 
     if (!isMobile) {
       const address = localStorage.getItem("address");
@@ -80,6 +143,7 @@ const GameEntryModal = (props: any) => {
           position: "top",
         });
     }
+
     return setLoginDialog(true);
   }
 
@@ -95,9 +159,19 @@ const GameEntryModal = (props: any) => {
       >
         <Dialog
           title={"Warning"}
-          description={`your are currently playing another game, finsih it and come back again.`}
+          description={message}
           open={dialog}
-          close={() => setDialog(false)}
+          close={() => {
+            setMessage("");
+            setDialog(false);
+          }}
+        />
+        <ConfirmDialog
+          open={confirm}
+          close={() => setConfirm(false)}
+          description={message}
+          enterContest={() => enterContest(null, true)}
+          title="Confirm"
         />
         <AuthDialog
           children={<Signin />}
@@ -112,10 +186,17 @@ const GameEntryModal = (props: any) => {
             <Text>{props.description}</Text>
           </Box>
           <Divider my="8"></Divider>
+
           {props.isActive ? (
             <Flex direction={"column"} rowGap="2rem">
-              {contest?.axleContests.map((d, i) => (
-                <EntryCard key={i} {...d} action={enterContest} />
+              {contests?.axleContests.map((d, i) => (
+                <Box>
+                  <EntryCard
+                    key={i}
+                    {...d}
+                    action={() => enterContest(d, false)}
+                  />
+                </Box>
               ))}
               <Divider />
             </Flex>

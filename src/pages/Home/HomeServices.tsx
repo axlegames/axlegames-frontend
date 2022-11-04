@@ -1,12 +1,7 @@
 import axios from "axios";
 
 import { gamePrefix } from "../../config";
-import { GameStatus } from "./modals/GameEntryModal";
-
-export enum GameType {
-  PRACTICE,
-  CONTEST,
-}
+import { GameType, GameStatus } from "./enums/contests.enum";
 
 export interface AxleGame {
   _id: string;

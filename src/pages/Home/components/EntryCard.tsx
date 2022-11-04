@@ -1,13 +1,22 @@
 import { Box, Text, Grid, GridItem, Button, Flex } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-import { AxleContest, GameType } from "../HomeServices";
-import { GameStatus } from "../modals/GameEntryModal";
+import { GameType, GameStatus } from "../enums/contests.enum";
+import { AxleContest } from "../HomeServices";
 
 const EntryCard = (props: AxleContest) => {
+  const toString = (gameStatus: GameStatus) => {
+    return gameStatus.valueOf().toString();
+  };
+  const status = props.status.valueOf().toString();
+
+  const toStringGameType = (gameType: GameType) => {
+    return gameType.valueOf().toString();
+  };
+  const gameType = props.status.valueOf().toString();
+
   return (
     <Box position="relative" boxShadow={"md"}>
-      {Number(props.gameType.valueOf()) ===
-      Number(GameType.PRACTICE.valueOf()) ? (
+      {gameType === toStringGameType(GameType.PRACTICE) ? (
         <Text
           zIndex={1}
           top={-3}
@@ -64,8 +73,7 @@ const EntryCard = (props: AxleContest) => {
           </GridItem>
           <GridItem>
             <Flex justifyContent={"flex-end"}>
-              {Number(props.status.valueOf()) ===
-              Number(GameStatus.LIVE.valueOf()) ? (
+              {status === toString(GameStatus.LIVE) ? (
                 <Button
                   size="sm"
                   onClick={() => props.action()}
@@ -78,15 +86,13 @@ const EntryCard = (props: AxleContest) => {
                 </Button>
               ) : null}
 
-              {Number(props.status.valueOf()) ===
-              Number(GameStatus.NEXT.valueOf()) ? (
+              {status === toString(GameStatus.NEXT) ? (
                 <Button size="sm" width={"32"} color="black">
                   Comingsoon
                 </Button>
               ) : null}
 
-              {Number(props.status.valueOf()) ===
-              Number(GameStatus.EXPIRED.valueOf()) ? (
+              {status === toString(GameStatus.EXPIRED) ? (
                 <Button size="sm" disabled={true} width={"32"} color="black">
                   Expired
                 </Button>
