@@ -3,7 +3,6 @@ import { theme } from "../../config/theme.config";
 import MainLayout from "../../layouts/MainLayout";
 import ProfileCard from "./components/ProfileCard";
 import Rewards from "./components/Rewards";
-import Referral from "./components/Referral";
 import Challenges from "./components/Challenges";
 import GameHistory from "./components/GameHistory";
 
@@ -43,11 +42,9 @@ const Dashboard = () => {
             rowGap="1rem"
             borderRadius="2xl"
           >
-            <Challenges />
             <GameHistory />
+            <Challenges />
           </Grid>
-
-          <Referral />
         </Flex>
       </Box>
     </MainLayout>

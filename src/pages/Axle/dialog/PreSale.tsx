@@ -49,7 +49,7 @@ const PreSale = (props: any) => {
   const [balance, setBalance] = useState(0);
   const [axleBalance, setAxleBalance] = useState(0);
 
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(true);
   const [hash, setHash] = useState<string>("");
 
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -206,6 +206,7 @@ const PreSale = (props: any) => {
         size={"lg"}
       />
       <Flex
+        display={success ? "none" : "flex"}
         alignItems={"center"}
         justifyContent={"center"}
         direction={"column"}
@@ -223,10 +224,10 @@ const PreSale = (props: any) => {
           <Tag name="1 BNB = 8000 AXLE" value="Listing price : $0.015" />
         </Flex>
         {address !== "" ? (
-          <Flex direction={"column"}>
-            <Text>Connected to {address}</Text>
-            <Text>BNB Bal : {!isLoading ? `${balance}` : `...`} </Text>
-            <Text>AXLE Bal : {axleBalance} </Text>
+          <Flex textAlign={"center"} direction={"column"}>
+            <Text>Connected to</Text>
+            <Text fontSize={"sm"}>{address}</Text>
+            <Text>Min 0.1 BNB | Max 1.99 BNB</Text>
           </Flex>
         ) : null}
         <Input
@@ -235,13 +236,13 @@ const PreSale = (props: any) => {
           min={0.1}
           type={"number"}
         ></Input>
-        <Flex direction="column">
+        <Flex textAlign={"center"} direction="column">
           <Text>
             {bnb} BNB for {axle} AXLE
           </Text>
-          <Text></Text>
+          <Text>BNB Bal : {!isLoading ? `${balance}` : `...`} </Text>
+          <Text>AXLE Bal : {axleBalance} </Text>
         </Flex>
-        <Text>Min 0.1 BNB | Max 1.99 BNB</Text>
         {address === "" ? (
           <Button
             onClick={connectWallet}

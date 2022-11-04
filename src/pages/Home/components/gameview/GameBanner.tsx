@@ -12,7 +12,10 @@ const GameBanner = (props: any) => {
           fontSize={{ base: "1xl", lg: "3xl" }}
           fontWeight="bold"
         >
-          Welcome to Axle Games
+          Welcome{" "}
+          {localStorage.getItem("username")
+            ? localStorage.getItem("username")
+            : "to Axle Games"}
         </Text>
         <Text
           fontFamily={"quicksand"}

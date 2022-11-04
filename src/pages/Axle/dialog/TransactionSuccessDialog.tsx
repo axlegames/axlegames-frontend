@@ -4,7 +4,7 @@ import { theme } from "../../../config/theme.config";
 
 const TransactionSuccessDialog = (props: any) => {
   return (
-    <Box display={"flex"} py={8} flexDirection="column" rowGap={"1rem"}>
+    <Box display={"flex"} py={16} px={0} flexDirection="column" rowGap={"1rem"}>
       <Flex
         direction={"column"}
         justifyContent="center"
@@ -18,8 +18,14 @@ const TransactionSuccessDialog = (props: any) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Box cursor={"pointer"} transition={`100ms all ease-in`}>
-            check transaction on blockchain
+          <Box
+            cursor={"pointer"}
+            transition={`100ms all ease-in`}
+            textAlign="center"
+          >
+            <Text as="u" textUnderlineOffset={"unset"}>
+              check transaction on blockchain
+            </Text>
           </Box>
         </a>
       </Flex>

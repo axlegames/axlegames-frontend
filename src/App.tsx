@@ -9,6 +9,7 @@ import Page403 from "./pages/Auth/Page403";
 import Axle from "./pages/Axle/Axle";
 import Dashboard from "./pages/DashBoard/DashBoard";
 import Profile from "./pages/DashBoard/pages/Profile";
+import ReferralLayout from "./pages/Referral/ReferralLayout";
 // import PrivateRoute from "./config/protected.router";
 
 export const App = () => {
@@ -27,6 +28,7 @@ export const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/axle-token" element={<Axle />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/referrals" element={<ReferralLayout />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

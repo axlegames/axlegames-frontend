@@ -20,9 +20,11 @@ import { MdStore, MdInfo } from "react-icons/md/index";
 import {
   HiHome,
   HiGlobe,
-  HiCash,
   HiOutlineViewList,
   HiDocument,
+  HiUser,
+  HiUsers,
+  HiCreditCard,
 } from "react-icons/hi/index";
 
 import { BiCoin } from "react-icons/bi";
@@ -190,32 +192,58 @@ const SideBarLayout = (props: SideBarProps) => {
         src={Logo}
       ></Image>
 
-      <SideBarCard>
-        <SideBarButton
-          onClick={() => clearConnectionAndChangeRoute("/")}
-          link={"/"}
-          title={"Home"}
-          icon={<HiHome size={32} />}
-        />
-        <SideBarButton title={"Rewards"} icon={<HiCash size={32} />} />
-        <SideBarButton
-          onClick={() => clearConnectionAndChangeRoute("/axle-token")}
-          title={"AXLE Token"}
-          link="/axle-token"
-          icon={<BiCoin size={32} />}
-        />
-
-        <IsLoggedIn>
+      <IsLoggedIn>
+        <SideBarCard>
+          <SideBarButton
+            onClick={() => clearConnectionAndChangeRoute("/")}
+            link={"/"}
+            title={"Home"}
+            icon={<HiHome size={32} />}
+          />
           <SideBarButton
             onClick={() => clearConnectionAndChangeRoute("/dashboard")}
             link="/dashboard"
             title={"Dashboard"}
             icon={<AiOutlineDashboard size={32} />}
           />
-        </IsLoggedIn>
-      </SideBarCard>
+          <SideBarButton
+            onClick={() => clearConnectionAndChangeRoute("/my-rewards")}
+            link={"/my-rewards"}
+            title={"My Reward"}
+            icon={<HiCreditCard size={32} />}
+          />
+          <SideBarButton
+            onClick={() => clearConnectionAndChangeRoute("/referrals")}
+            link={"/referral"}
+            title={"Referral"}
+            icon={<HiUsers size={32} />}
+          />
+
+          <SideBarButton
+            onClick={() => clearConnectionAndChangeRoute("/referrals")}
+            link={"/profile"}
+            title={"Profile"}
+            icon={<HiUser size={32} />}
+          />
+        </SideBarCard>
+      </IsLoggedIn>
 
       <SideBarCard>
+        <IsNotLoggedIn>
+          <SideBarButton
+            onClick={() => clearConnectionAndChangeRoute("/")}
+            link={"/"}
+            title={"Home"}
+            icon={<HiHome size={32} />}
+          />
+        </IsNotLoggedIn>
+
+        <SideBarButton
+          onClick={() => clearConnectionAndChangeRoute("/axle-token")}
+          title={"AXLE Token"}
+          link="/axle-token"
+          icon={<BiCoin size={32} />}
+        />
         <SideBarButton
           isCommingSoon={true}
           title={"AxleVerse"}

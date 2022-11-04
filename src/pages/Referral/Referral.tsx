@@ -14,8 +14,11 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { theme } from "../../../config/theme.config";
-import { DashBoardServices, ReferralModel } from "../DashBoardServices";
+import { theme } from "../../config/theme.config";
+import {
+  DashBoardServices,
+  ReferralModel,
+} from "../DashBoard/DashBoardServices";
 
 const Referral = () => {
   useEffect(() => {
