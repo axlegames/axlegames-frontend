@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import { theme } from "../../config/theme.config";
 import MainLayout from "../../layouts/MainLayout";
 import ProfileCard from "./components/ProfileCard";
@@ -9,15 +9,6 @@ import GameHistory from "./components/GameHistory";
 const Dashboard = () => {
   return (
     <MainLayout>
-      <Text
-        px={6}
-        fontSize={"3xl"}
-        fontWeight="bold"
-        color={theme.primaryTextColor}
-        fontFamily={"quicksand"}
-      >
-        Welcome! akashmrc98
-      </Text>
       <Box
         bg={theme.fgColor}
         p={6}
