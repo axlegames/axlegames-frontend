@@ -1,8 +1,9 @@
-import { Box, Button, Flex, Grid, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { theme } from "../../../config/theme.config";
 import Dialog from "../dialog/Dialog";
 import PreSale from "../dialog/PreSale";
+import NeuButton from "./NeuButton";
 import Tag from "./Tag";
 
 const AxleInfo = () => {
@@ -89,20 +90,14 @@ const AxleInfo = () => {
               width="100%"
               justifyContent={"center"}
             >
-              <Button
-                bg={theme.secondaryButtonColor}
-                onClick={() => setOpen(true)}
+              <NeuButton onClick={() => setOpen(true)} label="Buy now" />
+              <a
+                href="https://testnet.bscscan.com/address/0x9FE1eb84F87d83Ad87A532aD3ce034037039913B"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Buy now
-              </Button>
-
-              <Button
-                bg={theme.ternaryButtonColor}
-                color={theme.secondaryTwoTextColor}
-                onClick={() => setOpen(true)}
-              >
-                Contract
-              </Button>
+                <NeuButton label="Contract" />
+              </a>
             </Flex>
           </Flex>
         </Flex>

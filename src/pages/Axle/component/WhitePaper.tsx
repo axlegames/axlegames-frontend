@@ -1,7 +1,8 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
 import WP from "../../../assets/gamein/whitepaper.png";
+import NeuButton from "./NeuButton";
 
 const WhitePaper = (props: any) => {
   return (
@@ -26,7 +27,7 @@ const WhitePaper = (props: any) => {
         </Box>
         <Flex
           p={8}
-          bg={theme.bgColor}
+          bg={theme.fgColor}
           borderRadius="xl"
           rowGap={".5rem"}
           direction={"column"}
@@ -38,21 +39,14 @@ const WhitePaper = (props: any) => {
             GameInfinity project, tokenomics, roadmap and whitepaper is designed
             to serve the best crypto project to all the participants.
           </Text>
-          <Button
-            color={`black`}
-            bg={theme.primaryButtonColor}
-            mt="4"
-            width={"44"}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ width: "100%" }}
+            href="https://axlegames.s3.ap-south-1.amazonaws.com/AxleGames_EconomicsPaper.pdf"
           >
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ width: "100%" }}
-              href="https://axlegames.s3.ap-south-1.amazonaws.com/AxleGames_EconomicsPaper.pdf"
-            >
-              Economics Paper
-            </a>
-          </Button>
+            <NeuButton label={`Economics Paper`}></NeuButton>
+          </a>
         </Flex>
       </Flex>
     </Box>

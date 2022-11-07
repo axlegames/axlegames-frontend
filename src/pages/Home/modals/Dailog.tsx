@@ -22,7 +22,7 @@ interface Props {
 const Dialog = (props: Props) => {
   return (
     <Modal isCentered={true} isOpen={props.open} onClose={() => props.close()}>
-      <ModalOverlay />
+      <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
       <ModalContent
         borderRadius={"xl"}
         bg={theme.fgColor}

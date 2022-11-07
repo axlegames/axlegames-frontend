@@ -8,6 +8,7 @@ interface Props {
 const Timer = (props: Props) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const getTime = () => {
     const time = Date.parse(props.deadline) - new Date().getTime();
@@ -16,6 +17,9 @@ const Timer = (props: Props) => {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 1500);
     const interval = setInterval(() => getTime(), 1000);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,7 +33,9 @@ const Timer = (props: Props) => {
 
   return (
     <Box>
-      <Text>{isStarted ? timer : null}</Text>
+      <Text>
+        {isLoaded ? <Box>{isStarted ? timer : null}</Box> : `Loading...`}
+      </Text>
     </Box>
   );
 };

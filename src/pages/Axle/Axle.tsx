@@ -7,7 +7,7 @@ import AxleHeader from "./component/AxleHeader";
 
 const Axle = () => {
   return (
-    <MainLayout>
+    <MainLayout isNavbarHidden={true}>
       <Flex
         mt={4}
         borderRadius={"xl"}

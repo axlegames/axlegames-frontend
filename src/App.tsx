@@ -30,7 +30,10 @@ export const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/referrals" element={<ReferralLayout />} />
           <Route path="/profile" element={<Profile />} />
+
           <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
+          <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
+
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/403" element={<Page403 />} />
         </Routes>

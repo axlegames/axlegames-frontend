@@ -38,6 +38,7 @@ const GameEntryModal = (props: any) => {
   const [dialog, setDialog] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [loginDialog, setLoginDialog] = useState(false);
+  const [header, setHeader] = useState("");
   const [message, setMessage] = useState("");
   const [contest, setContest] = useState({
     _id: "",
@@ -62,11 +63,15 @@ const GameEntryModal = (props: any) => {
       return entryStatus.valueOf().toString();
     };
     if (status === toString(ENTRY_STATUS.OK)) {
-      setMessage(`Confirm entry, will deduct, ${fee}`);
+      setHeader("Confirm Entry");
+      setMessage(
+        `By confirming entry ${fee} AXLE, will be deducted from your wallet.`
+      );
       setDialog(false);
       return setConfirm(true);
     }
     if (status === toString(ENTRY_STATUS.ALREADY_IN_OTHER_GAME)) {
+      setHeader("Oops!");
       setMessage(
         "Your are already playing another game, please finish it and come back"
       );
@@ -75,21 +80,25 @@ const GameEntryModal = (props: any) => {
     if (
       status === toString(ENTRY_STATUS.ALREADY_PARTICIPATED_IN_THIS_CONTEST)
     ) {
+      setHeader("Oops!!");
       setMessage(
         "You already participated in this contest, try another contest"
       );
       return setDialog(true);
     }
     if (status === toString(ENTRY_STATUS.CONTEST_DOESNOT_EXIST)) {
-      setMessage("Invalid Entry");
+      setHeader("Oops!!");
+      setMessage("Invalid entry, contest does not exist");
       return setDialog(true);
     }
     if (status === toString(ENTRY_STATUS.IN_SUFFICENT_FUNDS)) {
-      setMessage("Insufficent Funds");
+      setHeader("Insufficent Funds");
+      setMessage("Please, add some funds to wallet, for entering into game");
       return setDialog(true);
     }
     if (status === toString(ENTRY_STATUS.WALLET_DOESTNOT_EXIST)) {
-      setMessage("Unauthorized Access");
+      setHeader("Unauthorized Access");
+      setMessage("Oops! unauthorized access, please retry again");
       return setDialog(true);
     }
     if (
@@ -135,7 +144,6 @@ const GameEntryModal = (props: any) => {
         .then((res) => handleEntryStatus(res, fee))
         .catch((err) => {
           console.log(err);
-          // return setDialog(true);
         });
     }
 
@@ -157,7 +165,7 @@ const GameEntryModal = (props: any) => {
 
   return (
     <Modal isOpen={props.open} onClose={props.close}>
-      <ModalOverlay />
+      <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
       <ModalContent
         borderRadius={"xl"}
         bg={theme.fgColor}
@@ -166,7 +174,7 @@ const GameEntryModal = (props: any) => {
         fontWeight="bold"
       >
         <Dialog
-          title={"Warning"}
+          title={header}
           description={message}
           open={dialog}
           close={() => {
@@ -179,7 +187,7 @@ const GameEntryModal = (props: any) => {
           close={() => setConfirm(false)}
           description={message}
           enterContest={() => enterContest(null, true)}
-          title="Confirm"
+          title={header}
         />
         <AuthDialog
           children={<Signin />}

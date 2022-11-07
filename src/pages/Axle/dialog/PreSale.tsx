@@ -1,13 +1,5 @@
 import Icon from "../../../assets/home/logos/icon.png";
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Input,
-  Text,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Flex, Image, Input, Text, useToast } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import { ethers } from "ethers";
 
@@ -18,6 +10,7 @@ import { useEtherBalance, useEthers } from "@usedapp/core";
 import Dialog from "./Dialog";
 import TransactionSuccessDialog from "./TransactionSuccessDialog";
 import { useEffect, useState } from "react";
+import NeuButton from "../component/NeuButton";
 
 declare global {
   interface Window {
@@ -49,7 +42,7 @@ const PreSale = (props: any) => {
   const [balance, setBalance] = useState(0);
   const [axleBalance, setAxleBalance] = useState(0);
 
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
   const [hash, setHash] = useState<string>("");
 
   const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -244,21 +237,9 @@ const PreSale = (props: any) => {
           <Text>AXLE Bal : {axleBalance} </Text>
         </Flex>
         {address === "" ? (
-          <Button
-            onClick={connectWallet}
-            color={"black"}
-            bg={theme.primaryButtonColor}
-          >
-            Connect Wallet & Buy
-          </Button>
+          <NeuButton onClick={connectWallet} label="Connect Wallet"></NeuButton>
         ) : (
-          <Button
-            onClick={buyAxle}
-            color={"black"}
-            bg={theme.primaryButtonColor}
-          >
-            Buy now
-          </Button>
+          <NeuButton onClick={buyAxle} label="Buy Axle"></NeuButton>
         )}
       </Flex>
     </Box>

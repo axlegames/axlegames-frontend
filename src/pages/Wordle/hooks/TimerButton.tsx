@@ -14,6 +14,7 @@ const TimerButton = (props: Props) => {
   const [started, setStarted] = useState(false);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const isPracticeContest =
     props.gameType === GameType.PRACTICE.valueOf().toString();
@@ -34,6 +35,9 @@ const TimerButton = (props: Props) => {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 1500);
     const interval = setInterval(() => isExpired(), 1000);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,7 +47,7 @@ const TimerButton = (props: Props) => {
     <Box>
       {expired && started ? (
         <Button disabled size="sm" width={"32"} color="black">
-          Expired
+          {!isLoaded ? `Loading...` : "Expired"}
         </Button>
       ) : null}
 
@@ -54,11 +58,11 @@ const TimerButton = (props: Props) => {
           size="sm"
           width={"32"}
         >
-          Play
+          {!isLoaded ? `Loading...` : "Play"}
         </Button>
       ) : !expired ? (
         <Button size="sm" width={"32"} color="black">
-          Starts in {`${minutes}m ${seconds}s`}
+          {!isLoaded ? `Loading...` : `Starts in ${minutes}m ${seconds}s`}
         </Button>
       ) : null}
     </Box>

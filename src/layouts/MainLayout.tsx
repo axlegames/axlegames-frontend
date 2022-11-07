@@ -9,6 +9,8 @@ const MainLayout = (props: any) => {
   const [open, setOpen] = useState(false);
   const scrollUpFun = () => ref.current.scroll({ top: 0, behavior: "smooth" });
   const ref = useRef<any>(null);
+  console.log(props);
+  const isNavbarHidden = props.isNavbarHidden || false;
 
   return (
     <Box maxHeight={"100vh"} overflow="hidden" bg={theme.bgColor}>
@@ -39,11 +41,13 @@ const MainLayout = (props: any) => {
           overflowY="scroll"
           ref={ref}
         >
-          <Navbar
-            open={open}
-            onOpen={() => setOpen(true)}
-            onClose={() => setOpen(false)}
-          />
+          {!isNavbarHidden ? (
+            <Navbar
+              open={open}
+              onOpen={() => setOpen(true)}
+              onClose={() => setOpen(false)}
+            />
+          ) : null}
           {props.children}
         </GridItem>
       </Grid>
