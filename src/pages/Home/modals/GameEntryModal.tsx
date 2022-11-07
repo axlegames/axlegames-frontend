@@ -72,6 +72,14 @@ const GameEntryModal = (props: any) => {
       );
       return setDialog(true);
     }
+    if (
+      status === toString(ENTRY_STATUS.ALREADY_PARTICIPATED_IN_THIS_CONTEST)
+    ) {
+      setMessage(
+        "You already participated in this contest, try another contest"
+      );
+      return setDialog(true);
+    }
     if (status === toString(ENTRY_STATUS.CONTEST_DOESNOT_EXIST)) {
       setMessage("Invalid Entry");
       return setDialog(true);
@@ -190,12 +198,8 @@ const GameEntryModal = (props: any) => {
           {props.isActive ? (
             <Flex direction={"column"} rowGap="2rem">
               {contests?.axleContests.map((d, i) => (
-                <Box>
-                  <EntryCard
-                    key={i}
-                    {...d}
-                    action={() => enterContest(d, false)}
-                  />
+                <Box key={i}>
+                  <EntryCard {...d} action={() => enterContest(d, false)} />
                 </Box>
               ))}
               <Divider />

@@ -22,9 +22,12 @@ import {
 
 const Referral = () => {
   useEffect(() => {
-    DashBoardServices.getReferralAndReferralCode().then((res) =>
-      setReferral(res)
-    );
+    DashBoardServices.getReferralAndReferralCode()
+      .then((res) => {
+        console.log(res);
+        setReferral(res);
+      })
+      .catch((err) => console.log(err));
   }, []);
   const [referral, setReferral] = useState<ReferralModel>({
     referralCode: "",
@@ -40,11 +43,11 @@ const Referral = () => {
       p={4}
       shadow="xl"
       borderRadius={"xl"}
-      bg={theme.bgColor}
       aria-expanded="false"
       display={{ base: "none", md: "grid" }}
+      bg={theme.bgColor}
     >
-      <Flex direction="column" justifyContent={"flex-start"}>
+      <Flex bg={theme.bgColor} direction="column" justifyContent={"flex-start"}>
         <Flex justifyContent={"space-between"}>
           <Flex fontWeight={"bold"} direction={"column"}>
             <Text fontSize={"3xl"} color={theme.primaryTextColor}>

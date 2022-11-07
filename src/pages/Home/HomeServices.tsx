@@ -18,6 +18,8 @@ export interface AxleGames {
 
 export interface AxleContests {
   axleContests: Array<AxleContest>;
+  error: boolean;
+  now: string;
 }
 
 export interface AxleContest {
@@ -32,9 +34,9 @@ export interface AxleContest {
 
 export interface AxleContestInfo {
   _id: string;
-  startsOn: Date;
-  opensAt: Date;
-  expiresAt: Date;
+  startsOn: string;
+  opensAt: string;
+  expiresAt: string;
   entryFee: number;
   prizePool: number;
 }
@@ -47,9 +49,9 @@ export class HomeServices {
   };
 
   static getAxleGameContest = async (
-    contestId: string
+    gameTypeId: string
   ): Promise<AxleContests> => {
-    const response = await axios.get(`${gamePrefix}/contest/${contestId}`);
+    const response = await axios.get(`${gamePrefix}/contest/${gameTypeId}`);
     let axleGames: AxleContests = response.data;
     return axleGames;
   };

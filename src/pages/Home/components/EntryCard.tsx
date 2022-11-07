@@ -1,22 +1,31 @@
-import { Box, Text, Grid, GridItem, Button, Flex } from "@chakra-ui/react";
+import { Box, Text, Grid, GridItem, Flex } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-import { GameType, GameStatus } from "../enums/contests.enum";
+import Timer from "../../Wordle/hooks/Timer";
+import TimerButton from "../../Wordle/hooks/TimerButton";
+import { GameType } from "../enums/contests.enum";
 import { AxleContest } from "../HomeServices";
 
 const EntryCard = (props: AxleContest) => {
-  const toString = (gameStatus: GameStatus) => {
-    return gameStatus.valueOf().toString();
-  };
-  const status = props.status.valueOf().toString();
-
   const toStringGameType = (gameType: GameType) => {
     return gameType.valueOf().toString();
   };
-  const gameType = props.status.valueOf().toString();
+  const gameType = props.gameType.valueOf().toString();
+  const type = gameType === toStringGameType(GameType.PRACTICE);
+
+  const TimeComponent = () => {
+    return !type ? (
+      <Box>
+        <Timer
+          deadline={props.axleContestInfo?.expiresAt || ""}
+          startsOn={props.axleContestInfo?.startsOn || ""}
+        />
+      </Box>
+    ) : null;
+  };
 
   return (
     <Box position="relative" boxShadow={"md"}>
-      {gameType === toStringGameType(GameType.PRACTICE) ? (
+      {type ? (
         <Text
           zIndex={1}
           top={-3}
@@ -48,6 +57,21 @@ const EntryCard = (props: AxleContest) => {
         </Text>
       )}
       <Box
+        zIndex={1}
+        bottom={-3}
+        mx={"auto"}
+        left={"50%"}
+        my={1}
+        bg={theme.ternaryButtonColor}
+        color={theme.primaryTwoTextColor}
+        px={2}
+        borderRadius="sm"
+        position="absolute"
+        boxShadow={`0px 0px 2px ${theme.primaryTwoTextColor}`}
+      >
+        <TimeComponent />
+      </Box>
+      <Box
         boxShadow={`0px 0px 4px ${theme.secondaryTwoTextColor}`}
         borderTopRadius="lg"
         p={"4"}
@@ -73,30 +97,12 @@ const EntryCard = (props: AxleContest) => {
           </GridItem>
           <GridItem>
             <Flex justifyContent={"flex-end"}>
-              {status === toString(GameStatus.LIVE) ? (
-                <Button
-                  size="sm"
-                  onClick={() => props.action()}
-                  variant={"ghost"}
-                  color="black"
-                  bg={"green.400"}
-                  w={"32"}
-                >
-                  Play
-                </Button>
-              ) : null}
-
-              {status === toString(GameStatus.NEXT) ? (
-                <Button size="sm" width={"32"} color="black">
-                  Comingsoon
-                </Button>
-              ) : null}
-
-              {status === toString(GameStatus.EXPIRED) ? (
-                <Button size="sm" disabled={true} width={"32"} color="black">
-                  Expired
-                </Button>
-              ) : null}
+              <TimerButton
+                gameType={props.gameType.valueOf().toString()}
+                action={props.action}
+                deadline={props.axleContestInfo?.expiresAt || ""}
+                startsIn={props.axleContestInfo?.startsOn || ""}
+              />
             </Flex>
           </GridItem>
         </Grid>

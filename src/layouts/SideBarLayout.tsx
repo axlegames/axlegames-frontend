@@ -220,7 +220,7 @@ const SideBarLayout = (props: SideBarProps) => {
           />
 
           <SideBarButton
-            onClick={() => clearConnectionAndChangeRoute("/referrals")}
+            onClick={() => clearConnectionAndChangeRoute("/profile")}
             link={"/profile"}
             title={"Profile"}
             icon={<HiUser size={32} />}
