@@ -21,10 +21,10 @@ const Dialog = (props: Props) => {
       isOpen={props.isOpen}
       onClose={() => props.close()}
     >
-      <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
+      <ModalOverlay backdropFilter="blur(5px) hue-rotate(0deg)" />
       <ModalContent
         borderRadius={"xl"}
-        bg={theme.fgColor}
+        bg={"#262442"}
         color={theme.highLightColor}
         fontFamily={"quicksand"}
         fontWeight="bold"

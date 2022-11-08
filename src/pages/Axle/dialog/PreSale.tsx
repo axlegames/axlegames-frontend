@@ -221,7 +221,7 @@ const PreSale = (props: any) => {
             <Text fontSize={"sm"} >{address}</Text>
           </Flex>
         ) : null}
-        <Input placeholder="value"
+        <Input placeholder="value (BNB)"
           onChange={onBnbChange}
           max={1.99}
           min={0.1}
