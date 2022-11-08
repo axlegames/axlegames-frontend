@@ -33,19 +33,21 @@ const WhitePaper = (props: any) => {
             GameInfinity project, tokenomics, roadmap and whitepaper is designed
             to serve the best crypto project to all the participants.
           </Text>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ width: "100%" }}
-            href="https://axlegames.s3.ap-south-1.amazonaws.com/AxleGames_EconomicsPaper.pdf"
-          >
-            <NeuButton
-              onClick={() => {}}
-              bg={"#A34400"}
-              shadow = {"#FF7C1F"}
-              label={`Economics Paper`}
-            ></NeuButton>
-          </a>
+          <Box mt={3}>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ width: "100%" }}
+              href="https://axlegames.s3.ap-south-1.amazonaws.com/AxleGames_EconomicsPaper.pdf"
+            >
+              <NeuButton
+                onClick={() => {}}
+                bg={"#A34400"}
+                shadow={"#FF7C1F"}
+                label={`Economics Paper`}
+              ></NeuButton>
+            </a>
+          </Box>
         </Flex>
       </Flex>
     </Box>
