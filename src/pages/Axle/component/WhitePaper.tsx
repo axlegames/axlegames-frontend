@@ -41,7 +41,8 @@ const WhitePaper = (props: any) => {
           >
             <NeuButton
               onClick={() => {}}
-              bg={theme.bgColor}
+              bg={"#A34400"}
+              shadow = {"#FF7C1F"}
               label={`Economics Paper`}
             ></NeuButton>
           </a>
