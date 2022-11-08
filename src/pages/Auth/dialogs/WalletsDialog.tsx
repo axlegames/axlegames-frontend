@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Flex, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
-import NEAR from "../../../assets/logos/NEAR.svg";
+import NEAR from "../../../assets/logos/near 2.svg";
 import MetaMask from "../../../assets/logos/metamask.svg";
 import WalletConnect from "../../../assets/logos/walletconnect.svg";
 import TrustWallet from "../../../assets/logos/trustwallet.svg";

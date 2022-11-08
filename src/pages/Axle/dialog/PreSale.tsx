@@ -56,10 +56,6 @@ const PreSale = (props: any) => {
     }
   });
 
-  window.ethereum.on("accountsChanged", (accounts: any) =>
-    window.location.reload()
-  );
-
   const { activateBrowserWallet, isLoading } = useEthers();
   const { chainId } = useEthers();
   const etherBalance = useEtherBalance(address);
@@ -71,7 +67,12 @@ const PreSale = (props: any) => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem("isWalletConnected") === "true") connectWallet();
+    if (localStorage.getItem("isWalletConnected") === "true") {
+      connectWallet();
+      window.ethereum.on("accountsChanged", (accounts: any) => {
+        if (accounts.length !== 0) window.location.reload();
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
