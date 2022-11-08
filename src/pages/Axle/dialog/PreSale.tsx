@@ -238,13 +238,14 @@ const PreSale = (props: any) => {
         </Flex>
         {address === "" ? (
           <NeuButton
-            bg={theme.fgColor}
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
             onClick={connectWallet}
             label="Connect Wallet"
           ></NeuButton>
         ) : (
           <NeuButton
-            bg={theme.fgColor}
+            bg={theme.primaryTwoTextColor}
             onClick={buyAxle}
             label="Buy Axle"
           ></NeuButton>

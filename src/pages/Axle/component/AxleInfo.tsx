@@ -91,7 +91,8 @@ const AxleInfo = () => {
               justifyContent={"center"}
             >
               <NeuButton
-                bg={theme.fgColor}
+                bg={"#A34400"}
+                shadow={"#FF7C1F"}
                 onClick={() => setOpen(true)}
                 label="Buy now"
               />
@@ -102,7 +103,8 @@ const AxleInfo = () => {
               >
                 <NeuButton
                   onClick={() => {}}
-                  bg={theme.ternaryButtonColor}
+                  bg={"#40464F"}
+                shadow={"#535A65"}
                   label="Contract"
                 />
               </a>
