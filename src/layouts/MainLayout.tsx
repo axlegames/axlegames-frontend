@@ -9,7 +9,6 @@ const MainLayout = (props: any) => {
   const [open, setOpen] = useState(false);
   const scrollUpFun = () => ref.current.scroll({ top: 0, behavior: "smooth" });
   const ref = useRef<any>(null);
-  console.log(props);
   const isNavbarHidden = props.isNavbarHidden || false;
 
   return (

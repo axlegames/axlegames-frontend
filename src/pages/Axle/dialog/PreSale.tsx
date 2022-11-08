@@ -11,6 +11,7 @@ import Dialog from "./Dialog";
 import TransactionSuccessDialog from "./TransactionSuccessDialog";
 import { useEffect, useState } from "react";
 import NeuButton from "../component/NeuButton";
+import { sign } from "crypto";
 
 declare global {
   interface Window {
@@ -78,6 +79,11 @@ const PreSale = (props: any) => {
   const connectWallet = async () => {
     try {
       const signer = provider.getSigner();
+      if (signer._address === null) {
+        await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+      }
       const address = await signer.getAddress();
       const token = new ethers.Contract(
         TOKEN_CONTRACT_ADDRESS,

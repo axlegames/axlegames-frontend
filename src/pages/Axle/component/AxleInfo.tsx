@@ -82,7 +82,7 @@ const AxleInfo = () => {
           </Text>
           <Flex my={4} rowGap={".5rem"} direction={"column"}>
             {token.map((t, i) => (
-              <Tag name={t.name} value={t.value} />
+              <Tag key={i} name={t.name} value={t.value} />
             ))}
             <Flex
               pt={{ base: "4" }}
@@ -104,7 +104,7 @@ const AxleInfo = () => {
                 <NeuButton
                   onClick={() => {}}
                   bg={"#40464F"}
-                shadow={"#535A65"}
+                  shadow={"#535A65"}
                   label="Contract"
                 />
               </a>
