@@ -207,8 +207,9 @@ const PreSale = (props: any) => {
       >
         <Image p={8} src={Icon} />
         <Box textAlign={"center"}>
-          <Text fontWeight={"bold"} fontSize="xl">Join the AXLE Presale</Text>
-          
+          <Text fontWeight={"bold"} fontSize="xl">
+            Join the AXLE Presale
+          </Text>
         </Box>
         <Flex direction={"column"}>
           <Tag name="Buy AXLE" value="Listing price = $0.015" />
@@ -218,10 +219,11 @@ const PreSale = (props: any) => {
         {address !== "" ? (
           <Flex textAlign={"center"} direction={"column"}>
             <Text>Connected to</Text>
-            <Text fontSize={"sm"} >{address}</Text>
+            <Text fontSize={"sm"}>{address}</Text>
           </Flex>
         ) : null}
-        <Input placeholder="value"
+        <Input
+          placeholder="value"
           onChange={onBnbChange}
           max={1.99}
           min={0.1}
