@@ -19,4 +19,6 @@ export const theme = {
 
   dangerColor: "#E94560",
   warningColor: "",
+
+  modalBgColor: "#262442",
 };

@@ -35,24 +35,22 @@ const WalletDetails = (props: any) => {
       cursor={"pointer"}
       onClick={() => setOpen(true)}
       py={2}
-      px={4}
+      px={3}
       bg={theme.bgColor}
       borderRadius="md"
       boxShadow={`0px 0px 4px ${theme.secondaryMiscColor}`}
       minWidth="220px"
     >
       <Flex
-        justifyContent={"space-evenly"}
+        justifyContent={"flex-start"}
         alignItems="center"
         columnGap={"1rem"}
         width="100%"
       >
-        <Box bg={theme.highLightColor} borderRadius="2xl" p={2}>
-          <Image height={4} width={4} src={props.logo} />
-        </Box>
+        <Image height={10} width={10} src={props.logo} />
         <Flex color={theme.highLightColor} direction={"column"}>
           <Text fontSize={"smaller"}>
-            {props.address.substr(0, 4)}....
+            {props.address.substr(0, 10)}....
             {props.address.substr(
               props.address.length - 4,
               props.address.length

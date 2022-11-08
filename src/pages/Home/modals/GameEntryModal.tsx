@@ -175,10 +175,10 @@ const GameEntryModal = (props: any) => {
       <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
       <ModalContent
         borderRadius={"xl"}
-        bg={theme.fgColor}
         color="#fbd6d2"
         fontFamily={"quicksand"}
         fontWeight="bold"
+        bg={theme.modalBgColor}
       >
         <Dialog
           title={header}

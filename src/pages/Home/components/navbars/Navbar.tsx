@@ -10,7 +10,7 @@ import { NearConnectionServices } from "../../connections/NearConnection";
 import WalletDetails from "./WalletDetails";
 
 import NEAR from "../../../../assets/logos/NEAR.svg";
-import ETH from "../../../../assets/logos/ETH.svg";
+import BNB from "../../../../assets/logos/bnb.png";
 
 import { formatEther } from "@ethersproject/units";
 import { useEtherBalance, useEthers } from "@usedapp/core";
@@ -64,7 +64,7 @@ const Navbar = (props: NavbarProps) => {
   const getSymbol = (chainId: number) => {
     if (chainId === 97) {
       return "BNB";
-    } else return "ETH";
+    } else return "NEAR";
   };
 
   const connectToMetaMask = async () => {
@@ -76,7 +76,7 @@ const Navbar = (props: NavbarProps) => {
     });
 
     const label = getSymbol(chainId || 0);
-    setDetails({ logo: ETH, label: label });
+    setDetails({ logo: BNB, label: label });
     localStorage.setItem("address", account!);
     props.onClose();
   };
@@ -107,7 +107,7 @@ const Navbar = (props: NavbarProps) => {
       balance: formatEther(etherBalance ?? 1).toString(),
       isConnected: account ? true : false,
     });
-    setDetails({ logo: ETH, label: getSymbol(chainId || 0) });
+    setDetails({ logo: BNB, label: getSymbol(chainId || 0) });
     localStorage.setItem("address", account!);
   }, [account, etherBalance, chainId]);
 

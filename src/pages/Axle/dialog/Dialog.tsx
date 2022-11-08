@@ -24,7 +24,7 @@ const Dialog = (props: Props) => {
       <ModalOverlay backdropFilter="blur(5px) hue-rotate(0deg)" />
       <ModalContent
         borderRadius={"xl"}
-        bg={"#262442"}
+        bg={theme.modalBgColor}
         color={theme.highLightColor}
         fontFamily={"quicksand"}
         fontWeight="bold"
