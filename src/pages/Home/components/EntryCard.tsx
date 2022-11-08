@@ -16,6 +16,7 @@ const EntryCard = (props: AxleContest) => {
     return !type ? (
       <Box>
         <Timer
+          opensAt={props.axleContestInfo?.opensAt || ""}
           deadline={props.axleContestInfo?.expiresAt || ""}
           startsOn={props.axleContestInfo?.startsOn || ""}
         />
@@ -100,6 +101,7 @@ const EntryCard = (props: AxleContest) => {
               <TimerButton
                 gameType={props.gameType.valueOf().toString()}
                 action={props.action}
+                opensAt={props.axleContestInfo?.opensAt || ""}
                 deadline={props.axleContestInfo?.expiresAt || ""}
                 startsIn={props.axleContestInfo?.startsOn || ""}
               />

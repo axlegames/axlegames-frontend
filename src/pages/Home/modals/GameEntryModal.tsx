@@ -101,6 +101,13 @@ const GameEntryModal = (props: any) => {
       setMessage("Oops! unauthorized access, please retry again");
       return setDialog(true);
     }
+    if (status === toString(ENTRY_STATUS.PRACTICE_GAME)) {
+      const gameStateId = res.gameState._id;
+      const contestId = res.gameState.axleContest;
+      setDialog(false);
+      setConfirm(false);
+      return navigate(`${props.link}/${contestId}/${gameStateId}`);
+    }
     if (
       status === toString(ENTRY_STATUS.ALREADY_IN_GAME) ||
       status === toString(ENTRY_STATUS.ENTER_CONTEST)
