@@ -1,6 +1,7 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import Success from "../../../assets/gamein/checked.png";
 import NeuButton from "../component/NeuButton";
+import { theme } from "../../../../src/config/theme.config";
 
 const TransactionSuccessDialog = (props: any) => {
   return (
@@ -12,7 +13,8 @@ const TransactionSuccessDialog = (props: any) => {
         alignItems={"center"}
       >
         <Image width={"50%"} src={Success} />
-        <Text fontSize={"xl"}>Congrats, you purchased {props.fee}</Text>
+        <Text fontSize={"xl"}>Welcome to AXLE family!</Text>{" "}
+        <Text fontSize={"md"}> You purchased {props.fee} AXLE</Text>
         <a
           href={`https://testnet.bscscan.com/tx/` + props.hash}
           target="_blank"
@@ -23,18 +25,24 @@ const TransactionSuccessDialog = (props: any) => {
             transition={`100ms all ease-in`}
             textAlign="center"
           >
-            <Text as="u" textUnderlineOffset={"unset"}>
+            <Text
+              as="u"
+              fontSize={"md"}
+              color={theme.primaryTextColor}
+              textUnderlineOffset={"unset"}
+            >
               check transaction on blockchain
             </Text>
           </Box>
         </a>
       </Flex>
+      <Box mt={3}></Box>
       <Flex justifyContent={"center"}>
         <NeuButton
-          bg={"#40464F"}
-          shadow={"#535A65"}
+          bg={"#A34400"}
+          shadow={"#FF7C1F"}
           onClick={props.close}
-          label="close"
+          label="Buy More"
         ></NeuButton>
       </Flex>
     </Box>

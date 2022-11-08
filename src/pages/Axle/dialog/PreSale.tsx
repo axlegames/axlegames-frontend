@@ -179,7 +179,7 @@ const PreSale = (props: any) => {
   }
 
   useEffect(() => {
-    const b: number = Number(ethers.utils.formatEther(etherBalance || 0));
+    const b: number = Number(Number(ethers.utils.formatEther(etherBalance || 0)).toFixed(2));
     setBalance(b);
   }, [address, etherBalance]);
 
@@ -191,7 +191,7 @@ const PreSale = (props: any) => {
           <TransactionSuccessDialog
             hash={hash}
             close={() => setSuccess(false)}
-            fee={100}
+            fee={axle}
           />
         }
         isOpen={success}
@@ -207,32 +207,52 @@ const PreSale = (props: any) => {
       >
         <Image p={8} src={Icon} />
         <Box textAlign={"center"}>
-          <Text fontWeight={"bold"} fontSize="xl">Join the AXLE Presale</Text>
-          
+          <Text fontWeight={"bold"} fontSize="xl">
+            Join the AXLE Presale
+          </Text>
         </Box>
         <Flex direction={"column"}>
-          <Tag name="Buy AXLE" value="Listing price = $0.015" />
-          <Tag name="1 BNB = 8000 AXLE" value="1 AXLE = 0.000125 BNB" />
+          <Text
+            fontWeight={"bold"}
+            align="center"
+            color={theme.primaryTextColor}
+            fontSize="md"
+          >
+            1 BNB = 8000 AXLE
+          </Text>
           <Tag name="Min = 0.1 BNB" value="Max = 2 BNB" />
         </Flex>
         {address !== "" ? (
           <Flex textAlign={"center"} direction={"column"}>
             <Text>Connected to</Text>
-            <Text fontSize={"sm"} >{address}</Text>
+            <Text fontSize={"sm"} color={theme.primaryTwoTextColor}>
+              {address}
+            </Text>
           </Flex>
         ) : null}
-        <Input placeholder="value (BNB)"
+        <Input
+          placeholder="value (BNB)"
           onChange={onBnbChange}
           max={1.99}
           min={0.1}
           type={"number"}
         ></Input>
         <Flex textAlign={"center"} direction="column">
-          <Text>
-            {bnb} BNB for {axle} AXLE
+          <Flex textAlign={"center"} direction="row" color={theme.highLightColor}>
+            <Text fontSize={"md"}>BNB Bal : </Text>
+            <Text>&nbsp; </Text>
+            <Text color={theme.highLightColor}>
+              {!isLoading ? `${balance}` : `...`}
+            </Text>
+            <Text>&nbsp; </Text>
+            <Text> | AXLE Bal : </Text>
+            <Text>&nbsp; </Text>
+            <Text color={theme.highLightColor}> {axleBalance} </Text>
+          </Flex>
+          <Box mt={3}></Box>
+          <Text fontSize={"md"} color={theme.primaryTextColor}>
+            You receive {axle} AXLE
           </Text>
-          <Text>BNB Bal : {!isLoading ? `${balance}` : `...`} </Text>
-          <Text>AXLE Bal : {axleBalance} </Text>
         </Flex>
         {address === "" ? (
           <NeuButton
