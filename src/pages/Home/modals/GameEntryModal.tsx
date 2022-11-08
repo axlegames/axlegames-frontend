@@ -10,7 +10,6 @@ import {
   Text,
   Divider,
   Flex,
-  Button,
   useToast,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -30,6 +29,7 @@ import Signin from "../../Auth/Signin";
 import { AxleContests, HomeServices } from "../HomeServices";
 import ConfirmDialog from "./ConfirmDialog";
 import { GameType } from "../enums/contests.enum";
+import NeuButton from "../../Axle/component/NeuButton";
 
 const GameEntryModal = (props: any) => {
   const toast = useToast();
@@ -109,7 +109,7 @@ const GameEntryModal = (props: any) => {
       const contestId = res.gameState.axleContest;
       setDialog(false);
       setConfirm(false);
-      return navigate(`${props.link}/${contestId}/${gameStateId}`);
+      return navigate(`${props.link}/lobby/${contestId}/${gameStateId}`);
     }
   };
 
@@ -220,15 +220,11 @@ const GameEntryModal = (props: any) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button
-            size="sm"
-            width={"32"}
-            colorScheme="blue"
-            mr={3}
+          <NeuButton
+            label="close"
+            bg={theme.ternaryButtonColor}
             onClick={props.close}
-          >
-            Close
-          </Button>
+          ></NeuButton>
         </ModalFooter>
       </ModalContent>
     </Modal>

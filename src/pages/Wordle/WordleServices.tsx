@@ -1,5 +1,6 @@
 import axios from "axios";
 import { headers, gamePrefix } from "../../config";
+import { GameStatus } from "../Home/enums/contests.enum";
 
 const token = headers() ?? "";
 
@@ -42,6 +43,25 @@ export interface EntryStatus {
   gameState: GameState;
 }
 
+export interface AxleContestInfo {
+  _id: string;
+  startsOn: string;
+  opensAt: string;
+  expiresAt: string;
+  entryFee: number;
+  prizePool: number;
+  minimumContestants: number;
+}
+
+export interface Contest {
+  _id: string;
+  axleGame: string;
+  gameType: string;
+  axleContestInfo: AxleContestInfo;
+  axleContestants: string[];
+  status: GameStatus;
+}
+
 export class WordleServices {
   static enterContest = async (data: any): Promise<EntryStatus> => {
     return await (
@@ -56,6 +76,12 @@ export class WordleServices {
 
   static cleanGameState = async (data: any): Promise<void> =>
     await axios.post(`${gamePrefix}/clean`, data, token);
+
+  static getLobbyStats = async (contestId: string): Promise<Contest> => {
+    return await (
+      await axios.get(`${gamePrefix}/lobby/${contestId}`)
+    ).data.contest;
+  };
 
   static validateUpdateGuess = async (data: any): Promise<GuessStatus> => {
     const resp = await axios.post(

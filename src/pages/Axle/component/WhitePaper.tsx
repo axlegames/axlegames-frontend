@@ -22,16 +22,10 @@ const WhitePaper = (props: any) => {
         rowGap={"1rem"}
         direction={{ base: "column", xl: "row" }}
       >
-        <Box bg={theme.bgColor} borderRadius="xl" p={{ base: "0", lg: "12" }}>
+        <Box borderRadius="xl" p={{ base: "0", lg: "12" }}>
           <Image maxWidth={"64"} width={"80"} src={WP} />
         </Box>
-        <Flex
-          p={8}
-          bg={theme.fgColor}
-          borderRadius="xl"
-          rowGap={".5rem"}
-          direction={"column"}
-        >
+        <Flex p={8} borderRadius="xl" rowGap={".5rem"} direction={"column"}>
           <Text color={theme.primaryTextColor} fontSize={"3xl"}>
             Finest designed gaming and NFT Project
           </Text>
@@ -45,7 +39,11 @@ const WhitePaper = (props: any) => {
             style={{ width: "100%" }}
             href="https://axlegames.s3.ap-south-1.amazonaws.com/AxleGames_EconomicsPaper.pdf"
           >
-            <NeuButton label={`Economics Paper`}></NeuButton>
+            <NeuButton
+              onClick={() => {}}
+              bg={theme.bgColor}
+              label={`Economics Paper`}
+            ></NeuButton>
           </a>
         </Flex>
       </Flex>

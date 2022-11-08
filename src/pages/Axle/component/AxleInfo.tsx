@@ -90,13 +90,21 @@ const AxleInfo = () => {
               width="100%"
               justifyContent={"center"}
             >
-              <NeuButton onClick={() => setOpen(true)} label="Buy now" />
+              <NeuButton
+                bg={theme.fgColor}
+                onClick={() => setOpen(true)}
+                label="Buy now"
+              />
               <a
                 href="https://testnet.bscscan.com/address/0x9FE1eb84F87d83Ad87A532aD3ce034037039913B"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <NeuButton label="Contract" />
+                <NeuButton
+                  onClick={() => {}}
+                  bg={theme.ternaryButtonColor}
+                  label="Contract"
+                />
               </a>
             </Flex>
           </Flex>

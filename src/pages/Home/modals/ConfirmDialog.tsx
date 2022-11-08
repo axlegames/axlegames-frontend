@@ -1,5 +1,4 @@
 import {
-  Button,
   Divider,
   Modal,
   ModalBody,
@@ -11,6 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
+import NeuButton from "../../Axle/component/NeuButton";
 
 interface Props {
   open: boolean;
@@ -38,22 +38,16 @@ const ConfirmDialog = (props: Props) => {
           <Divider my="8"></Divider>
         </ModalBody>
         <ModalFooter>
-          <Button
-            size="sm"
-            colorScheme="green"
-            mr={3}
+          <NeuButton
+            bg={theme.fgColor}
             onClick={() => props.enterContest()}
-          >
-            Confirm
-          </Button>
-          <Button
-            size="sm"
-            colorScheme="blue"
-            mr={3}
+            label="confirm"
+          ></NeuButton>
+          <NeuButton
+            bg={theme.ternaryButtonColor}
             onClick={() => props.close()}
-          >
-            Close
-          </Button>
+            label="close"
+          ></NeuButton>
         </ModalFooter>
       </ModalContent>
     </Modal>

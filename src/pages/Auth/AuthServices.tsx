@@ -25,6 +25,7 @@ export class AuthServices {
     localStorage.setItem("session", new Date(Date.now()).toString());
     localStorage.setItem("username", data.username);
     localStorage.setItem("userId", data.userId);
+    localStorage.setItem("name", data.name);
   };
 
   static setWalletAddress = async (data: any) =>

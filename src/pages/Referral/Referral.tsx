@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { theme } from "../../config/theme.config";
+import NeuButton from "../Axle/component/NeuButton";
 import {
   DashBoardServices,
   ReferralModel,
@@ -151,12 +152,11 @@ const Referral = () => {
               {referral.referralCode}
             </Text>
           </Box>
-          <Button
+          <NeuButton
             bg={theme.ternaryButtonColor}
-            color={theme.secondaryTwoTextColor}
-          >
-            Copy
-          </Button>
+            onClick={() => {}}
+            label="copy"
+          />
         </Box>
       </Flex>
     </Grid>

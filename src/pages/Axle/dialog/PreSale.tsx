@@ -237,9 +237,17 @@ const PreSale = (props: any) => {
           <Text>AXLE Bal : {axleBalance} </Text>
         </Flex>
         {address === "" ? (
-          <NeuButton onClick={connectWallet} label="Connect Wallet"></NeuButton>
+          <NeuButton
+            bg={theme.fgColor}
+            onClick={connectWallet}
+            label="Connect Wallet"
+          ></NeuButton>
         ) : (
-          <NeuButton onClick={buyAxle} label="Buy Axle"></NeuButton>
+          <NeuButton
+            bg={theme.fgColor}
+            onClick={buyAxle}
+            label="Buy Axle"
+          ></NeuButton>
         )}
       </Flex>
     </Box>

@@ -1,6 +1,7 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import Success from "../../../assets/gamein/checked.png";
 import { theme } from "../../../config/theme.config";
+import NeuButton from "../component/NeuButton";
 
 const TransactionSuccessDialog = (props: any) => {
   return (
@@ -30,15 +31,11 @@ const TransactionSuccessDialog = (props: any) => {
         </a>
       </Flex>
       <Flex justifyContent={"center"}>
-        <Button
-          width={"50%"}
-          size={"lg"}
-          _hover={{ color: theme.bgColor }}
-          bg={theme.primaryButtonColor}
+        <NeuButton
+          bg={theme.fgColor}
           onClick={props.close}
-        >
-          Buy More
-        </Button>
+          label="close"
+        ></NeuButton>
       </Flex>
     </Box>
   );

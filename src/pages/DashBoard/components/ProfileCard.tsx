@@ -1,7 +1,8 @@
-import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Image, Text } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { theme } from "../../../config/theme.config";
 import Logo from "../../../assets/home/logos/icon.png";
+import NeuButton from "../../Axle/component/NeuButton";
 
 const ProfileCard = () => {
   const navigate = useNavigate();
@@ -31,18 +32,16 @@ const ProfileCard = () => {
         ({localStorage.getItem("username")})
       </Text>
       <Flex justifyContent={"center"} columnGap=".5rem">
-        <Button
-          color={theme.secondaryTwoTextColor}
+        <NeuButton
+          onClick={() => {}}
           bg={theme.ternaryButtonColor}
-        >
-          Copy Link
-        </Button>
-        <Button
-          bg={theme.secondaryButtonColor}
+          label="Edit profile"
+        />
+        <NeuButton
+          bg={theme.bgColor}
           onClick={() => navigate("/profile")}
-        >
-          View Profile
-        </Button>
+          label="View profile"
+        />
       </Flex>
     </Flex>
   );

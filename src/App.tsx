@@ -10,6 +10,7 @@ import Axle from "./pages/Axle/Axle";
 import Dashboard from "./pages/DashBoard/DashBoard";
 import Profile from "./pages/DashBoard/pages/Profile";
 import ReferralLayout from "./pages/Referral/ReferralLayout";
+import Lobby from "./pages/Wordle/Lobby";
 // import PrivateRoute from "./config/protected.router";
 
 export const App = () => {
@@ -32,7 +33,10 @@ export const App = () => {
           <Route path="/profile" element={<Profile />} />
 
           <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
-          <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
+          <Route
+            path="/:game/lobby/:contestId/:gameStateId"
+            element={<Lobby />}
+          />
 
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/403" element={<Page403 />} />

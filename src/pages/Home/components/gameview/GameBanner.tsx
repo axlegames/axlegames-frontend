@@ -14,7 +14,7 @@ const GameBanner = (props: any) => {
         >
           Welcome{" "}
           {localStorage.getItem("username")
-            ? localStorage.getItem("username")
+            ? localStorage.getItem("name")
             : "to Axle Games"}
         </Text>
         <Text

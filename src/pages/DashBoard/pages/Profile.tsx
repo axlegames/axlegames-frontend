@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Divider,
   Flex,
   FormControl,
@@ -18,6 +17,7 @@ import Logo from "../../../assets/home/logos/icon.png";
 import { useFormik } from "formik";
 import { useEffect } from "react";
 import { ProfileService } from "./ProfileService";
+import NeuButton from "../../Axle/component/NeuButton";
 
 const FormInput = (props: any) => {
   return (
@@ -234,24 +234,20 @@ const Profile = () => {
             <Box bg={theme.fgColor} p={4} borderRadius="xl">
               <Image width={"32"} src={Logo} />
             </Box>
-            <Button
+            <NeuButton
               bg={theme.ternaryButtonColor}
-              color={theme.secondaryTwoTextColor}
-              mb={2}
-            >
-              Upload
-            </Button>
+              onClick={() => {}}
+              label="Upload"
+            />
           </Box>
         </Grid>
 
         <Flex p={5}>
-          <Button
+          <NeuButton
             bg={theme.ternaryButtonColor}
-            color={theme.secondaryTwoTextColor}
             onClick={() => form.handleSubmit()}
-          >
-            Update
-          </Button>
+            label="Update"
+          />
         </Flex>
         <Divider mb={3} />
         <Flex direction={"column"}>

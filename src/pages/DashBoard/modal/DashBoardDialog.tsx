@@ -21,7 +21,7 @@ const DashBoardDialog = (props: Props) => {
       isOpen={props.isOpen}
       onClose={() => props.close()}
     >
-      <ModalOverlay />
+      <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
       <ModalContent
         boxShadow={`0px 0px 8px ${theme.primaryMiscColor}`}
         borderRadius={"xl"}

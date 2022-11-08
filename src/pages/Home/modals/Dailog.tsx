@@ -1,5 +1,4 @@
 import {
-  Button,
   Divider,
   Modal,
   ModalBody,
@@ -11,6 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
+import NeuButton from "../../Axle/component/NeuButton";
 
 interface Props {
   open: boolean;
@@ -37,14 +37,11 @@ const Dialog = (props: Props) => {
           <Divider my="8"></Divider>
         </ModalBody>
         <ModalFooter>
-          <Button
-            size="sm"
-            colorScheme="blue"
-            mr={3}
+          <NeuButton
+            bg={theme.ternaryButtonColor}
             onClick={() => props.close()}
-          >
-            Close
-          </Button>
+            label="close"
+          ></NeuButton>
         </ModalFooter>
       </ModalContent>
     </Modal>

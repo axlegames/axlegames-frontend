@@ -1,5 +1,6 @@
-import { Box, Button, Flex, Grid, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
+import NeuButton from "../../Axle/component/NeuButton";
 
 const challenges = [
   {
@@ -58,13 +59,14 @@ const Challenges = () => (
           py={1}
         >
           <Text color={theme.secondaryTextColor}>{t.task}</Text>
-          <Button
-            bg={theme.ternaryButtonColor}
-            color={theme.secondaryTwoTextColor}
-            mb={2}
-          >
-            {t.buttonText}
-          </Button>
+          <Box mb={2}>
+            <NeuButton
+              width="100%"
+              onClick={() => {}}
+              bg={theme.ternaryButtonColor}
+              label={t.buttonText}
+            />
+          </Box>
         </Grid>
       </Box>
     ))}
