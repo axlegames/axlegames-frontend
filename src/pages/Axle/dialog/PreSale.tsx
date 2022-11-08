@@ -21,12 +21,12 @@ declare global {
 const Tag = (props: any) => {
   return (
     <Flex
-      color={theme.primaryTwoTextColor}
+      color={theme.primaryTextColor}
       direction={"row"}
       justifyContent="space-between"
       alignItems={"center"}
-      columnGap={{ base: "3rem" }}
-      fontSize={{ xl: "sm" }}
+      columnGap={{ base: "2rem" }}
+      fontSize={{ xl: "md" }}
     >
       <Text>{props.name}</Text>
       <Text>{props.value}</Text>
@@ -207,23 +207,21 @@ const PreSale = (props: any) => {
       >
         <Image p={8} src={Icon} />
         <Box textAlign={"center"}>
-          <Text>Join the AXLE Presale</Text>
-          <Text fontWeight={"normal"} fontSize="sm">
-            25% of coins on sale. Play,trade & play.
-          </Text>
+          <Text fontWeight={"bold"} fontSize="xl">Join the AXLE Presale</Text>
+          
         </Box>
         <Flex direction={"column"}>
-          <Tag name="Buy AXLE" value="1 AXLE = $ 0.0034" />
-          <Tag name="1 BNB = 8000 AXLE" value="Listing price : $0.015" />
+          <Tag name="Buy AXLE" value="Listing price = $0.015" />
+          <Tag name="1 BNB = 8000 AXLE" value="1 AXLE = 0.000125 BNB" />
+          <Tag name="Min = 0.1 BNB" value="Max = 2 BNB" />
         </Flex>
         {address !== "" ? (
           <Flex textAlign={"center"} direction={"column"}>
             <Text>Connected to</Text>
-            <Text fontSize={"sm"}>{address}</Text>
-            <Text>Min 0.1 BNB | Max 1.99 BNB</Text>
+            <Text fontSize={"sm"} >{address}</Text>
           </Flex>
         ) : null}
-        <Input
+        <Input placeholder="value"
           onChange={onBnbChange}
           max={1.99}
           min={0.1}
@@ -245,9 +243,10 @@ const PreSale = (props: any) => {
           ></NeuButton>
         ) : (
           <NeuButton
-            bg={theme.primaryTwoTextColor}
-            onClick={buyAxle}
-            label="Buy Axle"
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
+            onClick={connectWallet}
+            label="Connect Wallet"
           ></NeuButton>
         )}
       </Flex>
