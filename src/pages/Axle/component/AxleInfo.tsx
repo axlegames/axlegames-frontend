@@ -92,7 +92,7 @@ const AxleInfo = () => {
             >
               <NeuButton
                 bg={"#A34400"}
-                shadow={"#FF7C1F"}
+                shadow={"#FFA05C"}
                 onClick={() => setOpen(true)}
                 label="Buy now"
               />
@@ -104,7 +104,7 @@ const AxleInfo = () => {
                 <NeuButton
                   onClick={() => {}}
                   bg={"#40464F"}
-                  shadow={"#535A65"}
+                shadow={"#535A65"}
                   label="Contract"
                 />
               </a>
