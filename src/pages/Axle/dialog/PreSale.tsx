@@ -11,7 +11,6 @@ import Dialog from "./Dialog";
 import TransactionSuccessDialog from "./TransactionSuccessDialog";
 import { useEffect, useState } from "react";
 import NeuButton from "../component/NeuButton";
-import { sign } from "crypto";
 
 declare global {
   interface Window {
