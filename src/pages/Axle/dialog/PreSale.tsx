@@ -245,7 +245,8 @@ const PreSale = (props: any) => {
           ></NeuButton>
         ) : (
           <NeuButton
-            bg={theme.primaryTwoTextColor}
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
             onClick={buyAxle}
             label="Buy Axle"
           ></NeuButton>

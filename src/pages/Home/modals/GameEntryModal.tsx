@@ -229,8 +229,9 @@ const GameEntryModal = (props: any) => {
         <ModalFooter>
           <NeuButton
             label="close"
-            bg={theme.ternaryButtonColor}
             onClick={props.close}
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
           ></NeuButton>
         </ModalFooter>
       </ModalContent>

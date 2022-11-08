@@ -38,7 +38,8 @@ const Dialog = (props: Props) => {
         </ModalBody>
         <ModalFooter>
           <NeuButton
-            bg={theme.ternaryButtonColor}
+            bg={"#40464F"}
+            shadow={"#535A65"}
             onClick={() => props.close()}
             label="close"
           ></NeuButton>

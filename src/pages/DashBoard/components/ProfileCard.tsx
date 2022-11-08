@@ -34,11 +34,13 @@ const ProfileCard = () => {
       <Flex justifyContent={"center"} columnGap=".5rem">
         <NeuButton
           onClick={() => {}}
-          bg={theme.ternaryButtonColor}
+          bg={"#A34400"}
+          shadow={"#FF7C1F"}
           label="Edit profile"
         />
         <NeuButton
-          bg={theme.bgColor}
+          bg={"#40464F"}
+          shadow={"#535A65"}
           onClick={() => navigate("/profile")}
           label="View profile"
         />

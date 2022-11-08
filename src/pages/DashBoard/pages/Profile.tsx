@@ -235,7 +235,8 @@ const Profile = () => {
               <Image width={"32"} src={Logo} />
             </Box>
             <NeuButton
-              bg={theme.ternaryButtonColor}
+              bg={"#A34400"}
+              shadow={"#FF7C1F"}
               onClick={() => {}}
               label="Upload"
             />
@@ -244,7 +245,8 @@ const Profile = () => {
 
         <Flex p={5}>
           <NeuButton
-            bg={theme.ternaryButtonColor}
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
             onClick={() => form.handleSubmit()}
             label="Update"
           />

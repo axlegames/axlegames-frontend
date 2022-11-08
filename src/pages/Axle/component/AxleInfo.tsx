@@ -104,7 +104,7 @@ const AxleInfo = () => {
                 <NeuButton
                   onClick={() => {}}
                   bg={"#40464F"}
-                shadow={"#535A65"}
+                  shadow={"#535A65"}
                   label="Contract"
                 />
               </a>
