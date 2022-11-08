@@ -1,6 +1,5 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import Failed from "../../../assets/gamein/cancel.png";
-import { theme } from "../../../config/theme.config";
 import NeuButton from "../component/NeuButton";
 
 const TransactionFailureDialog = (props: any) => {
@@ -18,7 +17,8 @@ const TransactionFailureDialog = (props: any) => {
         </Flex>
         <Flex justifyContent={"center"}>
           <NeuButton
-            bg={theme.ternaryButtonColor}
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
             onClick={props.close}
             label="close"
           ></NeuButton>

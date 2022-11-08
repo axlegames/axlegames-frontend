@@ -37,14 +37,16 @@ const ConfirmDialog = (props: Props) => {
           <Text>{props.description}</Text>
           <Divider my="8"></Divider>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter columnGap="1rem">
           <NeuButton
-            bg={theme.fgColor}
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
             onClick={() => props.enterContest()}
             label="confirm"
           ></NeuButton>
           <NeuButton
-            bg={theme.ternaryButtonColor}
+            bg={"#40464F"}
+            shadow={"#535A65"}
             onClick={() => props.close()}
             label="close"
           ></NeuButton>

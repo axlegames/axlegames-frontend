@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 interface Props {
   deadline: string;
   startsOn: string;
+  opensAt: string;
 }
 const Timer = (props: Props) => {
   const [minutes, setMinutes] = useState(0);
@@ -11,7 +12,7 @@ const Timer = (props: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const getTime = () => {
-    const time = Date.parse(props.deadline) - new Date().getTime();
+    const time = Date.parse(props.opensAt) - new Date().getTime();
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
   };
@@ -27,9 +28,13 @@ const Timer = (props: Props) => {
 
   const starts = new Date(props.startsOn).getTime() - new Date().getTime();
   const isStarted = starts < 0 ? true : false;
-  const expires = new Date(props.deadline).getTime() - new Date().getTime();
+
+  const expires = new Date(props.opensAt).getTime() - new Date().getTime();
   const isExpired = expires < 0 ? true : false;
-  const timer = !isExpired ? `Expires In ${minutes}m ${seconds}s` : `Expired`;
+
+  const timer = !isExpired
+    ? `Entry closes in ${minutes}m ${seconds}s`
+    : `Entry closed`;
 
   return (
     <Box>

@@ -245,8 +245,8 @@ const PreSale = (props: any) => {
           <NeuButton
             bg={"#A34400"}
             shadow={"#FF7C1F"}
-            onClick={connectWallet}
-            label="Connect Wallet"
+            onClick={buyAxle}
+            label="Buy Axle"
           ></NeuButton>
         )}
       </Flex>

@@ -63,7 +63,8 @@ const Challenges = () => (
             <NeuButton
               width="100%"
               onClick={() => {}}
-              bg={theme.ternaryButtonColor}
+              bg={"#A34400"}
+              shadow={"#FF7C1F"}
               label={t.buttonText}
             />
           </Box>

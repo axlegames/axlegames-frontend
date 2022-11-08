@@ -153,7 +153,8 @@ const Referral = () => {
             </Text>
           </Box>
           <NeuButton
-            bg={theme.ternaryButtonColor}
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
             onClick={() => {}}
             label="copy"
           />
