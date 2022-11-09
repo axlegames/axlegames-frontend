@@ -11,6 +11,7 @@ import Dashboard from "./pages/DashBoard/DashBoard";
 import Profile from "./pages/DashBoard/pages/Profile";
 import ReferralLayout from "./pages/Referral/ReferralLayout";
 import Lobby from "./pages/Wordle/Lobby";
+import Wallet from "./pages/Wallet/Wallet";
 // import PrivateRoute from "./config/protected.router";
 
 export const App = () => {
@@ -31,6 +32,7 @@ export const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/referrals" element={<ReferralLayout />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/wallet" element={<Wallet />} />
 
           <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
           <Route

@@ -207,9 +207,9 @@ const SideBarLayout = (props: SideBarProps) => {
             icon={<AiOutlineDashboard size={32} />}
           />
           <SideBarButton
-            onClick={() => clearConnectionAndChangeRoute("/my-rewards")}
-            link={"/my-rewards"}
-            title={"My Reward"}
+            onClick={() => clearConnectionAndChangeRoute("/wallet")}
+            link={"/wallet"}
+            title={"Wallet"}
             icon={<HiCreditCard size={32} />}
           />
           <SideBarButton

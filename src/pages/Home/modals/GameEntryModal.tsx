@@ -230,8 +230,8 @@ const GameEntryModal = (props: any) => {
           <NeuButton
             label="close"
             onClick={props.close}
-            bg={"#A34400"}
-            shadow={"#FF7C1F"}
+            bg={"#40464F"}
+            shadow={"#535A65"}
           ></NeuButton>
         </ModalFooter>
       </ModalContent>

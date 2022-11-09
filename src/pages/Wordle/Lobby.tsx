@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { theme } from "../../config/theme.config";
 import { WordleServices, Contest } from "./WordleServices";
-import ETH from "../../assets/logos/NEAR.svg";
-import BNB from "../../assets/logos/bnb.png";
+import ETH from "../../assets/logos/trophy.webp";
+import BNB from "../../assets/logos/alram.webp";
 
 interface Props {
   deadline: string;
@@ -56,22 +56,21 @@ const Lobby = () => {
       : "Loading";
 
     return (
-      <Box justifyContent={"center"}>
-        <Text textAlign={"center"} fontSize={"3xl"}>
-          {timer}
-        </Text>
-      </Box>
+      <Text color={theme.secondaryTextColor} fontSize={"xl"}>
+        {timer}
+      </Text>
     );
   };
   const contestants = contest?.axleContestants.length || 0;
   return (
     <Box
       fontFamily="quicksand"
-      color={theme.secondaryTwoTextColor}
       fontWeight="bold"
       bg={theme.bgColor}
       justifyContent="center"
       display={"flex"}
+      px={12}
+      py={10}
     >
       <Box
         my={16}
@@ -83,6 +82,7 @@ const Lobby = () => {
         flexDirection={"column"}
         position="relative"
         minW={"450px"}
+        border={`4px groove ${theme.primaryTwoTextColor}`}
       >
         <Image
           top="-8"
@@ -101,7 +101,10 @@ const Lobby = () => {
           width={"24"}
         />
 
-        <Text fontSize={"3xl"}>{`#${params.game}`}</Text>
+        <Text
+          color={theme.primaryTextColor}
+          fontSize={"3xl"}
+        >{`#${params.game} Lobby`}</Text>
         <Timer
           deadline={contest?.axleContestInfo.expiresAt || ""}
           opensAt={contest?.axleContestInfo.opensAt || ""}
@@ -122,8 +125,11 @@ const Lobby = () => {
             alignItems={"center"}
             justifyContent={"center"}
           >
-            <Text fontSize="2xl"> {contestants}+</Text>
-            <Text>Contestants</Text>
+            <Text color={theme.secondaryTextColor} fontSize="2xl">
+              {" "}
+              {contestants}+
+            </Text>
+            <Text color={theme.secondaryTwoTextColor}>Contestants</Text>
           </Box>
           <Box
             display={"flex"}
@@ -131,10 +137,10 @@ const Lobby = () => {
             alignItems={"center"}
             justifyContent={"center"}
           >
-            <Text fontSize="2xl">
+            <Text color={theme.secondaryTextColor} fontSize="2xl">
               {contest?.axleContestInfo.entryFee || 0 / contestants}
             </Text>
-            <Text>Prize Pool </Text>
+            <Text color={theme.secondaryTwoTextColor}>Prize Pool </Text>
           </Box>
         </Box>
       </Box>
