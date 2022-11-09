@@ -17,11 +17,12 @@ const WalletHeader = () => {
       <Box
         display={"flex"}
         flexDirection="column"
-        bg={theme.fgColor}
+        bg={theme.bgColor}
         p={4}
         borderRadius="xl"
         alignItems={"center"}
         rowGap={"1rem"}
+        minW="14vw"
       >
         <Image width={"20"} height="20" src={props.img} />
         <Box>
@@ -57,7 +58,6 @@ const WalletHeader = () => {
       columnGap="1rem"
       justifyContent={"center"}
       p={4}
-      bg={theme.bgColor}
       borderRadius="xl"
     >
       <WalletCard

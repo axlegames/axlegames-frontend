@@ -7,7 +7,13 @@ import WalletTranscations from "./components/WalletTranscations";
 const Wallet = () => {
   return (
     <MainLayout>
-      <Box bg={theme.fgColor} p={4} fontFamily="quicksand" fontWeight={"bold"}>
+      <Box
+        bg={theme.fgColor}
+        p={4}
+        borderRadius="xl"
+        fontFamily="quicksand"
+        fontWeight={"bold"}
+      >
         <WalletHeader />
         <WalletTranscations />
       </Box>

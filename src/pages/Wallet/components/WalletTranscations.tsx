@@ -14,10 +14,22 @@ import { theme } from "../../../config/theme.config";
 const WalletTranscations = () => {
   const transactions: any[] = [1, 2, 3, 4, 5];
   return (
-    <Box>
-      <Text>Wallet Transaction History (3)</Text>
-      <Text>Track your GAMEIN token transactions in GameInfinity account.</Text>
-      <TableContainer aria-expanded="false" my={4}>
+    <Box fontFamily={"quicksand"} fontWeight="bold">
+      <Box p={3}>
+        <Text fontSize={"3xl"} color={theme.primaryTextColor}>
+          Wallet Transaction History (3)
+        </Text>
+        <Text color={theme.secondaryTextColor}>
+          Track your GAMEIN token transactions in GameInfinity account.
+        </Text>
+      </Box>
+      <TableContainer
+        p={3}
+        borderRadius={"xl"}
+        bg={theme.bgColor}
+        aria-expanded="false"
+        my={4}
+      >
         <Table
           fontFamily={"quicksand"}
           fontWeight="bold"
