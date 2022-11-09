@@ -10,9 +10,13 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
+import { Fee } from "../WalletServices";
 
-const WalletTranscations = () => {
-  const transactions: any[] = [1, 2, 3, 4, 5];
+interface Props {
+  transactions: Fee[];
+}
+const WalletTranscations = (props: Props) => {
+  const transactions = props.transactions || [];
   return (
     <Box fontFamily={"quicksand"} fontWeight="bold">
       <Box p={3}>
@@ -48,7 +52,7 @@ const WalletTranscations = () => {
                 color={theme.secondaryTwoTextColor}
                 fontSize={"md"}
               >
-                Date
+                Game
               </Th>
               <Th
                 fontFamily="quicksand"
@@ -67,7 +71,7 @@ const WalletTranscations = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {transactions.map((d: any, i: number) => (
+            {transactions.map((d: Fee, i: number) => (
               <Tr
                 key={i}
                 borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
@@ -77,10 +81,10 @@ const WalletTranscations = () => {
                 position={"relative"}
               >
                 <Td>
-                  <Text zIndex={2}>{`${new Date()}`}</Text>
+                  <Text zIndex={2}>{d.game}</Text>
                 </Td>
-                <Td>{d} Sigin Bonous</Td>
-                <Td>{d} AXLE</Td>
+                <Td>{d.transactionType} </Td>
+                <Td>{d.fee} AXLE</Td>
               </Tr>
             ))}
           </Tbody>

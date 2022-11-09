@@ -11,7 +11,11 @@ interface Props {
   label: string;
 }
 
-const WalletHeader = () => {
+interface WalletProps {
+  balance: number;
+}
+
+const WalletHeader = (props: WalletProps) => {
   const WalletCard = (props: Props) => {
     return (
       <Box
@@ -65,7 +69,7 @@ const WalletHeader = () => {
         img={ETH}
         label="Add Funds"
         main="Wallet Balance"
-        sub="240 AXLE"
+        sub={`${props.balance} AXLE`}
       />
       <WalletCard
         action={() => {}}
