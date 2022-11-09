@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
 import GameBarTile from "./TransactionBarTile";
