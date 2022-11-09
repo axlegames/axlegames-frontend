@@ -1,8 +1,10 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { theme } from "../../config/theme.config";
 import { WordleServices, Contest } from "./WordleServices";
+import ETH from "../../assets/logos/NEAR.svg";
+import BNB from "../../assets/logos/bnb.png";
 
 interface Props {
   deadline: string;
@@ -39,11 +41,11 @@ const Lobby = () => {
         new Date().getTime();
       setMinutes(Math.floor((time / 1000 / 60) % 60));
       setSeconds(Math.floor((time / 1000) % 60));
-      console.log(time);
-      if (time < 0)
+      if (time < 0) {
         return navigate(
           `/${params.game}/${params.contestId}/${params.gameStateId}`
         );
+      }
     };
 
     useEffect(() => {
@@ -65,26 +67,75 @@ const Lobby = () => {
   const contestants = contest?.axleContestants.length || 0;
   return (
     <Box
-      bg={theme.fgColor}
       fontFamily="quicksand"
       color={theme.secondaryTwoTextColor}
       fontWeight="bold"
+      bg={theme.bgColor}
+      justifyContent="center"
+      display={"flex"}
     >
-      <Timer
-        deadline={contest?.axleContestInfo.expiresAt || ""}
-        opensAt={contest?.axleContestInfo.opensAt || ""}
-        startsOn={contest?.axleContestInfo.startsOn || ""}
-      />
       <Box
+        my={16}
+        py={10}
+        px={16}
+        bg={theme.fgColor}
+        borderRadius="xl"
+        display="flex"
         flexDirection={"column"}
-        alignItems="center"
-        display={"flex"}
-        justifyContent="center"
+        position="relative"
+        minW={"450px"}
       >
-        <Text>Contestants {contestants}</Text>
-        <Text>
-          Prize Pool {contest?.axleContestInfo.entryFee || 0 / contestants}
-        </Text>
+        <Image
+          top="-8"
+          left={"-8"}
+          position={"absolute"}
+          src={ETH}
+          height={"24"}
+          width="24"
+        />
+        <Image
+          bottom={"-8"}
+          right="-8"
+          position={"absolute"}
+          src={BNB}
+          height="24"
+          width={"24"}
+        />
+
+        <Text fontSize={"3xl"}>{`#${params.game}`}</Text>
+        <Timer
+          deadline={contest?.axleContestInfo.expiresAt || ""}
+          opensAt={contest?.axleContestInfo.opensAt || ""}
+          startsOn={contest?.axleContestInfo.startsOn || ""}
+        />
+        <Box mx={12} mt={4} display={"flex"} justifyContent="space-between">
+          <Box
+            bg={theme.bgColor}
+            borderRadius="xl"
+            p={2}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Text fontSize="2xl"> {contestants}+</Text>
+            <Text>Contestants</Text>
+          </Box>
+          <Box
+            bg={theme.bgColor}
+            borderRadius="xl"
+            p={2}
+            display={"flex"}
+            flexDirection="column"
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Text fontSize="2xl">
+              {contest?.axleContestInfo.entryFee || 0 / contestants}
+            </Text>
+            <Text>Prize Pool </Text>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
