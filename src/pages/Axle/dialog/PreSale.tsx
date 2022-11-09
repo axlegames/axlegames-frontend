@@ -67,12 +67,15 @@ const PreSale = (props: any) => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem("isWalletConnected") === "true") {
-      connectWallet();
-      window.ethereum.on("accountsChanged", (accounts: any) => {
-        if (accounts.length !== 0) window.location.reload();
-      });
-    }
+    const isWalletConnected = localStorage.getItem("isWalletConnected");
+    if (isWalletConnected === "true") connectWallet();
+    window.ethereum.on("accountsChanged", (accounts: any) => {
+      if (accounts[0] !== address) connectWallet();
+      if (accounts.length === 0 || accounts[0] === "") {
+        localStorage.removeItem("isWalletConnected");
+        window.location.reload();
+      }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
