@@ -22,11 +22,8 @@ const Lobby = () => {
     const contestId = params.contestId || "";
     WordleServices.getLobbyStats(contestId)
       .then((res) => {
-        console.log(res);
         setContest(res);
-        setTimeout(() => {
-          setIsLoaded(true);
-        }, 2000);
+        setIsLoaded(true);
       })
       .catch((err) => console.log(err));
   }, [params.contestId]);
@@ -54,12 +51,14 @@ const Lobby = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const timer = `Game starts in ${minutes}m ${seconds}s`;
+    const timer = isLoaded
+      ? `Game starts in ${minutes}m ${seconds}s`
+      : "Loading";
 
     return (
       <Box justifyContent={"center"}>
         <Text textAlign={"center"} fontSize={"3xl"}>
-          {isLoaded ? timer : "Loading..."}
+          {timer}
         </Text>
       </Box>
     );
@@ -108,11 +107,16 @@ const Lobby = () => {
           opensAt={contest?.axleContestInfo.opensAt || ""}
           startsOn={contest?.axleContestInfo.startsOn || ""}
         />
-        <Box mx={12} mt={4} display={"flex"} justifyContent="space-between">
+        <Box
+          bg={theme.bgColor}
+          borderRadius="xl"
+          mx={4}
+          mt={4}
+          display={"flex"}
+          justifyContent="space-between"
+          p={4}
+        >
           <Box
-            bg={theme.bgColor}
-            borderRadius="xl"
-            p={2}
             display={"flex"}
             flexDirection="column"
             alignItems={"center"}
@@ -122,9 +126,6 @@ const Lobby = () => {
             <Text>Contestants</Text>
           </Box>
           <Box
-            bg={theme.bgColor}
-            borderRadius="xl"
-            p={2}
             display={"flex"}
             flexDirection="column"
             alignItems={"center"}

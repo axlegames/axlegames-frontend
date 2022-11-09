@@ -14,6 +14,9 @@ import MenuModal from "./modals/MenuModal";
 import { WordleServices, Status } from "./WordleServices";
 import { KEY_ACTION, initState, reducer, WordleState } from "./WordleReducer";
 
+import WordleTimer from "./hooks/WordleTimer";
+import { Contest } from "./WordleServices";
+
 const Wordle = () => {
   const toast = useToast();
 
@@ -21,9 +24,12 @@ const Wordle = () => {
   const [isLost, setIsLost] = useState(false);
 
   const navigate = useNavigate();
+
   const { contestId, gameStateId, game } = useParams();
 
   const [state, dispatch] = useReducer(reducer, initState);
+  const [contest, setContest] = useState<Contest>();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const fectchState = (game: Status) => {
     dispatch({
@@ -84,6 +90,17 @@ const Wordle = () => {
       setIsLost(false);
     };
   }, []);
+
+  useEffect(() => {
+    WordleServices.getLobbyStats(contestId || "")
+      .then((res) => {
+        setContest(res);
+        setIsLoaded(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [contestId]);
 
   const onKeyPress = (key: string) => {
     return dispatch({
@@ -161,6 +178,40 @@ const Wordle = () => {
     }
   };
 
+  const forceFinishGame = async () => {
+    const { isWinningWord } = await WordleServices.validateUpdateGuess({
+      word: state.currentGuess.toLowerCase(),
+      contestId: contestId,
+      gameStateId: gameStateId,
+    });
+    await WordleServices.cleanGameState({
+      userId: localStorage.getItem("userId"),
+    });
+    setTimeout(() => {
+      if (isWinningWord) {
+        setIsWon(true);
+        WordleServices.saveGame(
+          localStorage.getItem("userId") ?? "",
+          contestId ?? "",
+          state.currentRow + 1,
+          true
+        )
+          .then((r) => console.log(r))
+          .catch((e) => console.log(e));
+      } else {
+        setIsLost(true);
+        WordleServices.saveGame(
+          localStorage.getItem("userId") ?? "",
+          contestId ?? "",
+          state.currentRow + 1,
+          false
+        )
+          .then((r) => console.log(r))
+          .catch((e) => console.log(e));
+      }
+    }, 1500);
+  };
+
   const onDelete = () =>
     dispatch({
       type: KEY_ACTION.ON_DELETE,
@@ -175,6 +226,15 @@ const Wordle = () => {
   return (
     <Box>
       <Navbar title={game} />
+      <Box>
+        {isLoaded ? (
+          <WordleTimer
+            isLoaded={isLoaded}
+            endgame={() => forceFinishGame()}
+            deadline={contest?.axleContestInfo.expiresAt || ""}
+          />
+        ) : null}
+      </Box>
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
