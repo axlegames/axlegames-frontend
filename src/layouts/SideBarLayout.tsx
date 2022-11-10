@@ -11,7 +11,10 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
+
 import { theme } from "../config/theme.config";
+
+import ComingSoon from "../assets/logos/asap.png";
 import Logo from "../assets/home/logos/logo.png";
 
 import SideBarButton from "../pages/Home/components/sidebar/SideBarButton";
@@ -244,14 +247,48 @@ const SideBarLayout = (props: SideBarProps) => {
           link="/axle-token"
           icon={<BiCoin size={32} />}
         />
-        <SideBarButton
-          isCommingSoon={true}
-          title={"AxleVerse"}
-          icon={<HiGlobe size={32} />}
-        />
-        <SideBarButton title={"Marketplace"} icon={<MdStore size={32} />} />
+        <Box width={"100%"} position="relative">
+          <Image
+            position={"absolute"}
+            zIndex={100}
+            right="5%"
+            top={"-15%"}
+            src={ComingSoon}
+            height="12"
+            width={"12"}
+          />
+          <SideBarButton
+            isCommingSoon={true}
+            title={"AxleVerse"}
+            icon={<HiGlobe size={32} />}
+          />
+        </Box>
+        <Box width={"100%"} position="relative">
+          <Image
+            position={"absolute"}
+            zIndex={100}
+            right="5%"
+            top={"-15%"}
+            src={ComingSoon}
+            height="12"
+            width={"12"}
+          />
 
-        <SideBarButton title={"About Us"} icon={<MdInfo size={32} />} />
+          <SideBarButton title={"Marketplace"} icon={<MdStore size={32} />} />
+        </Box>
+        <Box width={"100%"} position="relative">
+          <Image
+            position={"absolute"}
+            zIndex={100}
+            right="5%"
+            top={"-15%"}
+            src={ComingSoon}
+            height="12"
+            width={"12"}
+          />
+
+          <SideBarButton title={"About Us"} icon={<MdInfo size={32} />} />
+        </Box>
 
         <Accordion width={"100%"} allowToggle allowMultiple>
           <AccordionItem border={"none"} outline="none" width={"100%"}>
