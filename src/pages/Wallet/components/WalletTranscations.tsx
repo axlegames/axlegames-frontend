@@ -11,17 +11,19 @@ import {
 } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import { Fee } from "../WalletServices";
+import moment from "moment";
 
 interface Props {
   transactions: Fee[];
 }
 const WalletTranscations = (props: Props) => {
   const transactions = props.transactions || [];
+  const headers = ["Date", "Transcation Type", "Amount", "Type", "Balance"];
   return (
     <Box fontFamily={"quicksand"} fontWeight="bold">
       <Box p={3}>
         <Text fontSize={"3xl"} color={theme.primaryTextColor}>
-          Wallet Transaction History (3)
+          Wallet Transaction History ({transactions.length})
         </Text>
         <Text color={theme.secondaryTextColor}>
           Track your GAMEIN token transactions in GameInfinity account.
@@ -47,46 +49,44 @@ const WalletTranscations = (props: Props) => {
               borderRight={"none"}
               borderTop="none"
             >
-              <Th
-                fontFamily="quicksand"
-                color={theme.secondaryTwoTextColor}
-                fontSize={"md"}
-              >
-                Game
-              </Th>
-              <Th
-                fontFamily="quicksand"
-                color={theme.secondaryTwoTextColor}
-                fontSize={"md"}
-              >
-                Transaction Type
-              </Th>
-              <Th
-                fontFamily="quicksand"
-                color={theme.secondaryTwoTextColor}
-                fontSize={"md"}
-              >
-                Amount
-              </Th>
+              {headers.map((h) => (
+                <Th
+                  fontFamily="quicksand"
+                  color={theme.secondaryTwoTextColor}
+                  fontSize={"md"}
+                >
+                  {h}
+                </Th>
+              ))}
             </Tr>
           </Thead>
           <Tbody>
-            {transactions.map((d: Fee, i: number) => (
-              <Tr
-                key={i}
-                borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
-                borderLeft="none"
-                borderRight={"none"}
-                borderTop="none"
-                position={"relative"}
-              >
-                <Td>
-                  <Text zIndex={2}>{d.game}</Text>
-                </Td>
-                <Td>{d.transactionType} </Td>
-                <Td>{d.fee} AXLE</Td>
-              </Tr>
-            ))}
+            {transactions.map((d: Fee, i: number) => {
+              const type = d.fee !== 0 ? "DEBIT" : "CREDIT";
+              const feeType = d.fee !== 0 ? d.fee : d.reward;
+              const sign = d.fee !== 0 ? "-" : "+";
+
+              return (
+                <Tr
+                  key={i}
+                  borderBottom={`2px solid ${theme.primaryTwoTextColor}`}
+                  borderLeft="none"
+                  borderRight={"none"}
+                  borderTop="none"
+                  position={"relative"}
+                >
+                  <Td>
+                    <Box>
+                      <Text>{moment(d.createdAt).format("LLL")}</Text>
+                    </Box>
+                  </Td>
+                  <Td>{d.transactionType} </Td>
+                  <Td>{`${sign}` + feeType} AXLE</Td>
+                  <Td>{type}</Td>
+                  <Td>{d.currentBalance}</Td>
+                </Tr>
+              );
+            })}
           </Tbody>
         </Table>
       </TableContainer>

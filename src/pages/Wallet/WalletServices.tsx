@@ -4,16 +4,17 @@ import { userPrefix } from "../../config";
 export interface Fee {
   _id: string;
   wallet: string;
+  createdAt: string;
   transactionType: string;
   game: string;
   gameType: string;
   fee: number;
   reward: number;
+  currentBalance: number;
 }
 
 export interface Transactions {
-  fees: Fee[];
-  rewards: Fee[];
+  transactions: Fee[];
   balance: number;
 }
 
