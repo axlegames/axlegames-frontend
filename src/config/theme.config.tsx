@@ -21,4 +21,9 @@ export const theme = {
   warningColor: "",
 
   modalBgColor: "#262442",
+
+  neuPrimaryBg: "#A34400",
+  newPrimaryShadow: "#FF7C1F",
+  neuSecondaryBg: "#40464F",
+  newSecondaryShadow: "#535A65",
 };

@@ -55,7 +55,7 @@ const WalletHeader = (props: WalletProps) => {
         </Box>
         <Flex columnGap={"1rem"}>
           <NeuButton
-            onClick={() => props.action}
+            onClick={() => props.action()}
             label={props.label}
             bg={"#A34400"}
             shadow={"#FF7C1F"}
