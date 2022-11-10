@@ -1,7 +1,13 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-import ETH from "../../../assets/logos/bnb.png";
+
+import AXLE from "../../../assets/home/logos/icon.png";
+import Trophy from "../../../assets/logos/trophy.webp";
+
 import NeuButton from "../../Axle/component/NeuButton";
+import PreSale from "../../Axle/dialog/PreSale";
+import { useState } from "react";
+import Dialog from "../../Axle/dialog/Dialog";
 
 interface Props {
   img: string;
@@ -16,6 +22,8 @@ interface WalletProps {
 }
 
 const WalletHeader = (props: WalletProps) => {
+  const [open, setOpen] = useState(false);
+
   const WalletCard = (props: Props) => {
     return (
       <Box
@@ -49,8 +57,8 @@ const WalletHeader = (props: WalletProps) => {
           <NeuButton
             onClick={() => props.action}
             label={props.label}
-            bg={theme.bgColor}
-            shadow={theme.dangerColor}
+            bg={"#A34400"}
+            shadow={"#FF7C1F"}
           />
         </Flex>
       </Box>
@@ -64,16 +72,30 @@ const WalletHeader = (props: WalletProps) => {
       p={4}
       borderRadius="xl"
     >
+      <Dialog
+        close={() => setOpen(false)}
+        children={<PreSale />}
+        isOpen={open}
+        key={1}
+        size={"lg"}
+      />
+
       <WalletCard
-        action={() => {}}
-        img={ETH}
+        action={() => {
+          setOpen(true);
+          console.log("Ok");
+        }}
+        img={Trophy}
         label="Add Funds"
         main="Wallet Balance"
         sub={`${props.balance} AXLE`}
       />
       <WalletCard
-        action={() => {}}
-        img={ETH}
+        action={() => {
+          setOpen(true);
+          console.log("not Ok");
+        }}
+        img={AXLE}
         label="Buy in Presale Token"
         main="Connected Wallet Balance"
         sub="00.00 AXLE"

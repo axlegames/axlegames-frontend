@@ -49,8 +49,9 @@ const WalletTranscations = (props: Props) => {
               borderRight={"none"}
               borderTop="none"
             >
-              {headers.map((h) => (
+              {headers.map((h, i) => (
                 <Th
+                  key={i}
                   fontFamily="quicksand"
                   color={theme.secondaryTwoTextColor}
                   fontSize={"md"}
