@@ -14,7 +14,8 @@ import {
 
 import { theme } from "../config/theme.config";
 
-import ComingSoon from "../assets/logos/asap.png";
+// import ComingSoon from "../assets/logos/asap.png";
+import Live from "../assets/logos/live.png";
 import Logo from "../assets/home/logos/logo.png";
 
 import SideBarButton from "../pages/Home/components/sidebar/SideBarButton";
@@ -51,6 +52,7 @@ import Instagram from "../assets/socials/instagram.png";
 import Twitter from "../assets/socials/twitter.png";
 import Telegram from "../assets/socials/telegram.png";
 import Discord from "../assets/socials/discord.png";
+import Terms from "./Terms";
 
 const images = [
   { img: Instagram, url: "https://www.instagram.com/axlegames/" },
@@ -75,6 +77,8 @@ const SideBarLayout = (props: SideBarProps) => {
     localStorage.clear();
     window.location.reload();
   };
+
+  const [terms, setTerms] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -185,7 +189,12 @@ const SideBarLayout = (props: SideBarProps) => {
         close={() => setOpen(!open)}
         children={<Signin />}
       />
-
+      <Dialog
+        size="2xl"
+        isOpen={terms}
+        close={() => setTerms(!terms)}
+        children={<Terms onClick={() => setTerms(!terms)} />}
+      ></Dialog>
       <Image
         zIndex={23600}
         cursor={"pointer"}
@@ -241,54 +250,40 @@ const SideBarLayout = (props: SideBarProps) => {
           />
         </IsNotLoggedIn>
 
-        <SideBarButton
-          onClick={() => clearConnectionAndChangeRoute("/axle-token")}
-          title={"AXLE Token"}
-          link="/axle-token"
-          icon={<BiCoin size={32} />}
-        />
         <Box width={"100%"} position="relative">
           <Image
             position={"absolute"}
             zIndex={100}
             right="5%"
-            top={"-15%"}
-            src={ComingSoon}
+            top={"-12%"}
+            src={Live}
             height="12"
             width={"12"}
           />
           <SideBarButton
-            isCommingSoon={true}
-            title={"AxleVerse"}
-            icon={<HiGlobe size={32} />}
+            onClick={() => clearConnectionAndChangeRoute("/axle-token")}
+            title={"AXLE Token"}
+            link="/axle-token"
+            icon={<BiCoin size={32} />}
           />
         </Box>
-        <Box width={"100%"} position="relative">
-          <Image
-            position={"absolute"}
-            zIndex={100}
-            right="5%"
-            top={"-15%"}
-            src={ComingSoon}
-            height="12"
-            width={"12"}
-          />
+        <SideBarButton
+          isCommingSoon={true}
+          onClick={() => clearConnectionAndChangeRoute("/coming-soon")}
+          title={"AxleVerse"}
+          icon={<HiGlobe size={32} />}
+        />
 
-          <SideBarButton title={"Marketplace"} icon={<MdStore size={32} />} />
-        </Box>
-        <Box width={"100%"} position="relative">
-          <Image
-            position={"absolute"}
-            zIndex={100}
-            right="5%"
-            top={"-15%"}
-            src={ComingSoon}
-            height="12"
-            width={"12"}
-          />
-
-          <SideBarButton title={"About Us"} icon={<MdInfo size={32} />} />
-        </Box>
+        <SideBarButton
+          onClick={() => clearConnectionAndChangeRoute("/coming-soon")}
+          title={"Marketplace"}
+          icon={<MdStore size={32} />}
+        />
+        <SideBarButton
+          onClick={() => setTerms(true)}
+          title={"Terms & Conditions"}
+          icon={<MdInfo size={32} />}
+        />
 
         <Accordion width={"100%"} allowToggle allowMultiple>
           <AccordionItem border={"none"} outline="none" width={"100%"}>

@@ -12,6 +12,7 @@ import Profile from "./pages/DashBoard/pages/Profile";
 import ReferralLayout from "./pages/Referral/ReferralLayout";
 import Lobby from "./pages/Wordle/Lobby";
 import Wallet from "./pages/Wallet/Wallet";
+import ComingSoon from "./pages/ComingSoon";
 // import PrivateRoute from "./config/protected.router";
 
 export const App = () => {
@@ -33,6 +34,7 @@ export const App = () => {
           <Route path="/referrals" element={<ReferralLayout />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/coming-soon" element={<ComingSoon />} />
 
           <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
           <Route
