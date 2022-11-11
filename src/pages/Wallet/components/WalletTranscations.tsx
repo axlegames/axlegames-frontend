@@ -25,9 +25,9 @@ const WalletTranscations = (props: Props) => {
         <Text fontSize={"3xl"} color={theme.primaryTextColor}>
           Wallet Transaction History ({transactions.length})
         </Text>
-        <Text color={theme.secondaryTextColor}>
-          Track your GAMEIN token transactions in GameInfinity account.
-        </Text>
+        {/* <Text color={theme.secondaryTextColor}>
+          Track your AXLE token transactions in AXLE account.
+        </Text> */}
       </Box>
       <TableContainer
         p={3}

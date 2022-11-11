@@ -59,7 +59,7 @@ const GameHistory = () => {
       <Flex justifyContent={"space-between"}>
         <Flex fontWeight={"bold"} direction={"column"}>
           <Text fontSize={"3xl"} color={theme.primaryTextColor}>
-            Your History
+            Game History
           </Text>
         </Flex>
         <Button

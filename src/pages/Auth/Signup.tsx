@@ -10,6 +10,7 @@ import { AuthServices } from "./AuthServices";
 import { useState } from "react";
 import FormError from "./componetns/FormError";
 import { theme } from "../../config/theme.config";
+import { useParams } from "react-router";
 
 const isValidUsername = (username: string) => /^[a-z0-9]{6}$/.test(username);
 const isValidEmail = (email: string) =>
@@ -36,8 +37,10 @@ const validate = (values: any) => {
 };
 
 const Signup = (props: any) => {
+  const params = useParams();
+  console.log(params);
+
   const handleRequest = (data: any) => {
-    console.log(data);
     setStatus({
       error: data.error,
       message: data.message,
@@ -56,7 +59,7 @@ const Signup = (props: any) => {
       password: "",
       username: "",
       confirmPassword: "",
-      referralCode: "",
+      referralCode: params.id || "",
     },
     validate,
     onSubmit: (values) => {
@@ -149,15 +152,17 @@ const Signup = (props: any) => {
         touched={form.touched.confirmPassword ?? false}
         name={form.errors.confirmPassword ?? ""}
       />
-      <FormField
-        placeHolder="Referral Code"
-        value={form.values.referralCode}
-        onChange={form.handleChange}
-        name="referralCode"
-        label="Referral Code"
-        type="text"
-        isRequired={false}
-      />
+      {!params.id ? (
+        <FormField
+          placeHolder="Referral Code"
+          value={form.values.referralCode}
+          onChange={form.handleChange}
+          name="referralCode"
+          label="Referral Code"
+          type="text"
+          isRequired={false}
+        />
+      ) : null}
       <Flex
         rowGap={"1rem"}
         direction={"column"}

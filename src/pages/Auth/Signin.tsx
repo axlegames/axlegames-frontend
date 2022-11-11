@@ -45,12 +45,17 @@ const Signin = () => {
   };
 
   const handleGoogleLogin = (data: any) => {
-    const tokenData = { token: data.tokenId };
+    const tokenData = {
+      token: data.tokenId,
+      name: data.profileObj.givenName,
+      avatarUrl: data.profileObj.imageUrl,
+    };
+    console.log(tokenData);
     AuthServices.loginGoogle(tokenData)
       .then((res: any) => {
         if (!res.data.error) {
           AuthServices.createSession(res.data);
-          window.location.reload();
+          // window.location.reload();
         }
       })
       .catch((err) => console.log(err));

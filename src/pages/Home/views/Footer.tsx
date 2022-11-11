@@ -112,8 +112,7 @@ const Footer = () => {
           p={{ base: "8" }}
           color={theme.secondaryTextColor}
         >
-          Don't Miss Out On Any Updates! Join Our Mailing List Today And Learn
-          Everything New About Axle Games. Yes, I'm In!
+          Join our mailing list to stay updated about Axle Games.
         </Text>
         <Button
           _hover={{

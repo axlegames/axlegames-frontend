@@ -199,9 +199,9 @@ const SideBarLayout = (props: SideBarProps) => {
         zIndex={23600}
         cursor={"pointer"}
         onClick={() => props.scrollTop()}
-        px={{ base: "8" }}
-        py={4}
+        width={"32"}
         src={Logo}
+        alignSelf="center"
       ></Image>
 
       <IsLoggedIn>

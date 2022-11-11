@@ -138,9 +138,9 @@ const Referral = () => {
             Referral Link
           </Text>
 
-          <Text color={theme.secondaryTextColor} fontSize="sm">
+          {/* <Text color={theme.secondaryTextColor} fontSize="sm">
             See who is on your top list.
-          </Text>
+          </Text> */}
         </Box>
 
         <Box borderRadius={"lg"} p={4} bg={theme.fgColor}>

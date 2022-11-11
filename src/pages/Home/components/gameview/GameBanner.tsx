@@ -1,8 +1,10 @@
 import { Box, Flex, Text, Image, Grid, GridItem } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 import { theme } from "../../../../config/theme.config";
 // import Carousel from "nuka-carousel/lib/carousel";
 
 const GameBanner = (props: any) => {
+  const navigate = useNavigate();
   return (
     <Box maxW={"100%"} overflowX="hidden" pb={16}>
       <Flex flexDirection={"column"} p={{ base: "4" }}>
@@ -37,14 +39,22 @@ const GameBanner = (props: any) => {
         columnGap="1rem"
       >
         <GridItem>
-          <Image
-            borderRadius={"3xl"}
-            width={"100%"}
-            src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
-          />
+          <a
+            href={`https://t.me/axlegames_en`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              onClick={() => navigate("/")}
+              borderRadius={"3xl"}
+              width={"100%"}
+              src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
+            />
+          </a>
         </GridItem>
         <GridItem>
           <Image
+            onClick={() => navigate("/referrals")}
             borderRadius={"3xl"}
             width={"100%"}
             src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}

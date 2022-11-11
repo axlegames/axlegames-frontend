@@ -7,6 +7,7 @@ import {
   Grid,
   Image,
   Input,
+  Progress,
   Stack,
   Text,
   useToast,
@@ -15,7 +16,7 @@ import { theme } from "../../../config/theme.config";
 import MainLayout from "../../../layouts/MainLayout";
 import Logo from "../../../assets/home/logos/icon.png";
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ProfileService } from "./ProfileService";
 import NeuButton from "../../Axle/component/NeuButton";
 
@@ -70,8 +71,8 @@ const Profile = () => {
         console.log(res);
         if (!res.data.error) {
           return toast({
-            title: "Profile Updated",
-            description: "Changes saved successfully",
+            title: "profile updated",
+            description: "changes saved successfully",
             status: "success",
             duration: 5000,
             isClosable: true,
@@ -91,10 +92,78 @@ const Profile = () => {
     },
   });
 
+  const [file, setFile] = useState();
+
+  enum AvtarUploadStatus {
+    FILE_NOT_FOUND = "FILE_NOT_FOUND",
+    USER_NOT_FOUND = "USER_NOT_FOUND",
+    INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR",
+    UPLOADED = "UPLOADED",
+  }
+
+  const handleAvatarUrl = async (event: any) => {
+    setFile(event.target.files[0]);
+    const avatarUrl = (await toBase64(event.target.files[0])) as string;
+    setAvatar(avatarUrl);
+  };
+  const toBase64 = (file: any) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  const uploadAvatarUrl = () => {
+    if (file !== null) {
+      const data = new FormData();
+      data.append("userId", localStorage.getItem("userId") || "");
+      data.append("avatar", file || "");
+      return ProfileService.setAvatarUrl(data)
+        .then((res) => {
+          if (AvtarUploadStatus.UPLOADED) {
+            return toast({
+              title: "Success",
+              description: "File Uploaded",
+              status: "success",
+              isClosable: true,
+              duration: 5000,
+              position: "top",
+            });
+          }
+
+          return toast({
+            title: "Error",
+            description: "Something went wrong",
+            status: "error",
+            isClosable: true,
+            duration: 5000,
+            position: "top",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    return toast({
+      title: "Upload file",
+      description: "please upload file",
+      status: "warning",
+      isClosable: true,
+      duration: 5000,
+      position: "top",
+    });
+  };
+
+  const [avatar, setAvatar] = useState("");
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
-    ProfileService.getProfile("admin")
+    ProfileService.getProfile(localStorage.getItem("username") || "")
       .then((res) => {
         const profile = res.data;
+        setAvatar(profile.avatarUrl);
+        setProgress(profile.profileCompletetion);
         form.setValues({
           email: profile.email,
           facebookUrl: profile.facebookUrl,
@@ -125,18 +194,102 @@ const Profile = () => {
       >
         <Stack my={4} textAlign={"center"}>
           <Text color={theme.primaryTextColor} fontSize={"3xl"}>
-            Update Public Profile Details
+            Update Your Profile
           </Text>
-          <Text color={theme.primaryTwoTextColor} fontSize={"xl"}>
+          {/* <Text color={theme.primaryTwoTextColor} fontSize={"xl"}>
             Edit your GI - Gamer Profile Details
-          </Text>
+          </Text> */}
         </Stack>
 
+        <Box
+          columnGap={"2rem"}
+          p={4}
+          borderRadius="xl"
+          display={"flex"}
+          flexDirection="row"
+        >
+          <Box
+            columnGap={"1rem"}
+            display={"flex"}
+            bg={theme.bgColor}
+            p={4}
+            borderRadius="xl"
+            flexDirection={"column"}
+            minW="24vw"
+            alignItems={"flex-start"}
+            justifyContent="center"
+            rowGap={"1rem"}
+          >
+            <Box>
+              <Text fontSize={"3xl"} color={theme.primaryTextColor}>
+                Complete your profile!
+              </Text>
+              <Text color={theme.primaryTwoTextColor}>
+                {progress.toFixed(2)}% profile has been completed
+              </Text>
+            </Box>
+            <Box
+              width={"100%"}
+              boxShadow={`0px 0px 4px ${theme.primaryTextColor}`}
+              borderRadius="xl"
+            >
+              <Progress
+                borderRadius={"xl"}
+                hasStripe
+                width={"100%"}
+                colorScheme="blue"
+                height="48px"
+                value={progress}
+              />
+            </Box>
+          </Box>
+
+          <Box
+            columnGap={"1rem"}
+            display={"flex"}
+            bg={theme.bgColor}
+            p={4}
+            borderRadius="xl"
+          >
+            <Box display={"flex"} flexDirection="column">
+              <Box bg={theme.fgColor} p={4} borderRadius="xl">
+                <Image width={"32"} src={avatar || Logo} />
+              </Box>
+            </Box>
+
+            <Box
+              alignItems={"flex-start"}
+              display="flex"
+              flexDirection={"column"}
+            >
+              <Input
+                outline="none"
+                border="none"
+                boxShadow={`0px 0px 3px ${theme.ternaryButtonColor}`}
+                bg={theme.bgColor}
+                alignItems="center"
+                onChange={handleAvatarUrl}
+                color={theme.secondaryTextColor}
+                size="lg"
+                fontWeight="bold"
+                name={"avatar"}
+                type={"file"}
+              ></Input>
+              <Box p={4}>
+                <NeuButton
+                  bg={"#A34400"}
+                  shadow={"#FF7C1F"}
+                  onClick={() => uploadAvatarUrl()}
+                  label="Upload"
+                />
+              </Box>
+            </Box>
+          </Box>
+        </Box>
         <Grid
           templateColumns={{
             base: "1fr",
             md: "1fr 1fr",
-            "2xl": "2fr 2fr 1fr",
           }}
           bg={theme.bgColor}
           borderRadius="xl"
@@ -220,27 +373,6 @@ const Profile = () => {
               label="LinkedIn"
             />
           </Flex>
-          <Box
-            p={4}
-            borderRadius="xl"
-            display={"flex"}
-            flexDirection="column"
-            alignItems="center"
-            rowGap={"1rem"}
-          >
-            <Box bg={theme.ternaryButtonColor} p={2} borderRadius="xl">
-              <Text color={theme.primaryTwoTextColor}>Choose Avatar</Text>
-            </Box>
-            <Box bg={theme.fgColor} p={4} borderRadius="xl">
-              <Image width={"32"} src={Logo} />
-            </Box>
-            <NeuButton
-              bg={"#A34400"}
-              shadow={"#FF7C1F"}
-              onClick={() => {}}
-              label="Upload"
-            />
-          </Box>
         </Grid>
 
         <Flex p={5}>

@@ -27,11 +27,11 @@ const WhitePaper = (props: any) => {
         </Box>
         <Flex p={8} borderRadius="xl" rowGap={".5rem"} direction={"column"}>
           <Text color={theme.primaryTextColor} fontSize={"3xl"}>
-            Finest designed gaming and NFT Project
+            A well-designed Deflationary token model
           </Text>
           <Text>
-            GameInfinity project, tokenomics, roadmap and whitepaper is designed
-            to serve the best crypto project to all the participants.
+            Axle games tokenomics is designed to create solid, reliable and
+            attractive ways for users to benefit from the platform.
           </Text>
           <Box mt={3}>
             <a
