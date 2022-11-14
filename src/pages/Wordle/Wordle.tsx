@@ -11,11 +11,12 @@ import WonModal from "./modals/WonModal";
 import LostModal from "./modals/LostModal";
 import MenuModal from "./modals/MenuModal";
 
-import { WordleServices, Status } from "./WordleServices";
+import { WordleServices, Status, GuessStatus } from "./WordleServices";
 import { KEY_ACTION, initState, reducer, WordleState } from "./WordleReducer";
 
 import WordleTimer from "./hooks/WordleTimer";
 import { Contest } from "./WordleServices";
+import { TokenAuthStatus } from "../../config/auth";
 
 const Wordle = () => {
   const toast = useToast();
@@ -30,6 +31,16 @@ const Wordle = () => {
   const [state, dispatch] = useReducer(reducer, initState);
   const [contest, setContest] = useState<Contest>();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  const isAuthorized = (status: TokenAuthStatus) => {
+    if (
+      status.valueOf().toString() ===
+      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+    ) {
+      localStorage.clear();
+      return navigate("/");
+    }
+  };
 
   const fectchState = (game: Status) => {
     dispatch({
@@ -77,6 +88,8 @@ const Wordle = () => {
   useEffect(() => {
     WordleServices.getGameState({ userId: localStorage.getItem("userId") })
       .then((game) => {
+        isAuthorized(game as TokenAuthStatus);
+        game = game as Status;
         if (game.isGameCompeted)
           if (game.isWinningWord) setIsWon(true);
           else setIsLost(true);
@@ -89,17 +102,20 @@ const Wordle = () => {
       setIsWon(false);
       setIsLost(false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     WordleServices.getLobbyStats(contestId || "")
       .then((res) => {
-        setContest(res);
+        isAuthorized(res as TokenAuthStatus);
+        setContest(res as Contest);
         setIsLoaded(true);
       })
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contestId]);
 
   const onKeyPress = (key: string) => {
@@ -124,12 +140,13 @@ const Wordle = () => {
         position: "top",
       });
     }
-    const { guessStatus, inValidWord, isWinningWord } =
-      await WordleServices.validateUpdateGuess({
-        word: state.currentGuess.toLowerCase(),
-        contestId: contestId,
-        gameStateId: gameStateId,
-      });
+    const resp = await WordleServices.validateUpdateGuess({
+      word: state.currentGuess.toLowerCase(),
+      contestId: contestId,
+      gameStateId: gameStateId,
+    });
+    isAuthorized(resp as TokenAuthStatus);
+    const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
     if (inValidWord) {
       return toast({
         title: "Invalid Word",
@@ -179,11 +196,13 @@ const Wordle = () => {
   };
 
   const forceFinishGame = async () => {
-    const { isWinningWord } = await WordleServices.validateUpdateGuess({
+    const resp = await WordleServices.validateUpdateGuess({
       word: state.currentGuess.toLowerCase(),
       contestId: contestId,
       gameStateId: gameStateId,
     });
+    isAuthorized(resp as TokenAuthStatus);
+    const { isWinningWord } = resp as GuessStatus;
     await WordleServices.cleanGameState({
       userId: localStorage.getItem("userId"),
     });

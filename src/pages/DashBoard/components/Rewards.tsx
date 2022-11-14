@@ -4,6 +4,8 @@ import { HiBriefcase } from "react-icons/hi";
 import { MdAccountBalance, MdPeople, MdLocalOffer } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { DashBoardServices, RewardsModel } from "../DashBoardServices";
+import { useNavigate } from "react-router";
+import { TokenAuthStatus } from "../../../config/auth";
 
 const Rewards = () => {
   const [reward, setReward] = useState<RewardsModel>({
@@ -14,12 +16,25 @@ const Rewards = () => {
     staking: 0,
   });
 
+  const navigate = useNavigate();
+  const isAuthorized = (status: TokenAuthStatus) => {
+    if (
+      status.valueOf().toString() ===
+      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+    ) {
+      localStorage.clear();
+      return navigate("/");
+    }
+  };
+
   useEffect(() => {
     DashBoardServices.getRewardsAndBalance()
       .then((res) => {
-        setReward(res);
+        isAuthorized(res as TokenAuthStatus);
+        setReward(res as RewardsModel);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Flex direction={"column"}>

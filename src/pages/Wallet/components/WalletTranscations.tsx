@@ -17,12 +17,15 @@ interface Props {
   transactions: Fee[];
 }
 const WalletTranscations = (props: Props) => {
-  const transactions = props.transactions || [];
+  const transactions: Fee[] = props.transactions;
   const headers = ["Date", "Transcation Type", "Amount", "Type", "Balance"];
   return (
     <Box fontFamily={"quicksand"} fontWeight="bold">
       <Box p={3}>
-        <Text fontSize={"3xl"} color={theme.primaryTextColor}>
+        <Text
+          fontSize={{ base: "lg", sm: "xl", md: "2xl" }}
+          color={theme.primaryTextColor}
+        >
           Wallet Transaction History ({transactions.length})
         </Text>
         {/* <Text color={theme.secondaryTextColor}>

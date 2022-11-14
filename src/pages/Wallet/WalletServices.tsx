@@ -1,5 +1,6 @@
 import axios from "axios";
-import { userPrefix } from "../../config";
+import { headers, userPrefix } from "../../config";
+import { TokenAuthStatus } from "../../config/auth";
 
 export interface Fee {
   _id: string;
@@ -18,11 +19,16 @@ export interface Transactions {
   balance: number;
 }
 
+const token = headers() ?? "";
+
 export class WalletServices {
-  static getUserTransactions = async (): Promise<Transactions> =>
+  static getUserTransactions = async (): Promise<
+    Transactions | TokenAuthStatus
+  > =>
     (
       await axios.get(
-        `${userPrefix}/transactions/${localStorage.getItem("userId")}`
+        `${userPrefix}/transactions/${localStorage.getItem("userId")}`,
+        token
       )
     ).data;
 }

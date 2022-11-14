@@ -30,6 +30,7 @@ import { AxleContests, HomeServices } from "../HomeServices";
 import ConfirmDialog from "./ConfirmDialog";
 import { GameType } from "../enums/contests.enum";
 import NeuButton from "../../Axle/component/NeuButton";
+import { TokenAuthStatus } from "../../../config/auth";
 
 const GameEntryModal = (props: any) => {
   const toast = useToast();
@@ -57,7 +58,22 @@ const GameEntryModal = (props: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.open]);
 
-  const handleEntryStatus = (res: EntryStatus, fee: number) => {
+  const isAuthorized = (status: TokenAuthStatus) => {
+    if (
+      status.valueOf().toString() ===
+      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+    ) {
+      localStorage.clear();
+      return navigate("/");
+    }
+  };
+
+  const handleEntryStatus = (
+    res: EntryStatus | TokenAuthStatus,
+    fee: number
+  ) => {
+    isAuthorized(res as TokenAuthStatus);
+    res = res as EntryStatus;
     const status = res.status.valueOf().toString();
     const toString = (entryStatus: ENTRY_STATUS): string => {
       return entryStatus.valueOf().toString();

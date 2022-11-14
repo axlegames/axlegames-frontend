@@ -20,7 +20,7 @@ const ComingSoon = () => {
           flexDirection="column"
           alignItems={"center"}
           fontFamily={"'Press Start 2P', cursive"}
-          fontSize={"9xl"}
+          fontSize={{ base: "xl", md: "5xl", lg: "7xl" }}
           color={theme.primaryTwoTextColor}
           justifyContent="center"
           mt={12}
@@ -33,7 +33,7 @@ const ComingSoon = () => {
         <Text
           fontFamily={"quicksand"}
           fontWeight="bold"
-          fontSize={"5xl"}
+          fontSize={{ base: "md", md: "xl", lg: "3xl" }}
           color={theme.primaryTextColor}
         >
           We are preparing something exciting & amazing for you.

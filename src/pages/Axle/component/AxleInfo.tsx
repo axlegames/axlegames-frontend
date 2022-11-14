@@ -36,7 +36,6 @@ const AxleInfo = () => {
     <Grid
       templateColumns={{ base: "1fr", xl: "1fr 1fr" }}
       alignItems={"center"}
-      p={8}
       borderRadius="xl"
     >
       <Dialog
@@ -57,7 +56,7 @@ const AxleInfo = () => {
 
       <Flex
         my={{ base: "8" }}
-        px={{ base: "8" }}
+        px={{ base: "4" }}
         direction={"row"}
         textAlign={"left"}
         fontWeight="bold"
@@ -66,16 +65,15 @@ const AxleInfo = () => {
           direction="column"
           bg={theme.fgColor}
           borderRadius="2xl"
-          px={{ base: "6" }}
-          pt={{ base: "6" }}
+          px={{ base: "3" }}
+          pt={{ base: "3" }}
           fontWeight="bold"
-          m={{ base: "4" }}
           minW={"30vw"}
           width="100%"
         >
           <Text
             color={theme.primaryTextColor}
-            fontSize={{ base: "2xl", xl: "3xl" }}
+            fontSize={{ base: "xl", xl: "3xl" }}
             textAlign="center"
           >
             Token Information

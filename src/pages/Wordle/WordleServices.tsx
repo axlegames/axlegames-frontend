@@ -1,5 +1,6 @@
 import axios from "axios";
 import { headers, gamePrefix } from "../../config";
+import { TokenAuthStatus } from "../../config/auth";
 import { GameStatus } from "../Home/enums/contests.enum";
 
 const token = headers() ?? "";
@@ -64,13 +65,15 @@ export interface Contest {
 }
 
 export class WordleServices {
-  static enterContest = async (data: any): Promise<EntryStatus> => {
+  static enterContest = async (
+    data: any
+  ): Promise<EntryStatus | TokenAuthStatus> => {
     return await (
       await axios.post(`${gamePrefix}/enter`, data, token)
     ).data;
   };
 
-  static getGameState = async (data: any): Promise<Status> =>
+  static getGameState = async (data: any): Promise<Status | TokenAuthStatus> =>
     await (
       await axios.post(`${gamePrefix}/status`, data, token)
     ).data;
@@ -78,13 +81,17 @@ export class WordleServices {
   static cleanGameState = async (data: any): Promise<void> =>
     await axios.post(`${gamePrefix}/clean`, data, token);
 
-  static getLobbyStats = async (contestId: string): Promise<Contest> => {
+  static getLobbyStats = async (
+    contestId: string
+  ): Promise<Contest | TokenAuthStatus> => {
     return await (
-      await axios.get(`${gamePrefix}/lobby/${contestId}`)
+      await axios.get(`${gamePrefix}/lobby/${contestId}`, token)
     ).data.contest;
   };
 
-  static validateUpdateGuess = async (data: any): Promise<GuessStatus> => {
+  static validateUpdateGuess = async (
+    data: any
+  ): Promise<GuessStatus | TokenAuthStatus> => {
     const resp = await axios.post(
       `${gamePrefix}/validate/word`,
 

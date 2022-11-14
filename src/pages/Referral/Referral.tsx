@@ -14,6 +14,8 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { TokenAuthStatus } from "../../config/auth";
 import { theme } from "../../config/theme.config";
 import NeuButton from "../Axle/component/NeuButton";
 import {
@@ -22,18 +24,32 @@ import {
 } from "../DashBoard/DashBoardServices";
 
 const Referral = () => {
+  const navigate = useNavigate();
+  const isAuthorized = (status: TokenAuthStatus) => {
+    if (
+      status.valueOf().toString() ===
+      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+    ) {
+      localStorage.clear();
+      return navigate("/");
+    }
+  };
+
   useEffect(() => {
     DashBoardServices.getReferralAndReferralCode()
       .then((res) => {
-        console.log(res);
-        setReferral(res);
+        isAuthorized(res as TokenAuthStatus);
+        setReferral(res as ReferralModel);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [referral, setReferral] = useState<ReferralModel>({
-    referralCode: "",
-    referrals: [],
+    referralCode: "testRef",
+    referrals: ["jayright", "johndoe"],
   });
+
+  const link = `https://axlegames.io/signup/${referral.referralCode}`;
 
   return (
     <Grid
@@ -45,7 +61,7 @@ const Referral = () => {
       shadow="xl"
       borderRadius={"xl"}
       aria-expanded="false"
-      display={{ base: "none", md: "grid" }}
+      display={{ base: "grid" }}
       bg={theme.bgColor}
     >
       <Flex bg={theme.bgColor} direction="column" justifyContent={"flex-start"}>
@@ -82,7 +98,7 @@ const Referral = () => {
                   fontFamily="quicksand"
                   fontWeight="bold"
                 >
-                  Address
+                  Usernames
                 </Th>
                 {/* <Th
                   fontSize={"md"}
@@ -148,9 +164,7 @@ const Referral = () => {
             100 AXLE Tokens per friend
           </Text>
           <Box width="100%" my={2} bg={theme.bgColor} p={2} borderRadius="lg">
-            <Text color={theme.primaryTwoTextColor}>
-              {referral.referralCode}
-            </Text>
+            <Text color={theme.primaryTwoTextColor}>{link}</Text>
           </Box>
           <NeuButton
             bg={"#A34400"}

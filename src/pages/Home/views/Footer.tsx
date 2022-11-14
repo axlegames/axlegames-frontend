@@ -48,7 +48,7 @@ const Footer = () => {
       alignItems="center"
       flexDirection={"column"}
       rowGap={{ base: "12rem", md: "5rem" }}
-      mb={16}
+      my={{ base: "20", md: "16" }}
     >
       <Box
         color={theme.highLightColor}

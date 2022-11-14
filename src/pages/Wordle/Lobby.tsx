@@ -5,6 +5,7 @@ import { theme } from "../../config/theme.config";
 import { WordleServices, Contest } from "./WordleServices";
 import ETH from "../../assets/logos/trophy.webp";
 import BNB from "../../assets/logos/alram.webp";
+import { TokenAuthStatus } from "../../config/auth";
 
 interface Props {
   deadline: string;
@@ -13,19 +14,31 @@ interface Props {
 }
 
 const Lobby = () => {
-  const navigate = useNavigate();
   const params = useParams();
   const [contest, setContest] = useState<Contest>();
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const navigate = useNavigate();
+  const isAuthorized = (status: TokenAuthStatus) => {
+    if (
+      status.valueOf().toString() ===
+      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+    ) {
+      localStorage.clear();
+      return navigate("/");
+    }
+  };
 
   useEffect(() => {
     const contestId = params.contestId || "";
     WordleServices.getLobbyStats(contestId)
       .then((res) => {
-        setContest(res);
+        isAuthorized(res as TokenAuthStatus);
+        setContest(res as Contest);
         setIsLoaded(true);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.contestId]);
 
   const Timer = (props: Props) => {

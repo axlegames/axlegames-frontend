@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { headers, gamePrefix } from "../../config";
+import { TokenAuthStatus } from "../../config/auth";
 
 const token = headers() ?? "";
 
@@ -29,7 +30,9 @@ export interface RewardsModel {
 }
 
 export class DashBoardServices {
-  static getRewardsAndBalance = async (): Promise<RewardsModel> => {
+  static getRewardsAndBalance = async (): Promise<
+    RewardsModel | TokenAuthStatus
+  > => {
     const { data } = await axios.post(
       `${gamePrefix}/rewards`,
       { userId: localStorage.getItem("userId") ?? "" },
@@ -37,7 +40,9 @@ export class DashBoardServices {
     );
     return data;
   };
-  static getGameHistory = async (): Promise<Array<GameHistoryModel>> => {
+  static getGameHistory = async (): Promise<
+    Array<GameHistoryModel> | TokenAuthStatus
+  > => {
     const { data } = await axios.post(
       `${gamePrefix}/transactions`,
       { userId: localStorage.getItem("userId") ?? "" },
@@ -46,13 +51,14 @@ export class DashBoardServices {
     return data.gameResults;
   };
 
-  static getReferralAndReferralCode = async (): Promise<ReferralModel> => {
+  static getReferralAndReferralCode = async (): Promise<
+    ReferralModel | TokenAuthStatus
+  > => {
     const { data } = await axios.post(
       `${gamePrefix}/referrals`,
       { userId: localStorage.getItem("userId") ?? "" },
       token
     );
-    console.log(data);
     return data;
   };
 }

@@ -66,11 +66,13 @@ const WalletHeader = (props: WalletProps) => {
   };
   return (
     <Box
-      display={"flex"}
+      display={"grid"}
       columnGap="1rem"
+      rowGap={"1rem"}
       justifyContent={"center"}
       p={4}
       borderRadius="xl"
+      gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
     >
       <Dialog
         close={() => setOpen(false)}

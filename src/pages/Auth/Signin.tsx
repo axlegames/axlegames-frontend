@@ -55,7 +55,7 @@ const Signin = () => {
       .then((res: any) => {
         if (!res.data.error) {
           AuthServices.createSession(res.data);
-          // window.location.reload();
+          window.location.reload();
         }
       })
       .catch((err) => console.log(err));

@@ -12,6 +12,8 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { TokenAuthStatus } from "../../../config/auth";
 import { theme } from "../../../config/theme.config";
 import { DashBoardServices, GameHistoryModel } from "../DashBoardServices";
 import DashBoardDialog from "../modal/DashBoardDialog";
@@ -28,11 +30,29 @@ const GameHistory = () => {
     history: [],
   });
 
+  const navigate = useNavigate();
+  const isAuthorized = (status: TokenAuthStatus) => {
+    if (
+      status.valueOf().toString() ===
+      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+    ) {
+      localStorage.clear();
+      return navigate("/");
+    }
+  };
+
   useEffect(() => {
     DashBoardServices.getGameHistory().then((res) => {
+      isAuthorized(res as TokenAuthStatus);
+      res = res as Array<GameHistoryModel>;
+      if (res.length > 6) {
+        setTempHistory({ history: res.slice(0, 6) });
+      } else {
+        setTempHistory({ history: res });
+      }
       setHistory({ history: res });
-      setTempHistory({ history: res.slice(0, 6) });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [open, setOpen] = useState(false);

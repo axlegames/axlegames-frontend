@@ -17,8 +17,15 @@ import MainLayout from "../../../layouts/MainLayout";
 import Logo from "../../../assets/home/logos/icon.png";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-import { ProfileService } from "./ProfileService";
+import {
+  APIHandler,
+  AvtarUploadStatus,
+  ProfileModel,
+  ProfileService,
+} from "./ProfileService";
 import NeuButton from "../../Axle/component/NeuButton";
+import { TokenAuthStatus } from "../../../config/auth";
+import { useNavigate } from "react-router";
 
 const FormInput = (props: any) => {
   return (
@@ -45,6 +52,17 @@ const FormInput = (props: any) => {
 };
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const isAuthorized = (status: TokenAuthStatus) => {
+    if (
+      status.valueOf().toString() ===
+      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+    ) {
+      localStorage.clear();
+      return navigate("/");
+    }
+  };
+
   const toast = useToast();
 
   const form = useFormik({
@@ -68,8 +86,9 @@ const Profile = () => {
         ...values,
         userId: localStorage.getItem("userId") ?? "",
       }).then((res) => {
-        console.log(res);
-        if (!res.data.error) {
+        isAuthorized(res as TokenAuthStatus);
+        res = res as APIHandler;
+        if (!res.error) {
           return toast({
             title: "profile updated",
             description: "changes saved successfully",
@@ -94,13 +113,6 @@ const Profile = () => {
 
   const [file, setFile] = useState();
 
-  enum AvtarUploadStatus {
-    FILE_NOT_FOUND = "FILE_NOT_FOUND",
-    USER_NOT_FOUND = "USER_NOT_FOUND",
-    INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR",
-    UPLOADED = "UPLOADED",
-  }
-
   const handleAvatarUrl = async (event: any) => {
     setFile(event.target.files[0]);
     const avatarUrl = (await toBase64(event.target.files[0])) as string;
@@ -121,7 +133,12 @@ const Profile = () => {
       data.append("avatar", file || "");
       return ProfileService.setAvatarUrl(data)
         .then((res) => {
-          if (AvtarUploadStatus.UPLOADED) {
+          isAuthorized(res as TokenAuthStatus);
+          res = res as APIHandler;
+          if (
+            res.valueOf().toString() ===
+            AvtarUploadStatus.UPLOADED.valueOf().toString()
+          ) {
             return toast({
               title: "Success",
               description: "File Uploaded",
@@ -161,7 +178,8 @@ const Profile = () => {
   useEffect(() => {
     ProfileService.getProfile(localStorage.getItem("username") || "")
       .then((res) => {
-        const profile = res.data;
+        isAuthorized(res as TokenAuthStatus);
+        const profile = res as ProfileModel;
         setAvatar(profile.avatarUrl);
         setProgress(profile.profileCompletetion);
         form.setValues({
@@ -202,11 +220,11 @@ const Profile = () => {
         </Stack>
 
         <Box
-          columnGap={"2rem"}
-          p={4}
-          borderRadius="xl"
-          display={"flex"}
-          flexDirection="row"
+          py={4}
+          display={"grid"}
+          rowGap="1rem"
+          columnGap={"1rem"}
+          gridTemplateColumns={{ base: "1fr", lg: "1fr 1fr" }}
         >
           <Box
             columnGap={"1rem"}
@@ -215,7 +233,7 @@ const Profile = () => {
             p={4}
             borderRadius="xl"
             flexDirection={"column"}
-            minW="24vw"
+            minW={{ base: "auto", lg: "24vw" }}
             alignItems={"flex-start"}
             justifyContent="center"
             rowGap={"1rem"}
@@ -388,7 +406,7 @@ const Profile = () => {
           <Text color={theme.primaryTextColor} fontSize="xl">
             Your Email ID
           </Text>
-          <Box maxW={"30%"} minWidth={"32"}>
+          <Box minWidth={"32"}>
             <Text color={theme.secondaryTextColor}>{form.values.email}</Text>
           </Box>
         </Flex>

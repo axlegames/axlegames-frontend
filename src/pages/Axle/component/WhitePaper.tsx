@@ -11,7 +11,7 @@ const WhitePaper = (props: any) => {
       flexDirection="column"
       rowGap={"8rem"}
       color={theme.secondaryTextColor}
-      p={{ base: "8" }}
+      p={{ base: "4" }}
       fontWeight="bold"
       width={{ base: "100%", md: "80%" }}
       mx={{ base: "0", md: "auto" }}
@@ -22,10 +22,10 @@ const WhitePaper = (props: any) => {
         rowGap={"1rem"}
         direction={{ base: "column", xl: "row" }}
       >
-        <Box borderRadius="xl" p={{ base: "0", lg: "12" }}>
-          <Image maxWidth={"64"} width={"80"} src={WP} />
+        <Box borderRadius="xl">
+          <Image src={WP} m={4} />
         </Box>
-        <Flex p={8} borderRadius="xl" rowGap={".5rem"} direction={"column"}>
+        <Flex p={4} borderRadius="xl" rowGap={".5rem"} direction={"column"}>
           <Text color={theme.primaryTextColor} fontSize={"3xl"}>
             A well-designed Deflationary token model
           </Text>
