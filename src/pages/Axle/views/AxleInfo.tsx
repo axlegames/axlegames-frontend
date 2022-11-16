@@ -1,10 +1,10 @@
 import { Box, Flex, Grid, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { theme } from "../../../config/theme.config";
-import Dialog from "../dialog/Dialog";
-import PreSale from "../dialog/PreSale";
-import NeuButton from "./NeuButton";
-import Tag from "./Tag";
+import Dialog from "../dialog/AxleDialog";
+import PreSale from "../dialog/PreSaleDialog";
+import NeuButton from "../component/NeuButton";
+import Tag from "../component/Tag";
 
 const AxleInfo = () => {
   const token = [

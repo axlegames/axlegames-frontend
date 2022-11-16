@@ -7,7 +7,7 @@ import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Page403 from "./pages/Auth/Page403";
 import Axle from "./pages/Axle/Axle";
 import Dashboard from "./pages/DashBoard/DashBoard";
-import Profile from "./pages/DashBoard/pages/Profile";
+import Profile from "./pages/Profile/Profile";
 import ReferralLayout from "./pages/Referral/ReferralLayout";
 import Lobby from "./pages/Wordle/Lobby";
 import Wallet from "./pages/Wallet/Wallet";

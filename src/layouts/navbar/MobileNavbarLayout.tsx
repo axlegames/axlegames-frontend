@@ -9,17 +9,17 @@ import {
   AccordionItem,
   AccordionPanel,
 } from "@chakra-ui/react";
-import { theme } from "../../../../config/theme.config";
+import { theme } from "../../config/theme.config";
 import {
   AiOutlineMenu,
   AiOutlineClose,
   AiOutlineDashboard,
 } from "react-icons/ai/index";
 import { useState } from "react";
-import Logo from "../../../../assets/home/logos/logo.png";
-import IsLoggedIn from "../../../../config/isLoggedIn";
-import SideBarCard from "../sidebar/SideBarCard";
-import SideBarButton from "../sidebar/SideBarButton";
+import Logo from "../../assets/home/logos/logo.png";
+import IsLoggedIn from "../../config/isLoggedIn";
+import SideBarCard from "./components/SideBarCard";
+import SideBarButton from "./components/SideBarButton";
 import { useNavigate } from "react-router";
 import { MdStore, MdInfo } from "react-icons/md/index";
 import {
@@ -31,12 +31,12 @@ import {
   HiUsers,
   HiCreditCard,
 } from "react-icons/hi/index";
-import IsNotLoggedIn from "../../../../config/isNotLoggedIn";
+import IsNotLoggedIn from "../../config/isNotLoggedIn";
 import { BiCoin } from "react-icons/bi";
-import Dialog from "../../../../pages/Auth/dialogs/Dialog";
-import Terms from "../../../../layouts/Terms";
+import Dialog from "../../pages/Auth/dialogs/AuthDialog";
+import Terms from "../Terms";
 
-import Live from "../../../../assets/logos/live.png";
+import Live from "../../assets/logos/live.png";
 
 const MobileNavbar = () => {
   const [open, setOpen] = useState(false);

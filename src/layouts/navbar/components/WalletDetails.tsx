@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import { theme } from "../../../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 
 const WalletDetails = (props: any) => {
   const ref = useRef<any>();

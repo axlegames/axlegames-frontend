@@ -23,8 +23,8 @@ import {
 } from "../../Wordle/WordleServices";
 import { useEffect, useState } from "react";
 
-import Dialog from "./Dailog";
-import AuthDialog from "../../Auth/dialogs/Dialog";
+import Dialog from "./HomeDailog";
+import AuthDialog from "../../Auth/dialogs/AuthDialog";
 import Signin from "../../Auth/Signin";
 import { AxleContests, HomeServices } from "../HomeServices";
 import ConfirmDialog from "./ConfirmDialog";

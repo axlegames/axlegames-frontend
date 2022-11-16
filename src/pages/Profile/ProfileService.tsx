@@ -1,6 +1,6 @@
 import axios from "axios";
-import { headers, userPrefix } from "../../../config";
-import { TokenAuthStatus } from "../../../config/auth";
+import { headers, userPrefix } from "../../config";
+import { TokenAuthStatus } from "../../config/auth";
 
 const token = headers() || "";
 

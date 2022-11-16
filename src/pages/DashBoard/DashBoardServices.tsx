@@ -16,11 +16,6 @@ export interface GameHistoryModel {
   reward: number;
 }
 
-export interface ReferralModel {
-  referrals: string[];
-  referralCode: string;
-}
-
 export interface RewardsModel {
   balance: number;
   staking: number;
@@ -49,16 +44,5 @@ export class DashBoardServices {
       token
     );
     return data.gameResults;
-  };
-
-  static getReferralAndReferralCode = async (): Promise<
-    ReferralModel | TokenAuthStatus
-  > => {
-    const { data } = await axios.post(
-      `${gamePrefix}/referrals`,
-      { userId: localStorage.getItem("userId") ?? "" },
-      token
-    );
-    return data;
   };
 }

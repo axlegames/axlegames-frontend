@@ -19,7 +19,7 @@ interface Props {
   description: string;
 }
 
-const Dialog = (props: Props) => {
+const HomeDialog = (props: Props) => {
   return (
     <Modal isCentered={true} isOpen={props.open} onClose={() => props.close()}>
       <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
@@ -49,4 +49,4 @@ const Dialog = (props: Props) => {
   );
 };
 
-export default Dialog;
+export default HomeDialog;

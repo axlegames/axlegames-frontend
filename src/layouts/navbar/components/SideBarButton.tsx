@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { useLocation } from "react-router";
-import { theme } from "../../../../config/theme.config";
+import { theme } from "../../../config/theme.config";
 
 const SideBarButton = (props: any) => {
   const location = useLocation();

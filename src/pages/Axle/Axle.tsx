@@ -1,9 +1,10 @@
 import { Flex } from "@chakra-ui/react";
 import MainLayout from "../../layouts/MainLayout";
-import UtilityGrid from "./component/UtilityGrid";
-import WhitePaper from "./component/WhitePaper";
-import AxleInfo from "./component/AxleInfo";
-import AxleHeader from "./component/AxleHeader";
+
+import UtilityGrid from "./views/UtilityGrid";
+import WhitePaper from "./views/WhitePaper";
+import AxleInfo from "./views/AxleInfo";
+import AxleHeader from "./views/AxleHeader";
 
 const Axle = () => {
   return (

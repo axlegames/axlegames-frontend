@@ -14,7 +14,7 @@ import "./index.css";
 
 import { theme } from "../../config/theme.config";
 
-import Dialog from "./dialogs/Dialog";
+import AuthDialog from "./dialogs/AuthDialog";
 import Signup from "./Signup";
 import ForgotPassword from "./ForgotPassword";
 
@@ -84,13 +84,13 @@ const Signin = () => {
 
   return (
     <Form>
-      <Dialog
+      <AuthDialog
         size="md"
         isOpen={signupModal}
         close={() => setSignupModal(false)}
         children={<Signup close={() => setSignupModal(false)} />}
       />
-      <Dialog
+      <AuthDialog
         size="md"
         isOpen={forgotPassword}
         close={() => setForgotPassword(false)}

@@ -5,9 +5,9 @@ import AXLE from "../../../assets/home/logos/icon.png";
 import Trophy from "../../../assets/logos/trophy.webp";
 
 import NeuButton from "../../Axle/component/NeuButton";
-import PreSale from "../../Axle/dialog/PreSale";
+import PreSale from "../../Axle/dialog/PreSaleDialog";
 import { useState } from "react";
-import Dialog from "../../Axle/dialog/Dialog";
+import Dialog from "../../Axle/dialog/AxleDialog";
 
 interface Props {
   img: string;

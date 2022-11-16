@@ -7,7 +7,7 @@ import axleTokenABI from "../../../abi/AxleToken.json";
 import axlePresaleABI from "../../../abi/TokenPresale.json";
 import { useEtherBalance, useEthers } from "@usedapp/core";
 
-import Dialog from "./Dialog";
+import AxleDialog from "./AxleDialog";
 import TransactionSuccessDialog from "./TransactionSuccessDialog";
 import { useEffect, useState } from "react";
 import NeuButton from "../component/NeuButton";
@@ -196,7 +196,7 @@ const PreSale = (props: any) => {
 
   return (
     <Box px={4} py={8}>
-      <Dialog
+      <AxleDialog
         close={() => setSuccess(false)}
         children={
           <TransactionSuccessDialog

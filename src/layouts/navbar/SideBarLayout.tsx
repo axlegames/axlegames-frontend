@@ -12,13 +12,13 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 
-import { theme } from "../config/theme.config";
+import { theme } from "../../config/theme.config";
 
 // import ComingSoon from "../assets/logos/asap.png";
-import Live from "../assets/logos/live.png";
-import Logo from "../assets/home/logos/logo.png";
+import Live from "../../assets/logos/live.png";
+import Logo from "../../assets/home/logos/logo.png";
 
-import SideBarButton from "../pages/Home/components/sidebar/SideBarButton";
+import SideBarButton from "./components/SideBarButton";
 
 import { MdStore, MdInfo } from "react-icons/md/index";
 import {
@@ -33,14 +33,14 @@ import {
 
 import { BiCoin } from "react-icons/bi";
 
-import SideBarCard from "../pages/Home/components/sidebar/SideBarCard";
-import IsNotLoggedIn from "../config/isNotLoggedIn";
-import Dialog from "../pages/Auth/dialogs/Dialog";
-import Signin from "../pages/Auth/Signin";
+import SideBarCard from "./components/SideBarCard";
+import IsNotLoggedIn from "../../config/isNotLoggedIn";
+import Dialog from "../../pages/Auth/dialogs/AuthDialog";
+import Signin from "../../pages/Auth/Signin";
 
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
-import IsLoggedIn from "../config/isLoggedIn";
+import IsLoggedIn from "../../config/isLoggedIn";
 import {
   AiOutlineDashboard,
   AiOutlineLogin,
@@ -48,11 +48,11 @@ import {
 } from "react-icons/ai";
 import { useNavigate } from "react-router";
 
-import Instagram from "../assets/socials/instagram.png";
-import Twitter from "../assets/socials/twitter.png";
-import Telegram from "../assets/socials/telegram.png";
-import Discord from "../assets/socials/discord.png";
-import Terms from "./Terms";
+import Instagram from "../../assets/socials/instagram.png";
+import Twitter from "../../assets/socials/twitter.png";
+import Telegram from "../../assets/socials/telegram.png";
+import Discord from "../../assets/socials/discord.png";
+import Terms from "../Terms";
 
 const images = [
   { img: Instagram, url: "https://www.instagram.com/axlegames/" },

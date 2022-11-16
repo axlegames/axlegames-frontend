@@ -12,9 +12,9 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
-import MainLayout from "../../../layouts/MainLayout";
-import Logo from "../../../assets/home/logos/icon.png";
+import { theme } from "../../config/theme.config";
+import MainLayout from "../../layouts/MainLayout";
+import Logo from "../../assets/home/logos/icon.png";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import {
@@ -23,8 +23,8 @@ import {
   ProfileModel,
   ProfileService,
 } from "./ProfileService";
-import NeuButton from "../../Axle/component/NeuButton";
-import { TokenAuthStatus } from "../../../config/auth";
+import NeuButton from "../Axle/component/NeuButton";
+import { TokenAuthStatus } from "../../config/auth";
 import { useNavigate } from "react-router";
 
 const FormInput = (props: any) => {

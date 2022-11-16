@@ -14,17 +14,17 @@ interface Props {
   size?: string;
 }
 
-const Dialog = (props: Props) => {
+const AuthDialog = (props: Props) => {
   return (
     <Modal
       size={props.size ?? "sm"}
       isOpen={props.isOpen}
       onClose={() => props.close()}
     >
-      <ModalOverlay backdropFilter="blur(5px) hue-rotate(0deg)" />
+      <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
       <ModalContent
         borderRadius={"xl"}
-        bg={theme.modalBgColor}
+        bg={theme.fgColor}
         color={theme.highLightColor}
         fontFamily={"quicksand"}
         fontWeight="bold"
@@ -36,4 +36,4 @@ const Dialog = (props: Props) => {
   );
 };
 
-export default Dialog;
+export default AuthDialog;

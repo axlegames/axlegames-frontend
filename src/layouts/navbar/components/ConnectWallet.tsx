@@ -1,20 +1,18 @@
-import { theme } from "../../../../config/theme.config";
+import { Box, Button } from "@chakra-ui/react";
+import { useEtherBalance, useEthers } from "@usedapp/core";
+import { formatEther } from "ethers/lib/utils";
 import { useEffect, useState } from "react";
-import { Button, Grid, GridItem } from "@chakra-ui/react";
-
-import Dialog from "../../../Auth/dialogs/Dialog";
-import WalletsDialog from "../../../Auth/dialogs/WalletsDialog";
-
-import { NearConnectionServices } from "../../connections/NearConnection";
-
-import WalletDetails from "./WalletDetails";
+import { useNavigate } from "react-router";
+import { useSearchParams } from "react-router-dom";
+import { NearConnectionServices } from "../connections/NearConnection";
 
 import NEAR from "../../../../assets/logos/NEAR.svg";
-import BNB from "../../../../assets/logos/bnb.png";
+import ETH from "../../../../assets/logos/ETH.svg";
 
-import { formatEther } from "@ethersproject/units";
-import { useEtherBalance, useEthers } from "@usedapp/core";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import Dialog from "../../../pages/Auth/dialogs/AuthDialog";
+import WalletsDialog from "../../../pages/Auth/dialogs/WalletsDialog";
+import { theme } from "../../../config/theme.config";
+import WalletDetails from "./WalletDetails";
 
 interface Props {
   account: string;
@@ -22,13 +20,13 @@ interface Props {
   isConnected: boolean;
 }
 
-interface NavbarProps {
+interface WalletDialogProps {
   open: boolean;
   onOpen: Function;
   onClose: Function;
 }
 
-const Navbar = (props: NavbarProps) => {
+const ConnectWallet = (props: WalletDialogProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -43,7 +41,7 @@ const Navbar = (props: NavbarProps) => {
   });
   const [wallet, setWallet] = useState<any>({});
 
-  const { activateBrowserWallet, deactivate, account, chainId } = useEthers();
+  const { activateBrowserWallet, deactivate, account } = useEthers();
   const etherBalance = useEtherBalance(account);
 
   const connectToNEAR = async () => {
@@ -61,12 +59,6 @@ const Navbar = (props: NavbarProps) => {
     props.onClose();
   };
 
-  const getSymbol = (chainId: number) => {
-    if (chainId === 97) {
-      return "BNB";
-    } else return "NEAR";
-  };
-
   const connectToMetaMask = async () => {
     activateBrowserWallet();
     setUser({
@@ -75,8 +67,8 @@ const Navbar = (props: NavbarProps) => {
       isConnected: account ? true : false,
     });
 
-    const label = getSymbol(chainId || 0);
-    setDetails({ logo: BNB, label: label });
+    console.log(account);
+    setDetails({ logo: ETH, label: "ETH" });
     localStorage.setItem("address", account!);
     props.onClose();
   };
@@ -92,10 +84,8 @@ const Navbar = (props: NavbarProps) => {
         isConnected: false,
       });
     } catch (error) {
-      console.log(error);
     } finally {
       localStorage.removeItem("address");
-      localStorage.removeItem("isWalletConnected");
       navigate("/");
       window.location.reload();
     }
@@ -107,9 +97,10 @@ const Navbar = (props: NavbarProps) => {
       balance: formatEther(etherBalance ?? 1).toString(),
       isConnected: account ? true : false,
     });
-    setDetails({ logo: BNB, label: getSymbol(chainId || 0) });
+    setDetails({ logo: ETH, label: "ETH" });
     localStorage.setItem("address", account!);
-  }, [account, etherBalance, chainId]);
+    console.log(account);
+  }, [account, etherBalance]);
 
   useEffect(() => {
     const account = searchParams.get("account_id");
@@ -121,15 +112,7 @@ const Navbar = (props: NavbarProps) => {
   }, [searchParams, setSearchParams]);
 
   return (
-    <Grid
-      position={"relative"}
-      bg={theme.bgColor}
-      color={theme.bgColor}
-      fontFamily="quicksand"
-      fontWeight={"bold"}
-      display={{ base: "none", lg: "flex" }}
-      p={2}
-    >
+    <Box>
       <Dialog
         size="2xl"
         children={
@@ -144,26 +127,21 @@ const Navbar = (props: NavbarProps) => {
         isOpen={props.open}
         close={props.onClose}
       />
-      <GridItem
-        width={"100%"}
-        justifyContent={"flex-end"}
-        columnGap={"1rem"}
-        display={"flex"}
-        flexDirection="row"
-        pr={"6"}
-      >
+      <Box justifyContent={"flex-end"} display={"flex"}>
         {!user.isConnected ? (
           <Button
             _hover={{
-              color: theme.primaryTextColor,
+              color: theme.primaryButtonColor,
               bg: theme.bgColor,
+              boxShadow: `0px 0px 4px ${theme.primaryMiscColor}`,
             }}
             zIndex={2000}
+            color={theme.bgColor}
             onClick={() => props.onOpen()}
             borderRadius={"2xl"}
             bg={theme.primaryMiscColor}
-            shadow="2xl"
             style={{ cursor: "pointer" }}
+            boxShadow={`0px 0px 4px ${theme.primaryMiscColor}`}
           >
             Connect Wallet
           </Button>
@@ -177,9 +155,9 @@ const Navbar = (props: NavbarProps) => {
             disconnect={disconnect}
           />
         )}
-      </GridItem>
-    </Grid>
+      </Box>
+    </Box>
   );
 };
 
-export default Navbar;
+export default ConnectWallet;

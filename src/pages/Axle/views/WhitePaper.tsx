@@ -2,7 +2,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
 import WP from "../../../assets/gamein/whitepaper.png";
-import NeuButton from "./NeuButton";
+import NeuButton from "../component/NeuButton";
 
 const WhitePaper = (props: any) => {
   return (

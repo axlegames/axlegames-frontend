@@ -1,9 +1,9 @@
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { theme } from "../config/theme.config";
-import MobileNavbar from "../pages/Home/components/navbars/MobileNavbar";
-import Navbar from "../pages/Home/components/navbars/Navbar";
-import SideBarLayout from "./SideBarLayout";
+import MobileNavbar from "./navbar/MobileNavbarLayout";
+import Navbar from "./navbar/NavbarLayout";
+import SideBarLayout from "./navbar/SideBarLayout";
 
 const MainLayout = (props: any) => {
   const [open, setOpen] = useState(false);
