@@ -53,7 +53,7 @@ const Lobby = () => {
       setSeconds(Math.floor((time / 1000) % 60));
       if (time < 0) {
         return navigate(
-          `/${params.game}/${params.contestId}/${params.gameStateId}`
+          `/${params.game}/${params.contestId}/${params.gameStateId}/${true}`
         );
       }
     };

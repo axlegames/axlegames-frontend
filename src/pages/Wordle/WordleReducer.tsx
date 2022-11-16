@@ -13,6 +13,10 @@ interface Payload {
   currentState?: WordleState;
   wordLength?: number;
   guessLength?: number;
+  completedRows?: boolean[];
+  currentGuess?: string;
+  currentRow?: number;
+  game?: string;
 }
 interface Action {
   type: KEY_ACTION;
@@ -113,9 +117,11 @@ export const reducer = (state: WordleState, action: Action): WordleState => {
       return { ...state };
 
     case KEY_ACTION.ON_ENTER:
+      const game = action.payload.game || "";
       if (
-        state.currentRow < state.guessLength &&
-        state.currentGuess.length === state.wordlength
+        (state.currentRow < state.guessLength &&
+          state.currentGuess.length === state.wordlength) ||
+        game === "ABSURDLE"
       ) {
         // onenter flip the keys
         let _completedRows = state.completedRows;

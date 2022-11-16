@@ -13,6 +13,7 @@ import Lobby from "./pages/Wordle/Lobby";
 import Wallet from "./pages/Wallet/Wallet";
 import ComingSoon from "./pages/ComingSoon";
 import SignupPage from "./pages/Auth/SignUpPage";
+import Absurdle from "./pages/Wordle/Absurdle";
 
 export const App = () => {
   return (
@@ -27,8 +28,19 @@ export const App = () => {
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="/signup/:id" element={<SignupPage />} />
+          <Route
+            path="/absurdle/:contestId/:gameStateId/:isContest"
+            element={<Absurdle />}
+          />
+          <Route
+            path="/:game/:contestId/:gameStateId/:isContest"
+            element={<Wordle />}
+          />
 
-          <Route path="/:game/:contestId/:gameStateId" element={<Wordle />} />
+          <Route
+            path="/absurdle/lobby/:contestId/:gameStateId"
+            element={<Lobby />}
+          />
           <Route
             path="/:game/lobby/:contestId/:gameStateId"
             element={<Lobby />}

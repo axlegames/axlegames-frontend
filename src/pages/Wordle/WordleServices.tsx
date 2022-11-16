@@ -19,6 +19,7 @@ export interface GuessStatus {
   guessStatus?: string[];
   isWinningWord?: boolean;
   inValidWord?: boolean;
+  guessLength?: number;
 }
 
 export enum ENTRY_STATUS {

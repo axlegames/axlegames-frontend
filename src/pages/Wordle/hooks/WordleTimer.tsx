@@ -17,7 +17,7 @@ const WordleTimer = (props: Props) => {
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
     if (time < 0) {
-      props.endgame();
+      // props.endgame();
     }
   };
 

@@ -122,7 +122,7 @@ const GameEntryModal = (props: any) => {
       const contestId = res.gameState.axleContest;
       setDialog(false);
       setConfirm(false);
-      return navigate(`${props.link}/${contestId}/${gameStateId}`);
+      return navigate(`${props.link}/${contestId}/${gameStateId}/${false}`);
     }
     if (
       status === toString(ENTRY_STATUS.ALREADY_IN_GAME) ||

@@ -18,7 +18,7 @@ import WordleTimer from "./hooks/WordleTimer";
 import { Contest } from "./WordleServices";
 import { TokenAuthStatus } from "../../config/auth";
 
-const Wordle = () => {
+const Absurdle = () => {
   const toast = useToast();
 
   const [isWon, setIsWon] = useState(false);
@@ -26,7 +26,8 @@ const Wordle = () => {
 
   const navigate = useNavigate();
 
-  const { contestId, gameStateId, game, isContest } = useParams();
+  const { contestId, gameStateId, isContest } = useParams();
+  const game = "absurdle";
 
   const [state, dispatch] = useReducer(reducer, initState);
   const [contest, setContest] = useState<Contest>();
@@ -108,7 +109,8 @@ const Wordle = () => {
   useEffect(() => {
     WordleServices.getLobbyStats(contestId || "")
       .then((res) => {
-        isAuthorized(res as TokenAuthStatus);
+        console.log(res);
+        // isAuthorized(res as TokenAuthStatus);
         setContest(res as Contest);
         setIsLoaded(true);
       })
@@ -147,6 +149,7 @@ const Wordle = () => {
     });
     isAuthorized(resp as TokenAuthStatus);
     const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
+
     if (inValidWord) {
       return toast({
         title: "Invalid Word",
@@ -156,16 +159,35 @@ const Wordle = () => {
         position: "top",
       });
     }
+
+    const wordLength = state.wordlength;
+    const gameState = state.gameState;
+    const emptyRow = WordleServices.generateEmptyRows(wordLength);
+    gameState.push(emptyRow);
+
+    const currentGuessStatus = guessStatus || [];
+
+    const gameStatus = state.gameStatus;
+    const len = gameStatus[gameStatus.length - 1].length;
+    if (len === 0) {
+      gameStatus.push(currentGuessStatus);
+    } else {
+      gameStatus.push([]);
+    }
+
     dispatch({
       type: KEY_ACTION.ON_ENTER,
       payload: {
         key: "",
-        guessesStatus: guessStatus || [],
-        gameState: state.gameState,
-        gameStatus: state.gameStatus,
+        guessesStatus: currentGuessStatus,
+        guessLength: gameState.length + 1,
+        gameState: gameState,
+        gameStatus: gameStatus,
+        game: "ABSURDLE",
       },
     });
-    if (state.currentRow === state.guessLength - 1 || isWinningWord) {
+    console.log(state);
+    if (isWinningWord) {
       await WordleServices.cleanGameState({
         userId: localStorage.getItem("userId"),
       });
@@ -283,8 +305,7 @@ const Wordle = () => {
         alignItems="center"
         bg={theme.bgColor}
         rowGap="3rem"
-        maxH={"100vh"}
-        minH="100vh"
+        py={8}
       >
         <Grid
           gameStatus={state.gameStatus}
@@ -301,4 +322,4 @@ const Wordle = () => {
   );
 };
 
-export default Wordle;
+export default Absurdle;
