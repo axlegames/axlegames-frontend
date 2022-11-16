@@ -1,11 +1,11 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { theme } from "../../config/theme.config";
-import { GameServices, Contest } from "./GameServices";
-import ETH from "../../assets/logos/trophy.webp";
-import BNB from "../../assets/logos/alram.webp";
-import { TokenAuthStatus } from "../../config/auth";
+import ETH from "../../../../assets/logos/trophy.webp";
+import BNB from "../../../../assets/logos/alram.webp";
+import { Contest, GameServices } from "../../GameServices";
+import { TokenAuthStatus } from "../../../../config/auth";
+import { theme } from "../../../../config/theme.config";
 
 interface Props {
   deadline: string;
@@ -13,7 +13,7 @@ interface Props {
   opensAt: string;
 }
 
-const Lobby = () => {
+const AbsurdleLobby = () => {
   const params = useParams();
   const [contest, setContest] = useState<Contest>();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -53,7 +53,7 @@ const Lobby = () => {
       setSeconds(Math.floor((time / 1000) % 60));
       if (time < 0) {
         return navigate(
-          `/${params.game}/${params.contestId}/${params.gameStateId}/${true}`
+          `/absurdle/${params.contestId}/${params.gameStateId}/${true}`
         );
       }
     };
@@ -117,7 +117,7 @@ const Lobby = () => {
         <Text
           color={theme.primaryTextColor}
           fontSize={"3xl"}
-        >{`#${params.game} Lobby`}</Text>
+        >{`#Absurdle Lobby`}</Text>
         <Timer
           deadline={contest?.axleContestInfo.expiresAt || ""}
           opensAt={contest?.axleContestInfo.opensAt || ""}
@@ -139,7 +139,6 @@ const Lobby = () => {
             justifyContent={"center"}
           >
             <Text color={theme.secondaryTextColor} fontSize="2xl">
-              {" "}
               {contestants}+
             </Text>
             <Text color={theme.secondaryTwoTextColor}>Contestants</Text>
@@ -161,4 +160,4 @@ const Lobby = () => {
   );
 };
 
-export default Lobby;
+export default AbsurdleLobby;
