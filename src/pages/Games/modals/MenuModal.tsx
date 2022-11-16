@@ -8,7 +8,6 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-
 import { theme } from "../../../config/theme.config";
 
 const MenuModal = (props: any) => {

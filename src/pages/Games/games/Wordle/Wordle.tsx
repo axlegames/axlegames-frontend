@@ -1,24 +1,29 @@
 import { useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Box, useToast } from "@chakra-ui/react";
-import { theme } from "../../config/theme.config";
+import { theme } from "../../../../config/theme.config";
 
-import Grid from "./components/Grid";
-import Navbar from "./components/Navbar";
-import KeyBoard from "./components/Keyboard";
+import Grid from "../../components/Grid";
+import Navbar from "../../components/Navbar";
+import KeyBoard from "../../components/Keyboard";
 
-import WonModal from "./modals/WonModal";
-import LostModal from "./modals/LostModal";
-import MenuModal from "./modals/MenuModal";
+import WonModal from "../../modals/WonModal";
+import LostModal from "../../modals/LostModal";
+import MenuModal from "../../modals/MenuModal";
 
-import { WordleServices, Status, GuessStatus } from "./WordleServices";
-import { KEY_ACTION, initState, reducer, WordleState } from "./WordleReducer";
+import { GameServices, Status, GuessStatus } from "../../GameServices";
+import {
+  KEY_ACTION,
+  initState,
+  wordleReducer,
+  WordleState,
+} from "./WordleReducer";
 
-import WordleTimer from "./hooks/WordleTimer";
-import { Contest } from "./WordleServices";
-import { TokenAuthStatus } from "../../config/auth";
+import WordleTimer from "../../hooks/WordleTimer";
+import { Contest } from "../../GameServices";
+import { TokenAuthStatus } from "../../../../config/auth";
 
-const Absurdle = () => {
+const Wordle = () => {
   const toast = useToast();
 
   const [isWon, setIsWon] = useState(false);
@@ -26,10 +31,9 @@ const Absurdle = () => {
 
   const navigate = useNavigate();
 
-  const { contestId, gameStateId, isContest } = useParams();
-  const game = "absurdle";
+  const { contestId, gameStateId, game, isContest } = useParams();
 
-  const [state, dispatch] = useReducer(reducer, initState);
+  const [state, dispatch] = useReducer(wordleReducer, initState);
   const [contest, setContest] = useState<Contest>();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -58,15 +62,15 @@ const Absurdle = () => {
   };
 
   const initializeState = (game: Status) => {
-    const completedRows = WordleServices.initRows(game.guessLength);
+    const completedRows = GameServices.initRows(game.guessLength);
     const initState: WordleState = {
       guessLength: game.guessLength,
       wordlength: game.wordLength,
-      gameState: WordleServices.createInitState(
+      gameState: GameServices.createInitState(
         game.guessLength,
         game.wordLength
       ),
-      gameStatus: WordleServices.createInitState(
+      gameStatus: GameServices.createInitState(
         game.guessLength,
         game.wordLength
       ),
@@ -87,7 +91,7 @@ const Absurdle = () => {
   };
 
   useEffect(() => {
-    WordleServices.getGameState({ userId: localStorage.getItem("userId") })
+    GameServices.getGameState({ userId: localStorage.getItem("userId") })
       .then((game) => {
         isAuthorized(game as TokenAuthStatus);
         game = game as Status;
@@ -107,10 +111,9 @@ const Absurdle = () => {
   }, []);
 
   useEffect(() => {
-    WordleServices.getLobbyStats(contestId || "")
+    GameServices.getLobbyStats(contestId || "")
       .then((res) => {
-        console.log(res);
-        // isAuthorized(res as TokenAuthStatus);
+        isAuthorized(res as TokenAuthStatus);
         setContest(res as Contest);
         setIsLoaded(true);
       })
@@ -142,14 +145,13 @@ const Absurdle = () => {
         position: "top",
       });
     }
-    const resp = await WordleServices.validateUpdateGuess({
+    const resp = await GameServices.validateUpdateGuess({
       word: state.currentGuess.toLowerCase(),
       contestId: contestId,
       gameStateId: gameStateId,
     });
     isAuthorized(resp as TokenAuthStatus);
     const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
-
     if (inValidWord) {
       return toast({
         title: "Invalid Word",
@@ -159,42 +161,23 @@ const Absurdle = () => {
         position: "top",
       });
     }
-
-    const wordLength = state.wordlength;
-    const gameState = state.gameState;
-    const emptyRow = WordleServices.generateEmptyRows(wordLength);
-    gameState.push(emptyRow);
-
-    const currentGuessStatus = guessStatus || [];
-
-    const gameStatus = state.gameStatus;
-    const len = gameStatus[gameStatus.length - 1].length;
-    if (len === 0) {
-      gameStatus.push(currentGuessStatus);
-    } else {
-      gameStatus.push([]);
-    }
-
     dispatch({
       type: KEY_ACTION.ON_ENTER,
       payload: {
         key: "",
-        guessesStatus: currentGuessStatus,
-        guessLength: gameState.length + 1,
-        gameState: gameState,
-        gameStatus: gameStatus,
-        game: "ABSURDLE",
+        guessesStatus: guessStatus || [],
+        gameState: state.gameState,
+        gameStatus: state.gameStatus,
       },
     });
-    console.log(state);
-    if (isWinningWord) {
-      await WordleServices.cleanGameState({
+    if (state.currentRow === state.guessLength - 1 || isWinningWord) {
+      await GameServices.cleanGameState({
         userId: localStorage.getItem("userId"),
       });
       setTimeout(() => {
         if (isWinningWord) {
           setIsWon(true);
-          WordleServices.saveGame(
+          GameServices.saveGame(
             localStorage.getItem("userId") ?? "",
             contestId ?? "",
             state.currentRow + 1,
@@ -204,7 +187,7 @@ const Absurdle = () => {
             .catch((e) => console.log(e));
         } else {
           setIsLost(true);
-          WordleServices.saveGame(
+          GameServices.saveGame(
             localStorage.getItem("userId") ?? "",
             contestId ?? "",
             state.currentRow + 1,
@@ -218,20 +201,20 @@ const Absurdle = () => {
   };
 
   const forceFinishGame = async () => {
-    const resp = await WordleServices.validateUpdateGuess({
+    const resp = await GameServices.validateUpdateGuess({
       word: state.currentGuess.toLowerCase(),
       contestId: contestId,
       gameStateId: gameStateId,
     });
     isAuthorized(resp as TokenAuthStatus);
     const { isWinningWord } = resp as GuessStatus;
-    await WordleServices.cleanGameState({
+    await GameServices.cleanGameState({
       userId: localStorage.getItem("userId"),
     });
     setTimeout(() => {
       if (isWinningWord) {
         setIsWon(true);
-        WordleServices.saveGame(
+        GameServices.saveGame(
           localStorage.getItem("userId") ?? "",
           contestId ?? "",
           state.currentRow + 1,
@@ -241,7 +224,7 @@ const Absurdle = () => {
           .catch((e) => console.log(e));
       } else {
         setIsLost(true);
-        WordleServices.saveGame(
+        GameServices.saveGame(
           localStorage.getItem("userId") ?? "",
           contestId ?? "",
           state.currentRow + 1,
@@ -305,7 +288,8 @@ const Absurdle = () => {
         alignItems="center"
         bg={theme.bgColor}
         rowGap="3rem"
-        py={8}
+        maxH={"100vh"}
+        minH="100vh"
       >
         <Grid
           gameStatus={state.gameStatus}
@@ -322,4 +306,4 @@ const Absurdle = () => {
   );
 };
 
-export default Absurdle;
+export default Wordle;

@@ -60,7 +60,10 @@ const createEmptyArrays = (number: number) => {
   return array;
 };
 
-export const reducer = (state: WordleState, action: Action): WordleState => {
+export const wordleReducer = (
+  state: WordleState,
+  action: Action
+): WordleState => {
   switch (action.type) {
     case KEY_ACTION.ON_FETCH:
       const filled = action.payload.gameState.length;
@@ -117,11 +120,9 @@ export const reducer = (state: WordleState, action: Action): WordleState => {
       return { ...state };
 
     case KEY_ACTION.ON_ENTER:
-      const game = action.payload.game || "";
       if (
-        (state.currentRow < state.guessLength &&
-          state.currentGuess.length === state.wordlength) ||
-        game === "ABSURDLE"
+        state.currentRow < state.guessLength &&
+        state.currentGuess.length === state.wordlength
       ) {
         // onenter flip the keys
         let _completedRows = state.completedRows;

@@ -1,7 +1,7 @@
 import { Box, Text, Grid, GridItem, Flex } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-import Timer from "../../Wordle/hooks/Timer";
-import TimerButton from "../../Wordle/hooks/TimerButton";
+import Timer from "../../Games/hooks/Timer";
+import TimerButton from "../../Games/hooks/TimerButton";
 import { GameType } from "../enums/contests.enum";
 import { AxleContest } from "../HomeServices";
 

@@ -2,7 +2,7 @@ import { Box, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { theme } from "../../config/theme.config";
-import { WordleServices, Contest } from "./WordleServices";
+import { GameServices, Contest } from "./GameServices";
 import ETH from "../../assets/logos/trophy.webp";
 import BNB from "../../assets/logos/alram.webp";
 import { TokenAuthStatus } from "../../config/auth";
@@ -31,7 +31,7 @@ const Lobby = () => {
 
   useEffect(() => {
     const contestId = params.contestId || "";
-    WordleServices.getLobbyStats(contestId)
+    GameServices.getLobbyStats(contestId)
       .then((res) => {
         isAuthorized(res as TokenAuthStatus);
         setContest(res as Contest);

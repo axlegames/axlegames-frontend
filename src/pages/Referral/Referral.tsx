@@ -18,10 +18,7 @@ import { useNavigate } from "react-router";
 import { TokenAuthStatus } from "../../config/auth";
 import { theme } from "../../config/theme.config";
 import NeuButton from "../Axle/component/NeuButton";
-import {
-  DashBoardServices,
-  ReferralModel,
-} from "../DashBoard/DashBoardServices";
+import { ReferralServices, ReferralModel } from "./ReferralServices";
 
 const Referral = () => {
   const navigate = useNavigate();
@@ -36,7 +33,7 @@ const Referral = () => {
   };
 
   useEffect(() => {
-    DashBoardServices.getReferralAndReferralCode()
+    ReferralServices.getReferralAndReferralCode()
       .then((res) => {
         isAuthorized(res as TokenAuthStatus);
         setReferral(res as ReferralModel);

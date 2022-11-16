@@ -1,7 +1,7 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-
 import Cell from "../components/Cell";
+
 import { getExample } from "./HowToPlayData";
 
 const HowToPlayModal = (props: any) => {

@@ -19,8 +19,8 @@ import { theme } from "../../../config/theme.config";
 import {
   EntryStatus,
   ENTRY_STATUS,
-  WordleServices,
-} from "../../Wordle/WordleServices";
+  GameServices,
+} from "../../Games/GameServices";
 import { useEffect, useState } from "react";
 
 import Dialog from "./HomeDailog";
@@ -159,7 +159,7 @@ const GameEntryModal = (props: any) => {
     }
     if (confirm) setConfirm(false);
     if (user) {
-      return WordleServices.enterContest({
+      return GameServices.enterContest({
         contestId: _id,
         userId: localStorage.getItem("userId"),
         confirm: confirm,

@@ -1,7 +1,8 @@
 import { Box, Text } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
 
 import Lottie from "lottie-react";
+import { theme } from "../../../config/theme.config";
+
 import Lost from "../../../assets/wordle/lottie/little-boy-crying.json";
 
 const LostModal = (props: any) => {

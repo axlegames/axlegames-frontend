@@ -65,7 +65,7 @@ export interface Contest {
   status: GameStatus;
 }
 
-export class WordleServices {
+export class GameServices {
   static enterContest = async (
     data: any
   ): Promise<EntryStatus | TokenAuthStatus> => {

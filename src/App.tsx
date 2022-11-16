@@ -2,18 +2,18 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home/Home";
-import Wordle from "./pages/Wordle/Wordle";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Page403 from "./pages/Auth/Page403";
 import Axle from "./pages/Axle/Axle";
 import Dashboard from "./pages/DashBoard/DashBoard";
 import Profile from "./pages/Profile/Profile";
 import ReferralLayout from "./pages/Referral/ReferralLayout";
-import Lobby from "./pages/Wordle/Lobby";
+import Lobby from "./pages/Games/Lobby";
 import Wallet from "./pages/Wallet/Wallet";
 import ComingSoon from "./pages/ComingSoon";
 import SignupPage from "./pages/Auth/SignUpPage";
-import Absurdle from "./pages/Wordle/Absurdle";
+import Absurdle from "./pages/Games/games/Absurdle/Absurdle";
+import Wordle from "./pages/Games/games/Wordle/Wordle";
 
 export const App = () => {
   return (
