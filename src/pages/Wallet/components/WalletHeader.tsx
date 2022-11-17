@@ -22,7 +22,20 @@ interface WalletProps {
 }
 
 const WalletHeader = (props: WalletProps) => {
+  // const loadRazorPay = () => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://checkout.razorpay.com/v1/checkout.js";
+  //   script.onerror = () => {
+  //     alert("Razorpay SDK failed to init");
+  //   };
+  //   // create order api here
+  //   script.onload = () => {};
+  // };
+
   const [open, setOpen] = useState(false);
+  // const [isLoading, setIslLoading] = useState(false);
+  // const [orderAmount, setOrderAmount] = useState(0);
+  // const [order, setOrders] = useState();
 
   const WalletCard = (props: Props) => {
     return (

@@ -34,7 +34,7 @@ const MainLayout = (props: any) => {
           />
         </GridItem>
         <GridItem
-          py={12}
+          py={{ base: "2", lg: "10" }}
           pb={{ base: "40", lg: "12" }}
           maxH={"100vh"}
           overflowY="scroll"

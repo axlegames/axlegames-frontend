@@ -6,7 +6,7 @@ import { theme } from "../../../../config/theme.config";
 const GameBanner = (props: any) => {
   const navigate = useNavigate();
   return (
-    <Box maxW={"100%"} overflowX="hidden" pb={16}>
+    <Box maxW={"100%"} overflowX="hidden" py={4}>
       <Flex flexDirection={"column"} p={{ base: "4" }}>
         <Text
           fontFamily={"quicksand"}

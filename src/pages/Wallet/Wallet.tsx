@@ -21,7 +21,8 @@ const Wallet = () => {
       TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
     ) {
       localStorage.clear();
-      return navigate("/");
+      navigate("/");
+      return window.location.reload();
     }
   };
 
@@ -37,7 +38,7 @@ const Wallet = () => {
   }, []);
 
   return (
-    <MainLayout>
+    <MainLayout isNavbarHidden={true}>
       <Box
         bg={theme.fgColor}
         p={4}

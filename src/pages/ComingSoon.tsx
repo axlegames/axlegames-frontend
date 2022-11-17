@@ -35,6 +35,8 @@ const ComingSoon = () => {
           fontWeight="bold"
           fontSize={{ base: "md", md: "xl", lg: "3xl" }}
           color={theme.primaryTextColor}
+          textAlign="center"
+          px={2}
         >
           We are preparing something exciting & amazing for you.
         </Text>

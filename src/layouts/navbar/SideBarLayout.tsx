@@ -53,6 +53,7 @@ import Twitter from "../../assets/socials/twitter.png";
 import Telegram from "../../assets/socials/telegram.png";
 import Discord from "../../assets/socials/discord.png";
 import Terms from "../Terms";
+import HighLightButton from "./components/HighLightButton";
 
 const images = [
   { img: Instagram, url: "https://www.instagram.com/axlegames/" },
@@ -136,39 +137,6 @@ const SideBarLayout = (props: SideBarProps) => {
     });
   };
 
-  const HighLightButton = (props: any) => {
-    return (
-      <Box
-        alignSelf={"center"}
-        display={"flex"}
-        alignItems="center"
-        justifyContent={"center"}
-        bg={theme.primaryButtonColor}
-        color={theme.bgColor}
-        boxShadow={`0px 0px 8px ${theme.primaryButtonColor}`}
-        transition={"all 100ms ease-in"}
-        onClick={props.click}
-        maxWidth={{ lg: "236px" }}
-        minWidth={{ lg: "236px" }}
-        height={{ base: "12" }}
-        borderRadius="xl"
-        cursor={"pointer"}
-        _hover={{
-          boxShadow: `0px 0px 0px ${theme.bgColor}`,
-        }}
-      >
-        <Flex
-          justifyContent={"space-evenly"}
-          columnGap=".4rem"
-          alignItems="center"
-        >
-          <props.icon size={32} color={theme.bgColor}></props.icon>
-          <Text fontSize={"20"}>{props.title}</Text>
-        </Flex>
-      </Box>
-    );
-  };
-
   return (
     <Box
       fontFamily={"quicksand"}
@@ -204,14 +172,15 @@ const SideBarLayout = (props: SideBarProps) => {
         alignSelf="center"
       ></Image>
 
-      <IsLoggedIn>
-        <SideBarCard>
-          <SideBarButton
-            onClick={() => clearConnectionAndChangeRoute("/")}
-            link={"/"}
-            title={"Home"}
-            icon={<HiHome size={32} />}
-          />
+      <SideBarCard>
+        <SideBarButton
+          onClick={() => clearConnectionAndChangeRoute("/")}
+          link={"/"}
+          title={"Home"}
+          icon={<HiHome size={32} />}
+        />
+
+        <IsLoggedIn>
           <SideBarButton
             onClick={() => clearConnectionAndChangeRoute("/dashboard")}
             link="/dashboard"
@@ -237,19 +206,7 @@ const SideBarLayout = (props: SideBarProps) => {
             title={"Profile"}
             icon={<HiUser size={32} />}
           />
-        </SideBarCard>
-      </IsLoggedIn>
-
-      <SideBarCard>
-        <IsNotLoggedIn>
-          <SideBarButton
-            onClick={() => clearConnectionAndChangeRoute("/")}
-            link={"/"}
-            title={"Home"}
-            icon={<HiHome size={32} />}
-          />
-        </IsNotLoggedIn>
-
+        </IsLoggedIn>
         <Box width={"100%"} position="relative">
           <Image
             position={"absolute"}

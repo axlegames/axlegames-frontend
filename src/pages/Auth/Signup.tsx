@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import Form from "./componetns/Form";
 import FormButton from "./componetns/FormButton";
 import FormField from "./componetns/FormField";
@@ -7,10 +7,11 @@ import FormMessage from "./componetns/FormMessage";
 
 import { useFormik } from "formik";
 import { AuthServices } from "./AuthServices";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormError from "./componetns/FormError";
 import { theme } from "../../config/theme.config";
 import { useParams } from "react-router";
+import { ReferralModel, ReferralServices } from "../Referral/ReferralServices";
 
 const isValidUsername = (username: string) => /^[a-z0-9]{6}$/.test(username);
 const isValidEmail = (email: string) =>
@@ -40,6 +41,7 @@ const Signup = (props: any) => {
   const params = useParams();
 
   const handleRequest = (data: any) => {
+    console.log(data);
     setStatus({
       error: data.error,
       message: data.message,
@@ -72,6 +74,21 @@ const Signup = (props: any) => {
           })
         );
     },
+  });
+
+  useEffect(() => {
+    ReferralServices.getReferralAndReferralCode(params.id)
+      .then((res) => {
+        setReferral(res as ReferralModel);
+      })
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const [referral, setReferral] = useState<ReferralModel>({
+    referralCode: "",
+    referrals: [],
+    username: "",
   });
 
   const [status, setStatus] = useState({
@@ -170,10 +187,17 @@ const Signup = (props: any) => {
       >
         <FormButton onClick={() => form.handleSubmit()} label="Sign up" />
 
-        <FormLink
-          action={() => props.close()}
-          label="Already have an account? Sign in"
-        />
+        {params.id ? (
+          <Box textAlign={"center"}>
+            <Text>Using referral code {referral.username}</Text>
+            <Text>Referrer will be rewarded with 500 AXLE</Text>
+          </Box>
+        ) : (
+          <FormLink
+            action={() => props.close()}
+            label="Already have an account? Sign in"
+          />
+        )}
       </Flex>
     </Form>
   );

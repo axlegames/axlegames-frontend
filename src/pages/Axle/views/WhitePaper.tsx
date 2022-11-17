@@ -23,7 +23,7 @@ const WhitePaper = (props: any) => {
         direction={{ base: "column", xl: "row" }}
       >
         <Box borderRadius="xl">
-          <Image src={WP} m={4} />
+          <Image width={{ base: "32", lg: "64" }} src={WP} m={4} />
         </Box>
         <Flex p={4} borderRadius="xl" rowGap={".5rem"} direction={"column"}>
           <Text color={theme.primaryTextColor} fontSize={"3xl"}>

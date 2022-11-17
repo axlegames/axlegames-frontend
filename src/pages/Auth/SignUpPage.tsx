@@ -1,11 +1,23 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { theme } from "../../config/theme.config";
 import Signup from "./Signup";
+import Logo from "../../assets/home/logos/logo.png";
 
 const SignupPage = () => {
   return (
-    <Box bg={theme.bgColor} py={4} px={{ base: "4", md: "20%", lg: "30%" }}>
-      <Signup />
+    <Box
+      flexDirection={"column"}
+      alignItems="center"
+      justifyContent={"center"}
+      bg={theme.bgColor}
+      rowGap="1rem"
+      display="flex"
+      py={8}
+    >
+      <Image height={"32"} src={Logo} />
+      <Box minW="22vw">
+        <Signup />
+      </Box>
     </Box>
   );
 };

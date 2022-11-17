@@ -17,7 +17,7 @@ const NeuButton = (props: Props) => {
       boxShadow={normalEffect}
       width={props.width || "auto"}
       bg={props.bg}
-      size={{ base: "sm" }}
+      size={{ base: "sm", md: "md", lg: "lg" }}
       color={theme.secondaryTextColor}
       onClick={() => props.onClick()}
       _hover={{

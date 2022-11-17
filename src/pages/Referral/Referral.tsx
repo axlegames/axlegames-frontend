@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  Grid,
   Table,
   TableCaption,
   TableContainer,
@@ -28,7 +27,8 @@ const Referral = () => {
       TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
     ) {
       localStorage.clear();
-      return navigate("/");
+      navigate("/");
+      return window.location.reload();
     }
   };
 
@@ -39,29 +39,31 @@ const Referral = () => {
         setReferral(res as ReferralModel);
       })
       .catch((err) => console.log(err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [referral, setReferral] = useState<ReferralModel>({
-    referralCode: "testRef",
-    referrals: ["jayright", "johndoe"],
+    referralCode: "",
+    referrals: [],
+    username: "",
   });
 
   const link = `https://axlegames.io/signup/${referral.referralCode}`;
 
   return (
-    <Grid
-      templateColumns={{ base: "1fr", xl: "2fr 1.2fr" }}
+    <Box
       columnGap="3rem"
-      justifyContent={"space-between"}
       rowGap={"1rem"}
       p={4}
       shadow="xl"
       borderRadius={"xl"}
-      aria-expanded="false"
-      display={{ base: "grid" }}
       bg={theme.bgColor}
     >
-      <Flex bg={theme.bgColor} direction="column" justifyContent={"flex-start"}>
+      <Flex
+        borderRadius={"xl"}
+        bg={theme.bgColor}
+        direction="column"
+        justifyContent={"flex-start"}
+      >
         <Flex justifyContent={"space-between"}>
           <Flex fontWeight={"bold"} direction={"column"}>
             <Text fontSize={"3xl"} color={theme.primaryTextColor}>
@@ -80,7 +82,7 @@ const Referral = () => {
             View all
           </Button>
         </Flex>
-        <TableContainer aria-expanded="false" my={4}>
+        <TableContainer my={4}>
           <Table color={theme.secondaryTextColor} variant="simple">
             <Thead>
               <Tr
@@ -97,14 +99,6 @@ const Referral = () => {
                 >
                   Usernames
                 </Th>
-                {/* <Th
-                  fontSize={"md"}
-                  color={theme.secondaryTwoTextColor}
-                  fontFamily="quicksand"
-                  fontWeight="bold"
-                >
-                  Address
-                </Th> */}
                 <Th
                   fontSize={"md"}
                   color={theme.secondaryTwoTextColor}
@@ -125,8 +119,7 @@ const Referral = () => {
                   key={i}
                 >
                   <Td>{d}</Td>
-                  {/* <Td>{d}...</Td> */}
-                  <Td>{100} AXLE</Td>
+                  <Td>+{500} AXLE</Td>
                 </Tr>
               ))}
             </Tbody>
@@ -171,7 +164,7 @@ const Referral = () => {
           />
         </Box>
       </Flex>
-    </Grid>
+    </Box>
   );
 };
 export default Referral;

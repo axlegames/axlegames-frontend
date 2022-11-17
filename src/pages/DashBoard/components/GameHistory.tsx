@@ -37,7 +37,8 @@ const GameHistory = () => {
       TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
     ) {
       localStorage.clear();
-      return navigate("/");
+      navigate("/");
+      return window.location.reload();
     }
   };
 

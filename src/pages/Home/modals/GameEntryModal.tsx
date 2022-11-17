@@ -64,7 +64,8 @@ const GameEntryModal = (props: any) => {
       TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
     ) {
       localStorage.clear();
-      return navigate("/");
+      navigate("/");
+      return window.location.reload();
     }
   };
 
