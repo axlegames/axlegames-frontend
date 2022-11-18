@@ -12,11 +12,14 @@ const token = headers() ?? "";
 
 export class ReferralServices {
   static getReferralAndReferralCode = async (
-    referralId: string = ""
+    referralCode: string = ""
   ): Promise<ReferralModel | TokenAuthStatus> => {
     const { data } = await axios.post(
       `${gamePrefix}/referrals`,
-      { userId: localStorage.getItem("userId") ?? "", referralId: referralId },
+      {
+        userId: localStorage.getItem("userId") ?? "",
+        referralCode: referralCode,
+      },
       token
     );
     return data;

@@ -41,7 +41,6 @@ const Signup = (props: any) => {
   const params = useParams();
 
   const handleRequest = (data: any) => {
-    console.log(data);
     setStatus({
       error: data.error,
       message: data.message,
@@ -79,6 +78,7 @@ const Signup = (props: any) => {
   useEffect(() => {
     ReferralServices.getReferralAndReferralCode(params.id)
       .then((res) => {
+        console.log(res);
         setReferral(res as ReferralModel);
       })
       .catch((err) => console.log(err));
@@ -189,7 +189,7 @@ const Signup = (props: any) => {
 
         {params.id ? (
           <Box textAlign={"center"}>
-            <Text>Using referral code {referral.username}</Text>
+            <Text>Your referral {referral.username}</Text>
             <Text>Referrer will be rewarded with 500 AXLE</Text>
           </Box>
         ) : (

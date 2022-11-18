@@ -1,10 +1,25 @@
 import { Box, Flex, Text, Image, Grid, GridItem } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { theme } from "../../../../config/theme.config";
+import { HomeServices, UserReferral } from "../../HomeServices";
 // import Carousel from "nuka-carousel/lib/carousel";
 
 const GameBanner = (props: any) => {
   const navigate = useNavigate();
+  const [state, setState] = useState<UserReferral>({
+    error: false,
+    referralCode: "",
+    username: "",
+  });
+
+  useEffect(() => {
+    HomeServices.getAdminReferralCode().then((res) => {
+      console.log(res);
+      setState(res);
+    });
+  }, []);
+
   return (
     <Box maxW={"100%"} overflowX="hidden" py={4}>
       <Flex flexDirection={"column"} p={{ base: "4" }}>
@@ -54,7 +69,7 @@ const GameBanner = (props: any) => {
         </GridItem>
         <GridItem>
           <Image
-            onClick={() => navigate("/referrals")}
+            onClick={() => navigate(`/signup/${state.referralCode}`)}
             borderRadius={"3xl"}
             width={"100%"}
             src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}

@@ -21,7 +21,29 @@ export interface Transactions {
 
 const token = headers() ?? "";
 
+export enum PaymentStatus {
+  SUCCESS = "SUCCESS",
+  FAILED = "FAILED",
+}
+
 export class WalletServices {
+  static createOrder = async (
+    orderAmount: number
+  ): Promise<any | TokenAuthStatus> =>
+    (
+      await axios.post(
+        `${userPrefix}/wallets/create-order`,
+        { amount: orderAmount },
+        token
+      )
+    ).data;
+
+  static depositTokens = async (
+    data: any
+  ): Promise<PaymentStatus | TokenAuthStatus> =>
+    (await axios.post(`${userPrefix}/wallets/deposit-tokens`, data, token))
+      .data;
+
   static getUserTransactions = async (): Promise<
     Transactions | TokenAuthStatus
   > =>

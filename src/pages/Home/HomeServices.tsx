@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { gamePrefix } from "../../config";
+import { gamePrefix, referralPrefix } from "../../config";
 import { GameType, GameStatus } from "./enums/contests.enum";
 
 export interface AxleGame {
@@ -41,10 +41,22 @@ export interface AxleContestInfo {
   prizePool: number;
 }
 
+export interface UserReferral {
+  username: string;
+  referralCode: string;
+  error: boolean;
+}
+
 export class HomeServices {
   static getAxleGames = async (): Promise<AxleGames> => {
     const response = await axios.get(`${gamePrefix}`);
     let axleGames: AxleGames = response.data;
+    return axleGames;
+  };
+
+  static getAdminReferralCode = async (): Promise<UserReferral> => {
+    const response = await axios.get(`${referralPrefix}/admin`);
+    let axleGames: UserReferral = response.data;
     return axleGames;
   };
 

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 import { Box, useToast } from "@chakra-ui/react";
 import { theme } from "../../../../config/theme.config";
 
-import Grid from "../../components/Grid";
 import Navbar from "../../components/Navbar";
 import KeyBoard from "../../components/Keyboard";
 
@@ -22,6 +21,8 @@ import {
 import WordleTimer from "../../hooks/WordleTimer";
 import { Contest } from "../../GameServices";
 import { TokenAuthStatus } from "../../../../config/auth";
+
+import AbsurdleGrid from "./components/AbsurdleGrid";
 
 const Absurdle = () => {
   const toast = useToast();
@@ -193,7 +194,7 @@ const Absurdle = () => {
         game: "ABSURDLE",
       },
     });
-    console.log(state);
+    window.scrollTo(0, document.body.scrollHeight);
     if (isWinningWord) {
       await GameServices.cleanGameState({
         userId: localStorage.getItem("userId"),
@@ -314,7 +315,7 @@ const Absurdle = () => {
         rowGap="3rem"
         py={8}
       >
-        <Grid
+        <AbsurdleGrid
           gameStatus={state.gameStatus}
           completedRows={state.completedRows}
           game={state.gameState}

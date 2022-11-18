@@ -242,7 +242,7 @@ const SideBarLayout = (props: SideBarProps) => {
           icon={<MdInfo size={32} />}
         />
 
-        <Accordion width={"100%"} allowToggle allowMultiple>
+        <Accordion width={"100%"} allowToggle defaultIndex={0}>
           <AccordionItem border={"none"} outline="none" width={"100%"}>
             <AccordionButton
               borderRadius={"md"}
