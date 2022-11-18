@@ -32,8 +32,9 @@ const WalletHeader = (props: WalletProps) => {
     }
   };
 
-  const handlePayment = async (params: any) => {
+  const handlePayment = async () => {
     const order = await WalletServices.createOrder(Number(orderAmount) * 100);
+    console.log(order);
     isAuthorized(order as TokenAuthStatus);
     const options = {
       key: "rzp_test_VmSch4maQMZS9L", // Enter the Key ID generated from the Dashboard
@@ -135,7 +136,7 @@ const WalletHeader = (props: WalletProps) => {
         amount={orderAmount}
         handleAmount={handleAmount}
         form={true}
-        action={() => handlePayment({})}
+        action={() => handlePayment()}
         img={Trophy}
         label="Add Funds"
         main="Wallet Balance"
