@@ -99,7 +99,6 @@ const ConnectWallet = (props: WalletDialogProps) => {
     });
     setDetails({ logo: ETH, label: "ETH" });
     localStorage.setItem("address", account!);
-    console.log(account);
   }, [account, etherBalance]);
 
   useEffect(() => {

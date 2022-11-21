@@ -117,7 +117,6 @@ const Absurdle = () => {
     GameServices.getLobbyStats(contestId || "")
 
       .then((res) => {
-        console.log(res);
         // isAuthorized(res as TokenAuthStatus);
         setContest(res as Contest);
         setIsLoaded(true);

@@ -41,7 +41,6 @@ export const App = () => {
             path="/absurdle/lobby/:contestId/:gameStateId"
             element={<AbsurdleLobby />}
           />
-
           <Route
             path="/:game/:contestId/:gameStateId/:isContest"
             element={<Wordle />}

@@ -15,7 +15,6 @@ const GameBanner = (props: any) => {
 
   useEffect(() => {
     HomeServices.getAdminReferralCode().then((res) => {
-      console.log(res);
       setState(res);
     });
   }, []);

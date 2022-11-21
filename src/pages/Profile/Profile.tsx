@@ -181,7 +181,6 @@ const Profile = () => {
       .then((res) => {
         isAuthorized(res as TokenAuthStatus);
         const profile = res as ProfileModel;
-        console.log(res);
         setAvatar(profile.avatarUrl);
         setProgress(profile.profileCompletetion);
         form.setValues({

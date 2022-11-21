@@ -29,7 +29,6 @@ const Wallet = () => {
   useEffect(() => {
     WalletServices.getUserTransactions()
       .then((res) => {
-        console.log(res);
         isAuthorized(res as TokenAuthStatus);
         res = res as Transactions;
         setTransactions(res);

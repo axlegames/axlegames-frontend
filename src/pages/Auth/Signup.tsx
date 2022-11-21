@@ -78,7 +78,6 @@ const Signup = (props: any) => {
   useEffect(() => {
     ReferralServices.getReferralAndReferralCode(params.id)
       .then((res) => {
-        console.log(res);
         setReferral(res as ReferralModel);
       })
       .catch((err) => console.log(err));

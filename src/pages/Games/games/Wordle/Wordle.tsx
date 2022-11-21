@@ -63,6 +63,7 @@ const Wordle = () => {
   };
 
   const initializeState = (game: Status) => {
+    console.log(game);
     const completedRows = GameServices.initRows(game.guessLength);
     const initState: WordleState = {
       guessLength: game.guessLength,

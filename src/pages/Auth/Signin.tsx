@@ -50,7 +50,6 @@ const Signin = () => {
       name: data.profileObj.givenName,
       avatarUrl: data.profileObj.imageUrl,
     };
-    console.log(tokenData);
     AuthServices.loginGoogle(tokenData)
       .then((res: any) => {
         if (!res.data.error) {
