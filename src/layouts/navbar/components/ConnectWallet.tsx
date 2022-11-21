@@ -66,8 +66,6 @@ const ConnectWallet = (props: WalletDialogProps) => {
       balance: formatEther(etherBalance ?? 1).toString(),
       isConnected: account ? true : false,
     });
-
-    console.log(account);
     setDetails({ logo: ETH, label: "ETH" });
     localStorage.setItem("address", account!);
     props.onClose();
