@@ -144,8 +144,6 @@ const SideBarLayout = (props: SideBarProps) => {
       color={theme.highLightColor}
       maxWidth={{ lg: "240px" }}
       minWidth={{ lg: "240px" }}
-      maxHeight="100%"
-      minH={"100vh"}
       display={"flex"}
       flexDirection="column"
       rowGap={"1rem"}
@@ -167,7 +165,7 @@ const SideBarLayout = (props: SideBarProps) => {
         zIndex={23600}
         cursor={"pointer"}
         onClick={() => props.scrollTop()}
-        width={"32"}
+        width={"48"}
         src={Logo}
         alignSelf="center"
       ></Image>

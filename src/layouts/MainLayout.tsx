@@ -12,7 +12,7 @@ const MainLayout = (props: any) => {
   const isNavbarHidden = props.isNavbarHidden || false;
 
   return (
-    <Box maxHeight={"100vh"} overflow="hidden" bg={theme.bgColor}>
+    <Box bg={theme.bgColor}>
       <MobileNavbar />
       <Grid
         templateColumns={{
@@ -36,8 +36,6 @@ const MainLayout = (props: any) => {
         <GridItem
           py={{ base: "2", lg: "10" }}
           pb={{ base: "40", lg: "12" }}
-          maxH={"100vh"}
-          overflowY="scroll"
           ref={ref}
         >
           {!isNavbarHidden ? (
