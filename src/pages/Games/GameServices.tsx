@@ -1,7 +1,7 @@
 import axios from "axios";
 import { headers, gamePrefix } from "../../config";
 import { TokenAuthStatus } from "../../config/auth";
-import { GameStatus } from "../Home/enums/contests.enum";
+import { GameStatus, GameType } from "../Home/enums/contests.enum";
 
 const token = headers() ?? "";
 
@@ -44,6 +44,8 @@ export interface GameState {
 export interface EntryStatus {
   status: ENTRY_STATUS;
   gameState: GameState;
+  name?: string;
+  type?: GameType;
 }
 
 export interface AxleContestInfo {

@@ -88,9 +88,12 @@ const GameEntryModal = (props: any) => {
       return setConfirm(true);
     }
     if (status === toString(ENTRY_STATUS.ALREADY_IN_OTHER_GAME)) {
+      console.log(res);
+      const type = res.type === GameType.PRACTICE ? "practice" : "contest";
+      console.log(res.type);
       setHeader("Oops!");
       setMessage(
-        "Your are already playing another game, please finish it and come back"
+        `Your are already playing ${res.name} ${type} game, please finish it and come back`
       );
       return setDialog(true);
     }

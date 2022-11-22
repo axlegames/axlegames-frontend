@@ -23,6 +23,7 @@ import { Contest } from "../../GameServices";
 import { TokenAuthStatus } from "../../../../config/auth";
 
 import AbsurdleGrid from "./components/AbsurdleGrid";
+import NeuButton from "../../../Axle/component/NeuButton";
 
 const Absurdle = () => {
   const toast = useToast();
@@ -36,7 +37,7 @@ const Absurdle = () => {
   const game = "absurdle";
 
   const [state, dispatch] = useReducer(absurdleReducer, initState);
-  const [contest, setContest] = useState<Contest>();
+  const [time, setTime] = useState<string>(new Date(Date.now()).toString());
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const isAuthorized = (status: TokenAuthStatus) => {
@@ -118,7 +119,16 @@ const Absurdle = () => {
 
       .then((res) => {
         // isAuthorized(res as TokenAuthStatus);
-        setContest(res as Contest);
+        const r = res as Contest;
+        const contestInfo = r.axleContestInfo;
+        const opensAt = new Date(contestInfo.opensAt).getTime();
+        const time = new Date(Date.now()).getTime();
+        const isOpened = opensAt - time < 0 ? true : false;
+        if (!isOpened)
+          return navigate(`/${game}/lobby/${contestId}/${gameStateId}`);
+        setTime(
+          r.axleContestInfo?.expiresAt || new Date(Date.now()).toString()
+        );
         setIsLoaded(true);
       })
       .catch((err) => {
@@ -271,18 +281,13 @@ const Absurdle = () => {
       },
     });
 
-  const iscontest = Boolean(isContest);
   const Timer = () => {
-    if (iscontest) {
-      return isLoaded && contest?.axleContestInfo !== null ? (
+    if (isContest === "true") {
+      return isLoaded ? (
         <WordleTimer
           isLoaded={isLoaded}
           endgame={() => forceFinishGame()}
-          deadline={
-            iscontest
-              ? contest?.axleContestInfo.expiresAt || ""
-              : Date.now().toString()
-          }
+          deadline={time}
         />
       ) : null;
     }
@@ -309,16 +314,30 @@ const Absurdle = () => {
         display={"flex"}
         justifyContent="center"
         flexDirection={"column"}
-        alignItems="center"
         bg={theme.bgColor}
-        rowGap="3rem"
-        py={8}
+        rowGap="1rem"
+        minH="90vh"
       >
         <AbsurdleGrid
           gameStatus={state.gameStatus}
           completedRows={state.completedRows}
           game={state.gameState}
         />
+        {isContest === "false" ? (
+          <Box
+            bg={theme.bgColor}
+            p={4}
+            justifyContent="center"
+            display={"flex"}
+          >
+            <NeuButton
+              bg={theme.neuPrimaryBg}
+              label="End Game"
+              shadow={theme.newPrimaryShadow}
+              onClick={() => forceFinishGame()}
+            />
+          </Box>
+        ) : null}
         <KeyBoard
           onDelete={onDelete}
           onEnter={onEnter}

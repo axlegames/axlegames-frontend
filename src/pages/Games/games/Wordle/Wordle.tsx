@@ -22,6 +22,7 @@ import {
 import WordleTimer from "../../hooks/WordleTimer";
 import { Contest } from "../../GameServices";
 import { TokenAuthStatus } from "../../../../config/auth";
+import NeuButton from "../../../Axle/component/NeuButton";
 
 const Wordle = () => {
   const toast = useToast();
@@ -34,7 +35,7 @@ const Wordle = () => {
   const { contestId, gameStateId, game, isContest } = useParams();
 
   const [state, dispatch] = useReducer(wordleReducer, initState);
-  const [contest, setContest] = useState<Contest>();
+  const [time, setTime] = useState<string>(new Date(Date.now()).toString());
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const isAuthorized = (status: TokenAuthStatus) => {
@@ -63,7 +64,6 @@ const Wordle = () => {
   };
 
   const initializeState = (game: Status) => {
-    console.log(game);
     const completedRows = GameServices.initRows(game.guessLength);
     const initState: WordleState = {
       guessLength: game.guessLength,
@@ -116,7 +116,16 @@ const Wordle = () => {
     GameServices.getLobbyStats(contestId || "")
       .then((res) => {
         isAuthorized(res as TokenAuthStatus);
-        setContest(res as Contest);
+        const r = res as Contest;
+        const contestInfo = r.axleContestInfo;
+        const opensAt = new Date(contestInfo.opensAt).getTime();
+        const time = new Date(Date.now()).getTime();
+        const isOpened = opensAt - time < 0 ? true : false;
+        if (!isOpened)
+          return navigate(`/${game}/lobby/${contestId}/${gameStateId}`);
+        setTime(
+          r.axleContestInfo?.expiresAt || new Date(Date.now()).toString()
+        );
         setIsLoaded(true);
       })
       .catch((err) => {
@@ -249,18 +258,13 @@ const Wordle = () => {
       },
     });
 
-  const iscontest = Boolean(isContest);
   const Timer = () => {
-    if (iscontest) {
-      return isLoaded && contest?.axleContestInfo !== null ? (
+    if (isContest === "true") {
+      return isLoaded ? (
         <WordleTimer
           isLoaded={isLoaded}
           endgame={() => forceFinishGame()}
-          deadline={
-            iscontest
-              ? contest?.axleContestInfo.expiresAt || ""
-              : Date.now().toString()
-          }
+          deadline={time}
         />
       ) : null;
     }
@@ -269,8 +273,6 @@ const Wordle = () => {
 
   return (
     <Box>
-      <Navbar title={game} />
-      <Timer />
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
@@ -283,21 +285,37 @@ const Wordle = () => {
         children={<LostModal />}
         close={() => navigate("/")}
       />
+      <Navbar title={game} />
+      <Timer />
+
       <Box
         display={"flex"}
-        justifyContent="center"
         flexDirection={"column"}
-        alignItems="center"
         bg={theme.bgColor}
-        rowGap="3rem"
-        maxH={"100vh"}
-        minH="100vh"
+        rowGap="1rem"
+        minH="90vh"
+        justifyContent="center"
       >
         <Grid
           gameStatus={state.gameStatus}
           completedRows={state.completedRows}
           game={state.gameState}
         />
+        {isContest === "false" ? (
+          <Box
+            bg={theme.bgColor}
+            p={4}
+            justifyContent="center"
+            display={"flex"}
+          >
+            <NeuButton
+              bg={theme.neuPrimaryBg}
+              label="End Game"
+              shadow={theme.newPrimaryShadow}
+              onClick={() => forceFinishGame()}
+            />
+          </Box>
+        ) : null}
         <KeyBoard
           onDelete={onDelete}
           onEnter={onEnter}
