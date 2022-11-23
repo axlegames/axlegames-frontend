@@ -55,29 +55,24 @@ const TimerButton = (props: Props) => {
           {!isLoaded ? `Loading...` : "Expired"}
         </Button>
       ) : null}
-      {isEntryClosed && !expired ? (
-        <Button color="black" disabled size="sm" width={"32"}>
-          {!isLoaded ? `Loading...` : "Entry Closed"}
-        </Button>
-      ) : (
-        <Box>
-          {(started && !expired) || isPracticeContest ? (
-            <Button
-              color="black"
-              bg="green.500"
-              onClick={() => props.action()}
-              size="sm"
-              width={"32"}
-            >
-              {!isLoaded ? `Loading...` : "Play"}
-            </Button>
-          ) : !expired ? (
-            <Button size="sm" color={"black"} bg={"orange.400"} width={"32"}>
-              {!isLoaded ? `Loading...` : `Starts in ${minutes}m ${seconds}s`}
-            </Button>
-          ) : null}
-        </Box>
-      )}
+
+      <Box>
+        {((started || isEntryClosed) && !expired) || isPracticeContest ? (
+          <Button
+            color="black"
+            bg="green.500"
+            onClick={() => props.action()}
+            size="sm"
+            width={"32"}
+          >
+            {!isLoaded ? `Loading...` : "Play"}
+          </Button>
+        ) : !expired ? (
+          <Button size="sm" color={"black"} bg={"orange.400"} width={"32"}>
+            {!isLoaded ? `Loading...` : `Starts in ${minutes}m ${seconds}s`}
+          </Button>
+        ) : null}
+      </Box>
     </Box>
   );
 };

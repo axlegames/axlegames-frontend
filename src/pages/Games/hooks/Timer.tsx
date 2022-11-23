@@ -29,12 +29,12 @@ const Timer = (props: Props) => {
   const starts = new Date(props.startsOn).getTime() - new Date().getTime();
   const isStarted = starts < 0 ? true : false;
 
-  const expires = new Date(props.opensAt).getTime() - new Date().getTime();
+  const expires = new Date(props.deadline).getTime() - new Date().getTime();
   const isExpired = expires < 0 ? true : false;
 
   const timer = !isExpired
     ? `Entry closes in ${minutes}m ${seconds}s`
-    : `Entry closed`;
+    : `Game Started`;
 
   return (
     <Box>
