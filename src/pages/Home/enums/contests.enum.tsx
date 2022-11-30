@@ -7,4 +7,6 @@ export enum GameStatus {
   EXPIRED = "EXPIRED",
   LIVE = "LIVE",
   NEXT = "NEXT",
+  LOBBY = "LOBBY",
+  LATER = "LATER",
 }

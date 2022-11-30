@@ -5,14 +5,41 @@ interface Props {
   deadline: string;
   startsOn: string;
   opensAt: string;
+  currentTime: string;
 }
 const Timer = (props: Props) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isLobby, setIsLobby] = useState(false);
+  const [isLive, setIsLive] = useState(false);
 
-  const getTime = (ftime: any) => {
-    const time = Date.parse(ftime) - new Date().getTime();
+  const calcualteRemainingTime = () => {
+    const remainingTimeForLobby =
+      new Date(props.opensAt).getTime() - new Date().getTime();
+
+    const _isLobby =
+      remainingTimeForLobby > 0 && remainingTimeForLobby < 5 * 1000 * 60
+        ? true
+        : false;
+
+    const remainingTimeForLive =
+      new Date(props.deadline).getTime() - new Date().getTime();
+
+    const _isLive =
+      remainingTimeForLive > 0 && remainingTimeForLive < 5 * 1000 * 60
+        ? true
+        : false;
+
+    setIsLobby(_isLobby);
+    const currentTime = () => {
+      if (_isLobby) return props.opensAt;
+      if (_isLive) return props.deadline;
+      return props.deadline;
+    };
+
+    setIsLive(_isLive);
+    const time = Date.parse(currentTime()) - new Date().getTime();
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
   };
@@ -21,30 +48,28 @@ const Timer = (props: Props) => {
     setTimeout(() => {
       setIsLoaded(true);
     }, 1500);
-
-    const opens = new Date(props.startsOn).getTime() - new Date().getTime();
-    const isOpened = opens < 0 ? true : false;
-    const currentTime = isOpened ? props.deadline : props.startsOn;
-    const interval = setInterval(() => getTime(currentTime), 1000);
-
+    const interval = setInterval(() => calcualteRemainingTime(), 1000);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const starts = new Date(props.startsOn).getTime() - new Date().getTime();
-  const isStarted = starts < 0 ? true : false;
-
   return (
     <Box>
-      {isStarted ? (
-        <Text>
+      <Text>
+        <Box>
           {isLoaded ? (
-            <Box>{`expires in ${minutes}m ${seconds}s`}</Box>
+            <Box>
+              {isLobby ? (
+                <Box>{`closes in ${minutes}m ${seconds}s`}</Box>
+              ) : (
+                <Box>{`${isLive ? `In progress` : ""}`}</Box>
+              )}
+            </Box>
           ) : (
-            `Loading...`
+            <Box>{`Loading...`}</Box>
           )}
-        </Text>
-      ) : null}
+        </Box>
+      </Text>
     </Box>
   );
 };

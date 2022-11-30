@@ -234,7 +234,11 @@ const GameEntryModal = (props: any) => {
             <Flex direction={"column"} rowGap="2rem">
               {contests?.axleContests.map((d, i) => (
                 <Box key={i}>
-                  <EntryCard {...d} action={() => enterContest(d, false)} />
+                  <EntryCard
+                    currentTime={contests.currentTime}
+                    contest={d}
+                    action={() => enterContest(d, false)}
+                  />
                 </Box>
               ))}
               <Divider />

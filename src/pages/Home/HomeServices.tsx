@@ -18,6 +18,7 @@ export interface AxleGames {
 
 export interface AxleContests {
   axleContests: Array<AxleContest>;
+  currentTime: string;
   error: boolean;
   now: string;
 }

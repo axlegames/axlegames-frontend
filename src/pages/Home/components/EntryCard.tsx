@@ -5,20 +5,27 @@ import TimerButton from "../../Games/hooks/TimerButton";
 import { GameType } from "../enums/contests.enum";
 import { AxleContest } from "../HomeServices";
 
-const EntryCard = (props: AxleContest) => {
+interface Props {
+  contest: AxleContest;
+  currentTime: string;
+  action: Function;
+}
+
+const EntryCard = (props: Props) => {
   const toStringGameType = (gameType: GameType) => {
     return gameType.valueOf().toString();
   };
-  const gameType = props.gameType.valueOf().toString();
+  const gameType = props.contest.gameType.valueOf().toString();
   const type = gameType === toStringGameType(GameType.PRACTICE);
 
   const TimeComponent = () => {
     return !type ? (
       <Box>
         <Timer
-          opensAt={props.axleContestInfo?.opensAt || ""}
-          deadline={props.axleContestInfo?.expiresAt || ""}
-          startsOn={props.axleContestInfo?.startsOn || ""}
+          currentTime={props.currentTime}
+          opensAt={props.contest.axleContestInfo?.opensAt || ""}
+          deadline={props.contest.axleContestInfo?.expiresAt || ""}
+          startsOn={props.contest.axleContestInfo?.startsOn || ""}
         />
       </Box>
     ) : null;
@@ -86,37 +93,39 @@ const EntryCard = (props: AxleContest) => {
           <GridItem>
             <Flex direction={"column"}>
               <Text>Entry Fee</Text>
-              <Text> {props.axleContestInfo?.entryFee} </Text>
+              <Text> {props.contest.axleContestInfo?.entryFee} </Text>
             </Flex>
           </GridItem>
 
           <GridItem>
             <Flex direction={"column"}>
               <Text>Prize</Text>
-              <Text>{props.axleContestInfo?.prizePool}</Text>
+              <Text>{props.contest.axleContestInfo?.prizePool}</Text>
             </Flex>
           </GridItem>
           <GridItem>
             <Flex justifyContent={"flex-end"}>
               <TimerButton
-                gameType={props.gameType.valueOf().toString()}
+                status={props.contest.status}
+                gameType={props.contest.gameType.valueOf().toString()}
                 action={props.action}
-                opensAt={props.axleContestInfo?.opensAt || ""}
-                deadline={props.axleContestInfo?.expiresAt || ""}
-                startsIn={props.axleContestInfo?.startsOn || ""}
+                opensAt={props.contest.axleContestInfo?.opensAt || ""}
+                deadline={props.contest.axleContestInfo?.expiresAt || ""}
+                startsIn={props.contest.axleContestInfo?.startsOn || ""}
+                currentTime={props.currentTime}
               />
             </Flex>
           </GridItem>
         </Grid>
       </Box>
-      {props.status ? (
+      {props.contest.status ? (
         <Box
           borderBottomRadius={"lg"}
           boxShadow={`0px 0px 4px ${theme.secondaryTwoTextColor}`}
           p="2"
         >
           <Text color={theme.primaryTextColor} fontSize={"smaller"}>
-            {props.axleContestants.length} + playing now
+            {props.contest.axleContestants.length} + playing now
           </Text>
         </Box>
       ) : null}
