@@ -11,8 +11,8 @@ const Timer = (props: Props) => {
   const [seconds, setSeconds] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const getTime = () => {
-    const time = Date.parse(props.opensAt) - new Date().getTime();
+  const getTime = (ftime: any) => {
+    const time = Date.parse(ftime) - new Date().getTime();
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
   };
@@ -21,7 +21,12 @@ const Timer = (props: Props) => {
     setTimeout(() => {
       setIsLoaded(true);
     }, 1500);
-    const interval = setInterval(() => getTime(), 1000);
+
+    const opens = new Date(props.startsOn).getTime() - new Date().getTime();
+    const isOpened = opens < 0 ? true : false;
+    const currentTime = isOpened ? props.deadline : props.startsOn;
+    const interval = setInterval(() => getTime(currentTime), 1000);
+
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -29,18 +34,17 @@ const Timer = (props: Props) => {
   const starts = new Date(props.startsOn).getTime() - new Date().getTime();
   const isStarted = starts < 0 ? true : false;
 
-  const expires = new Date(props.deadline).getTime() - new Date().getTime();
-  const isExpired = expires < 0 ? true : false;
-
-  const timer = !isExpired
-    ? `Entry closes in ${minutes}m ${seconds}s`
-    : `Game Started`;
-
   return (
     <Box>
-      <Text>
-        {isLoaded ? <Box>{isStarted ? timer : null}</Box> : `Loading...`}
-      </Text>
+      {isStarted ? (
+        <Text>
+          {isLoaded ? (
+            <Box>{`expires in ${minutes}m ${seconds}s`}</Box>
+          ) : (
+            `Loading...`
+          )}
+        </Text>
+      ) : null}
     </Box>
   );
 };
