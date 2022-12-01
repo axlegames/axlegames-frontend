@@ -13,11 +13,12 @@ const WordleTimer = (props: Props) => {
   const [seconds, setSeconds] = useState(0);
 
   const getTime = () => {
-    const time = Date.parse(props.deadline || "") - new Date().getTime();
+    const time =
+      Date.parse(props.deadline || "") - new Date(Date.now()).getTime();
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
     if (time < 0) {
-      // props.endgame();
+      props.endgame();
     }
   };
 
