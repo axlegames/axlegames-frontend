@@ -70,7 +70,10 @@ const AbsurdleLobby = () => {
       : "Loading";
 
     return (
-      <Text color={theme.secondaryTextColor} fontSize={"xl"}>
+      <Text
+        color={theme.secondaryTextColor}
+        fontSize={{ base: "md", xl: "xl" }}
+      >
         {timer}
       </Text>
     );
@@ -95,7 +98,7 @@ const AbsurdleLobby = () => {
         display="flex"
         flexDirection={"column"}
         position="relative"
-        minW={"450px"}
+        minW={{ base: "360px", md: "450px" }}
         border={`4px groove ${theme.primaryTwoTextColor}`}
       >
         <Image
@@ -117,7 +120,7 @@ const AbsurdleLobby = () => {
 
         <Text
           color={theme.primaryTextColor}
-          fontSize={"3xl"}
+          fontSize={{ base: "xl", md: "3xl" }}
         >{`#Absurdle Lobby`}</Text>
         <Timer
           deadline={contest?.axleContestInfo.expiresAt || ""}
@@ -130,6 +133,7 @@ const AbsurdleLobby = () => {
           mx={4}
           mt={4}
           display={"flex"}
+          flexDirection={{ base: "column", md: "row" }}
           justifyContent="space-between"
           p={4}
         >

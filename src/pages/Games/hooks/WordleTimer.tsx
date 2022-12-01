@@ -37,10 +37,9 @@ const WordleTimer = (props: Props) => {
     <Box bg={theme.bgColor} display="flex" justifyContent={"center"}>
       {props.isLoaded ? (
         <Box
-          display={{ sm: "none", lg: "flex" }}
           left={"8%"}
           position={"absolute"}
-          fontSize={"3xl"}
+          fontSize={{ base: "xl", md: "3xl" }}
           fontWeight="bold"
           fontFamily="quicksand"
           color={theme.secondaryButtonColor}
@@ -54,7 +53,7 @@ const WordleTimer = (props: Props) => {
             Expires In
           </Text>
           <Box
-            fontSize={"3xl"}
+            fontSize={{ base: "xl", md: "3xl" }}
             fontWeight="bold"
             fontFamily="quicksand"
             color={theme.secondaryButtonColor}
