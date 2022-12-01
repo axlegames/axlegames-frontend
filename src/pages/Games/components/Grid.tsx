@@ -4,7 +4,7 @@ import Cell from "./Cell";
 
 const Grid = (props: any) => {
   return (
-    <Box fontFamily={"quicksand"} fontSize="3xl" fontWeight={"bold"}>
+    <Box p={4} fontFamily={"quicksand"} fontSize="3xl" fontWeight={"bold"}>
       <Box
         bg={theme.bgColor}
         display="flex"

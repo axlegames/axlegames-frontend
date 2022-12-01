@@ -98,7 +98,7 @@ const WordleLobby = () => {
         display="flex"
         flexDirection={"column"}
         position="relative"
-        minW={{ base: "360px", md: "450px" }}
+        minW={{ base: "320px", md: "450px" }}
         border={`4px groove ${theme.primaryTwoTextColor}`}
       >
         <Image
