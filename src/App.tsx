@@ -1,20 +1,25 @@
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { lazy } from "react";
 
-import Home from "./pages/Home/Home";
-import ForgotPassword from "./pages/Auth/ForgotPassword";
-import Page403 from "./pages/Auth/Page403";
-import Axle from "./pages/Axle/Axle";
-import Dashboard from "./pages/DashBoard/DashBoard";
-import Profile from "./pages/Profile/Profile";
-import ReferralLayout from "./pages/Referral/ReferralLayout";
-import Wallet from "./pages/Wallet/Wallet";
-import ComingSoon from "./pages/ComingSoon";
-import SignupPage from "./pages/Auth/SignUpPage";
-import Absurdle from "./pages/Games/games/Absurdle/Absurdle";
-import Wordle from "./pages/Games/games/Wordle/Wordle";
-import WordleLobby from "./pages/Games/games/Wordle/WordleLobby";
-import AbsurdleLobby from "./pages/Games/games/Absurdle/AbsurdleLobby";
+const Home = lazy(() => import("./pages/Home/Home"));
+const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"));
+const Page403 = lazy(() => import("./pages/Auth/Page403"));
+const Axle = lazy(() => import("./pages/Axle/Axle"));
+const Dashboard = lazy(() => import("./pages/DashBoard/DashBoard"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
+const ReferralLayout = lazy(() => import("./pages/Referral/ReferralLayout"));
+const Wallet = lazy(() => import("./pages/Wallet/Wallet"));
+const ComingSoon = lazy(() => import("./pages/ComingSoon"));
+const SignupPage = lazy(() => import("./pages/Auth/SignUpPage"));
+const Absurdle = lazy(() => import("./pages/Games/games/Absurdle/Absurdle"));
+const Wordle = lazy(() => import("./pages/Games/games/Wordle/Wordle"));
+const WordleLobby = lazy(
+  () => import("./pages/Games/games/Wordle/WordleLobby")
+);
+const AbsurdleLobby = lazy(
+  () => import("./pages/Games/games/Absurdle/AbsurdleLobby")
+);
 
 export const App = () => {
   return (

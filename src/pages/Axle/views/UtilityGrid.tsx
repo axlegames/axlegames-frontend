@@ -1,29 +1,24 @@
 import { Box, Flex, Grid, GridItem, Image, Text } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 
-import Compete from "../../../assets/gamein/compete.png";
-import ChargeUp from "../../../assets/gamein/chargeup.png";
-import Compound from "../../../assets/gamein/compound.png";
-import Collect from "../../../assets/gamein/collect.png";
-
 const data = [
   {
-    img: Compete,
+    img: `https://axlegames.s3.ap-south-1.amazonaws.com/assets/gamein/compete.png`,
     title: "Compete",
     content: "Play web3 skill games with friends on Axle and win $AXLE tokens",
   },
   {
-    img: ChargeUp,
+    img: `https://axlegames.s3.ap-south-1.amazonaws.com/assets/gamein/chargeup.png`,
     title: "ChargeUp",
     content: "Use $AXLE tokens to power up and boost your rewards",
   },
   {
-    img: Compound,
+    img: `https://axlegames.s3.ap-south-1.amazonaws.com/assets/gamein/compound.png`,
     title: "Compound",
     content: "Stake $AXLE and earn compound interest with a decent APY",
   },
   {
-    img: Collect,
+    img: `https://axlegames.s3.ap-south-1.amazonaws.com/assets/gamein/collect.png`,
     title: "Collect",
     content: "Purchase or win AXLE game NFT rewards by playing games",
   },
