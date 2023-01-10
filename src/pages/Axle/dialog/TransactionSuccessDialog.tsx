@@ -1,5 +1,5 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import Success from "../../../assets/gamein/checked.png";
+import Success from "../../../assets/gamein/checked.webp";
 import NeuButton from "../component/NeuButton";
 import { theme } from "../../../../src/config/theme.config";
 
