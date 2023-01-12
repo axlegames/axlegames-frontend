@@ -1,6 +1,7 @@
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { lazy } from "react";
+import { lazy, useState } from "react";
+import Banner from "./layouts/Banner";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"));
@@ -22,8 +23,10 @@ const AbsurdleLobby = lazy(
 );
 
 export const App = () => {
+  const [banner, setBanner] = useState(true);
   return (
     <ChakraProvider theme={theme}>
+      <Banner close={() => setBanner(false)} isOpen={banner} size="xl" />
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
