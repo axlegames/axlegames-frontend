@@ -13,6 +13,7 @@ export interface Status {
   isGameCompeted: boolean;
   wordLength: number;
   guessLength: number;
+  hasPlayingAnotherGame?: boolean;
 }
 
 export interface GuessStatus {

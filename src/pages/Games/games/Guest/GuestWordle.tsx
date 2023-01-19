@@ -77,9 +77,25 @@ const GuestWordle = () => {
   };
 
   useEffect(() => {
-    GameServices.getGuestGameState({ gameStateId: gameStateId })
+    GameServices.getGuestGameState({
+      gameStateId: gameStateId,
+      contestId: contestId,
+    })
       .then((game) => {
         game = game as Status;
+        console.log(game);
+        if (game.hasPlayingAnotherGame) {
+          toast({
+            title: "Oops, You are already playing another game.",
+            status: "warning",
+            duration: 4000,
+            isClosable: true,
+            position: "top",
+          });
+          setTimeout(() => {
+            return navigate("/");
+          }, 4000);
+        }
         if (game.isGameCompeted) {
           if (game.isWinningWord) setIsWon(true);
           else setIsLost(true);
