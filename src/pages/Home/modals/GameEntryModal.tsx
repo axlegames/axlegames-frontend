@@ -220,7 +220,7 @@ const GameEntryModal = (props: any) => {
     });
 
     return (
-      <Modal isOpen={props.isOpen} onClose={props.close}>
+      <Modal isCentered={true} isOpen={props.isOpen} onClose={props.close}>
         <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
         <ModalContent
           p={4}
