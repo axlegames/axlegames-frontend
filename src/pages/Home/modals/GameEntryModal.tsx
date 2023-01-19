@@ -276,12 +276,12 @@ const GameEntryModal = (props: any) => {
                 color={theme.primaryButtonColor}
                 boxShadow={`5px 5px 15px #1e1c33, -5px -5px 15px #2e2c51`}
                 _active={{
-                  boxshadow:
-                    "inset 5px 5px 15px #1e1c33, inset -5px -5px 15px #2e2c51",
+                  bg: theme.primaryButtonColor,
+                  color: theme.modalBgColor,
                 }}
                 _hover={{
-                  boxshadow:
-                    "inset 5px 5px 15px #1e1c33, inset -5px -5px 15px #2e2c51",
+                  bg: theme.primaryButtonColor,
+                  color: theme.modalBgColor,
                 }}
                 bg={theme.modalBgColor}
                 onClick={() => form.handleSubmit()}
