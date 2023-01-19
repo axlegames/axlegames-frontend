@@ -1,5 +1,5 @@
 import axios from "axios";
-import { headers, gamePrefix } from "../../config";
+import { headers, gamePrefix, guestPrefix } from "../../config";
 import { TokenAuthStatus } from "../../config/auth";
 import { GameStatus, GameType } from "../Home/enums/contests.enum";
 
@@ -69,6 +69,35 @@ export interface Contest {
 }
 
 export class GameServices {
+  static createGuestGameState = async (data: {
+    guest: string;
+    contestId: string;
+  }) => {
+    return await (
+      await axios.post(`${guestPrefix}/games/create`, data)
+    ).data;
+  };
+
+  static cleanGuestGameState = async (data: { gameStateId: string }) => {
+    return await (
+      await axios.post(`${guestPrefix}/games/clean`, data)
+    ).data;
+  };
+
+  static getGuestGameState = async (data: any): Promise<Status> =>
+    await (
+      await axios.post(`${guestPrefix}/games/status`, data)
+    ).data;
+
+  static validateUpdateGuestGuess = async (data: any): Promise<GuessStatus> => {
+    const resp = await axios.post(`${guestPrefix}/games/validate`, data);
+    return {
+      inValidWord: resp.data.inValidWord,
+      guessStatus: resp.data.guessStatus,
+      isWinningWord: resp.data.isWinningWord,
+    };
+  };
+
   static enterContest = async (
     data: any
   ): Promise<EntryStatus | TokenAuthStatus> => {
@@ -76,35 +105,6 @@ export class GameServices {
       await axios.post(`${gamePrefix}/enter`, data, token)
     ).data;
   };
-
-  static createGuestGameState = async (data: {
-    guest: string;
-    contestId: string;
-  }) => {
-    return await (
-      await axios.post(
-        `http://localhost:5001/axlegames/api/v1/guest/games/create`,
-        data
-      )
-    ).data;
-  };
-
-  static cleanGuestGameState = async (data: { gameStateId: string }) => {
-    return await (
-      await axios.post(
-        `http://localhost:5001/axlegames/api/v1/guest/games/clean`,
-        data
-      )
-    ).data;
-  };
-
-  static getGuestGameState = async (data: any): Promise<Status> =>
-    await (
-      await axios.post(
-        `http://localhost:5001/axlegames/api/v1/guest/games/status`,
-        data
-      )
-    ).data;
 
   static getGameState = async (data: any): Promise<Status | TokenAuthStatus> =>
     await (
@@ -130,18 +130,6 @@ export class GameServices {
 
       data,
       token
-    );
-    return {
-      inValidWord: resp.data.inValidWord,
-      guessStatus: resp.data.guessStatus,
-      isWinningWord: resp.data.isWinningWord,
-    };
-  };
-
-  static validateUpdateGuestGuess = async (data: any): Promise<GuessStatus> => {
-    const resp = await axios.post(
-      `http://localhost:5001/axlegames/api/v1/guest/games/validate`,
-      data
     );
     return {
       inValidWord: resp.data.inValidWord,

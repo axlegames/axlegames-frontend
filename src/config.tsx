@@ -1,4 +1,4 @@
-let SERVER = "DEV";
+let SERVER = "PROD";
 let URL = "";
 
 if (SERVER === "DEV") URL = "http://localhost:5001";
@@ -8,6 +8,8 @@ const axlegamesPrefix = URL + "/axlegames/api/v1/";
 const userPrefix = axlegamesPrefix + "users";
 const gamePrefix = axlegamesPrefix + "games";
 const referralPrefix = axlegamesPrefix + "referrals";
+
+const guestPrefix = axlegamesPrefix + "guest";
 
 const headers = () => {
   return {
@@ -20,6 +22,7 @@ export {
   headers,
   userPrefix,
   axlegamesPrefix,
+  guestPrefix,
   gamePrefix,
   referralPrefix,
 };
