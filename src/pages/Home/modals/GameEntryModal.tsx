@@ -38,32 +38,14 @@ import { TokenAuthStatus } from "../../../config/auth";
 import { useFormik } from "formik";
 
 const GameEntryModal = (props: any) => {
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const [tryM, setTryM] = useState(false);
   const [guest, setGuest] = useState({
     contestId: "",
     link: "",
   });
-  const form = useFormik({
-    initialValues: { guest: "" },
-    onSubmit: (values) => {
-      const r = {
-        ...values,
-        contestId: guest.contestId,
-      };
-      GameServices.createGuestGameState(r)
-        .then((res: any) => {
-          if (res.status === "OK") {
-            navigate(
-              `/guest/${guest.link}/${guest.contestId}/${res.gameState._id}`
-            );
-          }
-        })
-        .catch((err) => console.log(err));
-    },
-  });
-
-  const toast = useToast();
-  const navigate = useNavigate();
 
   const [dialog, setDialog] = useState(false);
   const [confirm, setConfirm] = useState(false);
@@ -216,47 +198,88 @@ const GameEntryModal = (props: any) => {
 
     return setLoginDialog(true);
   }
-  console.log(props);
 
-  const TryNow = () => {
+  const TryNow = (props: any) => {
+    const form = useFormik({
+      initialValues: { guest: "" },
+      onSubmit: (values) => {
+        const r = {
+          ...values,
+          contestId: guest.contestId,
+        };
+        GameServices.createGuestGameState(r)
+          .then((res: any) => {
+            if (res.status === "OK") {
+              navigate(
+                `/guest/${guest.link}/${guest.contestId}/${res.gameState._id}`
+              );
+            }
+          })
+          .catch((err) => console.log(err));
+      },
+    });
+
     return (
-      <Box p={4} display={"flex"} flexDirection="column" rowGap={"1rem"}>
-        <Text fontSize={"3xl"} color={theme.primaryTextColor}>
-          Try {props.name}
-        </Text>
-        <FormControl>
-          <FormLabel>Enter name</FormLabel>
-          <Input
-            name="guest"
-            border={"none"}
-            outline="none"
-            boxShadow={`0px 0px 3px ${theme.ternaryButtonColor}`}
-            value={form.values.guest}
-            bg={theme.bgColor}
-            onChange={form.handleChange}
-            color={theme.secondaryTextColor}
-            type={"text"}
-          ></Input>
-        </FormControl>
-        <Box display={"flex"} alignItems="center">
-          <Button
-            _hover={{
-              bg: theme.bgColor,
-              color: theme.primaryTextColor,
-              boxShadow: `0px 0px 3px ${theme.primaryTextColor}`,
-            }}
-            bg={theme.primaryButtonColor}
-            onClick={() => form.handleSubmit()}
-          >
-            Play
-          </Button>
-        </Box>
-      </Box>
+      <Modal size={"2xl"} isOpen={props.isOpen} onClose={props.close}>
+        <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
+        <ModalContent
+          p={4}
+          borderRadius={"xl"}
+          color="#fbd6d2"
+          fontFamily={"quicksand"}
+          fontWeight="bold"
+          bg={theme.modalBgColor}
+        >
+          <Box p={4} display={"flex"} flexDirection="column" rowGap={"1rem"}>
+            <Text fontSize={"3xl"} color={theme.primaryTextColor}>
+              Try {props.name}
+            </Text>
+            <FormControl color={theme.primaryTextColor}>
+              <FormLabel>Enter name</FormLabel>
+              <Input
+                placeholder={"Guest"}
+                id={"guest"}
+                name="guest"
+                value={form.values.guest}
+                onChange={form.handleChange}
+                size={"lg"}
+                fontWeight="bold"
+                border={"none"}
+                outline="none"
+                bg={theme.bgColor}
+                color={theme.secondaryTextColor}
+                boxShadow={`0px 0px 3px ${theme.ternaryButtonColor}`}
+                _focus={{ outline: "none", border: "none" }}
+                type={"text"}
+                isRequired={true}
+              />
+            </FormControl>
+            <Box display={"flex"} alignItems="center">
+              <Button
+                _hover={{
+                  bg: theme.bgColor,
+                  color: theme.primaryTextColor,
+                  boxShadow: `0px 0px 3px ${theme.primaryTextColor}`,
+                }}
+                bg={theme.primaryButtonColor}
+                onClick={() => form.handleSubmit()}
+              >
+                Play
+              </Button>
+            </Box>
+          </Box>
+        </ModalContent>
+      </Modal>
     );
   };
 
   return (
-    <Modal isOpen={props.open} onClose={props.close}>
+    <Modal
+      blockScrollOnMount={false}
+      size={"2xl"}
+      isOpen={props.open}
+      onClose={props.close}
+    >
       <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
       <ModalContent
         borderRadius={"xl"}
@@ -281,12 +304,7 @@ const GameEntryModal = (props: any) => {
           enterContest={() => enterContest(null, true)}
           title={header}
         />
-        <AuthDialog
-          children={<TryNow />}
-          isOpen={tryM}
-          close={() => setTryM(false)}
-          size="md"
-        />
+        <TryNow isOpen={tryM} close={() => setTryM(false)} />
         <AuthDialog
           children={<Signin />}
           isOpen={loginDialog}

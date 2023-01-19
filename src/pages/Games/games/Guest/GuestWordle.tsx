@@ -84,9 +84,11 @@ const GuestWordle = () => {
       .then((game) => {
         game = game as Status;
         console.log(game);
+
         if (game.hasPlayingAnotherGame) {
           toast({
-            title: "Oops, You are already playing another game.",
+            description: `Oops, You are already playing ${game.name}`,
+            title: "Already In Game",
             status: "warning",
             duration: 4000,
             isClosable: true,
@@ -158,8 +160,8 @@ const GuestWordle = () => {
       },
     });
     if (state.currentRow === state.guessLength - 1 || isWinningWord) {
-      await GameServices.cleanGameState({
-        guest: "guest",
+      await GameServices.cleanGuestGameState({
+        gameStateId: gameStateId || "",
       });
       setTimeout(() => {
         if (isWinningWord) setIsWon(true);

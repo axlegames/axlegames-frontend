@@ -6,6 +6,7 @@ import { GameStatus, GameType } from "../Home/enums/contests.enum";
 const token = headers() ?? "";
 
 export interface Status {
+  name?: string;
   wordList: Array<Array<string>>;
   gameStatus: Array<Array<string>>;
   hasGameState: boolean;
