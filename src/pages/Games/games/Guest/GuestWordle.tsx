@@ -83,8 +83,6 @@ const GuestWordle = () => {
     })
       .then((game) => {
         game = game as Status;
-        console.log(game);
-
         if (game.hasPlayingAnotherGame) {
           toast({
             description: `Oops, You are already playing ${game.name}`,

@@ -220,7 +220,7 @@ const GameEntryModal = (props: any) => {
     });
 
     return (
-      <Modal size={"2xl"} isOpen={props.isOpen} onClose={props.close}>
+      <Modal isOpen={props.isOpen} onClose={props.close}>
         <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
         <ModalContent
           p={4}
@@ -231,11 +231,15 @@ const GameEntryModal = (props: any) => {
           bg={theme.modalBgColor}
         >
           <Box p={4} display={"flex"} flexDirection="column" rowGap={"1rem"}>
-            <Text fontSize={"3xl"} color={theme.primaryTextColor}>
-              Try {props.name}
+            <Text
+              textAlign={"center"}
+              fontSize={"3xl"}
+              color={theme.primaryTextColor}
+            >
+              {props.name} Practice Game
             </Text>
-            <FormControl color={theme.primaryTextColor}>
-              <FormLabel>Enter name</FormLabel>
+            <FormControl fontWeight={"bold"} color={theme.primaryTextColor}>
+              <FormLabel fontWeight={"bold"}>Enter name</FormLabel>
               <Input
                 placeholder={"Guest"}
                 id={"guest"}
@@ -243,25 +247,43 @@ const GameEntryModal = (props: any) => {
                 value={form.values.guest}
                 onChange={form.handleChange}
                 size={"lg"}
+                autoComplete="off"
                 fontWeight="bold"
                 border={"none"}
                 outline="none"
-                bg={theme.bgColor}
+                bg={theme.modalBgColor}
                 color={theme.secondaryTextColor}
-                boxShadow={`0px 0px 3px ${theme.ternaryButtonColor}`}
+                boxShadow={`inset 5px 5px 15px #1e1c33, inset -5px -5px 15px #2e2c51`}
                 _focus={{ outline: "none", border: "none" }}
                 type={"text"}
                 isRequired={true}
+                _hover={{
+                  outline: "none",
+                  border: "none",
+                }}
+                _highlighted={{
+                  outline: "none",
+                  border: "none",
+                }}
+                _focusVisible={{
+                  outline: "none",
+                  border: "none",
+                }}
               />
             </FormControl>
             <Box display={"flex"} alignItems="center">
               <Button
-                _hover={{
-                  bg: theme.bgColor,
-                  color: theme.primaryTextColor,
-                  boxShadow: `0px 0px 3px ${theme.primaryTextColor}`,
+                color={theme.primaryButtonColor}
+                boxShadow={`5px 5px 15px #1e1c33, -5px -5px 15px #2e2c51`}
+                _active={{
+                  boxshadow:
+                    "inset 5px 5px 15px #1e1c33, inset -5px -5px 15px #2e2c51",
                 }}
-                bg={theme.primaryButtonColor}
+                _hover={{
+                  boxshadow:
+                    "inset 5px 5px 15px #1e1c33, inset -5px -5px 15px #2e2c51",
+                }}
+                bg={theme.modalBgColor}
                 onClick={() => form.handleSubmit()}
               >
                 Play
@@ -304,7 +326,7 @@ const GameEntryModal = (props: any) => {
           enterContest={() => enterContest(null, true)}
           title={header}
         />
-        <TryNow isOpen={tryM} close={() => setTryM(false)} />
+        <TryNow name={props.name} isOpen={tryM} close={() => setTryM(false)} />
         <AuthDialog
           children={<Signin />}
           isOpen={loginDialog}
