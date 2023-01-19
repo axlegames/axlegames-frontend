@@ -19,7 +19,6 @@ const TimerButton = (props: Props) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log(props);
 
   const isPracticeContest =
     props.gameType === GameType.PRACTICE.valueOf().toString();

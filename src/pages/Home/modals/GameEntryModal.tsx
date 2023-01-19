@@ -12,6 +12,10 @@ import {
   Flex,
   useToast,
   useMediaQuery,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
 } from "@chakra-ui/react";
 import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
@@ -31,8 +35,33 @@ import ConfirmDialog from "./ConfirmDialog";
 import { GameType } from "../enums/contests.enum";
 import NeuButton from "../../Axle/component/NeuButton";
 import { TokenAuthStatus } from "../../../config/auth";
+import { useFormik } from "formik";
 
 const GameEntryModal = (props: any) => {
+  const [tryM, setTryM] = useState(false);
+  const [guest, setGuest] = useState({
+    contestId: "",
+    link: "",
+  });
+  const form = useFormik({
+    initialValues: { guest: "" },
+    onSubmit: (values) => {
+      const r = {
+        ...values,
+        contestId: guest.contestId,
+      };
+      GameServices.createGuestGameState(r)
+        .then((res: any) => {
+          if (res.status === "OK") {
+            navigate(
+              `/guest/${guest.link}/${guest.contestId}/${res.gameState._id}`
+            );
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+  });
+
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -88,9 +117,7 @@ const GameEntryModal = (props: any) => {
       return setConfirm(true);
     }
     if (status === toString(ENTRY_STATUS.ALREADY_IN_OTHER_GAME)) {
-      console.log(res);
       const type = res.type === GameType.PRACTICE ? "practice" : "contest";
-      console.log(res.type);
       setHeader("Oops!");
       setMessage(
         `Your are already playing ${res.name} ${type} game, please finish it and come back`
@@ -189,6 +216,44 @@ const GameEntryModal = (props: any) => {
 
     return setLoginDialog(true);
   }
+  console.log(props);
+
+  const TryNow = () => {
+    return (
+      <Box p={4} display={"flex"} flexDirection="column" rowGap={"1rem"}>
+        <Text fontSize={"3xl"} color={theme.primaryTextColor}>
+          Try {props.name}
+        </Text>
+        <FormControl>
+          <FormLabel>Enter name</FormLabel>
+          <Input
+            name="guest"
+            border={"none"}
+            outline="none"
+            boxShadow={`0px 0px 3px ${theme.ternaryButtonColor}`}
+            value={form.values.guest}
+            bg={theme.bgColor}
+            onChange={form.handleChange}
+            color={theme.secondaryTextColor}
+            type={"text"}
+          ></Input>
+        </FormControl>
+        <Box display={"flex"} alignItems="center">
+          <Button
+            _hover={{
+              bg: theme.bgColor,
+              color: theme.primaryTextColor,
+              boxShadow: `0px 0px 3px ${theme.primaryTextColor}`,
+            }}
+            bg={theme.primaryButtonColor}
+            onClick={() => form.handleSubmit()}
+          >
+            Play
+          </Button>
+        </Box>
+      </Box>
+    );
+  };
 
   return (
     <Modal isOpen={props.open} onClose={props.close}>
@@ -217,6 +282,12 @@ const GameEntryModal = (props: any) => {
           title={header}
         />
         <AuthDialog
+          children={<TryNow />}
+          isOpen={tryM}
+          close={() => setTryM(false)}
+          size="md"
+        />
+        <AuthDialog
           children={<Signin />}
           isOpen={loginDialog}
           close={() => setLoginDialog(false)}
@@ -237,7 +308,17 @@ const GameEntryModal = (props: any) => {
                   <EntryCard
                     currentTime={contests.currentTime}
                     contest={d}
-                    action={() => enterContest(d, false)}
+                    action={
+                      d.gameType !== "PRACTICE"
+                        ? () => enterContest(d, false)
+                        : () => {
+                            setTryM(true);
+                            setGuest({
+                              contestId: d._id,
+                              link: props.link,
+                            });
+                          }
+                    }
                   />
                 </Box>
               ))}

@@ -14,6 +14,7 @@ const Wallet = lazy(() => import("./pages/Wallet/Wallet"));
 const ComingSoon = lazy(() => import("./pages/ComingSoon"));
 const SignupPage = lazy(() => import("./pages/Auth/SignUpPage"));
 const Absurdle = lazy(() => import("./pages/Games/games/Absurdle/Absurdle"));
+const GuestWordle = lazy(() => import("./pages/Games/games/Guest/GuestWordle"));
 const Wordle = lazy(() => import("./pages/Games/games/Wordle/Wordle"));
 const WordleLobby = lazy(
   () => import("./pages/Games/games/Wordle/WordleLobby")
@@ -39,6 +40,10 @@ export const App = () => {
           <Route path="/signup/:id" element={<SignupPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/403" element={<Page403 />} />
+          <Route
+            path="/guest/:game/:contestId/:gameStateId"
+            element={<GuestWordle />}
+          />
 
           {/* GameRoutes */}
           <Route

@@ -1,46 +1,37 @@
 import { Box, Flex, Text, Image, Grid, GridItem } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { theme } from "../../../../config/theme.config";
-import { HomeServices, UserReferral } from "../../HomeServices";
 // import Carousel from "nuka-carousel/lib/carousel";
 
 const GameBanner = (props: any) => {
-  const navigate = useNavigate();
-  const [state, setState] = useState<UserReferral>({
-    error: false,
-    referralCode: "",
-    username: "",
-  });
-
-  useEffect(() => {
-    HomeServices.getAdminReferralCode().then((res) => {
-      setState(res);
-    });
-  }, []);
-
   return (
     <Box maxW={"100%"} overflowX="hidden" py={4}>
-      <Flex flexDirection={"column"} p={{ base: "4" }}>
-        <Text
-          fontFamily={"quicksand"}
-          color={theme.primaryTextColor}
-          fontSize={{ base: "1xl", lg: "3xl" }}
-          fontWeight="bold"
-        >
-          Welcome{" "}
-          {localStorage.getItem("username")
-            ? localStorage.getItem("name")
-            : "to Axle Games"}
-        </Text>
-        <Text
-          fontFamily={"quicksand"}
-          fontSize={{ base: "md", lg: "xl" }}
-          color={theme.secondaryTextColor}
-          fontWeight={"bold"}
-        >
-          A skill-based web3 gaming platform
-        </Text>
+      <Flex
+        columnGap={"2rem"}
+        flexDirection={"row"}
+        alignContent="center"
+        p={{ base: "4" }}
+      >
+        <Box>
+          <Text
+            fontFamily={"quicksand"}
+            color={theme.primaryTextColor}
+            fontSize={{ base: "1xl", lg: "3xl" }}
+            fontWeight="bold"
+          >
+            Welcome{" "}
+            {localStorage.getItem("username")
+              ? localStorage.getItem("name")
+              : "to Axle Games"}
+          </Text>
+          <Text
+            fontFamily={"quicksand"}
+            fontSize={{ base: "md", lg: "xl" }}
+            color={theme.secondaryTextColor}
+            fontWeight={"bold"}
+          >
+            A skill-based web3 gaming platform
+          </Text>
+        </Box>
       </Flex>
       <Grid
         marginRight="auto"
@@ -59,7 +50,6 @@ const GameBanner = (props: any) => {
             rel="noopener noreferrer"
           >
             <Image
-              onClick={() => navigate("/")}
               borderRadius={"3xl"}
               width={"100%"}
               src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_1.png"}
@@ -67,12 +57,17 @@ const GameBanner = (props: any) => {
           </a>
         </GridItem>
         <GridItem>
-          <Image
-            onClick={() => navigate(`/signup/${state.referralCode}`)}
-            borderRadius={"3xl"}
-            width={"100%"}
-            src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
-          />
+          <a
+            href={`https://sale.axlegames.io`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              borderRadius={"3xl"}
+              width={"100%"}
+              src={"https://axlegames.s3.ap-south-1.amazonaws.com/banner_3.png"}
+            />
+          </a>
         </GridItem>
       </Grid>
 

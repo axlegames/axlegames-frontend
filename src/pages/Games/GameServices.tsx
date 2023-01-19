@@ -76,6 +76,35 @@ export class GameServices {
     ).data;
   };
 
+  static createGuestGameState = async (data: {
+    guest: string;
+    contestId: string;
+  }) => {
+    return await (
+      await axios.post(
+        `http://localhost:5001/axlegames/api/v1/guest/games/create`,
+        data
+      )
+    ).data;
+  };
+
+  static cleanGuestGameState = async (data: { gameStateId: string }) => {
+    return await (
+      await axios.post(
+        `http://localhost:5001/axlegames/api/v1/guest/games/clean`,
+        data
+      )
+    ).data;
+  };
+
+  static getGuestGameState = async (data: any): Promise<Status> =>
+    await (
+      await axios.post(
+        `http://localhost:5001/axlegames/api/v1/guest/games/status`,
+        data
+      )
+    ).data;
+
   static getGameState = async (data: any): Promise<Status | TokenAuthStatus> =>
     await (
       await axios.post(`${gamePrefix}/status`, data, token)
@@ -100,6 +129,18 @@ export class GameServices {
 
       data,
       token
+    );
+    return {
+      inValidWord: resp.data.inValidWord,
+      guessStatus: resp.data.guessStatus,
+      isWinningWord: resp.data.isWinningWord,
+    };
+  };
+
+  static validateUpdateGuestGuess = async (data: any): Promise<GuessStatus> => {
+    const resp = await axios.post(
+      `http://localhost:5001/axlegames/api/v1/guest/games/validate`,
+      data
     );
     return {
       inValidWord: resp.data.inValidWord,
