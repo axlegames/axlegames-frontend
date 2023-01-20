@@ -41,7 +41,7 @@ export const App = () => {
           <Route path="/signup/:id" element={<SignupPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/403" element={<Page403 />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/leaderboard/:contestId" element={<Leaderboard />} />
           <Route
             path="/guest/:game/:contestId/:gameStateId"
             element={<GuestWordle />}

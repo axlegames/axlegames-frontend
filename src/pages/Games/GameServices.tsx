@@ -24,6 +24,17 @@ export interface GuessStatus {
   guessLength?: number;
 }
 
+export interface LeaderboardInterface {
+  isWon: boolean;
+  axleContest: string;
+  chances: number;
+  createdAt: Date;
+  compeletedAt: Date;
+  username: string;
+  userId: string;
+  time: number;
+}
+
 export enum ENTRY_STATUS {
   OK = "OK",
   ALREADY_IN_GAME = "ALREADY_IN_GAME",
@@ -70,6 +81,14 @@ export interface Contest {
 }
 
 export class GameServices {
+  static getContestLeaderboardResults = async (
+    contestId: string
+  ): Promise<Array<LeaderboardInterface>> => {
+    return await (
+      await axios.get(`${gamePrefix}/contest/leaderboard/${contestId}`)
+    ).data;
+  };
+
   static createGuestGameState = async (data: {
     guest: string;
     contestId: string;

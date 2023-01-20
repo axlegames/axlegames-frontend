@@ -10,68 +10,27 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import { theme } from "../../config/theme.config";
 import MainLayout from "../../layouts/MainLayout";
-
-const data = [
-  {
-    username: "zoro",
-    completedIn: "1",
-    chances: 3,
-  },
-  {
-    username: "goku77",
-    completedIn: "84",
-    chances: 4,
-  },
-  {
-    username: "eren21",
-    completedIn: "92",
-    chances: 3,
-  },
-  {
-    username: "mikasa2",
-    completedIn: "221",
-    chances: 5,
-  },
-  {
-    username: "gohan3",
-    completedIn: "18",
-    chances: 3,
-  },
-  {
-    username: "yamacha",
-    chances: 2,
-    completedIn: "32",
-  },
-  {
-    username: "krelin88",
-    completedIn: "222",
-    chances: 4,
-  },
-  {
-    username: "vegeta",
-    completedIn: "22",
-    chances: 4,
-  },
-  {
-    username: "rico",
-    completedIn: "221",
-    chances: 4,
-  },
-  {
-    username: "luffy",
-    completedIn: "21",
-    chances: 4,
-  },
-  {
-    username: "robin",
-    completedIn: "21",
-    chances: 4,
-  },
-];
+import { GameServices, LeaderboardInterface } from "../Games/GameServices";
 
 const Leaderboard = () => {
+  const [data, setData] = useState<Array<LeaderboardInterface>>([]);
+  const params = useParams();
+
+  useEffect(() => {
+    console.log("hello");
+    GameServices.getContestLeaderboardResults(params.contestId || "")
+      .then((res) => {
+        console.log(res);
+        setData(res);
+      })
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <MainLayout>
       <Box bg={theme.bgColor}>
@@ -155,7 +114,7 @@ const Leaderboard = () => {
                     </Tr>
                   </Thead>
                   <Tbody mt={2}>
-                    {data.map((d, i) => (
+                    {data.map((d: LeaderboardInterface, i: number) => (
                       <Tr
                         bg={i % 2 !== 0 ? theme.fgColor : theme.bgColor}
                         key={i}
@@ -164,7 +123,7 @@ const Leaderboard = () => {
                         <Td border="none">{i + 1}</Td>
                         <Td border={"none"}>{d.username}</Td>
                         <Td border={"none"}>{d.chances}</Td>
-                        <Td border={"none"}>{d.completedIn}s</Td>
+                        <Td border={"none"}>{d.time}s</Td>
                         <Td border={"none"}>4000 $AXLE</Td>
                       </Tr>
                     ))}
