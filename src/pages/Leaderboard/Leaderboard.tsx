@@ -113,7 +113,7 @@ const Leaderboard = () => {
                   <Thead my={4} bg={theme.bgColor}>
                     <Tr>
                       <Th
-                        color={theme.secondaryTextColor}
+                        color={theme.secondaryTwoTextColor}
                         borderTopLeftRadius={"2xl"}
                         fontFamily={"quicksand"}
                         fontWeight="bold"
@@ -123,7 +123,7 @@ const Leaderboard = () => {
                       <Th
                         fontFamily={"quicksand"}
                         fontWeight="bold"
-                        color={theme.secondaryTextColor}
+                        color={theme.secondaryTwoTextColor}
                       >
                         Username
                       </Th>
@@ -131,7 +131,7 @@ const Leaderboard = () => {
                       <Th
                         fontFamily={"quicksand"}
                         fontWeight="bold"
-                        color={theme.secondaryTextColor}
+                        color={theme.secondaryTwoTextColor}
                         borderTopRightRadius={"2xl"}
                       >
                         Chances
@@ -139,7 +139,7 @@ const Leaderboard = () => {
                       <Th
                         fontFamily={"quicksand"}
                         fontWeight="bold"
-                        color={theme.secondaryTextColor}
+                        color={theme.secondaryTwoTextColor}
                         borderTopRightRadius={"2xl"}
                       >
                         Completed in
@@ -147,10 +147,10 @@ const Leaderboard = () => {
                       <Th
                         fontFamily={"quicksand"}
                         fontWeight="bold"
-                        color={theme.secondaryTextColor}
+                        color={theme.secondaryTwoTextColor}
                         borderTopRightRadius={"2xl"}
                       >
-                        Completed in
+                        Reward
                       </Th>
                     </Tr>
                   </Thead>
@@ -164,8 +164,8 @@ const Leaderboard = () => {
                         <Td border="none">{i + 1}</Td>
                         <Td border={"none"}>{d.username}</Td>
                         <Td border={"none"}>{d.chances}</Td>
-                        <Td border={"none"}>{d.completedIn}</Td>
-                        <Td border={"none"}>4000 AXLE$</Td>
+                        <Td border={"none"}>{d.completedIn}s</Td>
+                        <Td border={"none"}>4000 $AXLE</Td>
                       </Tr>
                     ))}
                   </Tbody>
