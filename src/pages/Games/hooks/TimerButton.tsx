@@ -1,5 +1,6 @@
 import { Box, Button } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { GameStatus, GameType } from "../../Home/enums/contests.enum";
 
 interface Props {
@@ -88,7 +89,27 @@ const TimerButton = (props: Props) => {
     }
   };
 
-  return <Box>{CurrentButtonStatus()}</Box>;
+  const navigate = useNavigate();
+  console.log(isLive);
+
+  return (
+    <Box>
+      {CurrentButtonStatus()}
+      <Box mt={2}>
+        {props.gameType === "CONTEST" ? (
+          <Button
+            onClick={() => navigate("/leaderboard")}
+            size="sm"
+            width={"36"}
+            color="black"
+            bg="orange"
+          >
+            Leaderboard
+          </Button>
+        ) : null}
+      </Box>
+    </Box>
+  );
 };
 
 export default TimerButton;

@@ -2,6 +2,7 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, useState } from "react";
 import Banner from "./layouts/Banner";
+import Leaderboard from "./pages/Leaderboard/Leaderboard";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"));
@@ -40,6 +41,7 @@ export const App = () => {
           <Route path="/signup/:id" element={<SignupPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/403" element={<Page403 />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route
             path="/guest/:game/:contestId/:gameStateId"
             element={<GuestWordle />}
