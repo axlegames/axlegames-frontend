@@ -92,13 +92,12 @@ const TimerButton = (props: Props) => {
   };
 
   const navigate = useNavigate();
-  console.log(isLive);
 
   return (
     <Box>
       {CurrentButtonStatus()}
       <Box mt={2}>
-        {props.gameType === "CONTEST" ? (
+        {props.gameType === "CONTEST" && props.status === GameStatus.LIVE ? (
           <Button
             onClick={() =>
               navigate(

@@ -40,12 +40,12 @@ const EntryCard = (props: Props) => {
           top={-3}
           left={-3}
           my={1}
-          bg={theme.ternaryButtonColor}
+          bg={theme.modalBgColor}
           color={theme.primaryTwoTextColor}
           px={2}
-          borderRadius="sm"
+          borderRadius="md"
           position="absolute"
-          boxShadow={`0px 0px 2px ${theme.primaryTwoTextColor}`}
+          boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
         >
           Free
         </Text>
@@ -55,12 +55,12 @@ const EntryCard = (props: Props) => {
           top={-3}
           left={-3}
           my={1}
-          bg={theme.ternaryButtonColor}
+          bg={theme.modalBgColor}
           color={theme.primaryTwoTextColor}
           px={2}
-          borderRadius="sm"
+          borderRadius="md"
           position="absolute"
-          boxShadow={`0px 0px 2px ${theme.primaryTwoTextColor}`}
+          boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
         >
           Paid
         </Text>
@@ -71,17 +71,17 @@ const EntryCard = (props: Props) => {
         mx={"auto"}
         left={"50%"}
         my={1}
-        bg={theme.ternaryButtonColor}
+        bg={theme.modalBgColor}
         color={theme.primaryTwoTextColor}
         px={2}
-        borderRadius="sm"
+        borderRadius="md"
         position="absolute"
-        boxShadow={`0px 0px 2px ${theme.primaryTwoTextColor}`}
+        boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
       >
         <TimeComponent />
       </Box>
       <Box
-        boxShadow={`0px 0px 4px ${theme.secondaryTwoTextColor}`}
+        boxShadow={`inset 6px 6px 21px #1a192e, inset -6px -6px 21px #322f56`}
         borderTopRadius="lg"
         p={"4"}
       >

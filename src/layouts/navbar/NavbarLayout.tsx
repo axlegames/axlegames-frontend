@@ -1,6 +1,6 @@
 import { theme } from "../../config/theme.config";
 import { useEffect, useState } from "react";
-import { Button, Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 
 import Dialog from "../../pages/Auth/dialogs/AuthDialog";
 import WalletsDialog from "../../pages/Auth/dialogs/WalletsDialog";
@@ -153,20 +153,9 @@ const NavbarLayout = (props: NavbarProps) => {
         pr={"6"}
       >
         {!user.isConnected ? (
-          <Button
-            _hover={{
-              color: theme.primaryTextColor,
-              bg: theme.bgColor,
-            }}
-            zIndex={2000}
-            onClick={() => props.onOpen()}
-            borderRadius={"2xl"}
-            bg={theme.primaryMiscColor}
-            shadow="2xl"
-            style={{ cursor: "pointer" }}
-          >
+          <div onClick={() => props.onOpen()} className="btn">
             Connect Wallet
-          </Button>
+          </div>
         ) : (
           <WalletDetails
             close={props.onOpen}

@@ -41,11 +41,7 @@ import Signin from "../../pages/Auth/Signin";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import IsLoggedIn from "../../config/isLoggedIn";
-import {
-  AiOutlineDashboard,
-  AiOutlineLogin,
-  AiOutlineLogout,
-} from "react-icons/ai";
+import { AiOutlineDashboard, AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from "react-router";
 
 import Instagram from "../../assets/socials/instagram.png";
@@ -299,11 +295,9 @@ const SideBarLayout = (props: SideBarProps) => {
       </SideBarCard>
 
       <IsNotLoggedIn>
-        <HighLightButton
-          icon={AiOutlineLogin}
-          title="Join DApp"
-          click={signin}
-        />
+        <div onClick={() => signin()} className="btn">
+          Join DApp
+        </div>
       </IsNotLoggedIn>
       <IsLoggedIn>
         <HighLightButton
