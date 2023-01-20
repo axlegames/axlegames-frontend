@@ -2,6 +2,7 @@ import {
   Box,
   Divider,
   Table,
+  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -58,7 +59,8 @@ const Leaderboard = () => {
               borderTopRadius="3xl"
             >
               <Text color={theme.primaryTextColor} fontSize="2xl">
-                Winners Wordle #5 Contest
+                Winners {params.game ? params.game.replace("-", " #") : ""}{" "}
+                Contest
               </Text>
               <Divider my={4} />
               <TableContainer>
@@ -114,6 +116,20 @@ const Leaderboard = () => {
                     </Tr>
                   </Thead>
                   <Tbody mt={2}>
+                    <TableCaption borderBottomRadius={"2xl"} bg={theme.bgColor}>
+                      {data.length === 0 ? (
+                        <Box display={"flex"} justifyContent="center">
+                          <Text
+                            fontFamily={"quicksand"}
+                            color={theme.secondaryTextColor}
+                            fontSize="xl"
+                            textAlign={"center"}
+                          >
+                            Results will be updated soon.
+                          </Text>
+                        </Box>
+                      ) : null}
+                    </TableCaption>
                     {data.map((d: LeaderboardInterface, i: number) => (
                       <Tr
                         bg={i % 2 !== 0 ? theme.fgColor : theme.bgColor}

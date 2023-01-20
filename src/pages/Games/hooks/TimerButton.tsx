@@ -11,6 +11,8 @@ interface Props {
   gameType: string;
   currentTime: string;
   status: GameStatus;
+  contestId: string;
+  name: string;
 }
 
 const TimerButton = (props: Props) => {
@@ -98,7 +100,13 @@ const TimerButton = (props: Props) => {
       <Box mt={2}>
         {props.gameType === "CONTEST" ? (
           <Button
-            onClick={() => navigate("/leaderboard")}
+            onClick={() =>
+              navigate(
+                `/leaderboard/${props.name.replace(" ", "-")}/${
+                  props.contestId
+                }`
+              )
+            }
             size="sm"
             width={"36"}
             color="black"

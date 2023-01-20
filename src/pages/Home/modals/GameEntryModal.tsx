@@ -346,6 +346,7 @@ const GameEntryModal = (props: any) => {
               {contests?.axleContests.map((d, i) => (
                 <Box key={i}>
                   <EntryCard
+                    name={props.name}
                     currentTime={contests.currentTime}
                     contest={d}
                     action={

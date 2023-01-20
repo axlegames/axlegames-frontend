@@ -9,6 +9,7 @@ interface Props {
   contest: AxleContest;
   currentTime: string;
   action: Function;
+  name: string;
 }
 
 const EntryCard = (props: Props) => {
@@ -106,6 +107,8 @@ const EntryCard = (props: Props) => {
           <GridItem>
             <Flex justifyContent={"flex-end"}>
               <TimerButton
+                contestId={props.contest._id}
+                name={props.name}
                 status={props.contest.status}
                 gameType={props.contest.gameType.valueOf().toString()}
                 action={props.action}
