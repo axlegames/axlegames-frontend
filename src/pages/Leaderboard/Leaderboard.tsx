@@ -116,20 +116,6 @@ const Leaderboard = () => {
                     </Tr>
                   </Thead>
                   <Tbody mt={2}>
-                    <TableCaption borderBottomRadius={"2xl"} bg={theme.bgColor}>
-                      {data.length === 0 ? (
-                        <Box display={"flex"} justifyContent="center">
-                          <Text
-                            fontFamily={"quicksand"}
-                            color={theme.secondaryTextColor}
-                            fontSize="xl"
-                            textAlign={"center"}
-                          >
-                            Results will be updated soon.
-                          </Text>
-                        </Box>
-                      ) : null}
-                    </TableCaption>
                     {data.map((d: LeaderboardInterface, i: number) => (
                       <Tr
                         bg={i % 2 !== 0 ? theme.fgColor : theme.bgColor}
@@ -144,6 +130,21 @@ const Leaderboard = () => {
                       </Tr>
                     ))}
                   </Tbody>
+
+                  <TableCaption borderBottomRadius={"2xl"}>
+                    {data.length === 0 ? (
+                      <Box display={"flex"} justifyContent="center">
+                        <Text
+                          fontFamily={"quicksand"}
+                          color={theme.secondaryTextColor}
+                          fontSize="xl"
+                          textAlign={"center"}
+                        >
+                          Results will be updated soon.
+                        </Text>
+                      </Box>
+                    ) : null}
+                  </TableCaption>
                 </Table>
               </TableContainer>
             </Box>
