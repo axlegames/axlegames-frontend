@@ -6,6 +6,7 @@ import { Triangle } from "react-loader-spinner";
 
 import Banner from "./layouts/Banner";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
+import Stake from "./pages/Staking/Stake";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"));
@@ -71,6 +72,7 @@ export const App = () => {
             <Route path="/coming-soon" element={<ComingSoon />} />
             <Route path="/signup/:id" element={<SignupPage />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/staking" element={<Stake />} />
             <Route path="/403" element={<Page403 />} />
             <Route
               path="/leaderboard/:game/:contestId"
