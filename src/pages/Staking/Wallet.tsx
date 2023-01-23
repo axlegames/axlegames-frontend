@@ -19,7 +19,7 @@ const Wallet = (props: Props) => {
           <Box
             onClick={() => props.setOpenWallet(!props.openWallet)}
             width={"100%"}
-            bottom={"-205%"}
+            bottom={"-235%"}
             zIndex={200}
             p={2}
             bg={theme.fgColor}
@@ -38,6 +38,8 @@ const Wallet = (props: Props) => {
               display={"flex"}
               justifyContent="center"
               flexDirection={"column"}
+              bg={theme.bgColor}
+              p={2}
             >
               <Text color={theme.secondaryTextColor}>Your wallet balance</Text>
               <Text fontSize={"xl"} color={theme.secondaryTextColor}>
@@ -48,7 +50,7 @@ const Wallet = (props: Props) => {
               fontFamily={`'Russo One', sans-serif`}
               fontWeight={"bold"}
               _hover={{
-                bg: theme.secondaryButtonColor,
+                bg: theme.ternaryButtonColor,
               }}
               bg={theme.bgColor}
               color={theme.secondaryTextColor}

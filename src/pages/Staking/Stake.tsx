@@ -111,6 +111,8 @@ const Stake = () => {
   const [balance, setBalance] = useState(0);
   const [axleBalance, setAxleBalance] = useState<any>("0");
   const [openWallet, setOpenWallet] = useState(false);
+  const [togglePage, setTogglePage] = useState(false);
+  const [unstake, setUnstake] = useState(false);
 
   const [address, setAddress] = useState<string>("");
   const [onChain, setOnChain] = useState("");
@@ -255,10 +257,11 @@ const Stake = () => {
           width={"32vw"}
         >
           <Box
-            boxShadow={`0px 0px 512px -30px ${theme.primaryTextColor}`}
+            boxShadow={`0px 0px 125px -60px ${theme.primaryTextColor}`}
             p={6}
             borderRadius="xl"
             bg={theme.bgColor}
+            backgroundImage={`linear-gradient(to bottom, #061e37, #072340, #072849, #082d52, #0a325c)`}
             color={theme.secondaryTextColor}
             fontWeight="bold"
             justifyContent={"center"}
@@ -268,18 +271,23 @@ const Stake = () => {
             rowGap={"1rem"}
           >
             <Text fontSize={"3xl"}>Total Value Locked</Text>
-            <Text fontSize={"xl"}>$20000000</Text>
-            <Text fontSize={"sm"}>$ 0.00167 = 1 AXLE</Text>
+            <Divider bg={theme.primaryButtonColor} />
+            <Text color={theme.primaryTextColor} fontSize={"xl"}>
+              $20000000
+            </Text>
+            <Divider bg={theme.primaryButtonColor} />
+            <Text color={theme.primaryTextColor} fontSize={"sm"}>
+              $ 0.00167 = 1 AXLE
+            </Text>
           </Box>
           <Box
             mt={4}
             display={"flex"}
-            border={`2px solid ${theme.secondaryTwoTextColor}`}
             borderRadius={"3xl"}
             justifyContent="space-between"
             fontSize="2xl"
-            p={1}
             columnGap=".2rem"
+            border={`2px solid ${theme.primaryButtonColor}`}
           >
             <Box
               borderTopLeftRadius={"3xl"}
@@ -288,41 +296,62 @@ const Stake = () => {
               px={8}
               py={4}
               width={"100%"}
-              bg={theme.bgColor}
-              color={theme.secondaryTextColor}
+              bg={togglePage ? theme.primaryButtonColor : theme.bgColor}
+              color={!togglePage ? theme.primaryButtonColor : theme.bgColor}
               textAlign="center"
+              onClick={() => setTogglePage(true)}
+              cursor="pointer"
             >
               <Text>Flexible</Text>
             </Box>
             <Box
-              color={theme.secondaryTextColor}
+              cursor="pointer"
+              color={togglePage ? theme.primaryButtonColor : theme.bgColor}
               boxShadow="xl"
               borderTopRightRadius={"3xl"}
               borderBottomRightRadius={"3xl"}
               px={8}
               py={4}
               width={"100%"}
-              bg={theme.bgColor}
+              bg={!togglePage ? theme.primaryButtonColor : theme.bgColor}
               textAlign="center"
+              onClick={() => setTogglePage(false)}
             >
               <Text>Locked</Text>
             </Box>
           </Box>
-          <Box
-            color={theme.secondaryTextColor}
-            justifyContent="center"
-            display={"flex"}
-            flexDirection="column"
-            my={12}
-            alignItems={"center"}
-          >
-            <Text fontSize={"3xl"} fontWeight="bold">
-              FLEXIBLE STAKING
-            </Text>
-            <Text> APY: 12% </Text>
-            <Text fontSize={"2xl"}> Total $AXLE in Flexible Staking</Text>
-            <Text color={theme.primaryTextColor}>597,297,277.293 AXLE</Text>
-          </Box>
+          {togglePage ? (
+            <Box
+              color={theme.secondaryTextColor}
+              justifyContent="center"
+              display={"flex"}
+              flexDirection="column"
+              my={12}
+              alignItems={"center"}
+            >
+              <Text fontSize={"3xl"} fontWeight="bold">
+                FLEXIBLE STAKING
+              </Text>
+              <Text color={theme.primaryTextColor}> APY: 12% </Text>
+              <Text fontSize={"2xl"}> Total $AXLE in Flexible Staking</Text>
+              <Text color={theme.primaryTextColor}>597,297,277.293 AXLE</Text>
+            </Box>
+          ) : (
+            <Box
+              color={theme.secondaryTextColor}
+              justifyContent="center"
+              display={"flex"}
+              flexDirection="column"
+              my={12}
+              alignItems={"center"}
+            >
+              <Text fontSize={"3xl"} fontWeight="bold">
+                LOCKED STAKING
+              </Text>
+              <Text fontSize={"2xl"}> Total $AXLE in Locked Staking</Text>
+              <Text color={theme.primaryTextColor}>597,297,277.293 AXLE</Text>
+            </Box>
+          )}
         </Box>
 
         {address === "" ? (
@@ -339,111 +368,275 @@ const Stake = () => {
             </Box>
           </Box>
         ) : (
-          <Box
-            minW={`30vw`}
-            borderRadius="xl"
-            backdropFilter={`blur(12.3px)`}
-            border={`1px solid rgba(24, 28, 26, 1)`}
-            color={theme.primaryTextColor}
-            boxShadow={`0px 0px 120px -70px ${theme.primaryButtonColor}`}
-            p={4}
-          >
-            <Box textAlign={"center"}>
-              <Text fontSize={"3xl"}>STAKE AXLE</Text>
-            </Box>
-            <Divider bg={theme.primaryButtonColor} my={2} />
-            <Box
-              color={theme.secondaryTextColor}
-              display={"flex"}
-              px={8}
-              py={2}
-              justifyContent="space-between"
-            >
-              <Text>Amout</Text>
-              <Text>~My Balance {axleBalance} AXLE</Text>
-            </Box>
-            <Box
-              height={"100%"}
-              width="100%"
-              px={4}
-              alignItems={"center"}
-              display={"flex"}
-              border={`3px solid ${theme.fgColor}`}
-              borderRadius="xl"
-            >
-              <Box>$AXLE</Box>
-              <Input
-                mx={4}
-                fontWeight={"bold"}
-                color={theme.primaryButtonColor}
-                placeholder="value (BNB)"
-                onChange={onBnbChange}
-                fontSize="lg"
-                type={"number"}
-                inputMode="decimal"
-                borderRadius={"none"}
-                textAlign="right"
-                value={bnb}
-                borderLeft={`2px solid ${theme.fgColor}`}
-                borderRight={`2px solid ${theme.fgColor}`}
-                min={0.2}
-                max={50}
-                _active={{
-                  outline: "none",
-                  shadow: "none",
-                }}
-                _hover={{
-                  outline: "none",
-                  shadow: "none",
-                }}
-                _focus={{
-                  outline: "none",
-                  shadow: "none",
-                }}
-              ></Input>
-              <Box cursor={"pointer"}>MAX</Box>
-            </Box>
-            <Box color={theme.secondaryTextColor} my={4} px={8}>
-              Locking
-            </Box>
-            <Box
-              display={"flex"}
-              justifyContent="center"
-              columnGap={"1rem"}
-              alignItems={"center"}
-              my={8}
-            >
-              {stakeRewards.map((s, i) => (
+          <Box>
+            {togglePage ? (
+              <Box
+                minW={`30vw`}
+                borderRadius="xl"
+                backdropFilter={`blur(12.3px)`}
+                border={`1px solid rgba(24, 28, 26, 1)`}
+                color={theme.primaryTextColor}
+                boxShadow={`0px 0px 120px -70px ${theme.primaryButtonColor}`}
+                p={4}
+              >
                 <Box
-                  borderRadius={"xl"}
-                  p={2}
-                  bg={theme.bgColor}
-                  boxShadow={`1px 1px 3px ${theme.primaryTextColor}`}
                   textAlign={"center"}
-                  key={i}
-                  px={3}
-                  minW={"32"}
-                  cursor="pointer"
+                  display="flex"
+                  justifyContent={"space-between"}
+                  my={4}
+                  border={`2px solid ${theme.primaryButtonColor}`}
                 >
-                  <Text color={theme.secondaryTextColor} fontSize={"lg"}>
-                    {" "}
-                    {s.days} Days{" "}
+                  <Text
+                    width={"100%"}
+                    boxShadow="xl"
+                    fontSize={"2xl"}
+                    bg={!unstake ? theme.primaryButtonColor : theme.bgColor}
+                    color={unstake ? theme.primaryButtonColor : theme.bgColor}
+                    cursor="pointer"
+                    onClick={() => setUnstake(false)}
+                  >
+                    STAKE AXLE
                   </Text>
-                  <Divider my={2} />
-                  <Text color={theme.secondaryTwoTextColor} fontSize={"xl"}>
-                    {" "}
-                    {s.roi}%
+                  <Text
+                    boxShadow="xl"
+                    color={!unstake ? theme.primaryButtonColor : theme.bgColor}
+                    onClick={() => setUnstake(true)}
+                    cursor="pointer"
+                    width={"100%"}
+                    fontSize={"2xl"}
+                    bg={unstake ? theme.primaryButtonColor : theme.bgColor}
+                  >
+                    UNSTAKE AXLE
                   </Text>
                 </Box>
-              ))}
-            </Box>
-            <Box textAlign={"center"} className="btn">
-              Enable Staking
-            </Box>
-            <Box textAlign={"center"}>
-              <Divider bg={theme.primaryTextColor} my={4} />
-              <Text>Locking 12002 AXLE for 180 Days</Text>
-            </Box>
+                {!unstake ? (
+                  <Box>
+                    <Box
+                      color={theme.secondaryTextColor}
+                      display={"flex"}
+                      px={8}
+                      py={2}
+                      justifyContent="space-between"
+                    >
+                      <Text>Amout</Text>
+                      <Text>~My Balance {axleBalance} AXLE</Text>
+                    </Box>
+                    <Box
+                      height={"100%"}
+                      width="100%"
+                      px={4}
+                      alignItems={"center"}
+                      display={"flex"}
+                      border={`3px solid ${theme.fgColor}`}
+                      borderRadius="xl"
+                    >
+                      <Box>$AXLE</Box>
+                      <Input
+                        mx={4}
+                        fontWeight={"bold"}
+                        color={theme.primaryButtonColor}
+                        placeholder="value (BNB)"
+                        onChange={onBnbChange}
+                        fontSize="lg"
+                        type={"number"}
+                        inputMode="decimal"
+                        borderRadius={"none"}
+                        textAlign="right"
+                        value={bnb}
+                        borderLeft={`2px solid ${theme.fgColor}`}
+                        borderRight={`2px solid ${theme.fgColor}`}
+                        min={0.2}
+                        max={50}
+                        _active={{
+                          outline: "none",
+                          shadow: "none",
+                        }}
+                        _hover={{
+                          outline: "none",
+                          shadow: "none",
+                        }}
+                        _focus={{
+                          outline: "none",
+                          shadow: "none",
+                        }}
+                      ></Input>
+                      <Box cursor={"pointer"}>MAX</Box>
+                    </Box>
+                    <Box px={2} color={theme.secondaryTextColor}>
+                      Min Stake Amount : 8000 AXLE
+                    </Box>
+
+                    <Box mt={4} textAlign={"center"} className="btn">
+                      Enable Staking
+                    </Box>
+                  </Box>
+                ) : (
+                  <Box>
+                    <Box
+                      color={theme.secondaryTextColor}
+                      display={"flex"}
+                      px={8}
+                      py={2}
+                      justifyContent="space-between"
+                    >
+                      <Text>Amout</Text>
+                      <Text>~My Balance {axleBalance} AXLE</Text>
+                    </Box>
+                    <Box
+                      height={"100%"}
+                      width="100%"
+                      px={4}
+                      alignItems={"center"}
+                      display={"flex"}
+                      border={`3px solid ${theme.fgColor}`}
+                      borderRadius="xl"
+                    >
+                      <Box>$AXLE</Box>
+                      <Input
+                        mx={4}
+                        fontWeight={"bold"}
+                        color={theme.primaryButtonColor}
+                        placeholder="value (BNB)"
+                        onChange={onBnbChange}
+                        fontSize="lg"
+                        type={"number"}
+                        inputMode="decimal"
+                        borderRadius={"none"}
+                        textAlign="right"
+                        value={bnb}
+                        borderLeft={`2px solid ${theme.fgColor}`}
+                        borderRight={`2px solid ${theme.fgColor}`}
+                        min={0.2}
+                        max={50}
+                        _active={{
+                          outline: "none",
+                          shadow: "none",
+                        }}
+                        _hover={{
+                          outline: "none",
+                          shadow: "none",
+                        }}
+                        _focus={{
+                          outline: "none",
+                          shadow: "none",
+                        }}
+                      ></Input>
+                      <Box cursor={"pointer"}>MAX</Box>
+                    </Box>
+                    <Box mt={4} textAlign={"center"} className="btn">
+                      Unstake AXLE
+                    </Box>
+                  </Box>
+                )}
+              </Box>
+            ) : (
+              <Box
+                minW={`30vw`}
+                borderRadius="xl"
+                backdropFilter={`blur(12.3px)`}
+                border={`1px solid rgba(24, 28, 26, 1)`}
+                color={theme.primaryTextColor}
+                boxShadow={`0px 0px 120px -70px ${theme.primaryButtonColor}`}
+                p={4}
+              >
+                <Box textAlign={"center"}>
+                  <Text fontSize={"3xl"}>STAKE AXLE</Text>
+                </Box>
+                <Divider bg={theme.primaryButtonColor} my={2} />
+                <Box
+                  color={theme.secondaryTextColor}
+                  display={"flex"}
+                  px={8}
+                  py={2}
+                  justifyContent="space-between"
+                >
+                  <Text>Amout</Text>
+                  <Text>~My Balance {axleBalance} AXLE</Text>
+                </Box>
+                <Box
+                  height={"100%"}
+                  width="100%"
+                  px={4}
+                  alignItems={"center"}
+                  display={"flex"}
+                  border={`3px solid ${theme.fgColor}`}
+                  borderRadius="xl"
+                >
+                  <Box>$AXLE</Box>
+                  <Input
+                    mx={4}
+                    fontWeight={"bold"}
+                    color={theme.primaryButtonColor}
+                    placeholder="value (BNB)"
+                    onChange={onBnbChange}
+                    fontSize="lg"
+                    type={"number"}
+                    inputMode="decimal"
+                    borderRadius={"none"}
+                    textAlign="right"
+                    value={bnb}
+                    borderLeft={`2px solid ${theme.fgColor}`}
+                    borderRight={`2px solid ${theme.fgColor}`}
+                    min={0.2}
+                    max={50}
+                    _active={{
+                      outline: "none",
+                      shadow: "none",
+                    }}
+                    _hover={{
+                      outline: "none",
+                      shadow: "none",
+                    }}
+                    _focus={{
+                      outline: "none",
+                      shadow: "none",
+                    }}
+                  ></Input>
+                  <Box cursor={"pointer"}>MAX</Box>
+                </Box>
+                <Box color={theme.secondaryTextColor} my={4} px={8}>
+                  Locking
+                </Box>
+                <Box
+                  display={"flex"}
+                  justifyContent="center"
+                  columnGap={"1rem"}
+                  alignItems={"center"}
+                  my={8}
+                >
+                  {stakeRewards.map((s, i) => (
+                    <Box
+                      borderRadius={"xl"}
+                      p={2}
+                      bg={theme.bgColor}
+                      boxShadow={`1px 1px 3px ${theme.primaryTextColor}`}
+                      textAlign={"center"}
+                      key={i}
+                      px={3}
+                      minW={"32"}
+                      cursor="pointer"
+                    >
+                      <Text color={theme.secondaryTextColor} fontSize={"lg"}>
+                        {" "}
+                        {s.days} Days{" "}
+                      </Text>
+                      <Divider my={2} />
+                      <Text color={theme.secondaryTwoTextColor} fontSize={"xl"}>
+                        {" "}
+                        {s.roi}%
+                      </Text>
+                    </Box>
+                  ))}
+                </Box>
+                <Box textAlign={"center"} className="btn">
+                  Enable Staking
+                </Box>
+                <Box textAlign={"center"}>
+                  <Divider bg={theme.primaryTextColor} my={4} />
+                  <Text>Locking 12002 AXLE for 180 Days</Text>
+                </Box>
+              </Box>
+            )}
           </Box>
         )}
       </Box>
