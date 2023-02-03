@@ -60,7 +60,7 @@ const Timer = (props: Props) => {
           {isLobby ? (
             <Box>{`closes in ${minutes}m ${seconds}s`}</Box>
           ) : (
-            <Box>{`${isLive ? `In progress` : "Closed"}`}</Box>
+            <Box>{`${isLive ? `In progress` : ""}`}</Box>
           )}
         </Box>
       ) : (

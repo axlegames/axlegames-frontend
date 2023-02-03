@@ -207,7 +207,6 @@ const GameEntryModal = (props: Props) => {
           console.log(err);
         });
     }
-
     if (!isMobile) {
       const address = localStorage.getItem("address");
       if (!address || address === "undefined" || address === "null")
@@ -220,7 +219,6 @@ const GameEntryModal = (props: Props) => {
           position: "top",
         });
     }
-
     return setLoginDialog(true);
   }
 

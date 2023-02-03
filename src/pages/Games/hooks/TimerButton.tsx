@@ -28,12 +28,14 @@ const TimerButton = (props: Props) => {
 
   const calcualteRemainingTime = () => {
     const remainingTimeForLive =
-      new Date(props.deadline).getTime() -
-      new Date(props.currentTime).getTime();
+      new Date(props.deadline).getTime() - new Date().getTime();
 
     const remainingTimeForStartsIn =
-      new Date(props.startsIn).getTime() -
-      new Date(props.currentTime).getTime();
+      new Date(props.startsIn).getTime() - new Date().getTime();
+
+    if (isGaminContest) {
+      console.log(remainingTimeForLive / 1000);
+    }
 
     const _isStartsIn =
       remainingTimeForStartsIn > 0 && remainingTimeForStartsIn < 10 * 60 * 1000
@@ -60,15 +62,11 @@ const TimerButton = (props: Props) => {
   }, []);
 
   const CurrentButtonStatus = () => {
-    if (!isLive && !isStartsIn && isGaminContest) {
-      return (
-        <Button disabled size="sm" width={"36"} color="black">
-          {" "}
-          {!isLoaded ? `Loading...` : "Entry Closed"}{" "}
-        </Button>
-      );
-    }
-    if (props.status.toString() === GameStatus.LOBBY || isPracticeContest) {
+    if (
+      (props.status.toString() === GameStatus.LOBBY &&
+        props.gameType === "CONTEST") ||
+      isPracticeContest
+    ) {
       return (
         <Button
           color="black"
@@ -89,7 +87,36 @@ const TimerButton = (props: Props) => {
         </Button>
       );
     }
+    if (isGaminContest) {
+      return (
+        <Box>
+          {isLive ? (
+            <Button
+              color="black"
+              bg="green.500"
+              onClick={() => props.action()}
+              size="sm"
+              width={"36"}
+            >
+              {!isLoaded ? `Loading...` : "Play"}
+            </Button>
+          ) : (
+            <Button disabled size="sm" width={"36"} color="black">
+              {!isLoaded ? `Loading...` : "Entry Closed"}
+            </Button>
+          )}
+        </Box>
+      );
+    }
     if (isLive) {
+      return (
+        <Button disabled size="sm" width={"36"} color="black">
+          {" "}
+          {!isLoaded ? `Loading...` : "Entry Closed"}{" "}
+        </Button>
+      );
+    }
+    if (!isLive && !isStartsIn && isGaminContest) {
       return (
         <Button disabled size="sm" width={"36"} color="black">
           {" "}
@@ -102,15 +129,13 @@ const TimerButton = (props: Props) => {
   const navigate = useNavigate();
   const iscontest = props.gameType === "CONTEST";
   const isGaminContest = props.gameType === "GAMIN_NIGHTS";
-  if (props.gameType === "GAMIN_NIGHTS") {
-    console.log(iscontest, isGaminContest);
-  }
 
   return (
     <Box>
       <Box>{CurrentButtonStatus()}</Box>
       <Box mt={2}>
-        {(iscontest && props.status === GameStatus.LIVE) || isGaminContest ? (
+        {(iscontest && props.status === GameStatus.LIVE) ||
+        (isGaminContest && !isStartsIn && !isLive) ? (
           <Button
             onClick={() =>
               navigate(
