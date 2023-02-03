@@ -22,7 +22,7 @@ const EntryCard = (props: Props) => {
     gameType === toStringGameType(GameType.GAMIN_NIGHTS);
 
   const TimeComponent = () => {
-    return !type ? (
+    return !type || gameType === toStringGameType(GameType.GAMIN_NIGHTS) ? (
       <Box>
         <Timer
           currentTime={props.currentTime}

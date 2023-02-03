@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 
 interface Props {
@@ -55,21 +55,17 @@ const Timer = (props: Props) => {
 
   return (
     <Box>
-      <Text>
+      {isLoaded ? (
         <Box>
-          {isLoaded ? (
-            <Box>
-              {isLobby ? (
-                <Box>{`closes in ${minutes}m ${seconds}s`}</Box>
-              ) : (
-                <Box>{`${isLive ? `In progress` : ""}`}</Box>
-              )}
-            </Box>
+          {isLobby ? (
+            <Box>{`closes in ${minutes}m ${seconds}s`}</Box>
           ) : (
-            <Box>{`Loading...`}</Box>
+            <Box>{`${isLive ? `In progress` : "Closed"}`}</Box>
           )}
         </Box>
-      </Text>
+      ) : (
+        <Box>{`Loading...`}</Box>
+      )}
     </Box>
   );
 };
