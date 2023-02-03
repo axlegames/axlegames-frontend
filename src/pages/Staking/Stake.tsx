@@ -9,7 +9,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
-import creds from "../../main/abi/creds";
+// import creds from "../../main/abi/creds";
 import Wallet from "./Wallet";
 
 declare global {
@@ -53,8 +53,8 @@ const chainIds = [
   },
 ];
 
-const TOKEN_CONTRACT_ADDRESS = creds.AXLE_CONTRACT;
-const axleTokenABI = creds.tokenAbi;
+// const TOKEN_CONTRACT_ADDRESS = creds.AXLE_CONTRACT;
+// const axleTokenABI = creds.tokenAbi;
 
 const web3Modal = new Web3Modal({
   network: "mainnet",
@@ -175,15 +175,17 @@ const Stake = () => {
       bnbBal = Number(ethers.utils.formatEther(bnbBal));
       setBalance(bnbBal);
       const signer = provider.getSigner();
-      const token = new ethers.Contract(
-        TOKEN_CONTRACT_ADDRESS,
-        axleTokenABI,
-        signer
-      );
-      let bal = await token.balanceOf(web3Accounts[0]);
-      bal = ethers.utils.formatEther(bal);
-      setAxleBalance(bal);
-      localStorage.setItem("isWalletConnected", "true");
+      console.log(signer);
+      setAxleBalance(200);
+      // const token = new ethers.Contract(
+      //   TOKEN_CONTRACT_ADDRESS,
+      //   axleTokenABI,
+      //   signer
+      // );
+      // let bal = await token.balanceOf(web3Accounts[0]);
+      // bal = ethers.utils.formatEther(bal);
+      // setAxleBalance(bal);
+      // localStorage.setItem("isWalletConnected", "true");
     } catch (error) {
       console.log(error);
     }

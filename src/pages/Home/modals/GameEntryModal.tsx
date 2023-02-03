@@ -30,14 +30,25 @@ import { useEffect, useState } from "react";
 import Dialog from "./HomeDailog";
 import AuthDialog from "../../Auth/dialogs/AuthDialog";
 import Signin from "../../Auth/Signin";
-import { AxleContests, HomeServices } from "../HomeServices";
+import { AxleContest, AxleContests, HomeServices } from "../HomeServices";
 import ConfirmDialog from "./ConfirmDialog";
 import { GameType } from "../enums/contests.enum";
 import NeuButton from "../../Axle/component/NeuButton";
 import { TokenAuthStatus } from "../../../config/auth";
 import { useFormik } from "formik";
 
-const GameEntryModal = (props: any) => {
+interface Props {
+  open: boolean;
+  close: Function;
+  name: string;
+  isActive: boolean;
+  index: number;
+  _id: string;
+  description: string;
+  link: string;
+}
+
+const GameEntryModal = (props: Props) => {
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -60,9 +71,23 @@ const GameEntryModal = (props: any) => {
   const [isMobile] = useMediaQuery("(max-width: 600px)");
   const [contests, setContests] = useState<AxleContests>();
 
+  function sort(a: AxleContest, b: AxleContest) {
+    if (a.gameType === GameType.PRACTICE) {
+      return 0;
+    }
+    if (a.gameType === GameType.GAMIN_NIGHTS) {
+      return -1;
+    }
+    if (a.gameType === GameType.CONTEST) {
+      return 1;
+    }
+    return 0;
+  }
+
   useEffect(() => {
     if (props.open) {
       HomeServices.getAxleGameContest(props._id).then((res) => {
+        res.axleContests.sort(sort);
         setContests(res);
       });
     }
@@ -300,7 +325,7 @@ const GameEntryModal = (props: any) => {
       blockScrollOnMount={false}
       size={"2xl"}
       isOpen={props.open}
-      onClose={props.close}
+      onClose={() => props.close()}
     >
       <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
       <ModalContent
@@ -339,6 +364,7 @@ const GameEntryModal = (props: any) => {
           <Box>
             <Text>{props.description}</Text>
           </Box>
+
           <Divider my="8"></Divider>
 
           {props.isActive ? (

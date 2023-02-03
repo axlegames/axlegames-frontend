@@ -1,4 +1,4 @@
-import { Box, Text, Grid, GridItem, Flex } from "@chakra-ui/react";
+import { Box, Text, Grid, GridItem, Flex, Divider } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import Timer from "../../Games/hooks/Timer";
 import TimerButton from "../../Games/hooks/TimerButton";
@@ -17,7 +17,9 @@ const EntryCard = (props: Props) => {
     return gameType.valueOf().toString();
   };
   const gameType = props.contest.gameType.valueOf().toString();
-  const type = gameType === toStringGameType(GameType.PRACTICE);
+  const type =
+    gameType === toStringGameType(GameType.PRACTICE) ||
+    gameType === toStringGameType(GameType.GAMIN_NIGHTS);
 
   const TimeComponent = () => {
     return !type ? (
@@ -30,6 +32,17 @@ const EntryCard = (props: Props) => {
         />
       </Box>
     ) : null;
+  };
+
+  const dayGetter = () => {
+    const day = new Date(Date.now()).getDay();
+    if (day === 1) return "Monday";
+    if (day === 2) return "Tuesday";
+    if (day === 3) return "Wednesday";
+    if (day === 4) return "Thursday";
+    if (day === 5) return "Friday";
+    if (day === 6) return "Saturday";
+    if (day === 7) return "Sunday";
   };
 
   return (
@@ -80,11 +93,21 @@ const EntryCard = (props: Props) => {
       >
         <TimeComponent />
       </Box>
+
       <Box
         boxShadow={`inset 6px 6px 21px #1a192e, inset -6px -6px 21px #322f56`}
         borderTopRadius="lg"
         p={"4"}
       >
+        {gameType === "GAMIN_NIGHTS" ? (
+          <Box>
+            <Divider my={4} />
+            <Text fontSize={"lg"} fontWeight="bold">
+              {dayGetter()} {`Gaming Night Contest!`}
+            </Text>
+            <Divider my={4} />
+          </Box>
+        ) : null}
         <Grid
           templateColumns="1fr 1fr 2fr"
           alignItems={"center"}

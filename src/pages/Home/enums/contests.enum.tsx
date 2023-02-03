@@ -1,6 +1,7 @@
 export enum GameType {
   PRACTICE = "PRACTICE",
   CONTEST = "CONTEST",
+  GAMIN_NIGHTS = "GAMIN_NIGHTS",
 }
 
 export enum GameStatus {
