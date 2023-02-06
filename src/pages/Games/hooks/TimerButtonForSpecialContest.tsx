@@ -15,33 +15,30 @@ interface Props {
   name: string;
 }
 
-const TimerButton = (props: Props) => {
+const TimerButtonForSpecialContest = (props: Props) => {
   const [isLive, setIsLive] = useState(false);
-  const [isStartsIn, setIsStartsIn] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
 
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const isPracticeContest =
-    props.gameType === GameType.PRACTICE.valueOf().toString();
-
   const calcualteRemainingTime = () => {
-    const remainingTimeForLive =
-      new Date(props.deadline).getTime() - new Date().getTime();
-
-    const remainingTimeForStartsIn =
+    const remainingTimeToStart =
       new Date(props.startsIn).getTime() - new Date().getTime();
+    const _isStarted = remainingTimeToStart < 0 ? true : false;
+    setIsStarted(_isStarted);
 
-    const _isStartsIn =
-      remainingTimeForStartsIn > 0 && remainingTimeForStartsIn < 10 * 60 * 1000
-        ? true
-        : false;
-
-    const _isLive = remainingTimeForLive > 0 ? true : false;
-
-    setIsStartsIn(_isStartsIn);
+    const remainingTimeForLive =
+      new Date(props.opensAt).getTime() - new Date().getTime();
+    const _isLive = remainingTimeForLive < 0 ? true : false;
     setIsLive(_isLive);
+
+    // const remainingTimeForLive =
+    //   new Date(props.opensAt).getTime() - new Date().getTime();
+    // const _isLive = remainingTimeForLive < 0 ? true : false;
+    // setIsLive(_isLive);
 
     const time = Date.parse(props.startsIn) - new Date().getTime();
     setMinutes(Math.floor((time / 1000 / 60) % 60));
@@ -58,11 +55,15 @@ const TimerButton = (props: Props) => {
   }, []);
 
   const CurrentButtonStatus = () => {
-    if (
-      (props.status.toString() === GameStatus.LOBBY &&
-        props.gameType === "CONTEST") ||
-      isPracticeContest
-    ) {
+    if (!isStarted) {
+      return (
+        <Button size="sm" width={"36"} color="black" bg="orange">
+          {" "}
+          {!isLoaded ? `Loading...` : `opens in ${minutes}m ${seconds}s`}
+        </Button>
+      );
+    }
+    if (isStarted && !isLive) {
       return (
         <Button
           color="black"
@@ -75,32 +76,23 @@ const TimerButton = (props: Props) => {
         </Button>
       );
     }
-    if (isStartsIn) {
-      return (
-        <Button size="sm" width={"36"} color="black" bg="orange">
-          {" "}
-          {!isLoaded ? `Loading...` : `opens in ${minutes}m ${seconds}s`}
-        </Button>
-      );
-    }
-    if (isLive) {
+
+    if (isStarted && isLive) {
       return (
         <Button disabled size="sm" width={"36"} color="black">
-          {" "}
-          {!isLoaded ? `Loading...` : "Entry Closed"}{" "}
+          {!isLoaded ? `Loading...` : "Entry Closed"}
         </Button>
       );
     }
   };
 
   const navigate = useNavigate();
-  const iscontest = props.gameType === "CONTEST";
 
   return (
     <Box>
       <Box>{CurrentButtonStatus()}</Box>
       <Box mt={2}>
-        {iscontest && props.status === GameStatus.LIVE ? (
+        {isStarted && isLive ? (
           <Button
             onClick={() =>
               navigate(
@@ -122,4 +114,4 @@ const TimerButton = (props: Props) => {
   );
 };
 
-export default TimerButton;
+export default TimerButtonForSpecialContest;

@@ -2,6 +2,7 @@ import { Box, Text, Grid, GridItem, Flex, Divider } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import Timer from "../../Games/hooks/Timer";
 import TimerButton from "../../Games/hooks/TimerButton";
+import TimerButtonForSpecialContest from "../../Games/hooks/TimerButtonForSpecialContest";
 import { GameType } from "../enums/contests.enum";
 import { AxleContest } from "../HomeServices";
 
@@ -129,17 +130,31 @@ const EntryCard = (props: Props) => {
           </GridItem>
           <GridItem>
             <Flex justifyContent={"flex-end"}>
-              <TimerButton
-                contestId={props.contest._id}
-                name={props.name}
-                status={props.contest.status}
-                gameType={props.contest.gameType.valueOf().toString()}
-                action={props.action}
-                opensAt={props.contest.axleContestInfo?.opensAt || ""}
-                deadline={props.contest.axleContestInfo?.expiresAt || ""}
-                startsIn={props.contest.axleContestInfo?.startsOn || ""}
-                currentTime={props.currentTime}
-              />
+              {gameType === GameType.GAMIN_NIGHTS.toString() ? (
+                <TimerButtonForSpecialContest
+                  contestId={props.contest._id}
+                  name={props.name}
+                  status={props.contest.status}
+                  gameType={props.contest.gameType.valueOf().toString()}
+                  action={props.action}
+                  opensAt={props.contest.axleContestInfo?.opensAt || ""}
+                  deadline={props.contest.axleContestInfo?.expiresAt || ""}
+                  startsIn={props.contest.axleContestInfo?.startsOn || ""}
+                  currentTime={props.currentTime}
+                />
+              ) : (
+                <TimerButton
+                  contestId={props.contest._id}
+                  name={props.name}
+                  status={props.contest.status}
+                  gameType={props.contest.gameType.valueOf().toString()}
+                  action={props.action}
+                  opensAt={props.contest.axleContestInfo?.opensAt || ""}
+                  deadline={props.contest.axleContestInfo?.expiresAt || ""}
+                  startsIn={props.contest.axleContestInfo?.startsOn || ""}
+                  currentTime={props.currentTime}
+                />
+              )}
             </Flex>
           </GridItem>
         </Grid>
