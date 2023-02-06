@@ -1,7 +1,7 @@
 import { Box, Button } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { GameStatus, GameType } from "../../Home/enums/contests.enum";
+import { GameStatus } from "../../Home/enums/contests.enum";
 
 interface Props {
   deadline: string;
@@ -17,7 +17,6 @@ interface Props {
 
 const TimerButtonForSpecialContest = (props: Props) => {
   const [isLive, setIsLive] = useState(false);
-  const [isExpired, setIsExpired] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
 
   const [minutes, setMinutes] = useState(0);
