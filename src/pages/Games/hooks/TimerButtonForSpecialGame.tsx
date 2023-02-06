@@ -36,8 +36,8 @@ const TimerButtonForSpecialGame = (props: Props) => {
     setIsLive(_isLive);
 
     const remainingTimeForExpiry =
-      new Date(props.opensAt).getTime() - new Date().getTime();
-    const _isExpired = remainingTimeForLive < 0 ? true : false;
+      new Date(props.deadline).getTime() - new Date().getTime();
+    const _isExpired = remainingTimeForExpiry < 0 ? true : false;
     setIsExpired(_isExpired);
 
     const time = Date.parse(props.startsIn) - new Date().getTime();
