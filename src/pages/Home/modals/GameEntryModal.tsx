@@ -84,11 +84,29 @@ const GameEntryModal = (props: Props) => {
     return 0;
   }
 
+  function filterFreeAndSpecialContests(
+    contests: Array<AxleContest>
+  ): Array<AxleContest> {
+    const results = [];
+    for (let i = 0; i < contests.length; i++)
+      if (
+        contests[i].gameType.toString() === GameType.GAMIN_NIGHTS ||
+        contests[i].gameType.toString() === GameType.PRACTICE
+      )
+        results.push(contests[i]);
+    console.log(results);
+    return results;
+  }
+
   useEffect(() => {
     if (props.open) {
       HomeServices.getAxleGameContest(props._id).then((res) => {
-        res.axleContests.sort(sort);
-        setContests(res);
+        const results = filterFreeAndSpecialContests(res.axleContests);
+        results.sort(sort);
+        setContests({
+          ...res,
+          axleContests: results,
+        });
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -321,7 +339,7 @@ const GameEntryModal = (props: Props) => {
   return (
     <Modal
       blockScrollOnMount={false}
-      size={"2xl"}
+      size={"6xl"}
       isOpen={props.open}
       onClose={() => props.close()}
     >
@@ -366,9 +384,16 @@ const GameEntryModal = (props: Props) => {
           <Divider my="8"></Divider>
 
           {props.isActive ? (
-            <Flex direction={"column"} rowGap="2rem">
+            <Flex
+              justifyContent={"center"}
+              columnGap="2rem"
+              direction={"row"}
+              rowGap="2rem"
+              width={"100%"}
+              px={4}
+            >
               {contests?.axleContests.map((d, i) => (
-                <Box key={i}>
+                <Box width={"100%"} key={i}>
                   <EntryCard
                     name={props.name}
                     currentTime={contests.currentTime}
@@ -387,7 +412,6 @@ const GameEntryModal = (props: Props) => {
                   />
                 </Box>
               ))}
-              <Divider />
             </Flex>
           ) : (
             <Box>

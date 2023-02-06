@@ -1,10 +1,20 @@
-import { Box, Text, Grid, GridItem, Flex, Divider } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Grid,
+  GridItem,
+  Flex,
+  Image,
+  Divider,
+} from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import Timer from "../../Games/hooks/Timer";
 import TimerButton from "../../Games/hooks/TimerButton";
-import TimerButtonForSpecialContest from "../../Games/hooks/TimerButtonForSpecialContest";
+import TimerButtonForSpecialGame from "../../Games/hooks/TimerButtonForSpecialGame";
 import { GameType } from "../enums/contests.enum";
 import { AxleContest } from "../HomeServices";
+import Hot from "../../../assets/gamein/promotional.png";
+import Free from "../../../assets/gamein/free.png";
 
 interface Props {
   contest: AxleContest;
@@ -46,37 +56,34 @@ const EntryCard = (props: Props) => {
     if (day === 7) return "Sunday";
   };
 
+  const specialContest = props.contest.gameType === "GAMIN_NIGHTS";
+
   return (
     <Box position="relative" boxShadow={"md"}>
-      {type ? (
+      {specialContest ? (
         <Text
           zIndex={1}
-          top={-3}
-          left={-3}
+          bottom={-3}
+          right={-3}
           my={1}
-          bg={theme.modalBgColor}
           color={theme.primaryTwoTextColor}
-          px={2}
           borderRadius="md"
           position="absolute"
-          boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
+          transform={`rotate(45deg)`}
         >
-          Free
+          <Image height="52px" width="52px" src={Hot} />
         </Text>
       ) : (
         <Text
           zIndex={1}
-          top={-3}
-          left={-3}
+          bottom={-3}
+          right={-3}
           my={1}
-          bg={theme.modalBgColor}
           color={theme.primaryTwoTextColor}
-          px={2}
           borderRadius="md"
           position="absolute"
-          boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
         >
-          Paid
+          <Image height="52px" width="52px" src={Free} />
         </Text>
       )}
       <Box
@@ -87,7 +94,6 @@ const EntryCard = (props: Props) => {
         my={1}
         bg={theme.modalBgColor}
         color={theme.primaryTwoTextColor}
-        px={2}
         borderRadius="md"
         position="absolute"
         boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
@@ -100,38 +106,45 @@ const EntryCard = (props: Props) => {
         borderTopRadius="lg"
         p={"4"}
       >
-        {gameType === "GAMIN_NIGHTS" ? (
-          <Box>
-            <Divider my={4} />
-            <Text fontSize={"lg"} fontWeight="bold">
-              {dayGetter()} {`Gaming Night Contest!`}
-            </Text>
-            <Divider my={4} />
-          </Box>
-        ) : null}
         <Grid
-          templateColumns="1fr 1fr 2fr"
+          rowGap={"1rem"}
+          templateColumns="1fr"
           alignItems={"center"}
           fontSize={"md"}
-          gap={6}
+          width="100%"
         >
           <GridItem>
-            <Flex direction={"column"}>
+            <Flex justifyContent={"space-between"}>
               <Text>Entry Fee</Text>
-              <Text> {props.contest.axleContestInfo?.entryFee} </Text>
+              <Text> {props.contest.axleContestInfo?.entryFee || 0} </Text>
             </Flex>
           </GridItem>
 
           <GridItem>
-            <Flex direction={"column"}>
+            <Flex justifyContent={"space-between"}>
               <Text>Prize</Text>
-              <Text>{props.contest.axleContestInfo?.prizePool}</Text>
+              <Text>{props.contest.axleContestInfo?.prizePool || 0}</Text>
             </Flex>
           </GridItem>
+          <Divider />
           <GridItem>
-            <Flex justifyContent={"flex-end"}>
-              {gameType === GameType.GAMIN_NIGHTS.toString() ? (
-                <TimerButtonForSpecialContest
+            <Flex
+              color={theme.primaryTwoTextColor}
+              fontSize={"sm"}
+              fontWeight="bold"
+              justifyContent={"space-between"}
+              alignItems="center"
+            >
+              {specialContest ? (
+                <Text>
+                  {dayGetter()} {`Gaming Night Contest!`}
+                </Text>
+              ) : (
+                <Text>Practice</Text>
+              )}
+
+              {specialContest ? (
+                <TimerButtonForSpecialGame
                   contestId={props.contest._id}
                   name={props.name}
                   status={props.contest.status}
@@ -162,7 +175,7 @@ const EntryCard = (props: Props) => {
       {props.contest.status ? (
         <Box
           borderBottomRadius={"lg"}
-          boxShadow={`0px 0px 4px ${theme.secondaryTwoTextColor}`}
+          boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
           p="2"
         >
           <Text color={theme.primaryTextColor} fontSize={"smaller"}>

@@ -15,9 +15,10 @@ interface Props {
   name: string;
 }
 
-const TimerButtonForSpecialContest = (props: Props) => {
+const TimerButtonForSpecialGame = (props: Props) => {
   const [isLive, setIsLive] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
 
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -34,10 +35,10 @@ const TimerButtonForSpecialContest = (props: Props) => {
     const _isLive = remainingTimeForLive < 0 ? true : false;
     setIsLive(_isLive);
 
-    // const remainingTimeForLive =
-    //   new Date(props.opensAt).getTime() - new Date().getTime();
-    // const _isLive = remainingTimeForLive < 0 ? true : false;
-    // setIsLive(_isLive);
+    const remainingTimeForExpiry =
+      new Date(props.opensAt).getTime() - new Date().getTime();
+    const _isExpired = remainingTimeForLive < 0 ? true : false;
+    setIsExpired(_isExpired);
 
     const time = Date.parse(props.startsIn) - new Date().getTime();
     setMinutes(Math.floor((time / 1000 / 60) % 60));
@@ -76,7 +77,7 @@ const TimerButtonForSpecialContest = (props: Props) => {
       );
     }
 
-    if (isStarted && isLive) {
+    if (isStarted && isLive && !isExpired) {
       return (
         <Button disabled size="sm" width={"36"} color="black">
           {!isLoaded ? `Loading...` : "Entry Closed"}
@@ -113,4 +114,4 @@ const TimerButtonForSpecialContest = (props: Props) => {
   );
 };
 
-export default TimerButtonForSpecialContest;
+export default TimerButtonForSpecialGame;
