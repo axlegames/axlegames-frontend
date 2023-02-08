@@ -59,32 +59,39 @@ const EntryCard = (props: Props) => {
   const specialContest = props.contest.gameType === "GAMIN_NIGHTS";
 
   return (
-    <Box position="relative" boxShadow={"md"}>
+    <Box
+      justifyContent="center"
+      position="relative"
+      boxShadow={"xl"}
+      backgroundImage={
+        specialContest
+          ? `linear-gradient(to right top, #061e37, #072340, #072849, #082d52, #0a325c)`
+          : `linear-gradient(to left top, #061e37, #072340, #072849, #082d52, #0a325c)`
+      }
+      borderRadius="md"
+    >
       {specialContest ? (
-        <Text
+        <Box
           zIndex={1}
-          bottom={-3}
-          right={-3}
+          top={-6}
+          left={-3}
           my={1}
-          color={theme.primaryTwoTextColor}
-          borderRadius="md"
           position="absolute"
           transform={`rotate(45deg)`}
         >
-          <Image height="52px" width="52px" src={Hot} />
-        </Text>
+          <Image height="64px" width="64px" src={Hot} />
+        </Box>
       ) : (
-        <Text
+        <Box
           zIndex={1}
-          bottom={-3}
-          right={-3}
+          top={-6}
+          left={-3}
           my={1}
-          color={theme.primaryTwoTextColor}
           borderRadius="md"
           position="absolute"
         >
-          <Image height="52px" width="52px" src={Free} />
-        </Text>
+          <Image height="64px" width="64px" src={Free} />
+        </Box>
       )}
       <Box
         zIndex={1}
@@ -92,27 +99,42 @@ const EntryCard = (props: Props) => {
         mx={"auto"}
         left={"50%"}
         my={1}
-        bg={theme.modalBgColor}
         color={theme.primaryTwoTextColor}
-        borderRadius="md"
+        borderRadius="sm"
         position="absolute"
-        boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
+        bg={theme.bgColor}
+        px={4}
+        boxShadow={`0px 0px 4px ${theme.primaryTwoTextColor}`}
       >
         <TimeComponent />
       </Box>
 
-      <Box
-        boxShadow={`inset 6px 6px 21px #1a192e, inset -6px -6px 21px #322f56`}
-        borderTopRadius="lg"
-        p={"4"}
-      >
+      <Box borderTopRadius="lg" p={"4"}>
         <Grid
           rowGap={"1rem"}
           templateColumns="1fr"
           alignItems={"center"}
+          color={theme.primaryTextColor}
           fontSize={"md"}
           width="100%"
         >
+          <Box
+            display={"flex"}
+            justifyContent="flex-end"
+            fontFamily={"'Russo One', sans-serif"}
+            color={theme.primaryTwoTextColor}
+            fontSize={"xl"}
+            fontWeight="bold"
+          >
+            {specialContest ? (
+              <Text>
+                {dayGetter()} {`Gaming Night!`}
+              </Text>
+            ) : (
+              <Text>Practice</Text>
+            )}
+          </Box>
+          <Divider />
           <GridItem>
             <Flex justifyContent={"space-between"}>
               <Text>Entry Fee</Text>
@@ -126,23 +148,9 @@ const EntryCard = (props: Props) => {
               <Text>{props.contest.axleContestInfo?.prizePool || 0}</Text>
             </Flex>
           </GridItem>
-          <Divider />
-          <GridItem>
-            <Flex
-              color={theme.primaryTwoTextColor}
-              fontSize={"sm"}
-              fontWeight="bold"
-              justifyContent={"space-between"}
-              alignItems="center"
-            >
-              {specialContest ? (
-                <Text>
-                  {dayGetter()} {`Gaming Night Contest!`}
-                </Text>
-              ) : (
-                <Text>Practice</Text>
-              )}
 
+          <GridItem>
+            <Flex justifyContent={"flex-end"} alignItems="center">
               {specialContest ? (
                 <TimerButtonForSpecialGame
                   contestId={props.contest._id}
@@ -174,11 +182,15 @@ const EntryCard = (props: Props) => {
       </Box>
       {props.contest.status ? (
         <Box
+          boxShadow={`0px 0px 4px ${theme.primaryTwoTextColor}`}
           borderBottomRadius={"lg"}
-          boxShadow={`6px 6px 21px #1a192e, -6px -6px 21px #322f56`}
           p="2"
         >
-          <Text color={theme.primaryTextColor} fontSize={"smaller"}>
+          <Text
+            fontFamily={"'Russo One', sans-serif"}
+            color={theme.primaryTextColor}
+            fontSize={"smaller"}
+          >
             {props.contest.axleContestants.length} + playing now
           </Text>
         </Box>

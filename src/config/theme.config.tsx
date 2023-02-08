@@ -18,6 +18,9 @@ export const theme = {
   primaryTwoTextColor: "#AD78F7", //light purple
 
   dangerColor: "#E94560",
+
+  specialContestBgColor: "#FF6B6B",
+  freeContestBgColor: "#65C18C",
   warningColor: "",
 
   modalBgColor: "#262442",

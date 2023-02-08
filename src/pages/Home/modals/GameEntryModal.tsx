@@ -109,8 +109,8 @@ const GameEntryModal = (props: Props) => {
         });
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.open]);
+    return () => {};
+  }, [props.open, props._id]);
 
   const isAuthorized = (status: TokenAuthStatus) => {
     if (
@@ -339,7 +339,7 @@ const GameEntryModal = (props: Props) => {
   return (
     <Modal
       blockScrollOnMount={false}
-      size={"6xl"}
+      size={"4xl"}
       isOpen={props.open}
       onClose={() => props.close()}
     >
@@ -349,7 +349,8 @@ const GameEntryModal = (props: Props) => {
         color="#fbd6d2"
         fontFamily={"quicksand"}
         fontWeight="bold"
-        bg={theme.modalBgColor}
+        bg={theme.bgColor}
+        backgroundImage={`https://axlegames.s3.ap-south-1.amazonaws.com/assets/bg/token_countdown_bg.png`}
       >
         <Dialog
           title={header}
@@ -385,11 +386,11 @@ const GameEntryModal = (props: Props) => {
 
           {props.isActive ? (
             <Flex
-              justifyContent={"center"}
-              columnGap="2rem"
-              direction={"row"}
-              rowGap="2rem"
-              width={"100%"}
+              justifyContent={"space-between"}
+              columnGap="3rem"
+              rowGap={"3rem"}
+              alignItems="center"
+              direction={{ base: "column", lg: "row" }}
               px={4}
             >
               {contests?.axleContests.map((d, i) => (
