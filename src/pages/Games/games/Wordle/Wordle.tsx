@@ -11,7 +11,12 @@ import WonModal from "../../modals/WonModal";
 import LostModal from "../../modals/LostModal";
 import MenuModal from "../../modals/MenuModal";
 
-import { GameServices, Status, GuessStatus } from "../../GameServices";
+import {
+  GameServices,
+  Status,
+  GuessStatus,
+  LobbyInterface,
+} from "../../GameServices";
 import {
   KEY_ACTION,
   initState,
@@ -20,9 +25,26 @@ import {
 } from "./WordleReducer";
 
 import WordleTimer from "../../hooks/WordleTimer";
-import { Contest } from "../../GameServices";
 import { TokenAuthStatus } from "../../../../config/auth";
 import NeuButton from "../../../Axle/component/NeuButton";
+
+interface Props {
+  isLoaded: boolean;
+  currentTime: number;
+  forceFinishGame: Function;
+  deadline: string;
+}
+
+const Timer = (props: Props) => {
+  return props.isLoaded ? (
+    <WordleTimer
+      isLoaded={props.isLoaded}
+      currentTime={props.currentTime}
+      endgame={() => props.forceFinishGame()}
+      deadline={props.deadline.toString()}
+    />
+  ) : null;
+};
 
 const Wordle = () => {
   const toast = useToast();
@@ -34,20 +56,10 @@ const Wordle = () => {
 
   const { contestId, gameStateId, game, isContest } = useParams();
 
+  const [currentTime, setCurrentTime] = useState(new Date().getTime());
   const [state, dispatch] = useReducer(wordleReducer, initState);
-  const [time, setTime] = useState<string>(new Date(Date.now()).toString());
+  const [deadLine, setDeadLine] = useState<string>(new Date().toString());
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  const isAuthorized = (status: TokenAuthStatus) => {
-    if (
-      status.valueOf().toString() ===
-      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
-    ) {
-      localStorage.clear();
-      navigate("/");
-      return window.location.reload();
-    }
-  };
 
   const fectchState = (game: Status) => {
     dispatch({
@@ -93,6 +105,16 @@ const Wordle = () => {
   };
 
   useEffect(() => {
+    const isAuthorized = (status: TokenAuthStatus) => {
+      if (
+        status.valueOf().toString() ===
+        TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+      ) {
+        localStorage.clear();
+        navigate("/");
+        return window.location.reload();
+      }
+    };
     GameServices.getGameState({ userId: localStorage.getItem("userId") })
       .then((game) => {
         isAuthorized(game as TokenAuthStatus);
@@ -109,30 +131,40 @@ const Wordle = () => {
       setIsWon(false);
       setIsLost(false);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
+    const isAuthorized = (status: TokenAuthStatus) => {
+      if (
+        status.valueOf().toString() ===
+        TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+      ) {
+        localStorage.clear();
+        navigate("/");
+        return window.location.reload();
+      }
+    };
+
     GameServices.getLobbyStats(contestId || "")
       .then((res) => {
         isAuthorized(res as TokenAuthStatus);
-        const r = res as Contest;
-        const contestInfo = r.axleContestInfo;
+        const r = res as LobbyInterface;
+        const contestInfo = r.contest.axleContestInfo;
         const opensAt = new Date(contestInfo.opensAt).getTime();
-        const time = new Date(Date.now()).getTime();
+        const time = new Date(r.currentTime).getTime();
+        setCurrentTime(new Date(r.currentTime).getTime());
         const isOpened = opensAt - time < 0 ? true : false;
         if (!isOpened)
           return navigate(`/${game}/lobby/${contestId}/${gameStateId}`);
-        setTime(
-          r.axleContestInfo?.expiresAt || new Date(Date.now()).toString()
+        setDeadLine(
+          r.contest.axleContestInfo?.expiresAt || new Date().toString()
         );
         setIsLoaded(true);
       })
       .catch((err) => {
         console.log(err);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contestId]);
+  }, [contestId, game, gameStateId, navigate]);
 
   const onKeyPress = (key: string) => {
     return dispatch({
@@ -147,6 +179,17 @@ const Wordle = () => {
   };
 
   const onEnter = async () => {
+    const isAuthorized = (status: TokenAuthStatus) => {
+      if (
+        status.valueOf().toString() ===
+        TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+      ) {
+        localStorage.clear();
+        navigate("/");
+        return window.location.reload();
+      }
+    };
+
     if (state.currentGuess.length < state.wordlength) {
       return toast({
         title: "Not enough letters",
@@ -212,6 +255,16 @@ const Wordle = () => {
   };
 
   const forceFinishGame = async () => {
+    const isAuthorized = (status: TokenAuthStatus) => {
+      if (
+        status.valueOf().toString() ===
+        TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
+      ) {
+        localStorage.clear();
+        navigate("/");
+        return window.location.reload();
+      }
+    };
     const resp = await GameServices.validateUpdateGuess({
       word: state.currentGuess.toLowerCase(),
       contestId: contestId,
@@ -258,19 +311,6 @@ const Wordle = () => {
       },
     });
 
-  const Timer = () => {
-    if (isContest === "true") {
-      return isLoaded ? (
-        <WordleTimer
-          isLoaded={isLoaded}
-          endgame={() => forceFinishGame()}
-          deadline={time}
-        />
-      ) : null;
-    }
-    return null;
-  };
-
   return (
     <Box>
       <MenuModal
@@ -286,7 +326,14 @@ const Wordle = () => {
         close={() => navigate("/")}
       />
       <Navbar title={game} />
-      <Timer />
+      {isContest === "true" ? (
+        <Timer
+          currentTime={currentTime}
+          deadline={deadLine}
+          forceFinishGame={() => forceFinishGame()}
+          isLoaded={isLoaded}
+        />
+      ) : null}
 
       <Box
         display={"flex"}

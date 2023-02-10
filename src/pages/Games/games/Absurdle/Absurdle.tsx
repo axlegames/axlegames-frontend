@@ -10,7 +10,12 @@ import WonModal from "../../modals/WonModal";
 import LostModal from "../../modals/LostModal";
 import MenuModal from "../../modals/MenuModal";
 
-import { GameServices, Status, GuessStatus } from "../../GameServices";
+import {
+  GameServices,
+  Status,
+  GuessStatus,
+  LobbyInterface,
+} from "../../GameServices";
 import {
   KEY_ACTION,
   initState,
@@ -19,7 +24,6 @@ import {
 } from "./AbsurdleReducer";
 
 import WordleTimer from "../../hooks/WordleTimer";
-import { Contest } from "../../GameServices";
 import { TokenAuthStatus } from "../../../../config/auth";
 
 import AbsurdleGrid from "./components/AbsurdleGrid";
@@ -119,15 +123,16 @@ const Absurdle = () => {
 
       .then((res) => {
         // isAuthorized(res as TokenAuthStatus);
-        const r = res as Contest;
-        const contestInfo = r.axleContestInfo;
+        const r = res as LobbyInterface;
+        const contestInfo = r.contest.axleContestInfo;
         const opensAt = new Date(contestInfo.opensAt).getTime();
         const time = new Date(Date.now()).getTime();
         const isOpened = opensAt - time < 0 ? true : false;
         if (!isOpened)
           return navigate(`/${game}/lobby/${contestId}/${gameStateId}`);
         setTime(
-          r.axleContestInfo?.expiresAt || new Date(Date.now()).toString()
+          r.contest.axleContestInfo?.expiresAt ||
+            new Date(Date.now()).toString()
         );
         setIsLoaded(true);
       })
@@ -288,6 +293,7 @@ const Absurdle = () => {
           isLoaded={isLoaded}
           endgame={() => forceFinishGame()}
           deadline={time}
+          currentTime={0}
         />
       ) : null;
     }

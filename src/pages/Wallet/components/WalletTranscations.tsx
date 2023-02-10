@@ -18,7 +18,14 @@ interface Props {
 }
 const WalletTranscations = (props: Props) => {
   const transactions: Fee[] = props.transactions;
-  const headers = ["Date", "Transcation Type", "Amount", "Type", "Balance"];
+  const headers = [
+    "Date",
+    "Transcation Type",
+    "Amount",
+    "Type",
+    "Reward",
+    "Balance",
+  ];
   return (
     <Box fontFamily={"quicksand"} fontWeight="bold">
       <Box p={3}>
@@ -87,6 +94,7 @@ const WalletTranscations = (props: Props) => {
                   <Td>{d.transactionType} </Td>
                   <Td>{`${sign}` + feeType} AXLE</Td>
                   <Td>{type}</Td>
+                  <Td>+{d.reward}</Td>
                   <Td>{d.currentBalance}</Td>
                 </Tr>
               );

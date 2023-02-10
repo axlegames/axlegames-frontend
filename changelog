@@ -1,0 +1,64 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [0.0.0] - 2022-02-07
+
+### Added
+
+- Added game in night contests [feature] 
+
+### Changed
+
+- Changed game entry modal ui has been enhanced [patch] 
+
+### Removed
+
+- Removed scheduled contests [feature]
+
+
+## [0.0.0] - 2022-02-08
+
+### Added
+- Added new timer components has been added
+
+### Changed
+
+- Changed game entry modal ui has been enhanced [patch] 
+
+### Removed
+- Removed scheduled contests [feature]
+- Old timer components has been removed
+
+
+
+## [0.0.0] - 2022-02-09
+
+### Fixed
+- Fixed fixed minor bugs in game entry modal and entry card 
+
+### Changed
+
+- Changed game entry modal ui has been enhanced [patch] 
+
+
+
+
+## [0.0.1] - 2022-02-10
+
+### Fixed
+- Fixed Timer bug 
+
+### Changed
+
+- Changed Modal UI
+
+
+
+
+
+
+
+
+
+

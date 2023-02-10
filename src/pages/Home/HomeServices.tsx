@@ -30,6 +30,7 @@ export interface AxleContest {
   axleContestants: string[];
   status: GameStatus;
   axleContestInfo?: AxleContestInfo;
+  contestName: string;
   action: Function;
 }
 

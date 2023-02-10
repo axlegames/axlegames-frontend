@@ -5,28 +5,28 @@ import { theme } from "../../../config/theme.config";
 interface Props {
   deadline: string;
   isLoaded: boolean;
+  currentTime: number;
   endgame: Function;
 }
 
 const WordleTimer = (props: Props) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-
-  const getTime = () => {
-    const time =
-      Date.parse(props.deadline || "") - new Date(Date.now()).getTime();
-    setMinutes(Math.floor((time / 1000 / 60) % 60));
-    setSeconds(Math.floor((time / 1000) % 60));
-    if (time < 0) {
-      props.endgame();
-    }
-  };
+  const [currentTime, setCurrentTime] = useState(props.currentTime);
 
   useEffect(() => {
+    const getTime = () => {
+      const time = Date.parse(props.deadline || "") - currentTime;
+      setMinutes(Math.floor((time / 1000 / 60) % 60));
+      setSeconds(Math.floor((time / 1000) % 60));
+      setCurrentTime(currentTime + 1000);
+      if (time < 0) {
+        props.endgame();
+      }
+    };
     const interval = setInterval(() => getTime(), 1000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentTime, props]);
 
   const timeFormatter = (x: number) => {
     let s = x.toString().trim().replace("-", "");

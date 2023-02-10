@@ -22,10 +22,11 @@ const Leaderboard = () => {
   const params = useParams();
 
   useEffect(() => {
-    console.log("hello");
-    GameServices.getContestLeaderboardResults(params.contestId || "")
+    const contestName = `${params.game?.toLocaleLowerCase()}-${
+      params.contestId
+    }`;
+    GameServices.getContestLeaderboardResults(contestName)
       .then((res) => {
-        console.log(res);
         setData(res);
       })
       .catch((err) => console.log(err));
@@ -58,10 +59,14 @@ const Leaderboard = () => {
               p={4}
               borderTopRadius="3xl"
             >
-              <Text color={theme.primaryTextColor} fontSize="2xl">
-                Winners {params.game ? params.game.replace("-", " #") : ""}{" "}
-                Contest
-              </Text>
+              <Box>
+                <Text color={theme.primaryTextColor} fontSize="2xl">
+                  Winners {params.game ? params.game.replace("-", " #") : ""}{" "}
+                </Text>
+                <Text color={theme.secondaryTextColor} fontSize="xl">
+                  {params.contestId ? params.contestId.replace("-", " #") : ""}
+                </Text>
+              </Box>
               <Divider my={4} />
               <TableContainer>
                 <Table
@@ -126,7 +131,7 @@ const Leaderboard = () => {
                         <Td border={"none"}>{d.username}</Td>
                         <Td border={"none"}>{d.chances}</Td>
                         <Td border={"none"}>{d.time}s</Td>
-                        <Td border={"none"}>4000 $AXLE</Td>
+                        <Td border={"none"}>{d.reward} $AXLE</Td>
                       </Tr>
                     ))}
                   </Tbody>

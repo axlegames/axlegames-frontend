@@ -9,13 +9,13 @@ import {
   Box,
   Text,
   Divider,
-  Flex,
   useToast,
   useMediaQuery,
   FormControl,
   FormLabel,
   Input,
   Button,
+  Grid,
 } from "@chakra-ui/react";
 import EntryCard from "../components/EntryCard";
 import { useNavigate } from "react-router-dom";
@@ -94,7 +94,6 @@ const GameEntryModal = (props: Props) => {
         contests[i].gameType.toString() === GameType.PRACTICE
       )
         results.push(contests[i]);
-    console.log(results);
     return results;
   }
 
@@ -193,16 +192,24 @@ const GameEntryModal = (props: Props) => {
   };
 
   function enterContest(d: any, confirm: boolean) {
+    const user = localStorage.getItem("userId");
+    if (!user) {
+      setTryM(true);
+      setGuest({
+        contestId: d._id,
+        link: props.link,
+      });
+      return;
+    }
     let fee = 0;
     let _id = d?._id;
 
     if (
-      d?.gameType.valueOf().toString() === GameType.CONTEST.valueOf().toString()
+      d?.gameType.valueOf().toString() ===
+      GameType.GAMIN_NIGHTS.valueOf().toString()
     ) {
       fee = d.axleContestInfo?.entryFee || contest.fee;
     }
-
-    const user = localStorage.getItem("userId");
 
     if (confirm === true) {
       _id = contest._id;
@@ -385,35 +392,26 @@ const GameEntryModal = (props: Props) => {
           <Divider my="8"></Divider>
 
           {props.isActive ? (
-            <Flex
+            <Grid
               justifyContent={"space-between"}
               columnGap="3rem"
               rowGap={"3rem"}
               alignItems="center"
-              direction={{ base: "column", lg: "row" }}
+              gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
               px={4}
             >
               {contests?.axleContests.map((d, i) => (
                 <Box width={"100%"} key={i}>
                   <EntryCard
+                    index={i}
                     name={props.name}
                     currentTime={contests.currentTime}
                     contest={d}
-                    action={
-                      d.gameType !== "PRACTICE"
-                        ? () => enterContest(d, false)
-                        : () => {
-                            setTryM(true);
-                            setGuest({
-                              contestId: d._id,
-                              link: props.link,
-                            });
-                          }
-                    }
+                    action={() => enterContest(d, false)}
                   />
                 </Box>
               ))}
-            </Flex>
+            </Grid>
           ) : (
             <Box>
               <Text>Coming Soon</Text>

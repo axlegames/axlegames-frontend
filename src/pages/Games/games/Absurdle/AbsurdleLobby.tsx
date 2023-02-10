@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import ETH from "../../../../assets/logos/trophy.webp";
 import BNB from "../../../../assets/logos/alram.webp";
-import { Contest, GameServices } from "../../GameServices";
+import { GameServices, LobbyInterface } from "../../GameServices";
 import { TokenAuthStatus } from "../../../../config/auth";
 import { theme } from "../../../../config/theme.config";
 
@@ -15,7 +15,7 @@ interface Props {
 
 const AbsurdleLobby = () => {
   const params = useParams();
-  const [contest, setContest] = useState<Contest>();
+  const [contest, setContest] = useState<LobbyInterface>();
   const [isLoaded, setIsLoaded] = useState(false);
 
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const AbsurdleLobby = () => {
     GameServices.getLobbyStats(contestId)
       .then((res) => {
         isAuthorized(res as TokenAuthStatus);
-        setContest(res as Contest);
+        setContest(res as LobbyInterface);
         setIsLoaded(true);
       })
       .catch((err) => console.log(err));
@@ -48,7 +48,7 @@ const AbsurdleLobby = () => {
 
     const getTime = () => {
       const time =
-        Date.parse(contest?.axleContestInfo.opensAt || "") -
+        Date.parse(contest?.contest.axleContestInfo.opensAt || "") -
         new Date().getTime();
       setMinutes(Math.floor((time / 1000 / 60) % 60));
       setSeconds(Math.floor((time / 1000) % 60));
@@ -78,7 +78,7 @@ const AbsurdleLobby = () => {
       </Text>
     );
   };
-  const contestants = contest?.axleContestants.length || 0;
+  const contestants = contest?.contest.axleContestants.length || 0;
   return (
     <Box
       fontFamily="quicksand"
@@ -123,9 +123,9 @@ const AbsurdleLobby = () => {
           fontSize={{ base: "xl", md: "3xl" }}
         >{`#Absurdle Lobby`}</Text>
         <Timer
-          deadline={contest?.axleContestInfo.expiresAt || ""}
-          opensAt={contest?.axleContestInfo.opensAt || ""}
-          startsOn={contest?.axleContestInfo.startsOn || ""}
+          deadline={contest?.contest.axleContestInfo.expiresAt || ""}
+          opensAt={contest?.contest.axleContestInfo.opensAt || ""}
+          startsOn={contest?.contest.axleContestInfo.startsOn || ""}
         />
         <Box
           bg={theme.bgColor}
@@ -155,7 +155,7 @@ const AbsurdleLobby = () => {
             justifyContent={"center"}
           >
             <Text color={theme.secondaryTextColor} fontSize="2xl">
-              {contest?.axleContestInfo.entryFee || 0 / contestants}
+              {contest?.contest.axleContestInfo.entryFee || 0 / contestants}
             </Text>
             <Text color={theme.secondaryTwoTextColor}>Prize Pool </Text>
           </Box>

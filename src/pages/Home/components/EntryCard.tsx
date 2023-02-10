@@ -21,6 +21,7 @@ interface Props {
   currentTime: string;
   action: Function;
   name: string;
+  index: number;
 }
 
 const EntryCard = (props: Props) => {
@@ -64,7 +65,7 @@ const EntryCard = (props: Props) => {
       position="relative"
       boxShadow={"xl"}
       backgroundImage={
-        specialContest
+        props.index % 2 !== 0
           ? `linear-gradient(to right top, #061e37, #072340, #072849, #082d52, #0a325c)`
           : `linear-gradient(to left top, #061e37, #072340, #072849, #082d52, #0a325c)`
       }
@@ -122,7 +123,7 @@ const EntryCard = (props: Props) => {
             display={"flex"}
             justifyContent="flex-end"
             fontFamily={"'Russo One', sans-serif"}
-            color={theme.primaryTwoTextColor}
+            color={theme.secondaryTextColor}
             fontSize={"xl"}
             fontWeight="bold"
           >
@@ -134,25 +135,55 @@ const EntryCard = (props: Props) => {
               <Text>Practice</Text>
             )}
           </Box>
-          <Divider />
-          <GridItem>
+          <Divider
+            py={1}
+            backgroundImage={`linear-gradient(to right, #f46b15, #ff4d58, #ff4494, #eb5acc, #ad78f7)`}
+            size="sm"
+            borderRadius={"xl"}
+          />
+          <GridItem fontFamily={"'Russo One', sans-serif"}>
             <Flex justifyContent={"space-between"}>
-              <Text>Entry Fee</Text>
-              <Text> {props.contest.axleContestInfo?.entryFee || 0} </Text>
+              <Text color={theme.secondaryTextColor}>Entry Fee</Text>
+
+              <Text
+                boxShadow={"lg"}
+                bg={theme.bgColor}
+                px={4}
+                py={1}
+                borderRadius="md"
+              >
+                {props.contest.axleContestInfo?.entryFee || 0}{" "}
+              </Text>
             </Flex>
           </GridItem>
 
-          <GridItem>
+          <GridItem fontFamily={"'Russo One', sans-serif"}>
             <Flex justifyContent={"space-between"}>
-              <Text>Prize</Text>
-              <Text>{props.contest.axleContestInfo?.prizePool || 0}</Text>
+              <Text color={theme.secondaryTextColor}>Prize</Text>
+              <Text
+                boxShadow={"lg"}
+                bg={theme.bgColor}
+                px={4}
+                py={1}
+                borderRadius="md"
+              >
+                {props.contest.axleContestInfo?.prizePool || 0}
+              </Text>
             </Flex>
           </GridItem>
+
+          <Divider
+            py={1}
+            backgroundImage={`linear-gradient(to left, #f46b15, #ff4d58, #ff4494, #eb5acc, #ad78f7)`}
+            size="sm"
+            borderRadius={"xl"}
+          />
 
           <GridItem>
             <Flex justifyContent={"flex-end"} alignItems="center">
               {specialContest ? (
                 <TimerButtonForSpecialGame
+                  contestName={props.contest.contestName}
                   contestId={props.contest._id}
                   name={props.name}
                   status={props.contest.status}
@@ -165,6 +196,7 @@ const EntryCard = (props: Props) => {
                 />
               ) : (
                 <TimerButton
+                  contestName={props.contest.contestName}
                   contestId={props.contest._id}
                   name={props.name}
                   status={props.contest.status}

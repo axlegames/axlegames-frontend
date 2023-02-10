@@ -33,6 +33,7 @@ export interface LeaderboardInterface {
   username: string;
   userId: string;
   time: number;
+  reward: number;
 }
 
 export enum ENTRY_STATUS {
@@ -80,12 +81,17 @@ export interface Contest {
   status: GameStatus;
 }
 
+export interface LobbyInterface {
+  contest: Contest;
+  currentTime: Date;
+}
+
 export class GameServices {
   static getContestLeaderboardResults = async (
-    contestId: string
+    contestName: string
   ): Promise<Array<LeaderboardInterface>> => {
     return await (
-      await axios.get(`${gamePrefix}/contest/leaderboard/${contestId}`)
+      await axios.get(`${gamePrefix}/contest/leaderboard/${contestName}`)
     ).data;
   };
 
@@ -136,10 +142,10 @@ export class GameServices {
 
   static getLobbyStats = async (
     contestId: string
-  ): Promise<Contest | TokenAuthStatus> => {
+  ): Promise<LobbyInterface | TokenAuthStatus> => {
     return await (
       await axios.get(`${gamePrefix}/lobby/${contestId}`, token)
-    ).data.contest;
+    ).data;
   };
 
   static validateUpdateGuess = async (
