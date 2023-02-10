@@ -48,10 +48,13 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Fixed Timer bug 
+- Rafactoring
 
 ### Changed
 
 - Changed Modal UI
+- Changed Naming Conventions
+
 
 
 
