@@ -132,20 +132,20 @@ const WordleLobby = () => {
           my={16}
           py={10}
           px={16}
-          backgroundImage={`radial-gradient(circle, #1442b5, #003b96, #003376, #002956, #061e37)`}
+          backgroundImage={`linear-gradient(to bottom, #061e37, #002956, #003376, #003b96, #1442b5)`}
           borderRadius="xl"
           display="flex"
           flexDirection={"column"}
           position="relative"
           minW={{ base: "320px", md: "820px" }}
           minH={{ base: "auto", md: "640px" }}
-          border={`4px groove ${theme.primaryTextColor}`}
-          boxShadow={`0px 0px 160px -40px ${theme.primaryTextColor}`}
+          // border={`6px groove ${theme.fgColor}`}
+          boxShadow={`0px 0px 160px -40px #1442b5`}
           alignItems="center"
         >
           <Image
             src={ETH}
-            boxShadow={`0px 0px 120px -5px ${theme.primaryTextColor}`}
+            boxShadow={`0px 0px 120px -5px #1442b5`}
             borderRadius="40vw"
             p={6}
             height={{ base: "32", lg: "48" }}

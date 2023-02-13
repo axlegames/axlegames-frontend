@@ -2,25 +2,13 @@ import { theme } from "../../config/theme.config";
 import { useEffect, useState } from "react";
 import { Grid, GridItem } from "@chakra-ui/react";
 
-import Dialog from "../../pages/Auth/dialogs/AuthDialog";
-import WalletsDialog from "../../pages/Auth/dialogs/WalletsDialog";
-
-import { NearConnectionServices } from "./connections/NearConnection";
-
 import WalletDetails from "./components/WalletDetails";
 
-import NEAR from "../../assets/logos/NEAR.svg";
-import BNB from "../../assets/logos/bnb.png";
+import Web3Modal from "web3modal";
+import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
-import { formatEther } from "@ethersproject/units";
-import { useEtherBalance, useEthers } from "@usedapp/core";
-import { useNavigate, useSearchParams } from "react-router-dom";
-
-interface Props {
-  account: string;
-  balance: string;
-  isConnected: boolean;
-}
+import { ethers } from "ethers";
 
 interface NavbarProps {
   open: boolean;
@@ -28,97 +16,107 @@ interface NavbarProps {
   onClose: Function;
 }
 
+const web3Modal = new Web3Modal({
+  network: "mainnet",
+  theme: "dark",
+  providerOptions: {
+    binancechainwallet: {
+      package: true,
+    },
+    walletconnect: {
+      package: WalletConnectProvider, // required
+      options: {
+        infuraId: process.env.INFURA_ID, // required
+        rpc: {
+          56: "https://bsc-dataseed1.binance.org",
+        },
+        chainId: 56,
+      },
+    },
+    coinbasewallet: {
+      package: CoinbaseWalletSDK, // Required
+      options: {
+        appName: "COINBASE", // Required
+        infuraId: process.env.INFURA_ID, // Required
+        rpc: {
+          56: "https://bsc-dataseed1.binance.org",
+        },
+        chainId: 56,
+      },
+    },
+  },
+});
+
 const NavbarLayout = (props: NavbarProps) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const [balance, setBalance] = useState(0);
+  const [address, setAddress] = useState<string>("");
+  const [openWallet, setOpenWallet] = useState(false);
 
-  const [user, setUser] = useState<Props>({
-    account: "",
-    balance: "",
-    isConnected: false,
-  });
-  const [details, setDetails] = useState({
-    label: "",
-    logo: "",
-  });
-  const [wallet, setWallet] = useState<any>({});
-
-  const { activateBrowserWallet, deactivate, account, chainId } = useEthers();
-  const etherBalance = useEtherBalance(account);
-
-  const connectToNEAR = async () => {
-    const wallet = await NearConnectionServices.connectWallet();
-    const account = await wallet.getAccountId();
-    const amount = (await wallet.account().state()).amount;
-    setUser({
-      account: account,
-      balance: amount,
-      isConnected: true,
-    });
-    setWallet(wallet);
-    setDetails({ logo: NEAR, label: "NEAR" });
-    localStorage.setItem("address", account);
-    props.onClose();
-  };
-
-  const getSymbol = (chainId: number) => {
-    if (chainId === 97) {
-      return "BNB";
-    } else return "NEAR";
-  };
-
-  const connectToMetaMask = async () => {
-    activateBrowserWallet();
-    setUser({
-      account: account?.toString() ?? "",
-      balance: formatEther(etherBalance ?? 1).toString(),
-      isConnected: account ? true : false,
-    });
-
-    const label = getSymbol(chainId || 0);
-    setDetails({ logo: BNB, label: label });
-    localStorage.setItem("address", account!);
-    props.onClose();
-  };
-
-  const disconnect = async () => {
+  const switchNetwork = async () => {
     try {
-      deactivate();
-      wallet.signOut();
-      setWallet({});
-      setUser({
-        account: "",
-        balance: "",
-        isConnected: false,
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: ethers.utils.hexlify(56) }],
       });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      localStorage.removeItem("address");
-      localStorage.removeItem("isWalletConnected");
-      navigate("/");
-      window.location.reload();
+    } catch (err: any) {
+      // This error code indicates that the chain has not been added to MetaMask
+      if (err.code === 4902) {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainName: "Smart Chain",
+              chainId: 56,
+              nativeCurrency: {
+                name: "Smart Chain",
+                decimals: 18,
+                symbol: "BNB",
+              },
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            },
+          ],
+        });
+      }
     }
   };
 
-  useEffect(() => {
-    setUser({
-      account: account?.toString() ?? "",
-      balance: formatEther(etherBalance ?? 1).toString(),
-      isConnected: account ? true : false,
-    });
-    setDetails({ logo: BNB, label: getSymbol(chainId || 0) });
-    localStorage.setItem("address", account!);
-  }, [account, etherBalance, chainId]);
+  const disconnectWeb3Modal = async () => {
+    web3Modal.clearCachedProvider();
+  };
 
   useEffect(() => {
-    const account = searchParams.get("account_id");
-    if (account !== null) {
-      connectToNEAR();
-      setDetails({ logo: NEAR, label: "NEAR" });
+    const connectWeb3Wallet = async () => {
+      try {
+        const web3Provider = await web3Modal.connect();
+        const provider = new ethers.providers.Web3Provider(web3Provider);
+        const web3Accounts = await provider.listAccounts();
+        console.log(web3Provider, provider, web3Accounts);
+        setAddress(web3Accounts[0]);
+        const network = await provider.getNetwork();
+        if (network.chainId !== 56) switchNetwork();
+        let bnbBal: any = await provider.getBalance(web3Accounts[0]);
+        bnbBal = Number(ethers.utils.formatEther(bnbBal));
+        setBalance(bnbBal);
+        localStorage.setItem("address", address!);
+        localStorage.setItem("isWalletConnected", "true");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (window.ethereum !== null && address !== "") {
+      window.ethereum.on("accountsChanged", function (accounts: string) {
+        connectWeb3Wallet();
+      });
+      window.ethereum.on("networkChanged", function (chainId: number) {
+        if (chainId !== 56) {
+          setTimeout(() => {
+            switchNetwork();
+            connectWeb3Wallet();
+          }, 5000);
+        }
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams, setSearchParams]);
+  }, [address]);
 
   return (
     <Grid
@@ -130,20 +128,6 @@ const NavbarLayout = (props: NavbarProps) => {
       display={{ base: "none", lg: "flex" }}
       p={2}
     >
-      <Dialog
-        size="2xl"
-        children={
-          <WalletsDialog
-            isConnected={user.isConnected}
-            disconnect={disconnect}
-            address={user.account}
-            connectToNEAR={connectToNEAR}
-            connectToMetaMask={connectToMetaMask}
-          />
-        }
-        isOpen={props.open}
-        close={props.onClose}
-      />
       <GridItem
         width={"100%"}
         justifyContent={"flex-end"}
@@ -152,20 +136,35 @@ const NavbarLayout = (props: NavbarProps) => {
         flexDirection="row"
         pr={"6"}
       >
-        {!user.isConnected ? (
-          <div onClick={() => props.onOpen()} className="btn">
-            Connect Wallet
-          </div>
-        ) : (
-          <WalletDetails
-            close={props.onOpen}
-            logo={details.logo}
-            label={details.label}
-            address={user.account}
-            balance={user.balance}
-            disconnect={disconnect}
-          />
-        )}
+        <WalletDetails
+          address={address}
+          disconnect={() => disconnectWeb3Modal()}
+          balance={balance.toString()}
+          connectWallet={async () => {
+            try {
+              console.log("bfgin");
+              const web3Provider = await web3Modal.connect();
+              console.log(web3Provider);
+              const provider = new ethers.providers.Web3Provider(web3Provider);
+              console.log(props);
+              const web3Accounts = await provider.listAccounts();
+              console.log(web3Accounts);
+              setAddress(web3Accounts[0]);
+              // const network = await provider.getNetwork();
+              // if (network.chainId !== 56) switchNetwork();
+              let bnbBal: any = await provider.getBalance(web3Accounts[0]);
+              console.log("bfgi2");
+              bnbBal = Number(ethers.utils.formatEther(bnbBal));
+              setBalance(bnbBal);
+              // localStorage.setItem("address", web3Accounts[0]);
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+          isLoading={false}
+          openWallet={openWallet}
+          setOpenWallet={setOpenWallet}
+        />
       </GridItem>
     </Grid>
   );
