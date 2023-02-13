@@ -119,7 +119,8 @@ const NavbarLayout = (props: NavbarProps) => {
         }
       });
     }
-  }, [address]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Grid
