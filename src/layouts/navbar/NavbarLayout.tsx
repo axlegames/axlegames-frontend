@@ -16,41 +16,41 @@ interface NavbarProps {
   onClose: Function;
 }
 
-const web3Modal = new Web3Modal({
-  network: "mainnet",
-  theme: "dark",
-  providerOptions: {
-    binancechainwallet: {
-      package: true,
-    },
-    walletconnect: {
-      package: WalletConnectProvider, // required
-      options: {
-        infuraId: process.env.INFURA_ID, // required
-        rpc: {
-          56: "https://bsc-dataseed1.binance.org",
-        },
-        chainId: 56,
-      },
-    },
-    coinbasewallet: {
-      package: CoinbaseWalletSDK, // Required
-      options: {
-        appName: "COINBASE", // Required
-        infuraId: process.env.INFURA_ID, // Required
-        rpc: {
-          56: "https://bsc-dataseed1.binance.org",
-        },
-        chainId: 56,
-      },
-    },
-  },
-});
-
 const NavbarLayout = (props: NavbarProps) => {
   const [balance, setBalance] = useState(0);
   const [address, setAddress] = useState<string>("");
   const [openWallet, setOpenWallet] = useState(false);
+
+  const web3Modal = new Web3Modal({
+    network: "mainnet",
+    theme: "dark",
+    providerOptions: {
+      binancechainwallet: {
+        package: true,
+      },
+      walletconnect: {
+        package: WalletConnectProvider, // required
+        options: {
+          infuraId: process.env.INFURA_ID, // required
+          rpc: {
+            56: "https://bsc-dataseed1.binance.org",
+          },
+          chainId: 56,
+        },
+      },
+      coinbasewallet: {
+        package: CoinbaseWalletSDK, // Required
+        options: {
+          appName: "COINBASE", // Required
+          infuraId: process.env.INFURA_ID, // Required
+          rpc: {
+            56: "https://bsc-dataseed1.binance.org",
+          },
+          chainId: 56,
+        },
+      },
+    },
+  });
 
   const switchNetwork = async () => {
     try {
@@ -82,12 +82,15 @@ const NavbarLayout = (props: NavbarProps) => {
 
   const disconnectWeb3Modal = async () => {
     web3Modal.clearCachedProvider();
+    window.localStorage.clear();
+    window.location.reload();
   };
 
   useEffect(() => {
     const connectWeb3Wallet = async () => {
       try {
         const web3Provider = await web3Modal.connect();
+        console.log(web3Provider);
         const provider = new ethers.providers.Web3Provider(web3Provider);
         const web3Accounts = await provider.listAccounts();
         console.log(web3Provider, provider, web3Accounts);
