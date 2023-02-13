@@ -193,7 +193,10 @@ const GameEntryModal = (props: Props) => {
 
   function enterContest(d: any, confirm: boolean) {
     const user = localStorage.getItem("userId");
-    if (!user) {
+    const gameType =
+      d?.gameType.valueOf().toString() ===
+      GameType.GAMIN_NIGHTS.valueOf().toString();
+    if (user === null && !gameType) {
       setTryM(true);
       setGuest({
         contestId: d._id,
@@ -201,16 +204,21 @@ const GameEntryModal = (props: Props) => {
       });
       return;
     }
+    if (user === null && gameType) {
+      return toast({
+        title: "Login",
+        description: "Please Login, to enter contest",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    }
     let fee = 0;
     let _id = d?._id;
-
-    if (
-      d?.gameType.valueOf().toString() ===
-      GameType.GAMIN_NIGHTS.valueOf().toString()
-    ) {
+    if (gameType) {
       fee = d.axleContestInfo?.entryFee || contest.fee;
     }
-
     if (confirm === true) {
       _id = contest._id;
       fee = contest.fee;
