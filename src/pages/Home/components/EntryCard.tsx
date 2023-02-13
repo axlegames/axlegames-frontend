@@ -64,11 +64,7 @@ const EntryCard = (props: Props) => {
       justifyContent="center"
       position="relative"
       boxShadow={"xl"}
-      backgroundImage={
-        props.index % 2 !== 0
-          ? `linear-gradient(to right top, #061e37, #072340, #072849, #082d52, #0a325c)`
-          : `linear-gradient(to left top, #061e37, #072340, #072849, #082d52, #0a325c)`
-      }
+      backgroundImage={`radial-gradient(circle, #1442b5, #003b96, #003376, #002956, #061e37)`}
       borderRadius="md"
     >
       {specialContest ? (
@@ -137,8 +133,8 @@ const EntryCard = (props: Props) => {
           </Box>
           <Divider
             py={1}
-            backgroundImage={`linear-gradient(to right, #f46b15, #ff4d58, #ff4494, #eb5acc, #ad78f7)`}
-            size="sm"
+            boxShadow={`-1p -1px 12px ${theme.bgColor}`}
+            backgroundImage={`linear-gradient(to bottom, #eb6612, #ee2e4c, #d4007c, #9828a3, #1442b5)`}
             borderRadius={"xl"}
           />
           <GridItem fontFamily={"'Russo One', sans-serif"}>
@@ -159,7 +155,7 @@ const EntryCard = (props: Props) => {
 
           <GridItem fontFamily={"'Russo One', sans-serif"}>
             <Flex justifyContent={"space-between"}>
-              <Text color={theme.secondaryTextColor}>Prize</Text>
+              <Text color={theme.secondaryTextColor}>Prize Pool</Text>
               <Text
                 boxShadow={"lg"}
                 bg={theme.bgColor}
@@ -174,8 +170,7 @@ const EntryCard = (props: Props) => {
 
           <Divider
             py={1}
-            backgroundImage={`linear-gradient(to left, #f46b15, #ff4d58, #ff4494, #eb5acc, #ad78f7)`}
-            size="sm"
+            backgroundImage={`linear-gradient(to top, #eb6612, #ee2e4c, #d4007c, #9828a3, #1442b5)`}
             borderRadius={"xl"}
           />
 

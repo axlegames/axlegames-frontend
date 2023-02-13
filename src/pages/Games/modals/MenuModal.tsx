@@ -16,10 +16,10 @@ const MenuModal = (props: any) => {
       <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
       <ModalContent
         borderRadius={"xl"}
-        bg={theme.fgColor}
         color={theme.highLightColor}
         fontFamily={"quicksand"}
         fontWeight="bold"
+        backgroundImage={`radial-gradient(circle, #1442b5, #003b96, #003376, #002956, #061e37)`}
       >
         <ModalHeader fontSize={"5xl"}> {props.title} </ModalHeader>
         <ModalCloseButton />

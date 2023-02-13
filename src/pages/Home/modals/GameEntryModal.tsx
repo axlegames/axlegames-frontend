@@ -126,6 +126,7 @@ const GameEntryModal = (props: Props) => {
     res: EntryStatus | TokenAuthStatus,
     fee: number
   ) => {
+    console.log(res);
     isAuthorized(res as TokenAuthStatus);
     res = res as EntryStatus;
     const status = res.status.valueOf().toString();
@@ -205,9 +206,13 @@ const GameEntryModal = (props: Props) => {
       return;
     }
     if (user === null && gameType) {
+      const address = localStorage.getItem("address");
+      const notConnected = address === "undefined";
       return toast({
-        title: "Login",
-        description: "Please Login, to enter contest",
+        title: !notConnected ? "Login" : "Connect Wallet",
+        description: !notConnected
+          ? "Please Login, to enter contest"
+          : "Please Connect your wallet",
         status: "warning",
         duration: 5000,
         isClosable: true,

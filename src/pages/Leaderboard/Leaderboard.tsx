@@ -27,6 +27,7 @@ const Leaderboard = () => {
     }`;
     GameServices.getContestLeaderboardResults(contestName)
       .then((res) => {
+        console.log(res);
         setData(res);
       })
       .catch((err) => console.log(err));
