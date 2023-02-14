@@ -75,6 +75,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Integrated multiple wallets
+- Live update for participant count and prizepool [socket]
 
 ### Fixed
 
@@ -83,3 +84,4 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Updated Leaderboard Functionality
+- Changed Absurdle to AI Wordle

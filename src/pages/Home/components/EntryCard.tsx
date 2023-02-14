@@ -15,6 +15,8 @@ import { GameType } from "../enums/contests.enum";
 import { AxleContest } from "../HomeServices";
 import Hot from "../../../assets/gamein/promotional.png";
 import Free from "../../../assets/gamein/free.png";
+import { useEffect, useState } from "react";
+import useWebSocket from "react-use-websocket";
 
 interface Props {
   contest: AxleContest;
@@ -24,28 +26,66 @@ interface Props {
   index: number;
 }
 
-const EntryCard = (props: Props) => {
+interface TimerProps {
+  gameType: GameType;
+  currentTime: string;
+  opensAt: string;
+  expiresAt: string;
+  startsOn: string;
+}
+
+const TimeComponent = (props: TimerProps) => {
   const toStringGameType = (gameType: GameType) => {
     return gameType.valueOf().toString();
   };
-  const gameType = props.contest.gameType.valueOf().toString();
+  const gameType = props.gameType.valueOf().toString();
   const type =
     gameType === toStringGameType(GameType.PRACTICE) ||
     gameType === toStringGameType(GameType.GAMIN_NIGHTS);
 
-  const TimeComponent = () => {
-    return !type || gameType === toStringGameType(GameType.GAMIN_NIGHTS) ? (
-      <Box>
-        <Timer
-          currentTime={props.currentTime}
-          opensAt={props.contest.axleContestInfo?.opensAt || ""}
-          deadline={props.contest.axleContestInfo?.expiresAt || ""}
-          startsOn={props.contest.axleContestInfo?.startsOn || ""}
-        />
-      </Box>
-    ) : null;
-  };
+  return !type || gameType === toStringGameType(GameType.GAMIN_NIGHTS) ? (
+    <Box>
+      <Timer
+        currentTime={props.currentTime}
+        opensAt={props.opensAt || ""}
+        deadline={props.expiresAt || ""}
+        startsOn={props.startsOn || ""}
+      />
+    </Box>
+  ) : null;
+};
 
+const ParticipantCountAndPrizePoolSocket = (props: {
+  contestId: string;
+  isParticipantCount: boolean;
+}) => {
+  const [liveActions, setLiveActions] = useState({
+    prizePool: 0,
+    participants: 0,
+  });
+
+  const { sendMessage, lastMessage, readyState } =
+    useWebSocket(`ws://localhost:5001`);
+  useEffect(() => {
+    sendMessage(props.contestId);
+    const resp = lastMessage?.data;
+    try {
+      const live = JSON.parse(resp.replace("/", ""));
+      setLiveActions({
+        participants: live.participants,
+        prizePool: live.prizePool,
+      });
+    } catch (error) {}
+  }, [readyState, lastMessage, props, sendMessage]);
+
+  return props.isParticipantCount ? (
+    <Box>{liveActions.participants} + playing now</Box>
+  ) : (
+    <Box> {liveActions.prizePool} </Box>
+  );
+};
+
+const EntryCard = (props: Props) => {
   const dayGetter = () => {
     const day = new Date(Date.now()).getDay();
     if (day === 1) return "Monday";
@@ -103,7 +143,13 @@ const EntryCard = (props: Props) => {
         px={4}
         boxShadow={`0px 0px 4px ${theme.primaryTwoTextColor}`}
       >
-        <TimeComponent />
+        <TimeComponent
+          gameType={props.contest.gameType}
+          currentTime={props.currentTime}
+          expiresAt={props.contest.axleContestInfo?.expiresAt || ""}
+          opensAt={props.contest.axleContestInfo?.opensAt || ""}
+          startsOn={props.contest.axleContestInfo?.expiresAt || ""}
+        />
       </Box>
 
       <Box borderTopRadius="lg" p={"4"}>
@@ -163,7 +209,10 @@ const EntryCard = (props: Props) => {
                 py={1}
                 borderRadius="md"
               >
-                {props.contest.axleContestInfo?.prizePool || 0}
+                <ParticipantCountAndPrizePoolSocket
+                  contestId={props.contest._id}
+                  isParticipantCount={false}
+                />
               </Text>
             </Flex>
           </GridItem>
@@ -218,7 +267,10 @@ const EntryCard = (props: Props) => {
             color={theme.primaryTextColor}
             fontSize={"smaller"}
           >
-            {props.contest.axleContestants.length} + playing now
+            <ParticipantCountAndPrizePoolSocket
+              contestId={props.contest._id}
+              isParticipantCount={true}
+            />
           </Text>
         </Box>
       ) : null}

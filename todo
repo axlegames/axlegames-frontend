@@ -8,7 +8,6 @@ todo
 -> build profile page [pending]
 
 Backend
-
 getters =>
 getGameHistory(userId)
 <= getters
@@ -44,8 +43,11 @@ changelog [done]
 corner cases
 
 \*time from backend issue
-remove visibility of game by nextday
-leaderboard
-prize pool, contestants websockets
-ai wordle rename (absurdle)
+
+leaderboard [done]
+remove visibility of game by nextday [done]
+ai wordle rename (absurdle) [done]
+prize pool, contestants websockets [done]
+
+[later]
 smart wordle
