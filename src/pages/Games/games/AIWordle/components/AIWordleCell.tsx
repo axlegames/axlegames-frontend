@@ -8,7 +8,7 @@ interface Props {
   index: number;
 }
 
-const AbsurdleCell = (props: Props) => {
+const AIWordleCell = (props: Props) => {
   const validate = () => {
     if (props.isCurrentRowCompleted) {
       if (props.keyPresence === "absent") return "red.400";
@@ -39,4 +39,4 @@ const AbsurdleCell = (props: Props) => {
   );
 };
 
-export default AbsurdleCell;
+export default AIWordleCell;

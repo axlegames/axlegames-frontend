@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { theme } from "../../../../../config/theme.config";
-import AbsurdleCell from "./AbsurdleCell";
+import AIWordleCell from "./AIWordleCell";
 
-const AbsurdleGrid = (props: any) => {
+const AIWordleGrid = (props: any) => {
   return (
     <Box fontFamily={"quicksand"} fontSize="3xl" fontWeight={"bold"}>
       <Box
@@ -15,7 +15,7 @@ const AbsurdleGrid = (props: any) => {
         {props.game.map((row: any, CurrentRowindex: number) => (
           <Box key={CurrentRowindex} display={"flex"} flexDirection="row">
             {row.map((letter: any, currentCellIndex: number) => (
-              <AbsurdleCell
+              <AIWordleCell
                 isCurrentRowCompleted={props.completedRows[CurrentRowindex]}
                 keyPresence={
                   props.gameStatus[CurrentRowindex][currentCellIndex]
@@ -31,4 +31,4 @@ const AbsurdleGrid = (props: any) => {
     </Box>
   );
 };
-export default AbsurdleGrid;
+export default AIWordleGrid;

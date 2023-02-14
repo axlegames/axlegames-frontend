@@ -13,7 +13,7 @@ interface Props {
   opensAt: string;
 }
 
-const AbsurdleLobby = () => {
+const AIWordleLobby = () => {
   const params = useParams();
   const [contest, setContest] = useState<LobbyInterface>();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -54,7 +54,7 @@ const AbsurdleLobby = () => {
       setSeconds(Math.floor((time / 1000) % 60));
       if (time < 0) {
         return navigate(
-          `/absurdle/${params.contestId}/${params.gameStateId}/${true}`
+          `/aiwordle/${params.contestId}/${params.gameStateId}/${true}`
         );
       }
     };
@@ -121,7 +121,7 @@ const AbsurdleLobby = () => {
         <Text
           color={theme.primaryTextColor}
           fontSize={{ base: "xl", md: "3xl" }}
-        >{`#Absurdle Lobby`}</Text>
+        >{`#AIWordle Lobby`}</Text>
         <Timer
           deadline={contest?.contest.axleContestInfo.expiresAt || ""}
           opensAt={contest?.contest.axleContestInfo.opensAt || ""}
@@ -165,4 +165,4 @@ const AbsurdleLobby = () => {
   );
 };
 
-export default AbsurdleLobby;
+export default AIWordleLobby;

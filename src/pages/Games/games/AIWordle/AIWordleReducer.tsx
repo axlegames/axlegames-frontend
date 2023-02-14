@@ -60,7 +60,7 @@ const createEmptyArrays = (number: number) => {
   return array;
 };
 
-export const absurdleReducer = (
+export const aiWordleReducer = (
   state: WordleState,
   action: Action
 ): WordleState => {
@@ -121,7 +121,7 @@ export const absurdleReducer = (
 
     case KEY_ACTION.ON_ENTER:
       const game = action.payload.game || "";
-      if (game === "ABSURDLE") {
+      if (game === "AI_WORDLE") {
         // onenter flip the keys
         let _completedRows = state.completedRows;
         _completedRows[state.currentRow] = true;

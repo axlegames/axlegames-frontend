@@ -6,48 +6,46 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Added game in night contests [feature] 
+- Added game in night contests [feature]
 
 ### Changed
 
-- Changed game entry modal ui has been enhanced [patch] 
+- Changed game entry modal ui has been enhanced [patch]
 
 ### Removed
 
 - Removed scheduled contests [feature]
-
 
 ## [0.0.0] - 2022-02-08
 
 ### Added
+
 - Added new timer components has been added
 
 ### Changed
 
-- Changed game entry modal ui has been enhanced [patch] 
+- Changed game entry modal ui has been enhanced [patch]
 
 ### Removed
+
 - Removed scheduled contests [feature]
 - Old timer components has been removed
-
-
 
 ## [0.0.0] - 2022-02-09
 
 ### Fixed
-- Fixed fixed minor bugs in game entry modal and entry card 
+
+- Fixed fixed minor bugs in game entry modal and entry card
 
 ### Changed
 
-- Changed game entry modal ui has been enhanced [patch] 
-
-
-
+- Changed game entry modal ui has been enhanced [patch]
 
 ## [0.0.1] - 2022-02-10
 
 ### Fixed
-- Fixed Timer bug 
+
+- Fixed Timer bug
 - Rafactoring
 
 ### Changed
@@ -55,13 +53,33 @@ All notable changes to this project will be documented in this file.
 - Changed Modal UI
 - Changed Naming Conventions
 
+## [0.0.1] - 2022-02-13
 
+### Added
 
+- Integrated multiple wallets
 
+### Fixed
 
+- Rafactoring
 
+### Changed
 
+- Leaderboard UI changed
+- Lobby UI changed
+- GameEntry modal ui changed
+- Minor UI changes
 
+## [0.0.1] - 2022-02-14
 
+### Added
 
+- Integrated multiple wallets
 
+### Fixed
+
+- Rafactoring
+
+### Changed
+
+- Updated Leaderboard Functionality

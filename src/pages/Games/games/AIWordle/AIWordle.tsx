@@ -19,17 +19,17 @@ import {
 import {
   KEY_ACTION,
   initState,
-  absurdleReducer,
+  aiWordleReducer,
   WordleState,
-} from "./AbsurdleReducer";
+} from "./AIWordleReducer";
 
 import WordleTimer from "../../hooks/WordleTimer";
 import { TokenAuthStatus } from "../../../../config/auth";
 
-import AbsurdleGrid from "./components/AbsurdleGrid";
+import AIWordleGrid from "./components/AIWordleGrid";
 import NeuButton from "../../../Axle/component/NeuButton";
 
-const Absurdle = () => {
+const AIWordle = () => {
   const toast = useToast();
 
   const [isWon, setIsWon] = useState(false);
@@ -38,9 +38,9 @@ const Absurdle = () => {
   const navigate = useNavigate();
 
   const { contestId, gameStateId, isContest } = useParams();
-  const game = "absurdle";
+  const game = "aiwordle";
 
-  const [state, dispatch] = useReducer(absurdleReducer, initState);
+  const [state, dispatch] = useReducer(aiWordleReducer, initState);
   const [time, setTime] = useState<string>(new Date(Date.now()).toString());
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -205,7 +205,7 @@ const Absurdle = () => {
         guessLength: gameState.length + 1,
         gameState: gameState,
         gameStatus: gameStatus,
-        game: "ABSURDLE",
+        game: "AI_WORDLE",
       },
     });
     window.scrollTo(0, document.body.scrollHeight);
@@ -324,7 +324,7 @@ const Absurdle = () => {
         rowGap="1rem"
         minH="90vh"
       >
-        <AbsurdleGrid
+        <AIWordleGrid
           gameStatus={state.gameStatus}
           completedRows={state.completedRows}
           game={state.gameState}
@@ -354,4 +354,4 @@ const Absurdle = () => {
   );
 };
 
-export default Absurdle;
+export default AIWordle;

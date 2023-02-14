@@ -18,14 +18,14 @@ const ReferralLayout = lazy(() => import("./pages/Referral/ReferralLayout"));
 const Wallet = lazy(() => import("./pages/Wallet/Wallet"));
 const ComingSoon = lazy(() => import("./pages/ComingSoon"));
 const SignupPage = lazy(() => import("./pages/Auth/SignUpPage"));
-const Absurdle = lazy(() => import("./pages/Games/games/Absurdle/Absurdle"));
+const AIWordle = lazy(() => import("./pages/Games/games/AIWordle/AIWordle"));
 const GuestWordle = lazy(() => import("./pages/Games/games/Guest/GuestWordle"));
 const Wordle = lazy(() => import("./pages/Games/games/Wordle/Wordle"));
 const WordleLobby = lazy(
   () => import("./pages/Games/games/Wordle/WordleLobby")
 );
-const AbsurdleLobby = lazy(
-  () => import("./pages/Games/games/Absurdle/AbsurdleLobby")
+const AIWordleLobby = lazy(
+  () => import("./pages/Games/games/AIWordle/AIWordleLobby")
 );
 
 const FallBack = () => {
@@ -82,12 +82,12 @@ export const App = () => {
 
             {/* GameRoutes */}
             <Route
-              path="/absurdle/:contestId/:gameStateId/:isContest"
-              element={<Absurdle />}
+              path="/aiwordle/:contestId/:gameStateId/:isContest"
+              element={<AIWordle />}
             />
             <Route
-              path="/absurdle/lobby/:contestId/:gameStateId"
-              element={<AbsurdleLobby />}
+              path="/aiwordle/lobby/:contestId/:gameStateId"
+              element={<AIWordleLobby />}
             />
             <Route
               path="/:game/:contestId/:gameStateId/:isContest"
