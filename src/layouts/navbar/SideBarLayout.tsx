@@ -177,7 +177,11 @@ const SideBarLayout = (props: SideBarProps) => {
           title={"Home"}
           icon={<HiHome size={32} />}
         />
-
+        <SideBarButton
+          onClick={() => clearConnectionAndChangeRoute("/leaderboard")}
+          title={"Leaderboard"}
+          icon={<MdStore size={32} />}
+        />
         <IsLoggedIn>
           <SideBarButton
             onClick={() => clearConnectionAndChangeRoute("/dashboard")}
@@ -228,7 +232,6 @@ const SideBarLayout = (props: SideBarProps) => {
           title={"AxleVerse"}
           icon={<HiGlobe size={32} />}
         />
-
         <SideBarButton
           onClick={() => clearConnectionAndChangeRoute("/coming-soon")}
           title={"Marketplace"}

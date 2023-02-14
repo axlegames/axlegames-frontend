@@ -93,15 +93,14 @@ const NavbarLayout = (props: NavbarProps) => {
         console.log(web3Provider);
         const provider = new ethers.providers.Web3Provider(web3Provider);
         const web3Accounts = await provider.listAccounts();
-        console.log(web3Provider, provider, web3Accounts);
+        localStorage.setItem("address", web3Accounts[0]);
+        localStorage.setItem("isWalletConnected", "true");
         setAddress(web3Accounts[0]);
         const network = await provider.getNetwork();
         if (network.chainId !== 56) switchNetwork();
         let bnbBal: any = await provider.getBalance(web3Accounts[0]);
         bnbBal = Number(ethers.utils.formatEther(bnbBal));
         setBalance(bnbBal);
-        localStorage.setItem("address", address!);
-        localStorage.setItem("isWalletConnected", "true");
       } catch (error) {
         console.log(error);
       }
@@ -146,21 +145,16 @@ const NavbarLayout = (props: NavbarProps) => {
           balance={balance.toString()}
           connectWallet={async () => {
             try {
-              console.log("bfgin");
               const web3Provider = await web3Modal.connect();
-              console.log(web3Provider);
               const provider = new ethers.providers.Web3Provider(web3Provider);
-              console.log(props);
               const web3Accounts = await provider.listAccounts();
-              console.log(web3Accounts);
               setAddress(web3Accounts[0]);
-              // const network = await provider.getNetwork();
-              // if (network.chainId !== 56) switchNetwork();
+              const network = await provider.getNetwork();
+              if (network.chainId !== 56) switchNetwork();
               let bnbBal: any = await provider.getBalance(web3Accounts[0]);
-              console.log("bfgi2");
               bnbBal = Number(ethers.utils.formatEther(bnbBal));
               setBalance(bnbBal);
-              // localStorage.setItem("address", web3Accounts[0]);
+              localStorage.setItem("address", web3Accounts[0]);
             } catch (error) {
               console.log(error);
             }

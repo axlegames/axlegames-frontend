@@ -95,6 +95,15 @@ export class GameServices {
     ).data;
   };
 
+  static getContestsList = async (body: {
+    game: string;
+    date: Date;
+  }): Promise<Array<string>> => {
+    const resp = await axios.post(`${gamePrefix}/gamenight/contest/list`, body);
+    console.log(resp);
+    return resp.data.axleContests;
+  };
+
   static createGuestGameState = async (data: {
     guest: string;
     contestId: string;

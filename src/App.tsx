@@ -74,10 +74,7 @@ export const App = () => {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/staking" element={<Stake />} />
             <Route path="/403" element={<Page403 />} />
-            <Route
-              path="/leaderboard/:game/:contestId"
-              element={<Leaderboard />}
-            />
+            <Route path="/leaderboard" element={<Leaderboard />} />
             <Route
               path="/guest/:game/:contestId/:gameStateId"
               element={<GuestWordle />}

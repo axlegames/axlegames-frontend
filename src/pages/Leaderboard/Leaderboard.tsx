@@ -1,6 +1,8 @@
 import {
   Box,
+  Button,
   Divider,
+  Select,
   Table,
   TableCaption,
   TableContainer,
@@ -11,28 +13,51 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import { theme } from "../../config/theme.config";
 import MainLayout from "../../layouts/MainLayout";
 import { GameServices, LeaderboardInterface } from "../Games/GameServices";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+import "./Leaderboard.css";
 
 const Leaderboard = () => {
+  const [startDate, setStartDate] = useState<Date>(new Date());
   const [data, setData] = useState<Array<LeaderboardInterface>>([]);
-  const params = useParams();
 
-  useEffect(() => {
-    const contestName = `${params.game?.toLocaleLowerCase()}-${
-      params.contestId
-    }`;
+  const [isSearched, setIsSearched] = useState(false);
+
+  const params = useParams();
+  const wordles = ["Wordle-5", "Wordle-6", "Wordle-7"];
+
+  const [wordleList, setWordleList] = useState<Array<string>>([]);
+  const [wordle, setWordle] = useState<string>("");
+  const onCurrentWorldeChange = (e: any) => {
+    setWordle(e.target.value.toLowerCase());
+  };
+
+  const searchForContests = () => {
+    const body = { game: wordle, date: startDate };
+    GameServices.getContestsList(body)
+      .then((res) => {
+        console.log(res);
+        setWordleList(res);
+        setIsSearched(true);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const onContestChange = (e: any) => {
+    const contestName = wordle + "-" + e.target.value;
     GameServices.getContestLeaderboardResults(contestName)
       .then((res) => {
         console.log(res);
         setData(res);
       })
       .catch((err) => console.log(err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   return (
     <MainLayout>
@@ -67,6 +92,68 @@ const Leaderboard = () => {
                 <Text color={theme.secondaryTextColor} fontSize="xl">
                   {params.contestId ? params.contestId.replace("-", " #") : ""}
                 </Text>
+              </Box>
+
+              <Box
+                display={"flex"}
+                justifyContent="flex-start"
+                flexDirection={"column"}
+              >
+                <Box
+                  py={4}
+                  display={"flex"}
+                  flexDirection="row"
+                  rowGap={"1rem"}
+                  fontWeight="bold"
+                  justifyContent={"flex-start"}
+                  columnGap="1rem"
+                >
+                  <Select
+                    width={"64"}
+                    color={theme.primaryButtonColor}
+                    placeholder="Select Wordle"
+                    onChange={onCurrentWorldeChange}
+                  >
+                    {wordles.map((w, i) => (
+                      <option value={w}>{w}</option>
+                    ))}
+                  </Select>
+
+                  <Box w={64}>
+                    <DatePicker
+                      customInput={
+                        <Select
+                          w={64}
+                          color={theme.primaryButtonColor}
+                          placeholder="Select Date"
+                        >
+                          <option value={startDate.toString()}>
+                            {startDate.toDateString()}
+                          </option>
+                        </Select>
+                      }
+                      selected={startDate}
+                      onChange={(date: any) => setStartDate(date)}
+                    />
+                  </Box>
+                  <Button onClick={searchForContests} w={64}>
+                    Search
+                  </Button>
+                </Box>
+                {isSearched ? (
+                  <Select
+                    width={"64"}
+                    color={theme.primaryButtonColor}
+                    placeholder="Select Contest"
+                    onChange={onContestChange}
+                  >
+                    {wordleList.map((s, i) => (
+                      <option key={i} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </Select>
+                ) : null}
               </Box>
               <Divider my={4} />
               <TableContainer>
