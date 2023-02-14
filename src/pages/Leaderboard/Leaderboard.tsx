@@ -34,6 +34,7 @@ const Leaderboard = () => {
 
   const [wordleList, setWordleList] = useState<Array<string>>([]);
   const [wordle, setWordle] = useState<string>("");
+
   const onCurrentWorldeChange = (e: any) => {
     setWordle(e.target.value.toLowerCase());
   };

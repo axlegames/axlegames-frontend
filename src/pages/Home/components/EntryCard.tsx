@@ -64,8 +64,9 @@ const ParticipantCountAndPrizePoolSocket = (props: {
     participants: 0,
   });
 
-  const { sendMessage, lastMessage, readyState } =
-    useWebSocket(`ws://localhost:5001`);
+  const { sendMessage, lastMessage, readyState } = useWebSocket(
+    `wss://api.axlegames.io`
+  );
   useEffect(() => {
     sendMessage(props.contestId);
     const resp = lastMessage?.data;
