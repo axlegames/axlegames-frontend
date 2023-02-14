@@ -13,7 +13,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { theme } from "../../config/theme.config";
 import MainLayout from "../../layouts/MainLayout";
@@ -43,18 +43,27 @@ const Leaderboard = () => {
     const body = { game: wordle, date: startDate };
     GameServices.getContestsList(body)
       .then((res) => {
-        console.log(res);
         setWordleList(res);
         setIsSearched(true);
       })
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+    const contestName = params.game?.toLowerCase() + "-" + params.contest;
+    console.log(contestName);
+    GameServices.getContestLeaderboardResults(contestName)
+      .then((res) => {
+        console.log(res);
+        setData(res);
+      })
+      .catch((err) => console.log(err));
+  }, [params]);
+
   const onContestChange = (e: any) => {
     const contestName = wordle + "-" + e.target.value;
     GameServices.getContestLeaderboardResults(contestName)
       .then((res) => {
-        console.log(res);
         setData(res);
       })
       .catch((err) => console.log(err));

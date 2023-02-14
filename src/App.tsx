@@ -76,6 +76,10 @@ export const App = () => {
             <Route path="/403" element={<Page403 />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route
+              path="/leaderboard/:game/:contest"
+              element={<Leaderboard />}
+            />
+            <Route
               path="/guest/:game/:contestId/:gameStateId"
               element={<GuestWordle />}
             />
