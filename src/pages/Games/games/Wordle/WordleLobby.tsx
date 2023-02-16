@@ -5,80 +5,8 @@ import { theme } from "../../../../config/theme.config";
 import { GameServices, LobbyInterface } from "../../GameServices";
 import ETH from "../../../../assets/logos/trophy.webp";
 import { TokenAuthStatus } from "../../../../config/auth";
-
-interface Props {
-  lobby?: LobbyInterface;
-  params: any;
-  isLoaded: boolean;
-  navigate: Function;
-}
-
-const Timer = (props: Props) => {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-  const [currentTime, setCurrentTime] = useState(
-    new Date(props.lobby?.currentTime || Date.now()).getTime()
-  );
-
-  useEffect(() => {
-    const getTime = () => {
-      const time =
-        Date.parse(props.lobby?.contest.axleContestInfo.opensAt || "") -
-        currentTime;
-      const _currentTime = currentTime + 1000;
-      setCurrentTime(_currentTime);
-      setMinutes(Math.floor((time / 1000 / 60) % 60));
-      setSeconds(Math.floor((time / 1000) % 60));
-      if (time < 0) {
-        return props.navigate(
-          `/${props.params.game}/${props.params.contestId}/${
-            props.params.gameStateId
-          }/${true}`
-        );
-      }
-    };
-    const interval = setInterval(() => getTime(), 1000);
-    return () => clearInterval(interval);
-  }, [currentTime, props]);
-
-  return (
-    <Box>
-      <Box
-        fontSize={"4xl"}
-        color={theme.secondaryTextColor}
-        display={"flex"}
-        columnGap="1rem"
-        fontFamily={"'Russo One', sans-serif"}
-      >
-        <Box
-          minW="32"
-          maxW={"32"}
-          p={4}
-          backgroundImage={`radial-gradient(circle, #1442b5, #003b96, #003376, #002956, #061e37)`}
-          borderRadius="md"
-          display={"flex"}
-          alignItems="center"
-          justifyContent={"center"}
-        >
-          {minutes === 0 ? minutes : "0" + minutes.toString()}m
-        </Box>
-        <Box
-          minW="32"
-          maxW={"32"}
-          p={4}
-          backgroundImage={`radial-gradient(circle, #1442b5, #003b96, #003376, #002956, #061e37)`}
-          borderRadius="md"
-          display={"flex"}
-          alignItems="center"
-          justifyContent={"center"}
-        >
-          {seconds.toString().length === 0 ? "0" + seconds.toString() : seconds}
-          s
-        </Box>
-      </Box>
-    </Box>
-  );
-};
+import ParticipantCountAndPrizePoolSocket from "../../../Home/components/ParicipantAndPrizePoolSocket";
+import WordleLobbyTimer from "./WordleLobbyTimer";
 
 const WordleLobby = () => {
   const params = useParams();
@@ -109,7 +37,6 @@ const WordleLobby = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.contestId]);
 
-  const contestants = lobby?.contest.axleContestants.length || 0;
   return (
     <Box
       bg={theme.bgColor}
@@ -177,7 +104,10 @@ const WordleLobby = () => {
             >
               <Text color={theme.secondaryTextColor} fontSize="2xl">
                 {" "}
-                {contestants}+
+                <ParticipantCountAndPrizePoolSocket
+                  isParticipantCount={true}
+                  contestId={params.contestId || ""}
+                />
               </Text>
               <Text
                 fontFamily={"'Russo One', sans-serif"}
@@ -193,7 +123,10 @@ const WordleLobby = () => {
               justifyContent={"center"}
             >
               <Text color={theme.secondaryTextColor} fontSize="2xl">
-                {lobby?.contest.axleContestInfo.entryFee || 0 / contestants}
+                <ParticipantCountAndPrizePoolSocket
+                  isParticipantCount={false}
+                  contestId={params.contestId || ""}
+                />
               </Text>
               <Text
                 fontFamily={"'Russo One', sans-serif"}
@@ -211,7 +144,7 @@ const WordleLobby = () => {
             >
               Game Starts in
             </Text>
-            <Timer
+            <WordleLobbyTimer
               params={params}
               navigate={navigate}
               lobby={lobby}

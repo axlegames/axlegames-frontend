@@ -8,15 +8,13 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
-import Timer from "../../Games/hooks/Timer";
 import TimerButton from "../../Games/hooks/TimerButton";
 import TimerButtonForSpecialGame from "../../Games/hooks/TimerButtonForSpecialGame";
-import { GameType } from "../enums/contests.enum";
 import { AxleContest } from "../HomeServices";
 import Hot from "../../../assets/gamein/promotional.png";
 import Free from "../../../assets/gamein/free.png";
-import { useEffect, useState } from "react";
-import useWebSocket from "react-use-websocket";
+import ParticipantCountAndPrizePoolSocket from "./ParicipantAndPrizePoolSocket";
+import EntryCardTimer from "./EntryCardTimer";
 
 interface Props {
   contest: AxleContest;
@@ -25,66 +23,6 @@ interface Props {
   name: string;
   index: number;
 }
-
-interface TimerProps {
-  gameType: GameType;
-  currentTime: string;
-  opensAt: string;
-  expiresAt: string;
-  startsOn: string;
-}
-
-const TimeComponent = (props: TimerProps) => {
-  const toStringGameType = (gameType: GameType) => {
-    return gameType.valueOf().toString();
-  };
-  const gameType = props.gameType.valueOf().toString();
-  const type =
-    gameType === toStringGameType(GameType.PRACTICE) ||
-    gameType === toStringGameType(GameType.GAMIN_NIGHTS);
-
-  return !type || gameType === toStringGameType(GameType.GAMIN_NIGHTS) ? (
-    <Box>
-      <Timer
-        currentTime={props.currentTime}
-        opensAt={props.opensAt || ""}
-        deadline={props.expiresAt || ""}
-        startsOn={props.startsOn || ""}
-      />
-    </Box>
-  ) : null;
-};
-
-const ParticipantCountAndPrizePoolSocket = (props: {
-  contestId: string;
-  isParticipantCount: boolean;
-}) => {
-  const [liveActions, setLiveActions] = useState({
-    prizePool: 0,
-    participants: 0,
-  });
-
-  const { sendMessage, lastMessage, readyState } = useWebSocket(
-    `wss://api.axlegames.io`
-  );
-  useEffect(() => {
-    sendMessage(props.contestId);
-    const resp = lastMessage?.data;
-    try {
-      const live = JSON.parse(resp.replace("/", ""));
-      setLiveActions({
-        participants: live.participants,
-        prizePool: live.prizePool,
-      });
-    } catch (error) {}
-  }, [readyState, lastMessage, props, sendMessage]);
-
-  return props.isParticipantCount ? (
-    <Box>{liveActions.participants} + playing now</Box>
-  ) : (
-    <Box> {liveActions.prizePool} </Box>
-  );
-};
 
 const EntryCard = (props: Props) => {
   const dayGetter = () => {
@@ -144,7 +82,7 @@ const EntryCard = (props: Props) => {
         px={4}
         boxShadow={`0px 0px 4px ${theme.primaryTwoTextColor}`}
       >
-        <TimeComponent
+        <EntryCardTimer
           gameType={props.contest.gameType}
           currentTime={props.currentTime}
           expiresAt={props.contest.axleContestInfo?.expiresAt || ""}
