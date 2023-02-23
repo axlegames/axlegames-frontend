@@ -307,13 +307,34 @@ const AIWordle = () => {
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
-        children={<WonModal />}
+        children={
+          <WonModal
+            result={[[]]}
+            stats={{
+              currentStreak: 0,
+              maxStreak: 0,
+              played: 0,
+              winPercent: 0,
+            }}
+            shareResult={() => null}
+          />
+        }
         close={() => navigate("/")}
       />
       <MenuModal
         title={"Oh oh!"}
         isOpen={isLost}
-        children={<LostModal />}
+        children={
+          <LostModal
+            stats={{
+              currentStreak: 0,
+              maxStreak: 0,
+              played: 0,
+              winPercent: 0,
+            }}
+            shareResult={() => null}
+          />
+        }
         close={() => navigate("/")}
       />
       <Box

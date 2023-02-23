@@ -16,6 +16,7 @@ import {
   Status,
   GuessStatus,
   LobbyInterface,
+  PlayerStats,
 } from "../../GameServices";
 import {
   KEY_ACTION,
@@ -60,6 +61,12 @@ const Wordle = () => {
   const [state, dispatch] = useReducer(wordleReducer, initState);
   const [deadLine, setDeadLine] = useState<string>(new Date().toString());
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [stats, setStats] = useState<PlayerStats>({
+    currentStreak: 0,
+    maxStreak: 0,
+    played: 0,
+    winPercent: 0,
+  });
 
   const fectchState = (game: Status) => {
     dispatch({
@@ -127,11 +134,16 @@ const Wordle = () => {
         else initializeState(game);
       })
       .catch((err) => console.log(err));
+
+    GameServices.getPlayerStats(contestId || "").then((resp) => {
+      setStats(resp);
+    });
+
     return () => {
       setIsWon(false);
       setIsLost(false);
     };
-  }, [navigate]);
+  }, [contestId, navigate]);
 
   useEffect(() => {
     const isAuthorized = (status: TokenAuthStatus) => {
@@ -230,24 +242,28 @@ const Wordle = () => {
       });
       setTimeout(() => {
         if (isWinningWord) {
-          setIsWon(true);
           GameServices.saveGame(
             localStorage.getItem("userId") ?? "",
             contestId ?? "",
             state.currentRow + 1,
             true
           )
-            .then((r) => console.log(r))
+            .then((r) => {
+              getStats();
+              setIsWon(true);
+            })
             .catch((e) => console.log(e));
         } else {
-          setIsLost(true);
           GameServices.saveGame(
             localStorage.getItem("userId") ?? "",
             contestId ?? "",
             state.currentRow + 1,
             false
           )
-            .then((r) => console.log(r))
+            .then((r) => {
+              getStats();
+              setIsLost(true);
+            })
             .catch((e) => console.log(e));
         }
       }, 1500);
@@ -277,27 +293,65 @@ const Wordle = () => {
     });
     setTimeout(() => {
       if (isWinningWord) {
-        setIsWon(true);
         GameServices.saveGame(
           localStorage.getItem("userId") ?? "",
           contestId ?? "",
           state.currentRow + 1,
           true
         )
-          .then((r) => console.log(r))
+          .then((r) => {
+            getStats();
+            setIsWon(true);
+          })
           .catch((e) => console.log(e));
       } else {
-        setIsLost(true);
         GameServices.saveGame(
           localStorage.getItem("userId") ?? "",
           contestId ?? "",
           state.currentRow + 1,
           false
         )
-          .then((r) => console.log(r))
+          .then((r) => {
+            getStats();
+            setIsLost(true);
+          })
           .catch((e) => console.log(e));
       }
     }, 1500);
+  };
+
+  const getStats = () => {
+    GameServices.getPlayerStats(contestId || "").then((resp) => {
+      setStats(resp);
+    });
+  };
+
+  const shareResult = () => {
+    let result: string = `I guessed this ${state.wordlength}-letter word in ${
+      state.currentRow
+    }/5 tries.\ncontest  : ${contestId}.\nusername : ${
+      localStorage.getItem("username") || ""
+    }.\n
+    `;
+
+    for (let i = 0; i < state.gameStatus.length; i++) {
+      const word = state.gameStatus[i];
+      for (let j = 0; j < word.length; j++) {
+        if (word[j] === "present") result += String("🟨 ");
+        if (word[j] === "absent") result += String("⬜ ");
+        if (word[j] === "correct") result += String("🟩 ");
+      }
+      result += "\n";
+    }
+    navigator.clipboard.writeText(result);
+    return toast({
+      title: "Copied",
+      description: "Result copied to clipboard",
+      status: "success",
+      duration: 4000,
+      isClosable: true,
+      position: "top",
+    });
   };
 
   const onDelete = () =>
@@ -316,16 +370,22 @@ const Wordle = () => {
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
-        children={<WonModal />}
+        children={
+          <WonModal
+            result={state.gameStatus}
+            stats={stats}
+            shareResult={shareResult}
+          />
+        }
         close={() => navigate("/")}
       />
       <MenuModal
         title={"Oh oh!"}
         isOpen={isLost}
-        children={<LostModal />}
+        children={<LostModal stats={stats} shareResult={shareResult} />}
         close={() => navigate("/")}
       />
-      <Navbar title={game} />
+      <Navbar username={localStorage.getItem("username")} title={game} />
       {isContest === "true" ? (
         <Timer
           currentTime={currentTime}
@@ -348,26 +408,34 @@ const Wordle = () => {
           completedRows={state.completedRows}
           game={state.gameState}
         />
-        {isContest === "false" ? (
-          <Box
-            bg={theme.bgColor}
-            p={4}
-            justifyContent="center"
-            display={"flex"}
-          >
-            <NeuButton
-              bg={theme.neuPrimaryBg}
-              label="End Game"
-              shadow={theme.newPrimaryShadow}
-              onClick={() => forceFinishGame()}
-            />
-          </Box>
-        ) : null}
         <KeyBoard
           onDelete={onDelete}
           onEnter={onEnter}
           onKeyPress={onKeyPress}
         />
+
+        <Box
+          mx={8}
+          display={"flex"}
+          justifyContent="flex-end"
+          alignItems={"center"}
+        >
+          {isContest === "false" ? (
+            <Box
+              bg={theme.bgColor}
+              p={4}
+              justifyContent="center"
+              display={"flex"}
+            >
+              <NeuButton
+                bg={theme.neuPrimaryBg}
+                label="End Game"
+                shadow={theme.newPrimaryShadow}
+                onClick={() => forceFinishGame()}
+              />
+            </Box>
+          ) : null}
+        </Box>
       </Box>
     </Box>
   );

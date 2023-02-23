@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import { AiOutlineQuestion } from "react-icons/ai/index";
 
 import { BiArrowBack } from "react-icons/bi/index";
@@ -32,7 +32,11 @@ const Navbar = (props: any) => {
         onClick={() => setHowToPlayModal(false)}
         children={<HowToPlayModal></HowToPlayModal>}
       />
-      <Flex alignItems={"center"} justifyContent={{ base: "space-between" }}>
+      <Grid
+        alignItems={"center"}
+        justifyContent={"center"}
+        gridTemplateColumns={"1fr 1fr 1fr"}
+      >
         <Flex>
           <BiArrowBack
             cursor={"pointer"}
@@ -40,7 +44,11 @@ const Navbar = (props: any) => {
             size={42}
           />
         </Flex>
-        <Flex columnGap={{ base: ".8rem" }} alignItems={"center"}>
+        <Flex
+          justifyContent={"center"}
+          columnGap={{ base: ".8rem" }}
+          alignItems={"center"}
+        >
           <Text
             cursor={"pointer"}
             textAlign={"center"}
@@ -50,7 +58,13 @@ const Navbar = (props: any) => {
           </Text>
         </Flex>
 
-        <Flex columnGap={{ base: "2" }}>
+        <Flex
+          justifyContent={"flex-end"}
+          textAlign={"center"}
+          alignItems="center"
+          columnGap={{ base: "2" }}
+        >
+          <Text>Hello, {props.username}</Text>
           <AiOutlineQuestion
             cursor={"pointer"}
             onClick={() => setHowToPlayModal(true)}
@@ -59,7 +73,7 @@ const Navbar = (props: any) => {
           <ImStatsDots cursor={"pointer"} size={30} />
           <IoMdSettings cursor={"pointer"} size={30} />
         </Flex>
-      </Flex>
+      </Grid>
     </Box>
   );
 };

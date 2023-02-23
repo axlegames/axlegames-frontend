@@ -86,7 +86,21 @@ export interface LobbyInterface {
   currentTime: Date;
 }
 
+export interface PlayerStats {
+  winPercent: number;
+  currentStreak: number;
+  maxStreak: number;
+  played: number;
+}
+
 export class GameServices {
+  static getPlayerStats = async (contestId: string): Promise<PlayerStats> => {
+    const userId = localStorage.getItem("userId") || "";
+    return await (
+      await axios.get(`${gamePrefix}/streak/${contestId}/${userId}`)
+    ).data;
+  };
+
   static getContestLeaderboardResults = async (
     contestName: string
   ): Promise<Array<LeaderboardInterface>> => {

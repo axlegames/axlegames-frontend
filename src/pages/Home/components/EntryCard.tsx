@@ -195,7 +195,7 @@ const EntryCard = (props: Props) => {
                 py={1}
                 borderRadius="md"
               >
-                {props.contest.axleContestInfo?.entryFee || 0}{" "}
+                {props.contest.axleContestInfo?.entryFee || `FREE`}
               </Text>
             </Flex>
           </GridItem>
@@ -210,10 +210,14 @@ const EntryCard = (props: Props) => {
                 py={1}
                 borderRadius="md"
               >
-                <ParticipantCountAndPrizePoolSocket
-                  contestId={props.contest._id}
-                  isParticipantCount={false}
-                />
+                {props.contest.gameType === "PRACTICE" ? (
+                  `FREE`
+                ) : (
+                  <ParticipantCountAndPrizePoolSocket
+                    contestId={props.contest._id}
+                    isParticipantCount={false}
+                  />
+                )}
               </Text>
             </Flex>
           </GridItem>
@@ -268,10 +272,14 @@ const EntryCard = (props: Props) => {
             color={theme.primaryTextColor}
             fontSize={"smaller"}
           >
-            <ParticipantCountAndPrizePoolSocket
-              contestId={props.contest._id}
-              isParticipantCount={true}
-            />
+            {props.contest.gameType === "PRACTICE" ? (
+              <Box>{Math.floor(Math.random() * 24)}+ playing now</Box>
+            ) : (
+              <ParticipantCountAndPrizePoolSocket
+                contestId={props.contest._id}
+                isParticipantCount={true}
+              />
+            )}
           </Text>
         </Box>
       ) : null}

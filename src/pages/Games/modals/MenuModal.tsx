@@ -1,10 +1,8 @@
 import {
-  Button,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
@@ -24,11 +22,6 @@ const MenuModal = (props: any) => {
         <ModalHeader fontSize={"5xl"}> {props.title} </ModalHeader>
         <ModalCloseButton />
         <ModalBody>{props.children}</ModalBody>
-        <ModalFooter>
-          <Button size="sm" colorScheme="blue" mr={3} onClick={props.close}>
-            Close
-          </Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );
