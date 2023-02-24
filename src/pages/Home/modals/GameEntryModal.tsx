@@ -270,6 +270,7 @@ const GameEntryModal = (props: Props) => {
         };
         GameServices.createGuestGameState(r)
           .then((res: any) => {
+            localStorage.setItem("guestname", values.guest);
             if (res.status === "OK") {
               navigate(
                 `/guest/${guest.link}/${guest.contestId}/${res.gameState._id}`

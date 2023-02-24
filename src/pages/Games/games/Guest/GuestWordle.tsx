@@ -195,21 +195,70 @@ const GuestWordle = () => {
       },
     });
 
+  const shareResult = () => {
+    let result: string = `I guessed this ${state.wordlength}-letter word in ${
+      state.currentRow
+    }/5 tries.\ncontest  : ${contestId}.\nusername : ${
+      localStorage.getItem("guestname") || ""
+    }.\n
+    `;
+
+    for (let i = 0; i < state.gameStatus.length; i++) {
+      const word = state.gameStatus[i];
+      for (let j = 0; j < word.length; j++) {
+        if (word[j] === "present") result += String("🟨 ");
+        if (word[j] === "absent") result += String("⬜ ");
+        if (word[j] === "correct") result += String("🟩 ");
+      }
+      result += "\n";
+    }
+    navigator.clipboard.writeText(result);
+    return toast({
+      title: "Copied",
+      description: "Result copied to clipboard",
+      status: "success",
+      duration: 4000,
+      isClosable: true,
+      position: "top",
+    });
+  };
+
   return (
     <Box>
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
-        children={<WonModal />}
+        children={
+          <WonModal
+            result={state.gameStatus}
+            stats={{
+              currentStreak: 0,
+              maxStreak: 0,
+              played: 0,
+              winPercent: 0,
+            }}
+            shareResult={shareResult}
+          />
+        }
         close={() => navigate("/")}
       />
       <MenuModal
         title={"Oh oh!"}
         isOpen={isLost}
-        children={<LostModal />}
+        children={
+          <LostModal
+            stats={{
+              currentStreak: 0,
+              maxStreak: 0,
+              played: 0,
+              winPercent: 0,
+            }}
+            shareResult={shareResult}
+          />
+        }
         close={() => navigate("/")}
       />
-      <Navbar title={`${game}`} />
+      <Navbar username={localStorage.getItem("guestname")} title={`${game}`} />
 
       <Box
         display={"flex"}
@@ -224,18 +273,19 @@ const GuestWordle = () => {
           completedRows={state.completedRows}
           game={state.gameState}
         />
-        <Box display={"flex"} justifyContent="center">
-          <NeuButton
-            bg={theme.neuPrimaryBg}
-            label="End Game"
-            shadow={theme.newPrimaryShadow}
-            onClick={() => forceFinishGame()}
-          />
-        </Box>
+
         <KeyBoard
           onDelete={onDelete}
           onEnter={onEnter}
           onKeyPress={onKeyPress}
+        />
+      </Box>
+      <Box p={8} bg={theme.bgColor} display={"flex"} justifyContent="flex-end">
+        <NeuButton
+          bg={theme.neuPrimaryBg}
+          label="End Game"
+          shadow={theme.newPrimaryShadow}
+          onClick={() => forceFinishGame()}
         />
       </Box>
     </Box>
