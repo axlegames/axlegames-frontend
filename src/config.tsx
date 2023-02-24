@@ -1,5 +1,5 @@
 let SERVER = "DEV";
-let URL = "";
+let URL = "PROD";
 
 if (SERVER === "DEV") URL = "http://localhost:5001";
 if (SERVER === "PROD") URL = "https://api.axlegames.io";
