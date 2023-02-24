@@ -23,13 +23,17 @@ const Signin = () => {
 
   const [status, setStatus] = useState({ message: "", error: false });
   useEffect(() => {
-    const initClient = () => {
-      gapi.auth2.init({
-        clientId: clientId,
-        scope: "",
-      });
-    };
-    gapi.load("client:auth2", initClient);
+    try {
+      const initClient = () => {
+        gapi.auth.init({
+          clientId: clientId,
+          scope: "email",
+        });
+      };
+      gapi.load("client:auth2", initClient());
+    } catch (error) {
+      console.log(error);
+    }
   }, [clientId]);
 
   const handleLoginSuccess = (data: any) => {

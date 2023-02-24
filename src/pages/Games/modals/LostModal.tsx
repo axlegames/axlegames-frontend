@@ -47,7 +47,7 @@ const LostModal = (props: Props) => {
             alignItems="center"
             flexDirection={"column"}
           >
-            <Text fontSize={"2xl"}>{props.stats.winPercent}</Text>
+            <Text fontSize={"2xl"}>{props.stats.winPercent.toFixed(2)}</Text>
             <Text>Win %</Text>
           </Box>
           <Box
@@ -56,7 +56,7 @@ const LostModal = (props: Props) => {
             justifyContent="center"
             flexDirection={"column"}
           >
-            <Text fontSize={"2xl"}>{props.stats.currentStreak}</Text>
+            <Text fontSize={"2xl"}>{props.stats.currentStreak.toFixed(2)}</Text>
             <Text>Streak</Text>
           </Box>
           <Box

@@ -329,9 +329,9 @@ const Wordle = () => {
   const shareResult = () => {
     let result: string = `I guessed this ${state.wordlength}-letter word in ${
       state.currentRow
-    }/5 tries.\ncontest  : ${contestId}.\nusername : ${
-      localStorage.getItem("username") || ""
-    }.\n
+    }/5 tries.
+    \ncontest  : ${contestId}.
+    \nusername : ${localStorage.getItem("username") || ""}.\n
     `;
 
     for (let i = 0; i < state.gameStatus.length; i++) {
