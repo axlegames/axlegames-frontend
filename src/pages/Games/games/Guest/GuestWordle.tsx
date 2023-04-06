@@ -169,11 +169,14 @@ const GuestWordle = () => {
   };
 
   const forceFinishGame = async () => {
-    const resp = await GameServices.validateUpdateGuess({
-      word: state.currentGuess.toLowerCase(),
-      contestId: contestId,
-      gameStateId: gameStateId,
-    });
+    const resp = await GameServices.validateUpdateGuess(
+      {
+        word: state.currentGuess.toLowerCase(),
+        contestId: contestId,
+        gameStateId: gameStateId,
+      },
+      false
+    );
     const { isWinningWord } = resp as GuessStatus;
     await GameServices.cleanGuestGameState({
       gameStateId: gameStateId || "",

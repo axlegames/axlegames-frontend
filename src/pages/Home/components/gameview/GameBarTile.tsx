@@ -4,6 +4,7 @@ import { theme } from "../../../../config/theme.config";
 const GameBarTile = (props: any) => {
   return (
     <Button
+      transition={"300ms all ease-in"}
       size={"sm"}
       height={"100%"}
       width="100%"

@@ -34,6 +34,7 @@ const GamesView = () => {
   }
 
   const [page, setPage] = useState(0);
+  const [tab, setTab] = useState(0);
 
   useEffect(() => {
     if (page === 1 || page === 2) {
@@ -76,7 +77,12 @@ const GamesView = () => {
         borderRadius={"2xl"}
         color={theme.primaryTextColor}
       >
-        <GameNavbar onClick={(p: number) => setPage(p)} page={page} />
+        <GameNavbar
+          onTabChange={(t: number) => setTab(t)}
+          onPageChange={(p: number) => setPage(p)}
+          page={page}
+          tab={tab}
+        />
         <GamesGrid openModal={openModal} axleGames={axleGames.axleGames} />
       </Flex>
     </Box>

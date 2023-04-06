@@ -287,3 +287,18 @@
   aspect-ratio: 3.2/2;
   object-fit: contain;
 }
+.web3modal-modal-lightbox {
+  z-index: 9999 !important;
+}
+
+@keyframes celebrate_blinker {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

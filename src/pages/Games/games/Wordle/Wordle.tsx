@@ -99,6 +99,7 @@ const Wordle = () => {
       currentGuess: "",
       currentRow: 0,
     };
+
     dispatch({
       type: KEY_ACTION.ON_INIT,
       payload: {
@@ -211,13 +212,17 @@ const Wordle = () => {
         position: "top",
       });
     }
-    const resp = await GameServices.validateUpdateGuess({
-      word: state.currentGuess.toLowerCase(),
-      contestId: contestId,
-      gameStateId: gameStateId,
-    });
+    const resp = await GameServices.validateUpdateGuess(
+      {
+        word: state.currentGuess.toLowerCase(),
+        contestId: contestId,
+        gameStateId: gameStateId,
+      },
+      false
+    );
     isAuthorized(resp as TokenAuthStatus);
     const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
+    console.log(resp);
     if (inValidWord) {
       return toast({
         title: "Invalid Word",
@@ -261,6 +266,8 @@ const Wordle = () => {
             false
           )
             .then((r) => {
+              console.log("cry");
+              console.log(r);
               getStats();
               setIsLost(true);
             })
@@ -281,11 +288,14 @@ const Wordle = () => {
         return window.location.reload();
       }
     };
-    const resp = await GameServices.validateUpdateGuess({
-      word: state.currentGuess.toLowerCase(),
-      contestId: contestId,
-      gameStateId: gameStateId,
-    });
+    const resp = await GameServices.validateUpdateGuess(
+      {
+        word: state.currentGuess.toLowerCase(),
+        contestId: contestId,
+        gameStateId: gameStateId,
+      },
+      false
+    );
     isAuthorized(resp as TokenAuthStatus);
     const { isWinningWord } = resp as GuessStatus;
     await GameServices.cleanGameState({

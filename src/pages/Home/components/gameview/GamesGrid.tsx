@@ -22,7 +22,7 @@ const GamesGrid = (props: any) => {
       bgColor={theme.bgColor}
       p={{ base: "4" }}
       borderBottomRadius={"2xl"}
-      borderTopRightRadius={{ base: "2xl" }}
+      borderRadius={{ base: "2xl" }}
     >
       <Grid
         templateColumns={{

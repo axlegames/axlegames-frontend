@@ -1,41 +1,43 @@
 import {
-  Modal,
+  ModalCloseButton,
+  useMediaQuery,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
-  Box,
-  Text,
-  Divider,
   useToast,
-  useMediaQuery,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
+  Divider,
+  Modal,
+  Text,
   Grid,
+  Box,
 } from "@chakra-ui/react";
+
 import EntryCard from "../components/EntryCard";
+
 import { useNavigate } from "react-router-dom";
 import { theme } from "../../../config/theme.config";
+
 import {
   EntryStatus,
   ENTRY_STATUS,
   GameServices,
 } from "../../Games/GameServices";
-import { useEffect, useState } from "react";
 
+import { GameType } from "../enums/contests.enum";
+import { useEffect, useState } from "react";
+import { AxleContest, AxleContests, HomeServices } from "../HomeServices";
+
+import Signin from "../../Auth/Signin";
 import Dialog from "./HomeDailog";
 import AuthDialog from "../../Auth/dialogs/AuthDialog";
-import Signin from "../../Auth/Signin";
-import { AxleContest, AxleContests, HomeServices } from "../HomeServices";
 import ConfirmDialog from "./ConfirmDialog";
-import { GameType } from "../enums/contests.enum";
+
 import NeuButton from "../../Axle/component/NeuButton";
 import { TokenAuthStatus } from "../../../config/auth";
-import { useFormik } from "formik";
+
+import TryNow from "../components/TryNow";
 
 interface Props {
   open: boolean;
@@ -59,6 +61,7 @@ const GameEntryModal = (props: Props) => {
   });
 
   const [dialog, setDialog] = useState(false);
+  const [errorDialog, setErrorDialog] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [loginDialog, setLoginDialog] = useState(false);
   const [header, setHeader] = useState("");
@@ -91,6 +94,7 @@ const GameEntryModal = (props: Props) => {
     for (let i = 0; i < contests.length; i++)
       if (
         contests[i].gameType.toString() === GameType.GAMIN_NIGHTS ||
+        contests[i].gameType.toString() === GameType.CHALLENGE ||
         contests[i].gameType.toString() === GameType.PRACTICE
       )
         results.push(contests[i]);
@@ -126,7 +130,6 @@ const GameEntryModal = (props: Props) => {
     res: EntryStatus | TokenAuthStatus,
     fee: number
   ) => {
-    console.log(res);
     isAuthorized(res as TokenAuthStatus);
     res = res as EntryStatus;
     const status = res.status.valueOf().toString();
@@ -260,103 +263,6 @@ const GameEntryModal = (props: Props) => {
     return setLoginDialog(true);
   }
 
-  const TryNow = (props: any) => {
-    const form = useFormik({
-      initialValues: { guest: "" },
-      onSubmit: (values) => {
-        const r = {
-          ...values,
-          contestId: guest.contestId,
-        };
-        GameServices.createGuestGameState(r)
-          .then((res: any) => {
-            localStorage.setItem("guestname", values.guest);
-            if (res.status === "OK") {
-              navigate(
-                `/guest/${guest.link}/${guest.contestId}/${res.gameState._id}`
-              );
-            }
-          })
-          .catch((err) => console.log(err));
-      },
-    });
-
-    return (
-      <Modal isCentered={true} isOpen={props.isOpen} onClose={props.close}>
-        <ModalOverlay backdropFilter="blur(4px) hue-rotate(0deg)" />
-        <ModalContent
-          p={4}
-          borderRadius={"xl"}
-          color="#fbd6d2"
-          fontFamily={"quicksand"}
-          fontWeight="bold"
-          bg={theme.modalBgColor}
-        >
-          <Box p={4} display={"flex"} flexDirection="column" rowGap={"1rem"}>
-            <Text
-              textAlign={"center"}
-              fontSize={"3xl"}
-              color={theme.primaryTextColor}
-            >
-              {props.name} Practice Game
-            </Text>
-            <FormControl fontWeight={"bold"} color={theme.primaryTextColor}>
-              <FormLabel fontWeight={"bold"}>Enter name</FormLabel>
-              <Input
-                placeholder={"Guest"}
-                id={"guest"}
-                name="guest"
-                value={form.values.guest}
-                onChange={form.handleChange}
-                size={"lg"}
-                autoComplete="off"
-                fontWeight="bold"
-                border={"none"}
-                outline="none"
-                bg={theme.modalBgColor}
-                color={theme.secondaryTextColor}
-                boxShadow={`inset 5px 5px 15px #1e1c33, inset -5px -5px 15px #2e2c51`}
-                _focus={{ outline: "none", border: "none" }}
-                type={"text"}
-                isRequired={true}
-                _hover={{
-                  outline: "none",
-                  border: "none",
-                }}
-                _highlighted={{
-                  outline: "none",
-                  border: "none",
-                }}
-                _focusVisible={{
-                  outline: "none",
-                  border: "none",
-                }}
-              />
-            </FormControl>
-            <Box display={"flex"} alignItems="center">
-              <Button
-                color={theme.primaryButtonColor}
-                boxShadow={`5px 5px 15px #1e1c33, -5px -5px 15px #2e2c51`}
-                _active={{
-                  bg: theme.primaryButtonColor,
-                  color: theme.modalBgColor,
-                }}
-                _hover={{
-                  bg: theme.primaryButtonColor,
-                  color: theme.modalBgColor,
-                }}
-                bg={theme.modalBgColor}
-                onClick={() => form.handleSubmit()}
-              >
-                Play
-              </Button>
-            </Box>
-          </Box>
-        </ModalContent>
-      </Modal>
-    );
-  };
-
   return (
     <Modal
       blockScrollOnMount={false}
@@ -382,6 +288,16 @@ const GameEntryModal = (props: Props) => {
             setDialog(false);
           }}
         />
+        <Dialog
+          title={header}
+          description={message}
+          open={errorDialog}
+          close={() => {
+            setMessage("");
+            setErrorDialog(false);
+          }}
+        />
+
         <ConfirmDialog
           open={confirm}
           close={() => setConfirm(false)}
@@ -389,7 +305,14 @@ const GameEntryModal = (props: Props) => {
           enterContest={() => enterContest(null, true)}
           title={header}
         />
-        <TryNow name={props.name} isOpen={tryM} close={() => setTryM(false)} />
+        <TryNow
+          contestId={guest.contestId}
+          link={guest.link}
+          name={props.name}
+          isOpen={tryM}
+          key={0}
+          close={() => setTryM(false)}
+        />
         <AuthDialog
           children={<Signin />}
           isOpen={loginDialog}
@@ -399,11 +322,13 @@ const GameEntryModal = (props: Props) => {
         <ModalHeader fontSize={"5xl"}> {props.name} </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Box>
-            <Text>{props.description}</Text>
-          </Box>
-
-          <Divider my="8"></Divider>
+          <Text>{props.description}</Text>
+          <Divider
+            py={1}
+            my={8}
+            backgroundImage={`linear-gradient(to top, #eb6612, #ee2e4c, #d4007c, #9828a3, #1442b5)`}
+            borderRadius={"xl"}
+          />
 
           {props.isActive ? (
             <Grid

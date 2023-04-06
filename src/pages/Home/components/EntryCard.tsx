@@ -43,7 +43,7 @@ const EntryCard = (props: Props) => {
       justifyContent="center"
       position="relative"
       boxShadow={"xl"}
-      backgroundImage={`radial-gradient(circle, #1442b5, #003b96, #003376, #002956, #061e37)`}
+      backgroundImage={`linear-gradient(to right top, #0e063d, #160d5d, #220f7e, #330fa0, #4609c3)`}
       borderRadius="md"
     >
       {specialContest ? (
@@ -205,7 +205,7 @@ const EntryCard = (props: Props) => {
           borderBottomRadius={"lg"}
           p="2"
         >
-          <Text
+          <Box
             fontFamily={"'Russo One', sans-serif"}
             color={theme.primaryTextColor}
             fontSize={"smaller"}
@@ -218,7 +218,7 @@ const EntryCard = (props: Props) => {
                 isParticipantCount={true}
               />
             )}
-          </Text>
+          </Box>
         </Box>
       ) : null}
     </Box>

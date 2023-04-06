@@ -172,10 +172,14 @@ export class GameServices {
   };
 
   static validateUpdateGuess = async (
-    data: any
+    data: any,
+    isAiWordle: boolean
   ): Promise<GuessStatus | TokenAuthStatus> => {
+    let val = "/validate/word";
+    if (isAiWordle) val = "/validate/word/absurdle";
+    console.log(val);
     const resp = await axios.post(
-      `${gamePrefix}/validate/word`,
+      `${gamePrefix}${val}`,
 
       data,
       token

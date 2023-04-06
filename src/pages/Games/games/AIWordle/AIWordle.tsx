@@ -164,13 +164,18 @@ const AIWordle = () => {
         position: "top",
       });
     }
-    const resp = await GameServices.validateUpdateGuess({
-      word: state.currentGuess.toLowerCase(),
-      contestId: contestId,
-      gameStateId: gameStateId,
-    });
+    const resp = await GameServices.validateUpdateGuess(
+      {
+        userId: localStorage.getItem("userId") || "",
+        word: state.currentGuess.toLowerCase(),
+        contestId: contestId,
+        gameStateId: gameStateId,
+      },
+      true
+    );
     isAuthorized(resp as TokenAuthStatus);
     const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
+    console.log(resp);
 
     if (inValidWord) {
       return toast({
@@ -185,7 +190,7 @@ const AIWordle = () => {
     const wordLength = state.wordlength;
     const gameState = state.gameState;
     const emptyRow = GameServices.generateEmptyRows(wordLength);
-    gameState.push(emptyRow);
+    if (!isWinningWord) gameState.push(emptyRow);
 
     const currentGuessStatus = guessStatus || [];
 
@@ -240,11 +245,15 @@ const AIWordle = () => {
   };
 
   const forceFinishGame = async () => {
-    const resp = await GameServices.validateUpdateGuess({
-      word: state.currentGuess.toLowerCase(),
-      contestId: contestId,
-      gameStateId: gameStateId,
-    });
+    const resp = await GameServices.validateUpdateGuess(
+      {
+        userId: localStorage.getItem("userId"),
+        word: state.currentGuess.toLowerCase(),
+        contestId: contestId,
+        gameStateId: gameStateId,
+      },
+      true
+    );
     isAuthorized(resp as TokenAuthStatus);
     const { isWinningWord } = resp as GuessStatus;
     await GameServices.cleanGameState({

@@ -13,6 +13,7 @@ const SideBarButton = (props: any) => {
   return (
     <Button
       py={"5"}
+      fontWeight="bold"
       bg={bg}
       color={color}
       width={"100%"}

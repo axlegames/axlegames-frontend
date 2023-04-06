@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 - Removed scheduled contests [feature]
 
-## [0.0.0] - 2022-02-08
+## [0.0.1] - 2022-02-08
 
 ### Added
 
@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
 - Removed scheduled contests [feature]
 - Old timer components has been removed
 
-## [0.0.0] - 2022-02-09
+## [0.1.0] - 2022-02-09
 
 ### Fixed
 
@@ -41,7 +41,7 @@ All notable changes to this project will be documented in this file.
 
 - Changed game entry modal ui has been enhanced [patch]
 
-## [0.0.1] - 2022-02-10
+## [0.1.1] - 2022-02-10
 
 ### Fixed
 
@@ -53,7 +53,7 @@ All notable changes to this project will be documented in this file.
 - Changed Modal UI
 - Changed Naming Conventions
 
-## [0.0.1] - 2022-02-13
+## [0.1.2] - 2022-02-13
 
 ### Added
 
@@ -70,7 +70,7 @@ All notable changes to this project will be documented in this file.
 - GameEntry modal ui changed
 - Minor UI changes
 
-## [0.0.1] - 2022-02-14
+## [0.1.3] - 2022-02-14
 
 ### Added
 
@@ -85,3 +85,28 @@ All notable changes to this project will be documented in this file.
 
 - Updated Leaderboard Functionality
 - Changed Absurdle to AI Wordle
+
+## [0.1.4] - 2022-02-23
+
+### Added
+
+- Added stats feature
+- Added share feature
+- Added result log
+
+### Changed
+- Minor UI changes
+
+### Fixed
+
+- Rafactoring
+
+## [0.1.4] - 2022-02-24
+
+### Changed
+
+- Added result log
+
+### Fixed
+
+- Rafactoring

@@ -3,8 +3,8 @@ import { Box, Flex, Image, Input, Text, useToast } from "@chakra-ui/react";
 import { theme } from "../../../config/theme.config";
 import { ethers } from "ethers";
 
-import axleTokenABI from "../../../abi/AxleToken.json";
-import axlePresaleABI from "../../../abi/TokenPresale.json";
+import axleTokenABI from "../../../abi/testnet/AxleTokenTest.json";
+import axlePresaleABI from "../../../abi/testnet/AxlePresaleTest.json";
 import { useEtherBalance, useEthers } from "@usedapp/core";
 
 import AxleDialog from "./AxleDialog";
@@ -90,7 +90,7 @@ const PreSale = (props: any) => {
       const address = await signer.getAddress();
       const token = new ethers.Contract(
         TOKEN_CONTRACT_ADDRESS,
-        axleTokenABI.abi,
+        axleTokenABI,
         signer
       );
       if (token !== null) {
@@ -163,7 +163,7 @@ const PreSale = (props: any) => {
       const signer = provider.getSigner();
       const presale = new ethers.Contract(
         PRESALE_CONTRACT_ADDRESS,
-        axlePresaleABI.abi,
+        axlePresaleABI,
         signer
       );
       const options = { value: ethers.utils.parseEther(bnb.toString()) };

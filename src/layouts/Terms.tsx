@@ -50,7 +50,7 @@ const Terms = (props: any) => {
   ];
 
   return (
-    <Box fontWeight={"bold"}>
+    <Box color={theme.secondaryTextColor} fontWeight={"bold"}>
       <Text fontSize={"3xl"}>Terms of Service</Text>
       <Text>
         please read on to learn the rules and restrictions that govern your use

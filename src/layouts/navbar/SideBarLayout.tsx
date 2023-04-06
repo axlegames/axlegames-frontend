@@ -1,9 +1,4 @@
 import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
   Box,
   Divider,
   Flex,
@@ -24,8 +19,6 @@ import { MdStore, MdInfo } from "react-icons/md/index";
 import {
   HiHome,
   HiGlobe,
-  HiOutlineViewList,
-  HiDocument,
   HiUser,
   HiUsers,
   HiCreditCard,
@@ -162,7 +155,7 @@ const SideBarLayout = (props: SideBarProps) => {
         children={<Terms onClick={() => setTerms(!terms)} />}
       ></Dialog>
       <Image
-        zIndex={23600}
+        zIndex={100}
         cursor={"pointer"}
         onClick={() => props.scrollTop()}
         width={"48"}
@@ -176,11 +169,6 @@ const SideBarLayout = (props: SideBarProps) => {
           link={"/"}
           title={"Home"}
           icon={<HiHome size={32} />}
-        />
-        <SideBarButton
-          onClick={() => clearConnectionAndChangeRoute("/leaderboard")}
-          title={"Leaderboard"}
-          icon={<MdStore size={32} />}
         />
         <IsLoggedIn>
           <SideBarButton
@@ -196,12 +184,17 @@ const SideBarLayout = (props: SideBarProps) => {
             icon={<HiCreditCard size={32} />}
           />
           <SideBarButton
+            onClick={() => clearConnectionAndChangeRoute("/leaderboard")}
+            link={"/leaderboard"}
+            title={"Leaderboard"}
+            icon={<MdStore size={32} />}
+          />
+          <SideBarButton
             onClick={() => clearConnectionAndChangeRoute("/referrals")}
             link={"/referral"}
             title={"Referral"}
             icon={<HiUsers size={32} />}
           />
-
           <SideBarButton
             onClick={() => clearConnectionAndChangeRoute("/profile")}
             link={"/profile"}
@@ -243,12 +236,13 @@ const SideBarLayout = (props: SideBarProps) => {
           icon={<MdInfo size={32} />}
         />
 
-        <Accordion width={"100%"} allowToggle defaultIndex={0}>
+        {/* <Accordion width={"100%"} allowToggle defaultIndex={0}>
           <AccordionItem border={"none"} outline="none" width={"100%"}>
             <AccordionButton
               borderRadius={"md"}
               width={"100%"}
               justifyContent="flex-start"
+              bg={theme.bgColor}
               _hover={{ color: theme.primaryTextColor, bg: theme.bgColor }}
               position="relative"
               fontSize={"sm"}
@@ -298,7 +292,7 @@ const SideBarLayout = (props: SideBarProps) => {
               </Flex>
             </AccordionPanel>
           </AccordionItem>
-        </Accordion>
+        </Accordion> */}
       </SideBarCard>
 
       <IsNotLoggedIn>
