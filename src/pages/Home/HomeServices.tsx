@@ -50,8 +50,8 @@ export interface UserReferral {
 }
 
 export class HomeServices {
-  static getAxleGames = async (): Promise<AxleGames> => {
-    const response = await axios.get(`${gamePrefix}`);
+  static getAxleGames = async (type: string): Promise<AxleGames> => {
+    const response = await axios.get(`${gamePrefix}/${type}`);
     let axleGames: AxleGames = response.data;
     return axleGames;
   };

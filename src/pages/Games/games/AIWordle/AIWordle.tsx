@@ -348,10 +348,11 @@ const AIWordle = () => {
       />
       <Box
         display={"flex"}
-        justifyContent="center"
         flexDirection={"column"}
         bg={theme.bgColor}
+        justifyContent="space-between"
         rowGap="1rem"
+        p={4}
         minH="90vh"
       >
         <AIWordleGrid
@@ -359,26 +360,30 @@ const AIWordle = () => {
           completedRows={state.completedRows}
           game={state.gameState}
         />
-        {isContest === "false" ? (
-          <Box
-            bg={theme.bgColor}
-            p={4}
-            justifyContent="center"
-            display={"flex"}
-          >
-            <NeuButton
-              bg={theme.neuPrimaryBg}
-              label="End Game"
-              shadow={theme.newPrimaryShadow}
-              onClick={() => forceFinishGame()}
+        <Box display={"flex"} justifyContent="center" pos={"relative"}>
+          <Box pb={8} bottom={0}>
+            {isContest === "false" ? (
+              <Box
+                bg={theme.bgColor}
+                p={4}
+                justifyContent="center"
+                display={"flex"}
+              >
+                <NeuButton
+                  bg={theme.neuPrimaryBg}
+                  label="End Game"
+                  shadow={theme.newPrimaryShadow}
+                  onClick={() => forceFinishGame()}
+                />
+              </Box>
+            ) : null}
+            <KeyBoard
+              onDelete={onDelete}
+              onEnter={onEnter}
+              onKeyPress={onKeyPress}
             />
           </Box>
-        ) : null}
-        <KeyBoard
-          onDelete={onDelete}
-          onEnter={onEnter}
-          onKeyPress={onKeyPress}
-        />
+        </Box>
       </Box>
     </Box>
   );

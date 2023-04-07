@@ -42,9 +42,11 @@ const GamesView = () => {
       games[0].isActive = false;
       games[1].isActive = false;
       games[2].isActive = false;
+      games[3].isActive = false;
+      games[4].isActive = false;
       setAxleGames({ axleGames: games });
     } else {
-      HomeServices.getAxleGames()
+      HomeServices.getAxleGames("AI")
         .then((axleGames) => {
           setAxleGames(axleGames);
         })
@@ -78,7 +80,18 @@ const GamesView = () => {
         color={theme.primaryTextColor}
       >
         <GameNavbar
-          onTabChange={(t: number) => setTab(t)}
+          onTabChange={(t: number) => {
+            setTab(t);
+            let s = "AI";
+            if (t === 1) s = "WEB3";
+            HomeServices.getAxleGames(s)
+              .then((axleGames) => {
+                setAxleGames(axleGames);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
           onPageChange={(p: number) => setPage(p)}
           page={page}
           tab={tab}

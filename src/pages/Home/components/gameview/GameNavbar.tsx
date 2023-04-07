@@ -6,22 +6,20 @@ import GameBarTile from "./GameBarTile";
 const GameNavbar = (props: any) => {
   return (
     <Flex justifyContent={"space-between"}>
-      <Flex my={1}>
+      <Flex mx={2} my={2}>
         <Box
-          transition={"all 200ms ease-in"}
-          fontWeight="bold"
-          p={{ base: "4" }}
-          borderLeftRadius="2xl"
-          textAlign="center"
-          pr={{ base: "8", xl: "16" }}
-          pl={{ base: "6" }}
-          fontSize={{ base: "xl" }}
           display={"flex"}
-          justifyContent="flex-start"
-          columnGap={".5rem"}
-          cursor="pointer"
+          alignItems="center"
+          justifyContent={"center"}
+          px={4}
+          borderLeftRadius="xl"
+          fontWeight={"bold"}
+          columnGap=".5rem"
+          transition={"all 200ms ease-in"}
           bg={props.tab === 0 ? theme.primaryButtonColor : theme.bgColor}
           onClick={() => props.onTabChange(0)}
+          cursor="pointer"
+          py={2}
         >
           <Text color={theme.secondaryTextColor}>Axle</Text>
           <Text
@@ -32,19 +30,17 @@ const GameNavbar = (props: any) => {
         </Box>
         <Box
           cursor="pointer"
-          transition={"all 200ms ease-in"}
           bg={props.tab === 1 ? theme.primaryButtonColor : theme.bgColor}
           onClick={() => props.onTabChange(1)}
-          fontWeight="bold"
-          p={{ base: "4" }}
-          textAlign="center"
-          borderRightRadius={"2xl"}
-          pr={{ base: "8", xl: "16" }}
-          pl={{ base: "6" }}
-          fontSize={{ base: "xl" }}
           display={"flex"}
-          justifyContent="flex-start"
-          columnGap={".5rem"}
+          alignItems="center"
+          justifyContent={"center"}
+          px={4}
+          py={2}
+          borderRightRadius="xl"
+          fontWeight={"bold"}
+          columnGap=".5rem"
+          transition={"all 200ms ease-in"}
         >
           <Text color={theme.secondaryTextColor}>Axle</Text>
           <Text
