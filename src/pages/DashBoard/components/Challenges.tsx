@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import { theme } from "../../../config/theme.config";
-import { Box, Button, Flex, Text, Toast, useToast } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Toast } from "@chakra-ui/react";
 import {
   ChallengeServices,
   Challenges,
@@ -78,7 +78,6 @@ declare global {
 }
 
 const ChallengesC = () => {
-  const toast = useToast();
   const navigate = useNavigate();
   const [dialog, setDialog] = useState(false);
   const [statusDialog, setStatusDialog] = useState(false);
@@ -106,7 +105,6 @@ const ChallengesC = () => {
   const [errorDialog, setErrorDialog] = useState(false);
   const [header, setHeader] = useState("");
   const [message, setMessage] = useState("");
-  const [confirmChallengeEntry, setConfirmChallengeEntry] = useState(false);
   const [status, setStatus] = useState<ChallengeStatus[]>([]);
 
   useEffect(() => {
