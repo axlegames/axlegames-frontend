@@ -1,4 +1,4 @@
-import { Box, ChakraProvider, theme } from "@chakra-ui/react";
+import { Box, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense, useState } from "react";
 
@@ -8,6 +8,7 @@ import Banner from "./layouts/Banner";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import Admin from "./pages/Admin/Admin";
 import Winners from "./pages/Admin/WInnners";
+import { theme } from "./config/theme.config";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"));
@@ -37,7 +38,7 @@ const FallBack = () => {
       display={"flex"}
       justifyContent="center"
       alignItems={"center"}
-      bg={"#061E37"}
+      bg={theme.bgColor}
       position="fixed"
       zIndex={500}
       margin={0}
@@ -60,7 +61,7 @@ export const App = () => {
   const [banner, setBanner] = useState(true);
   return (
     <Suspense fallback={<FallBack />}>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider>
         <Banner close={() => setBanner(false)} isOpen={banner} size="xl" />
         <Router>
           <Routes>
