@@ -6,29 +6,25 @@ import GameBarTile from "./GameBarTile";
 const GameNavbar = (props: any) => {
   return (
     <Flex justifyContent={"space-between"}>
-      <Flex mx={2} my={2}>
+      <Flex mx={3}>
         <Box
           display={"flex"}
           alignItems="center"
           justifyContent={"center"}
           px={4}
-          borderLeftRadius="xl"
+          borderTopRadius="xl"
           fontWeight={"bold"}
           columnGap=".5rem"
           transition={"all 200ms ease-in"}
-          bg={props.tab === 0 ? theme.primaryButtonColor : theme.bgColor}
+          bg={theme.bgColor}
           onClick={() => props.onTabChange(0)}
           cursor="pointer"
           py={2}
         >
           <Text color={theme.secondaryTextColor}>Axle</Text>
-          <Text
-            color={props.tab === 0 ? theme.bgColor : theme.primaryButtonColor}
-          >
-            AI Games
-          </Text>
+          <Text color={theme.primaryTextColor}>AI Games</Text>
         </Box>
-        <Box
+        {/* <Box
           cursor="pointer"
           bg={props.tab === 1 ? theme.primaryButtonColor : theme.bgColor}
           onClick={() => props.onTabChange(1)}
@@ -48,7 +44,7 @@ const GameNavbar = (props: any) => {
           >
             Web3 Games
           </Text>
-        </Box>
+        </Box> */}
       </Flex>
       <Box
         borderRadius={"2xl"}

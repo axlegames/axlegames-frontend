@@ -5,10 +5,10 @@ const GameBarTile = (props: any) => {
   return (
     <Button
       transition={"300ms all ease-in"}
-      size={"sm"}
       height={"100%"}
       width="100%"
       borderRadius={"2xl"}
+      py={2}
       px={{ base: "6" }}
       bg={props.isActive ? theme.primaryButtonColor : theme.bgColor}
       color={props.isActive ? theme.bgColor : theme.primaryTextColor}
