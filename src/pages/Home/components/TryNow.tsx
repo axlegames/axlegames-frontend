@@ -33,8 +33,10 @@ const TryNow = (props: {
         .then((res: any) => {
           localStorage.setItem("guestname", values.guest);
           if (res.status === "OK") {
+            let l = "";
+            if (props.link.includes("aiwordle")) l = "aiwordle";
             navigate(
-              `/guest/${props.link}/${props.contestId}/${res.gameState._id}`
+              `${l}/guest/${props.link}/${props.contestId}/${res.gameState._id}`
             );
           }
         })

@@ -10,24 +10,16 @@ import WonModal from "../../modals/WonModal";
 import LostModal from "../../modals/LostModal";
 import MenuModal from "../../modals/MenuModal";
 
-import {
-  GameServices,
-  Status,
-  GuessStatus,
-  LobbyInterface,
-} from "../../GameServices";
+import { GameServices, Status, GuessStatus } from "../../GameServices";
 import {
   KEY_ACTION,
   initState,
-  aiWordleReducer,
+  aiGuestWordleReducer,
   WordleState,
-} from "./AIWordleReducer";
+} from "./AiGuestWordleReducer";
 
-import WordleTimer from "../../hooks/WordleTimer";
-import { TokenAuthStatus } from "../../../../config/auth";
-
-import AIWordleGrid from "./components/AIWordleGrid";
 import NeuButton from "../../../Axle/component/NeuButton";
+import AIWordleGrid from "../AIWordle/components/AIWordleGrid";
 
 const AIWordle = () => {
   const toast = useToast();
@@ -40,20 +32,7 @@ const AIWordle = () => {
   const { contestId, gameStateId, isContest } = useParams();
   const game = "aiwordle";
 
-  const [state, dispatch] = useReducer(aiWordleReducer, initState);
-  const [time, setTime] = useState<string>(new Date(Date.now()).toString());
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
-  const isAuthorized = (status: TokenAuthStatus) => {
-    if (
-      status.valueOf().toString() ===
-      TokenAuthStatus.UNAUTHORIZED.valueOf().toString()
-    ) {
-      localStorage.clear();
-      navigate("/");
-      return window.location.reload();
-    }
-  };
+  const [state, dispatch] = useReducer(aiGuestWordleReducer, initState);
 
   const fectchState = (game: Status) => {
     dispatch({
@@ -99,10 +78,12 @@ const AIWordle = () => {
   };
 
   useEffect(() => {
-    GameServices.getGameState({ userId: localStorage.getItem("userId") })
+    GameServices.getGuestGameState({
+      gameStateId: gameStateId,
+      contestId: contestId,
+    })
       .then((game) => {
         console.log(game);
-        isAuthorized(game as TokenAuthStatus);
         game = game as Status;
         if (game.isGameCompeted)
           if (game.isWinningWord) setIsWon(true);
@@ -115,33 +96,7 @@ const AIWordle = () => {
       setIsWon(false);
       setIsLost(false);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (isContest === "true") {
-      GameServices.getLobbyStats(contestId || "")
-        .then((res) => {
-          isAuthorized(res as TokenAuthStatus);
-          const r = res as LobbyInterface;
-          const contestInfo = r.contest.axleContestInfo;
-          const opensAt = new Date(contestInfo.opensAt).getTime();
-          const time = new Date(Date.now()).getTime();
-          const isOpened = opensAt - time < 0 ? true : false;
-          if (!isOpened)
-            return navigate(`/${game}/lobby/${contestId}/${gameStateId}`);
-          setTime(
-            r.contest.axleContestInfo?.expiresAt ||
-              new Date(Date.now()).toString()
-          );
-          setIsLoaded(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [gameStateId, contestId]);
 
   const onKeyPress = (key: string) => {
     return dispatch({
@@ -165,16 +120,12 @@ const AIWordle = () => {
         position: "top",
       });
     }
-    const resp = await GameServices.validateUpdateGuess(
-      {
-        userId: localStorage.getItem("userId") || "",
-        word: state.currentGuess.toLowerCase(),
-        contestId: contestId,
-        gameStateId: gameStateId,
-      },
-      true
-    );
-    isAuthorized(resp as TokenAuthStatus);
+    const resp = await GameServices.validateUpdateGuestGuess({
+      game: "AI_WORDLE_" + state.wordlength.toString(),
+      word: state.currentGuess.toLowerCase(),
+      contestId: contestId,
+      gameStateId: gameStateId,
+    });
     const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
     console.log(resp);
 
@@ -216,31 +167,12 @@ const AIWordle = () => {
     });
     window.scrollTo(0, document.body.scrollHeight);
     if (isWinningWord) {
-      await GameServices.cleanGameState({
-        userId: localStorage.getItem("userId"),
+      await GameServices.cleanGuestGameState({
+        gameStateId: gameStateId || "",
       });
       setTimeout(() => {
-        if (isWinningWord) {
-          setIsWon(true);
-          GameServices.saveGame(
-            localStorage.getItem("userId") ?? "",
-            contestId ?? "",
-            state.currentRow + 1,
-            true
-          )
-            .then((r) => console.log(r))
-            .catch((e) => console.log(e));
-        } else {
-          setIsLost(true);
-          GameServices.saveGame(
-            localStorage.getItem("userId") ?? "",
-            contestId ?? "",
-            state.currentRow + 1,
-            false
-          )
-            .then((r) => console.log(r))
-            .catch((e) => console.log(e));
-        }
+        if (isWinningWord) setIsWon(true);
+        else setIsLost(true);
       }, 1500);
     }
   };
@@ -255,33 +187,13 @@ const AIWordle = () => {
       },
       true
     );
-    isAuthorized(resp as TokenAuthStatus);
     const { isWinningWord } = resp as GuessStatus;
-    await GameServices.cleanGameState({
-      userId: localStorage.getItem("userId"),
+    await GameServices.cleanGuestGameState({
+      gameStateId: gameStateId || "",
     });
     setTimeout(() => {
-      if (isWinningWord) {
-        setIsWon(true);
-        GameServices.saveGame(
-          localStorage.getItem("userId") ?? "",
-          contestId ?? "",
-          state.currentRow + 1,
-          true
-        )
-          .then((r) => console.log(r))
-          .catch((e) => console.log(e));
-      } else {
-        setIsLost(true);
-        GameServices.saveGame(
-          localStorage.getItem("userId") ?? "",
-          contestId ?? "",
-          state.currentRow + 1,
-          false
-        )
-          .then((r) => console.log(r))
-          .catch((e) => console.log(e));
-      }
+      if (isWinningWord) setIsWon(true);
+      else setIsLost(true);
     }, 1500);
   };
 
@@ -296,24 +208,9 @@ const AIWordle = () => {
       },
     });
 
-  const Timer = () => {
-    if (isContest === "true") {
-      return isLoaded ? (
-        <WordleTimer
-          isLoaded={isLoaded}
-          endgame={() => forceFinishGame()}
-          deadline={time}
-          currentTime={0}
-        />
-      ) : null;
-    }
-    return null;
-  };
-
   return (
     <Box>
       <Navbar title={game} />
-      <Timer />
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
@@ -348,21 +245,14 @@ const AIWordle = () => {
         close={() => navigate("/")}
       />
 
-      {isContest === "false" ? (
-        <Box
-          bg={theme.bgColor}
-          p={8}
-          justifyContent="flex-end"
-          display={"flex"}
-        >
-          <NeuButton
-            bg={theme.neuPrimaryBg}
-            label="End Game"
-            shadow={theme.newPrimaryShadow}
-            onClick={() => forceFinishGame()}
-          />
-        </Box>
-      ) : null}
+      <Box p={8} bg={theme.bgColor} display={"flex"} justifyContent="flex-end">
+        <NeuButton
+          bg={theme.neuPrimaryBg}
+          label="End Game"
+          shadow={theme.newPrimaryShadow}
+          onClick={() => forceFinishGame()}
+        />
+      </Box>
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -377,9 +267,23 @@ const AIWordle = () => {
           completedRows={state.completedRows}
           game={state.gameState}
         />
-
         <Box display={"flex"} justifyContent="center" pos={"relative"}>
           <Box pb={8} bottom={0}>
+            {isContest === "false" ? (
+              <Box
+                bg={theme.bgColor}
+                p={4}
+                justifyContent="center"
+                display={"flex"}
+              >
+                <NeuButton
+                  bg={theme.neuPrimaryBg}
+                  label="End Game"
+                  shadow={theme.newPrimaryShadow}
+                  onClick={() => forceFinishGame()}
+                />
+              </Box>
+            ) : null}
             <KeyBoard
               onDelete={onDelete}
               onEnter={onEnter}

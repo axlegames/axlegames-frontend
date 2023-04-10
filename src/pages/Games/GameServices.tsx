@@ -177,13 +177,7 @@ export class GameServices {
   ): Promise<GuessStatus | TokenAuthStatus> => {
     let val = "/validate/word";
     if (isAiWordle) val = "/validate/word/absurdle";
-    console.log(val);
-    const resp = await axios.post(
-      `${gamePrefix}${val}`,
-
-      data,
-      token
-    );
+    const resp = await axios.post(`${gamePrefix}${val}`, data, token);
     return {
       inValidWord: resp.data.inValidWord,
       guessStatus: resp.data.guessStatus,

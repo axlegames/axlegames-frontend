@@ -1,8 +1,9 @@
-const SERVER = process.env.IS_DEV_SERVER;
+const SERVER = "true";
 let URL = "";
+console.log(SERVER);
 
 if (SERVER === "true") URL = "http://localhost:5001";
-if (SERVER !== "false") URL = "https://api.axlegames.io";
+// if (SERVER !== "false") URL = "https://api.axlegames.io";
 
 const axlegamesPrefix = URL + "/axlegames/api/v1/";
 const userPrefix = axlegamesPrefix + "users";

@@ -125,6 +125,7 @@ const Wordle = () => {
     };
     GameServices.getGameState({ userId: localStorage.getItem("userId") })
       .then((game) => {
+        console.log(game);
         isAuthorized(game as TokenAuthStatus);
         game = game as Status;
         if (game.isGameCompeted)
@@ -222,7 +223,7 @@ const Wordle = () => {
     );
     isAuthorized(resp as TokenAuthStatus);
     const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
-    console.log(resp);
+
     if (inValidWord) {
       return toast({
         title: "Invalid Word",
@@ -232,6 +233,7 @@ const Wordle = () => {
         position: "top",
       });
     }
+
     dispatch({
       type: KEY_ACTION.ON_ENTER,
       payload: {
@@ -241,39 +243,50 @@ const Wordle = () => {
         gameStatus: state.gameStatus,
       },
     });
+
     if (state.currentRow === state.guessLength - 1 || isWinningWord) {
       await GameServices.cleanGameState({
         userId: localStorage.getItem("userId"),
-      });
-      setTimeout(() => {
-        if (isWinningWord) {
-          GameServices.saveGame(
-            localStorage.getItem("userId") ?? "",
-            contestId ?? "",
-            state.currentRow + 1,
-            true
-          )
-            .then((r) => {
-              getStats();
-              setIsWon(true);
-            })
-            .catch((e) => console.log(e));
-        } else {
-          GameServices.saveGame(
-            localStorage.getItem("userId") ?? "",
-            contestId ?? "",
-            state.currentRow + 1,
-            false
-          )
-            .then((r) => {
-              console.log("cry");
-              console.log(r);
-              getStats();
-              setIsLost(true);
-            })
-            .catch((e) => console.log(e));
-        }
-      }, 1500);
+      })
+        .then((r) => console.log("ok"))
+        .catch((e) => console.log(e));
+      if (isWinningWord) {
+        console.log("save");
+        GameServices.saveGame(
+          localStorage.getItem("userId") ?? "",
+          contestId ?? "",
+          state.currentRow + 1,
+          true
+        )
+          .then((r) => {
+            console.log(r);
+            console.log("saved");
+          })
+          .catch((e) => console.log(e));
+        setTimeout(() => {
+          GameServices.getPlayerStats(contestId || "").then((resp) => {
+            console.log(resp);
+            setStats(resp);
+            setIsWon(true);
+          });
+        }, 2500);
+      } else {
+        GameServices.saveGame(
+          localStorage.getItem("userId") ?? "",
+          contestId ?? "",
+          state.currentRow + 1,
+          false
+        )
+          .then((r) => {})
+          .catch((e) => console.log(e));
+        setTimeout(() => {
+          GameServices.getPlayerStats(contestId || "").then((resp) => {
+            console.log(resp);
+            setStats(resp);
+            setIsLost(true);
+          });
+        }, 2500);
+      }
     }
   };
 
@@ -310,8 +323,12 @@ const Wordle = () => {
           true
         )
           .then((r) => {
-            getStats();
-            setIsWon(true);
+            GameServices.getPlayerStats(contestId || "").then((resp) => {
+              console.log("cukjl");
+              console.log(resp);
+              setStats(resp);
+              setIsWon(true);
+            });
           })
           .catch((e) => console.log(e));
       } else {
@@ -322,18 +339,16 @@ const Wordle = () => {
           false
         )
           .then((r) => {
-            getStats();
-            setIsLost(true);
+            GameServices.getPlayerStats(contestId || "").then((resp) => {
+              console.log("cukjl");
+              console.log(resp);
+              setStats(resp);
+              setIsLost(true);
+            });
           })
           .catch((e) => console.log(e));
       }
     }, 1500);
-  };
-
-  const getStats = () => {
-    GameServices.getPlayerStats(contestId || "").then((resp) => {
-      setStats(resp);
-    });
   };
 
   const shareResult = () => {
@@ -396,6 +411,31 @@ const Wordle = () => {
         close={() => navigate("/")}
       />
       <Navbar username={localStorage.getItem("username")} title={game} />
+
+      <Box
+        bg={theme.bgColor}
+        px={8}
+        pt={8}
+        display={"flex"}
+        justifyContent="flex-end"
+        alignItems={"center"}
+      >
+        {isContest === "false" ? (
+          <Box
+            bg={theme.bgColor}
+            p={4}
+            justifyContent="center"
+            display={"flex"}
+          >
+            <NeuButton
+              bg={theme.neuPrimaryBg}
+              label="End Game"
+              shadow={theme.newPrimaryShadow}
+              onClick={() => forceFinishGame()}
+            />
+          </Box>
+        ) : null}
+      </Box>
       {isContest === "true" ? (
         <Timer
           currentTime={currentTime}
@@ -423,29 +463,6 @@ const Wordle = () => {
           onEnter={onEnter}
           onKeyPress={onKeyPress}
         />
-
-        <Box
-          mx={8}
-          display={"flex"}
-          justifyContent="flex-end"
-          alignItems={"center"}
-        >
-          {isContest === "false" ? (
-            <Box
-              bg={theme.bgColor}
-              p={4}
-              justifyContent="center"
-              display={"flex"}
-            >
-              <NeuButton
-                bg={theme.neuPrimaryBg}
-                label="End Game"
-                shadow={theme.newPrimaryShadow}
-                onClick={() => forceFinishGame()}
-              />
-            </Box>
-          ) : null}
-        </Box>
       </Box>
     </Box>
   );

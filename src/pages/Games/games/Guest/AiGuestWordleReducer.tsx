@@ -60,7 +60,7 @@ const createEmptyArrays = (number: number) => {
   return array;
 };
 
-export const aiWordleReducer = (
+export const aiGuestWordleReducer = (
   state: WordleState,
   action: Action
 ): WordleState => {

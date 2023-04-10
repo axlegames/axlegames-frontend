@@ -263,6 +263,14 @@ const GuestWordle = () => {
       />
       <Navbar username={localStorage.getItem("guestname")} title={`${game}`} />
 
+      <Box p={8} bg={theme.bgColor} display={"flex"} justifyContent="flex-end">
+        <NeuButton
+          bg={theme.neuPrimaryBg}
+          label="End Game"
+          shadow={theme.newPrimaryShadow}
+          onClick={() => forceFinishGame()}
+        />
+      </Box>
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -281,14 +289,6 @@ const GuestWordle = () => {
           onDelete={onDelete}
           onEnter={onEnter}
           onKeyPress={onKeyPress}
-        />
-      </Box>
-      <Box p={8} bg={theme.bgColor} display={"flex"} justifyContent="flex-end">
-        <NeuButton
-          bg={theme.neuPrimaryBg}
-          label="End Game"
-          shadow={theme.newPrimaryShadow}
-          onClick={() => forceFinishGame()}
         />
       </Box>
     </Box>

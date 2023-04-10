@@ -22,6 +22,9 @@ const ComingSoon = lazy(() => import("./pages/ComingSoon"));
 const SignupPage = lazy(() => import("./pages/Auth/SignUpPage"));
 const AIWordle = lazy(() => import("./pages/Games/games/AIWordle/AIWordle"));
 const GuestWordle = lazy(() => import("./pages/Games/games/Guest/GuestWordle"));
+const AIGuestWordle = lazy(
+  () => import("./pages/Games/games/Guest/AiGuestWordle")
+);
 const Wordle = lazy(() => import("./pages/Games/games/Wordle/Wordle"));
 const WordleLobby = lazy(
   () => import("./pages/Games/games/Wordle/WordleLobby")
@@ -83,6 +86,10 @@ export const App = () => {
             <Route
               path="/guest/:game/:contestId/:gameStateId"
               element={<GuestWordle />}
+            />
+            <Route
+              path="aiwordle/guest/:game/:contestId/:gameStateId"
+              element={<AIGuestWordle />}
             />
 
             {/* GameRoutes */}
