@@ -1,6 +1,5 @@
 const SERVER = "true";
 let URL = "";
-console.log(SERVER);
 
 if (SERVER === "true") URL = "http://localhost:5001";
 else URL = "https://api.axlegames.io";
