@@ -1,7 +1,4 @@
 import { Box, Flex, useToast } from "@chakra-ui/react";
-import { theme } from "../../../config/theme.config";
-// import { TiBackspaceOutline } from "react-icons/ti/index";
-// import { AiOutlineEnter } from "react-icons/ai/index";
 import { useEffect, useState } from "react";
 import Key from "./Key";
 
@@ -122,7 +119,6 @@ const KeyBoard = (props: any) => {
   return (
     <Box fontFamily={"quicksand"} fontSize="3xl" fontWeight={"bold"}>
       <Box
-        bg={theme.bgColor}
         display="flex"
         flexDirection={"column"}
         justifyContent={"center"}

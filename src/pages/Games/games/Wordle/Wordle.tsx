@@ -452,6 +452,7 @@ const Wordle = () => {
         rowGap="1rem"
         minH="90vh"
         justifyContent="center"
+        backgroundImage={`https://axlegames.s3.ap-south-1.amazonaws.com/theme_assets/images/how-works-bg.png`}
       >
         <Grid
           gameStatus={state.gameStatus}

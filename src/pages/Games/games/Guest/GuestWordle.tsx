@@ -263,7 +263,7 @@ const GuestWordle = () => {
       />
       <Navbar username={localStorage.getItem("guestname")} title={`${game}`} />
 
-      <Box p={8} bg={theme.bgColor} display={"flex"} justifyContent="flex-end">
+      <Box bg={theme.bgColor} p={8} display={"flex"} justifyContent="flex-end">
         <NeuButton
           bg={theme.neuPrimaryBg}
           label="End Game"
@@ -274,10 +274,14 @@ const GuestWordle = () => {
       <Box
         display={"flex"}
         flexDirection={"column"}
-        bg={theme.bgColor}
         rowGap="1rem"
         minH="90vh"
+        bg={theme.bgColor}
+        backgroundImage={`https://axlegames.s3.ap-south-1.amazonaws.com/theme_assets/images/how-works-bg.png`}
         justifyContent="center"
+        backgroundPosition={"center"}
+        backgroundSize="cover"
+        backgroundRepeat={"no-repeat"}
       >
         <Grid
           gameStatus={state.gameStatus}

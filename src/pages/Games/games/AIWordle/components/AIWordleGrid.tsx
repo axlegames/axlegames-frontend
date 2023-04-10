@@ -1,12 +1,10 @@
 import { Box } from "@chakra-ui/react";
-import { theme } from "../../../../../config/theme.config";
 import AIWordleCell from "./AIWordleCell";
 
 const AIWordleGrid = (props: any) => {
   return (
     <Box fontFamily={"quicksand"} fontSize="3xl" fontWeight={"bold"}>
       <Box
-        bg={theme.bgColor}
         display="flex"
         flexDirection={"column"}
         justifyContent={"center"}

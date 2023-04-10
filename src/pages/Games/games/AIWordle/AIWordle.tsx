@@ -176,7 +176,8 @@ const AIWordle = () => {
     );
     isAuthorized(resp as TokenAuthStatus);
     const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
-    console.log(resp);
+
+    if (state.currentRow === 15) return forceFinishGame();
 
     if (inValidWord) {
       return toast({
@@ -310,23 +311,51 @@ const AIWordle = () => {
     return null;
   };
 
+  const shareResult = () => {
+    let result: string = `I guessed this ${state.wordlength}-letter word in ${
+      state.currentRow
+    }/5 tries.
+    \ncontest  : ${contestId}.
+    \nusername : ${localStorage.getItem("username") || ""}.\n
+    `;
+
+    for (let i = 0; i < state.gameStatus.length; i++) {
+      const word = state.gameStatus[i];
+      for (let j = 0; j < word.length; j++) {
+        if (word[j] === "present") result += String("🟨 ");
+        if (word[j] === "absent") result += String("⬜ ");
+        if (word[j] === "correct") result += String("🟩 ");
+      }
+      result += "\n";
+    }
+    navigator.clipboard.writeText(result);
+    return toast({
+      title: "Copied",
+      description: "Result copied to clipboard",
+      status: "success",
+      duration: 4000,
+      isClosable: true,
+      position: "top",
+    });
+  };
+
   return (
     <Box>
-      <Navbar title={game} />
+      <Navbar username={localStorage.getItem("username")} title={game} />
       <Timer />
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
         children={
           <WonModal
-            result={[[]]}
+            result={state.gameStatus}
             stats={{
               currentStreak: 0,
               maxStreak: 0,
               played: 0,
               winPercent: 0,
             }}
-            shareResult={() => null}
+            shareResult={shareResult}
           />
         }
         close={() => navigate("/")}
@@ -342,7 +371,7 @@ const AIWordle = () => {
               played: 0,
               winPercent: 0,
             }}
-            shareResult={() => null}
+            shareResult={shareResult}
           />
         }
         close={() => navigate("/")}
@@ -366,11 +395,15 @@ const AIWordle = () => {
       <Box
         display={"flex"}
         flexDirection={"column"}
-        bg={theme.bgColor}
         justifyContent="space-between"
         rowGap="1rem"
         p={4}
         minH="90vh"
+        bg={theme.bgColor}
+        backgroundImage={`https://axlegames.s3.ap-south-1.amazonaws.com/theme_assets/images/how-works-bg.png`}
+        backgroundPosition={"center"}
+        backgroundSize="cover"
+        backgroundRepeat={"no-repeat"}
       >
         <AIWordleGrid
           gameStatus={state.gameStatus}
