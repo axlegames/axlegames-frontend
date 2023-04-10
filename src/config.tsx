@@ -3,7 +3,7 @@ let URL = "";
 console.log(SERVER);
 
 if (SERVER === "true") URL = "http://localhost:5001";
-// if (SERVER !== "false") URL = "https://api.axlegames.io";
+else URL = "https://api.axlegames.io";
 
 const axlegamesPrefix = URL + "/axlegames/api/v1/";
 const userPrefix = axlegamesPrefix + "users";
