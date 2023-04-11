@@ -341,6 +341,7 @@ const AIWordle = () => {
         isOpen={isWon}
         children={
           <WonModal
+            isPractice={Boolean(isContest)}
             isGuest={false}
             tries={state.currentRow}
             letter={state.wordlength}
@@ -362,6 +363,7 @@ const AIWordle = () => {
         isOpen={isLost}
         children={
           <LostModal
+            isPractice={Boolean(isContest)}
             stats={{
               currentStreak: 0,
               maxStreak: 0,

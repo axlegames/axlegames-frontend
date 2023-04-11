@@ -240,6 +240,7 @@ const AIWordle = () => {
         isOpen={isWon}
         children={
           <WonModal
+            isPractice={true}
             tries={state.currentRow}
             letter={state.wordlength}
             isGuest={true}
@@ -261,6 +262,7 @@ const AIWordle = () => {
         isOpen={isLost}
         children={
           <LostModal
+            isPractice={true}
             isGuest={true}
             stats={{
               currentStreak: 0,

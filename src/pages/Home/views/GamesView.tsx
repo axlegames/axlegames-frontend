@@ -44,6 +44,8 @@ const GamesView = () => {
       games[2].isActive = false;
       games[3].isActive = false;
       games[4].isActive = false;
+      games[5].isActive = false;
+      games[6].isActive = false;
       setAxleGames({ axleGames: games });
     } else {
       HomeServices.getAxleGames("AI")

@@ -10,6 +10,7 @@ interface Props {
   stats: PlayerStats;
   shareResult: Function;
   isGuest?: boolean;
+  isPractice: boolean;
 }
 
 const LostModal = (props: Props) => {
@@ -22,7 +23,7 @@ const LostModal = (props: Props) => {
       rowGap={"1rem"}
       color={theme.highLightColor}
     >
-      {props.isGuest ? (
+      {props.isGuest || props.isPractice ? (
         <Box></Box>
       ) : (
         <Box>

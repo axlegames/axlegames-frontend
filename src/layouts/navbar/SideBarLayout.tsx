@@ -16,27 +16,23 @@ import Logo from "../../assets/home/logos/logo.png";
 import SideBarButton from "./components/SideBarButton";
 
 import { MdStore, MdInfo } from "react-icons/md/index";
-import {
-  HiHome,
-  HiGlobe,
-  HiUser,
-  HiUsers,
-  HiCreditCard,
-} from "react-icons/hi/index";
+import { HiHome, HiUser, HiUsers, HiCreditCard } from "react-icons/hi/index";
 
-import SideBarCard from "./components/SideBarCard";
+import IsLoggedIn from "../../config/isLoggedIn";
 import IsNotLoggedIn from "../../config/isNotLoggedIn";
+import SideBarCard from "./components/SideBarCard";
 import Dialog from "../../pages/Auth/dialogs/AuthDialog";
 import Signin from "../../pages/Auth/Signin";
 
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
-import IsLoggedIn from "../../config/isLoggedIn";
+
 import {
   AiOutlineDashboard,
   AiOutlineLogin,
   AiOutlineLogout,
 } from "react-icons/ai";
+
 import { useNavigate } from "react-router";
 
 import Instagram from "../../assets/socials/instagram.png";
@@ -212,13 +208,8 @@ const SideBarLayout = (props: SideBarProps) => {
           />
         </Box>
         <SideBarButton
-          isCommingSoon={true}
-          onClick={() => clearConnectionAndChangeRoute("/coming-soon")}
-          title={"AxleVerse"}
-          icon={<HiGlobe size={32} />}
-        />
-        <SideBarButton
-          onClick={() => clearConnectionAndChangeRoute("/coming-soon")}
+          isCommingSoon={false}
+          onClick={() => clearConnectionAndChangeRoute("/marketplace")}
           title={"Marketplace"}
           icon={<MdStore size={32} />}
         />

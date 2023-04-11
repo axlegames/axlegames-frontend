@@ -15,9 +15,11 @@ interface Props {
   isAIWordle: boolean;
   tries: number;
   letter: number;
+  isPractice: boolean;
 }
 
 const WonModal = (props: Props) => {
+  console.log(props);
   const getColor = (key: string) => {
     if (key === "absent") return "gray.200";
     if (key === "present") return "yellow.400";
@@ -36,7 +38,7 @@ const WonModal = (props: Props) => {
         You have won {props.letter} letter AI wordle in {props.tries} tries.
       </Text>
       <Divider></Divider>
-      {props.isGuest ? null : (
+      {props.isGuest || props.isPractice ? null : (
         <Box>
           <Text fontSize={"xl"} textAlign={"center"}>
             Statistics
@@ -87,7 +89,7 @@ const WonModal = (props: Props) => {
         </Box>
       )}
       <Box>
-        {props.isGuest ? (
+        {props.isGuest || props.isPractice ? (
           <Box
             display={"flex"}
             justifyContent="center"

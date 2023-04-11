@@ -393,6 +393,7 @@ const Wordle = () => {
         isOpen={isWon}
         children={
           <WonModal
+            isPractice={Boolean(isContest)}
             isGuest={false}
             isAIWordle={false}
             letter={state.wordlength}
@@ -407,7 +408,13 @@ const Wordle = () => {
       <MenuModal
         title={"Oh oh!"}
         isOpen={isLost}
-        children={<LostModal stats={stats} shareResult={shareResult} />}
+        children={
+          <LostModal
+            isPractice={Boolean(isContest)}
+            stats={stats}
+            shareResult={shareResult}
+          />
+        }
         close={() => navigate("/")}
       />
       <Navbar username={localStorage.getItem("username")} title={game} />

@@ -233,6 +233,7 @@ const GuestWordle = () => {
         isOpen={isWon}
         children={
           <WonModal
+            isPractice={true}
             isAIWordle={false}
             letter={state.wordlength}
             tries={state.currentRow}
@@ -254,6 +255,7 @@ const GuestWordle = () => {
         isOpen={isLost}
         children={
           <LostModal
+            isPractice={true}
             isGuest={true}
             stats={{
               currentStreak: 0,

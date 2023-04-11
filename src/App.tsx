@@ -9,6 +9,7 @@ import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import Admin from "./pages/Admin/Admin";
 import Winners from "./pages/Admin/WInnners";
 import { theme } from "./config/theme.config";
+import NFTs from "./pages/NFTs";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"));
@@ -109,6 +110,7 @@ export const App = () => {
               path="/:game/lobby/:contestId/:gameStateId"
               element={<WordleLobby />}
             />
+            <Route path="/marketplace" element={<NFTs />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/winners/:challengeId" element={<Winners />} />
           </Routes>
