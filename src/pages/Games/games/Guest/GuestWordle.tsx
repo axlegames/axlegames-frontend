@@ -233,6 +233,7 @@ const GuestWordle = () => {
         isOpen={isWon}
         children={
           <WonModal
+            isGuest={true}
             result={state.gameStatus}
             stats={{
               currentStreak: 0,
@@ -250,6 +251,7 @@ const GuestWordle = () => {
         isOpen={isLost}
         children={
           <LostModal
+            isGuest={true}
             stats={{
               currentStreak: 0,
               maxStreak: 0,

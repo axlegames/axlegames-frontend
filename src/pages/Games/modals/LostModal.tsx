@@ -10,6 +10,7 @@ import { PlayerStats } from "../GameServices";
 interface Props {
   stats: PlayerStats;
   shareResult: Function;
+  isGuest?: boolean;
 }
 
 const LostModal = (props: Props) => {
@@ -22,54 +23,60 @@ const LostModal = (props: Props) => {
       rowGap={"1rem"}
       color={theme.highLightColor}
     >
-      <Box>
-        <Text fontSize={"xl"} textAlign={"center"}>
-          Statistics
-        </Text>
-        <Grid
-          fontFamily={`'Russo One', sans-serif`}
-          my={4}
-          gridTemplateColumns={`1fr 1fr 1fr 1fr`}
-          justifyContent={"space-between"}
-        >
-          <Box
-            display={"flex"}
-            justifyContent="center"
-            flexDirection={"column"}
-            alignItems="center"
+      {props.isGuest ? (
+        <Box></Box>
+      ) : (
+        <Box>
+          <Text fontSize={"xl"} textAlign={"center"}>
+            Statistics
+          </Text>
+          <Grid
+            fontFamily={`'Russo One', sans-serif`}
+            my={4}
+            gridTemplateColumns={`1fr 1fr 1fr 1fr`}
+            justifyContent={"space-between"}
           >
-            <Text fontSize={"2xl"}>{props.stats.played}</Text>
-            <Text>Played</Text>
-          </Box>
-          <Box
-            display={"flex"}
-            justifyContent="center"
-            alignItems="center"
-            flexDirection={"column"}
-          >
-            <Text fontSize={"2xl"}>{props.stats.winPercent.toFixed(2)}</Text>
-            <Text>Win %</Text>
-          </Box>
-          <Box
-            display={"flex"}
-            alignItems="center"
-            justifyContent="center"
-            flexDirection={"column"}
-          >
-            <Text fontSize={"2xl"}>{props.stats.currentStreak.toFixed(2)}</Text>
-            <Text>Streak</Text>
-          </Box>
-          <Box
-            display={"flex"}
-            alignItems="center"
-            justifyContent="center"
-            flexDirection={"column"}
-          >
-            <Text fontSize={"2xl"}>{props.stats.maxStreak}</Text>
-            <Text>Max Streak</Text>
-          </Box>
-        </Grid>
-      </Box>
+            <Box
+              display={"flex"}
+              justifyContent="center"
+              flexDirection={"column"}
+              alignItems="center"
+            >
+              <Text fontSize={"2xl"}>{props.stats.played}</Text>
+              <Text>Played</Text>
+            </Box>
+            <Box
+              display={"flex"}
+              justifyContent="center"
+              alignItems="center"
+              flexDirection={"column"}
+            >
+              <Text fontSize={"2xl"}>{props.stats.winPercent.toFixed(2)}</Text>
+              <Text>Win %</Text>
+            </Box>
+            <Box
+              display={"flex"}
+              alignItems="center"
+              justifyContent="center"
+              flexDirection={"column"}
+            >
+              <Text fontSize={"2xl"}>
+                {props.stats.currentStreak.toFixed(2)}
+              </Text>
+              <Text>Streak</Text>
+            </Box>
+            <Box
+              display={"flex"}
+              alignItems="center"
+              justifyContent="center"
+              flexDirection={"column"}
+            >
+              <Text fontSize={"2xl"}>{props.stats.maxStreak}</Text>
+              <Text>Max Streak</Text>
+            </Box>
+          </Grid>
+        </Box>
+      )}
       <Divider></Divider>
 
       <Box

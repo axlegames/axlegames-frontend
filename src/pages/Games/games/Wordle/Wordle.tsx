@@ -322,15 +322,13 @@ const Wordle = () => {
           state.currentRow + 1,
           true
         )
-          .then((r) => {
-            GameServices.getPlayerStats(contestId || "").then((resp) => {
-              console.log("cukjl");
-              console.log(resp);
-              setStats(resp);
-              setIsWon(true);
-            });
-          })
+          .then((r) => {})
           .catch((e) => console.log(e));
+        GameServices.getPlayerStats(contestId || "").then((resp) => {
+          setStats(resp);
+          setIsWon(true);
+          return navigate("/");
+        });
       } else {
         GameServices.saveGame(
           localStorage.getItem("userId") ?? "",
@@ -338,15 +336,13 @@ const Wordle = () => {
           state.currentRow + 1,
           false
         )
-          .then((r) => {
-            GameServices.getPlayerStats(contestId || "").then((resp) => {
-              console.log("cukjl");
-              console.log(resp);
-              setStats(resp);
-              setIsLost(true);
-            });
-          })
+          .then((r) => {})
           .catch((e) => console.log(e));
+        GameServices.getPlayerStats(contestId || "").then((resp) => {
+          setStats(resp);
+          setIsLost(true);
+          return navigate("/");
+        });
       }
     }, 1500);
   };

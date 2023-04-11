@@ -101,7 +101,6 @@ const AIWordle = () => {
   useEffect(() => {
     GameServices.getGameState({ userId: localStorage.getItem("userId") })
       .then((game) => {
-        console.log(game);
         isAuthorized(game as TokenAuthStatus);
         game = game as Status;
         if (game.isGameCompeted)
@@ -156,6 +155,7 @@ const AIWordle = () => {
   };
 
   const onEnter = async () => {
+    console.log("ok");
     if (state.currentGuess.length < state.wordlength) {
       return toast({
         title: "Not enough letters",

@@ -24,8 +24,6 @@ import {
   HiCreditCard,
 } from "react-icons/hi/index";
 
-import { BiCoin } from "react-icons/bi";
-
 import SideBarCard from "./components/SideBarCard";
 import IsNotLoggedIn from "../../config/isNotLoggedIn";
 import Dialog from "../../pages/Auth/dialogs/AuthDialog";
@@ -211,12 +209,6 @@ const SideBarLayout = (props: SideBarProps) => {
             src={Live}
             height="12"
             width={"12"}
-          />
-          <SideBarButton
-            onClick={() => clearConnectionAndChangeRoute("/axle-token")}
-            title={"AXLE Token"}
-            link="/axle-token"
-            icon={<BiCoin size={32} />}
           />
         </Box>
         <SideBarButton

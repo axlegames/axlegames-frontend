@@ -1,4 +1,4 @@
-const SERVER = process.env.IS_DEV_SERVER;
+const SERVER = "true";
 let URL = "";
 
 if (SERVER === "true") URL = "http://localhost:5001";
