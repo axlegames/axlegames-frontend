@@ -1,5 +1,4 @@
 import { Box, Flex, Grid, Text } from "@chakra-ui/react";
-import { AiOutlineQuestion } from "react-icons/ai/index";
 
 import { BiArrowBack } from "react-icons/bi/index";
 import { theme } from "../../../config/theme.config";

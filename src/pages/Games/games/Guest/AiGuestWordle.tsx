@@ -30,7 +30,6 @@ const AIWordle = () => {
   const navigate = useNavigate();
 
   const { contestId, gameStateId, isContest } = useParams();
-  const game = "aiwordle";
 
   const [state, dispatch] = useReducer(aiGuestWordleReducer, initState);
 

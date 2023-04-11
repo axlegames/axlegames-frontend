@@ -28,7 +28,6 @@ import { TokenAuthStatus } from "../../../../config/auth";
 
 import AIWordleGrid from "./components/AIWordleGrid";
 import NeuButton from "../../../Axle/component/NeuButton";
-import { stat } from "fs";
 
 const AIWordle = () => {
   const toast = useToast();
