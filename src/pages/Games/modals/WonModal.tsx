@@ -1,14 +1,20 @@
 import { Box, Divider, Flex, Grid, Text } from "@chakra-ui/react";
 
 import { theme } from "../../../config/theme.config";
-import NeuButton from "../../Axle/component/NeuButton";
 import { PlayerStats } from "../GameServices";
+
+import Lottie from "lottie-react";
+import NeuButton from "../../Axle/component/NeuButton";
+import Won from "../../../assets/wordle/lottie/little-boy-with-thumbs-up.json";
 
 interface Props {
   stats: PlayerStats;
   shareResult: Function;
   result: Array<Array<string>>;
-  isGuest?: boolean;
+  isGuest: boolean;
+  isAIWordle: boolean;
+  tries: number;
+  letter: number;
 }
 
 const WonModal = (props: Props) => {
@@ -26,9 +32,11 @@ const WonModal = (props: Props) => {
       rowGap={"1rem"}
       color={theme.highLightColor}
     >
-      {props.isGuest ? (
-        <Box></Box>
-      ) : (
+      <Text fontSize={{ base: "xl" }}>
+        You have won {props.letter} letter AI wordle in {props.tries} tries.
+      </Text>
+      <Divider></Divider>
+      {props.isGuest ? null : (
         <Box>
           <Text fontSize={"xl"} textAlign={"center"}>
             Statistics
@@ -78,27 +86,44 @@ const WonModal = (props: Props) => {
           </Grid>
         </Box>
       )}
-      <Divider></Divider>
-      <Box
-        justifyContent={"center"}
-        display={"flex"}
-        rowGap={".2rem"}
-        flexDirection="column"
-        alignItems={"center"}
-      >
-        {props.result.map((word, i) => (
-          <Box columnGap=".2rem" display={"flex"} key={i}>
-            {word.map((letter, j) => (
-              <Box
-                height={"8"}
-                width={"8"}
-                borderRadius="md"
-                key={i}
-                bg={getColor(letter)}
-              ></Box>
+      <Box>
+        {props.isGuest ? (
+          <Box
+            display={"flex"}
+            justifyContent="center"
+            alignItems={"center"}
+            width="100%"
+            mx="auto"
+            maxW={"220px"}
+            maxH={"220px"}
+            flexDirection="column"
+          >
+            <Lottie animationData={Won} loop={false} />
+          </Box>
+        ) : null}
+        {props.isAIWordle ? null : (
+          <Box
+            justifyContent={"center"}
+            display={"flex"}
+            rowGap={".2rem"}
+            flexDirection="column"
+            alignItems={"center"}
+          >
+            {props.result.map((word, i) => (
+              <Box columnGap=".2rem" display={"flex"} key={i}>
+                {word.map((letter, j) => (
+                  <Box
+                    height={"8"}
+                    width={"8"}
+                    borderRadius="md"
+                    key={i}
+                    bg={getColor(letter)}
+                  ></Box>
+                ))}
+              </Box>
             ))}
           </Box>
-        ))}
+        )}
       </Box>
       <Divider></Divider>
       {/* <Box
@@ -113,6 +138,7 @@ const WonModal = (props: Props) => {
         <Text fontSize="2xl">Congrats! you have won</Text>
       </Box> */}
       {/* <Divider /> */}
+      <Text> Click on the share button and win exciting rewards</Text>
       <Flex justifyContent={"flex-end"}>
         <NeuButton
           bg={theme.neuPrimaryBg}

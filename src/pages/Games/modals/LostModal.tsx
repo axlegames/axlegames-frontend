@@ -1,11 +1,10 @@
+import { theme } from "../../../config/theme.config";
+import { PlayerStats } from "../GameServices";
 import { Box, Divider, Flex, Grid, Text } from "@chakra-ui/react";
 
 import Lottie from "lottie-react";
-import { theme } from "../../../config/theme.config";
-
-import Lost from "../../../assets/wordle/lottie/little-boy-crying.json";
 import NeuButton from "../../Axle/component/NeuButton";
-import { PlayerStats } from "../GameServices";
+import Lost from "../../../assets/wordle/lottie/little-boy-crying.json";
 
 interface Props {
   stats: PlayerStats;

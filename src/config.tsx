@@ -1,7 +1,7 @@
-const SERVER = "true";
+const SERVER = false;
 let URL = "";
 
-if (SERVER === "true") URL = "http://localhost:5001";
+if (SERVER) URL = "http://localhost:5001";
 else URL = "https://api.axlegames.io";
 
 const axlegamesPrefix = URL + "/axlegames/api/v1/";

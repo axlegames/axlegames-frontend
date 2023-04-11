@@ -393,6 +393,10 @@ const Wordle = () => {
         isOpen={isWon}
         children={
           <WonModal
+            isGuest={false}
+            isAIWordle={false}
+            letter={state.wordlength}
+            tries={state.currentRow}
             result={state.gameStatus}
             stats={stats}
             shareResult={shareResult}

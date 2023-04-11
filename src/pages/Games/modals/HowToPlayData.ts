@@ -313,9 +313,100 @@ const example5 = {
   ],
 };
 
+const aiwordle = {
+  main: "AI Wordle is an adversarial version of Josh Wardle's excellent Wordle.",
+  sub: "Our AI alogirithm is actively trying to avoid giving you the answer. With each guess, AI Wordle reveals as little information as possible, changing the secret word if need be.",
+  text: "Other than that, the rules are the same as Wordle's, except you have 15 guesses. You'll need them!",
+  example1: "The letter W is in the word and in the correct spot.",
+  example2: "The letter I is in the word but in the wrong spot.",
+  example3: "The letter U is not in the word in any spot.",
+  1: [
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "P",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "present",
+      letter: "I",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "L",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "L",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "S",
+    },
+  ],
+  2: [
+    {
+      isCompleted: true,
+      keyPresence: "correct",
+      letter: "W",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "E",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "A",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "R",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "Y",
+    },
+  ],
+  3: [
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "V",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "A",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "G",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "absent",
+      letter: "U",
+    },
+    {
+      isCompleted: true,
+      keyPresence: "",
+      letter: "E",
+    },
+  ],
+};
+
 export const getExample = (game: string) => {
   if (game === "wordle-5") return example5;
   if (game === "wordle-6") return example6;
   if (game === "wordle-7") return example7;
+  if (game === "aiwordle") return aiwordle;
   return example5;
 };

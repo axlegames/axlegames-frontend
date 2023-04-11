@@ -2,8 +2,6 @@ import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import { AiOutlineQuestion } from "react-icons/ai/index";
 
 import { BiArrowBack } from "react-icons/bi/index";
-import { IoMdSettings } from "react-icons/io/index";
-import { ImStatsDots } from "react-icons/im/index";
 import { theme } from "../../../config/theme.config";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -30,7 +28,7 @@ const Navbar = (props: any) => {
         isOpen={howToPlayModal}
         close={() => setHowToPlayModal(false)}
         onClick={() => setHowToPlayModal(false)}
-        children={<HowToPlayModal></HowToPlayModal>}
+        children={<HowToPlayModal game={props.game}></HowToPlayModal>}
       />
       <Grid
         alignItems={"center"}
@@ -63,15 +61,41 @@ const Navbar = (props: any) => {
           textAlign={"center"}
           alignItems="center"
           columnGap={{ base: "2" }}
+          fontSize={{ base: "xl" }}
+          px={8}
         >
           <Text>Hello, {props.username}</Text>
-          <AiOutlineQuestion
-            cursor={"pointer"}
+          <Box
+            position={"fixed"}
+            bottom="4%"
+            right={"4%"}
+            display={{ base: "none", lg: "block" }}
             onClick={() => setHowToPlayModal(true)}
-            size={30}
-          />
-          <ImStatsDots cursor={"pointer"} size={30} />
-          <IoMdSettings cursor={"pointer"} size={30} />
+            cursor="pointer"
+            zIndex={1000}
+          >
+            <Box
+              px={6}
+              py={2}
+              bg={theme.bgColor}
+              fontFamily={`'Russo One', sans-serif`}
+              color={theme.primaryTwoTextColor}
+              border={`2px groove ${theme.primaryTwoTextColor}`}
+              borderRadius="sm"
+              cursor="pointer"
+              display={"flex"}
+              _hover={{
+                textDecoration: "underline",
+              }}
+              alignItems={"center"}
+              columnGap={".25rem"}
+            >
+              {/* <LinkIcon /> */}
+              <Text fontSize={{ base: "xs", md: "sm", lg: "md" }}>
+                How To play?
+              </Text>
+            </Box>
+          </Box>
         </Flex>
       </Grid>
     </Box>

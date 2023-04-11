@@ -28,6 +28,7 @@ import { TokenAuthStatus } from "../../../../config/auth";
 
 import AIWordleGrid from "./components/AIWordleGrid";
 import NeuButton from "../../../Axle/component/NeuButton";
+import { stat } from "fs";
 
 const AIWordle = () => {
   const toast = useToast();
@@ -155,7 +156,6 @@ const AIWordle = () => {
   };
 
   const onEnter = async () => {
-    console.log("ok");
     if (state.currentGuess.length < state.wordlength) {
       return toast({
         title: "Not enough letters",
@@ -312,22 +312,12 @@ const AIWordle = () => {
   };
 
   const shareResult = () => {
-    let result: string = `I guessed this ${state.wordlength}-letter word in ${
-      state.currentRow
-    }/5 tries.
-    \ncontest  : ${contestId}.
-    \nusername : ${localStorage.getItem("username") || ""}.\n
-    `;
+    let result: string = `Hi! I have guessed this ${state.wordlength}-letter word in ${state.currentRow} tries on Axlegames.io - a skill-based AI gaming platform that is introducing Metamorphosis AI games to web3. Signup using the link below and win 500 AXLE tokens by playing your first AI game - https://play.axlegames.io`;
+    window.open(
+      `https://twitter.com/intent/tweet?text=${result}`,
+      "_blank" // <- This is what makes it open in a new window.
+    );
 
-    for (let i = 0; i < state.gameStatus.length; i++) {
-      const word = state.gameStatus[i];
-      for (let j = 0; j < word.length; j++) {
-        if (word[j] === "present") result += String("🟨 ");
-        if (word[j] === "absent") result += String("⬜ ");
-        if (word[j] === "correct") result += String("🟩 ");
-      }
-      result += "\n";
-    }
     navigator.clipboard.writeText(result);
     return toast({
       title: "Copied",
@@ -341,13 +331,21 @@ const AIWordle = () => {
 
   return (
     <Box>
-      <Navbar username={localStorage.getItem("username")} title={game} />
+      <Navbar
+        game={"aiwordle"}
+        username={localStorage.getItem("username")}
+        title={game}
+      />
       <Timer />
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
         children={
           <WonModal
+            isGuest={false}
+            tries={state.currentRow}
+            letter={state.wordlength}
+            isAIWordle={true}
             result={state.gameStatus}
             stats={{
               currentStreak: 0,
