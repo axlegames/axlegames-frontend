@@ -61,18 +61,12 @@ const AIWordle = () => {
   };
 
   const initializeState = (game: Status) => {
-    const completedRows = GameServices.initRows(game.guessLength);
+    const completedRows = GameServices.initRows(1);
     const initState: WordleState = {
-      guessLength: game.guessLength,
+      guessLength: 1,
       wordlength: game.wordLength,
-      gameState: GameServices.createInitState(
-        game.guessLength,
-        game.wordLength
-      ),
-      gameStatus: GameServices.createInitState(
-        game.guessLength,
-        game.wordLength
-      ),
+      gameState: GameServices.createInitState(game.guessLength, 5),
+      gameStatus: GameServices.createInitState(1, game.wordLength),
       completedRows: completedRows,
       currentGuess: "",
       currentRow: 0,
@@ -94,6 +88,7 @@ const AIWordle = () => {
       userId: localStorage.getItem("userId"),
     })
       .then(async (game) => {
+        console.log(game);
         isAuthorized(game as TokenAuthStatus);
         game = game as Status;
         if (game.isGameCompeted)
@@ -115,6 +110,17 @@ const AIWordle = () => {
     });
 
     return () => {
+      dispatch({
+        type: KEY_ACTION.ON_ENTER,
+        payload: {
+          key: "",
+          guessesStatus: [],
+          guessLength: state.guessLength,
+          gameState: [[]],
+          gameStatus: [[]],
+          game: "AI_WORDLE",
+        },
+      });
       setIsWon(false);
       setIsLost(false);
     };
@@ -237,7 +243,7 @@ const AIWordle = () => {
         .catch((e) => console.log(e));
     }
 
-    if (state.currentRow === 5) {
+    if (state.currentRow === 15) {
       setIsLost(true);
       GameServices.saveGame(
         localStorage.getItem("userId") ?? "",

@@ -33,24 +33,12 @@ export interface WordleState {
 }
 
 export const initState: WordleState = {
-  gameState: [
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-  ],
-  gameStatus: [
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-    ["", "", "", "", ""],
-  ],
+  gameState: [["", "", "", "", ""]],
+  gameStatus: [["", "", "", "", ""]],
   completedRows: [false, false, false, false, false],
   currentGuess: "",
   currentRow: 0,
-  guessLength: 5,
+  guessLength: 1,
   wordlength: 5,
 };
 
