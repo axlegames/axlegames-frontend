@@ -1,4 +1,4 @@
-const SERVER = true;
+const SERVER = false;
 let URL = "";
 
 if (SERVER) URL = "http://localhost:5001";
