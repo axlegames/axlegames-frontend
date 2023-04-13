@@ -87,9 +87,9 @@ export interface LobbyInterface {
 }
 
 export interface PlayerStats {
-  winPercent: number;
-  currentStreak: number;
-  maxStreak: number;
+  winPercent?: number;
+  currentStreak?: number;
+  maxStreak?: number;
   played: number;
 }
 

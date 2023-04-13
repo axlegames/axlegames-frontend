@@ -15,6 +15,7 @@ import {
   Status,
   GuessStatus,
   LobbyInterface,
+  PlayerStats,
 } from "../../GameServices";
 import {
   KEY_ACTION,
@@ -29,9 +30,28 @@ import { TokenAuthStatus } from "../../../../config/auth";
 import AIWordleGrid from "./components/AIWordleGrid";
 import NeuButton from "../../../Axle/component/NeuButton";
 
+interface Props {
+  isLoaded: boolean;
+  currentTime: number;
+  forceFinishGame: Function;
+  deadline: string;
+}
+
+const Timer = (props: Props) => {
+  return props.isLoaded ? (
+    <WordleTimer
+      isLoaded={props.isLoaded}
+      endgame={() => props.forceFinishGame()}
+      deadline={props.deadline}
+      currentTime={props.currentTime}
+    />
+  ) : null;
+};
+
 const AIWordle = () => {
   const toast = useToast();
 
+  const [currentTime, setCurrentTime] = useState(Date.now());
   const [isWon, setIsWon] = useState(false);
   const [isLost, setIsLost] = useState(false);
 
@@ -40,8 +60,14 @@ const AIWordle = () => {
   const { contestId, gameStateId, isContest } = useParams();
   const game = "aiwordle";
 
+  const [stats, setStats] = useState<PlayerStats>({
+    currentStreak: 0,
+    maxStreak: 0,
+    played: 0,
+    winPercent: 0,
+  });
   const [state, dispatch] = useReducer(aiWordleReducer, initState);
-  const [time, setTime] = useState<string>(new Date(Date.now()).toString());
+  const [deadLine, setDeadLine] = useState<string>(new Date().toString());
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const isAuthorized = (status: TokenAuthStatus) => {
@@ -110,6 +136,12 @@ const AIWordle = () => {
         else initializeState(game);
       })
       .catch((err) => console.log(err));
+
+    GameServices.getPlayerStats(contestId || "").then((resp) => {
+      console.log(resp);
+      setStats(resp);
+    });
+
     return () => {
       setIsWon(false);
       setIsLost(false);
@@ -126,12 +158,14 @@ const AIWordle = () => {
           const contestInfo = r.contest.axleContestInfo;
           const opensAt = new Date(contestInfo.opensAt).getTime();
           const time = new Date(Date.now()).getTime();
+          console.log(r.currentTime);
+          setCurrentTime(new Date(r.currentTime).getTime());
+          console.log(new Date(currentTime));
           const isOpened = opensAt - time < 0 ? true : false;
           if (!isOpened)
             return navigate(`/${game}/lobby/${contestId}/${gameStateId}`);
-          setTime(
-            r.contest.axleContestInfo?.expiresAt ||
-              new Date(Date.now()).toString()
+          setDeadLine(
+            r.contest.axleContestInfo?.expiresAt || new Date().toString()
           );
           setIsLoaded(true);
         })
@@ -221,7 +255,6 @@ const AIWordle = () => {
       });
       setTimeout(() => {
         if (isWinningWord) {
-          setIsWon(true);
           GameServices.saveGame(
             localStorage.getItem("userId") ?? "",
             contestId ?? "",
@@ -230,8 +263,11 @@ const AIWordle = () => {
           )
             .then((r) => console.log(r))
             .catch((e) => console.log(e));
+          GameServices.getPlayerStats(contestId || "").then((resp) => {
+            setStats(resp);
+            setIsWon(true);
+          });
         } else {
-          setIsLost(true);
           GameServices.saveGame(
             localStorage.getItem("userId") ?? "",
             contestId ?? "",
@@ -240,6 +276,10 @@ const AIWordle = () => {
           )
             .then((r) => console.log(r))
             .catch((e) => console.log(e));
+          GameServices.getPlayerStats(contestId || "").then((resp) => {
+            setStats(resp);
+            setIsLost(true);
+          });
         }
       }, 1500);
     }
@@ -271,6 +311,10 @@ const AIWordle = () => {
         )
           .then((r) => console.log(r))
           .catch((e) => console.log(e));
+        GameServices.getPlayerStats(contestId || "").then((resp) => {
+          setStats(resp);
+          setIsWon(true);
+        });
       } else {
         setIsLost(true);
         GameServices.saveGame(
@@ -281,6 +325,10 @@ const AIWordle = () => {
         )
           .then((r) => console.log(r))
           .catch((e) => console.log(e));
+        GameServices.getPlayerStats(contestId || "").then((resp) => {
+          setStats(resp);
+          setIsLost(true);
+        });
       }
     }, 1500);
   };
@@ -295,20 +343,6 @@ const AIWordle = () => {
         gameStatus: state.gameStatus,
       },
     });
-
-  const Timer = () => {
-    if (isContest === "true") {
-      return isLoaded ? (
-        <WordleTimer
-          isLoaded={isLoaded}
-          endgame={() => forceFinishGame()}
-          deadline={time}
-          currentTime={0}
-        />
-      ) : null;
-    }
-    return null;
-  };
 
   const shareResult = () => {
     let result: string = `Hi! I have guessed this ${state.wordlength}-letter word in ${state.currentRow} tries on Axlegames.io - a skill-based AI gaming platform that is introducing Metamorphosis AI games to web3. Signup using the link below and win 500 AXLE tokens by playing your first AI game - https://play.axlegames.io`;
@@ -331,28 +365,30 @@ const AIWordle = () => {
   return (
     <Box>
       <Navbar
-        game={"aiwordle"}
+        game={`aiwordle`}
         username={localStorage.getItem("username")}
-        title={game}
+        title={`AI WORDLE ${state.wordlength}`}
       />
-      <Timer />
+      {isContest === "true" ? (
+        <Timer
+          currentTime={currentTime}
+          deadline={deadLine}
+          forceFinishGame={forceFinishGame}
+          isLoaded={isLoaded}
+        />
+      ) : null}
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
         children={
           <WonModal
-            isPractice={Boolean(isContest)}
+            isContest={isContest || ""}
             isGuest={false}
             tries={state.currentRow}
             letter={state.wordlength}
             isAIWordle={true}
             result={state.gameStatus}
-            stats={{
-              currentStreak: 0,
-              maxStreak: 0,
-              played: 0,
-              winPercent: 0,
-            }}
+            stats={stats}
             shareResult={shareResult}
           />
         }
@@ -363,7 +399,7 @@ const AIWordle = () => {
         isOpen={isLost}
         children={
           <LostModal
-            isPractice={Boolean(isContest)}
+            isPractice={isContest || ""}
             stats={{
               currentStreak: 0,
               maxStreak: 0,

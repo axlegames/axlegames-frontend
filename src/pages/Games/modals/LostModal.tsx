@@ -10,10 +10,14 @@ interface Props {
   stats: PlayerStats;
   shareResult: Function;
   isGuest?: boolean;
-  isPractice: boolean;
+  isPractice: string;
 }
 
 const LostModal = (props: Props) => {
+  const wp = (props.stats.winPercent || 0).toFixed(2);
+  const s = (props.stats.currentStreak || 0).toFixed(2);
+  const ms = (props.stats.maxStreak || 0).toFixed(2);
+
   return (
     <Box
       display={"flex"}
@@ -23,7 +27,7 @@ const LostModal = (props: Props) => {
       rowGap={"1rem"}
       color={theme.highLightColor}
     >
-      {props.isGuest || props.isPractice ? (
+      {props.isGuest || props.isPractice === "true" ? (
         <Box></Box>
       ) : (
         <Box>
@@ -51,7 +55,7 @@ const LostModal = (props: Props) => {
               alignItems="center"
               flexDirection={"column"}
             >
-              <Text fontSize={"2xl"}>{props.stats.winPercent.toFixed(2)}</Text>
+              <Text fontSize={"2xl"}>{wp}</Text>
               <Text>Win %</Text>
             </Box>
             <Box
@@ -60,9 +64,7 @@ const LostModal = (props: Props) => {
               justifyContent="center"
               flexDirection={"column"}
             >
-              <Text fontSize={"2xl"}>
-                {props.stats.currentStreak.toFixed(2)}
-              </Text>
+              <Text fontSize={"2xl"}>{s}</Text>
               <Text>Streak</Text>
             </Box>
             <Box
@@ -71,7 +73,7 @@ const LostModal = (props: Props) => {
               justifyContent="center"
               flexDirection={"column"}
             >
-              <Text fontSize={"2xl"}>{props.stats.maxStreak}</Text>
+              <Text fontSize={"2xl"}>{ms}</Text>
               <Text>Max Streak</Text>
             </Box>
           </Grid>

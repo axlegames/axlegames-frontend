@@ -92,6 +92,21 @@ const NFTs = () => {
       bg={theme.bgColor}
       backgroundImage="https://axlegames.s3.ap-south-1.amazonaws.com/theme_assets/images/players-week-bg.png"
     >
+      <Box
+        py={4}
+        px={8}
+        display={"flex"}
+        flexDirection="column"
+        alignItems={"center"}
+        fontFamily={"'Press Start 2P', cursive"}
+        fontSize={{ base: "xl", md: "5xl", lg: "7xl" }}
+        color={theme.primaryTextColor}
+        justifyContent="center"
+        mt={12}
+        borderRadius={"xl"}
+      >
+        <Text>Coming Soon</Text>
+      </Box>
       <Grid
         columnGap={{ base: "1rem", xl: "1rem" }}
         justifyContent={"space-evenly"}

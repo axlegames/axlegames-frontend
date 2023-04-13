@@ -29,7 +29,7 @@ const GuestWordle = () => {
 
   const navigate = useNavigate();
 
-  const { contestId, gameStateId, game } = useParams();
+  const { contestId, gameStateId, game, isContest } = useParams();
 
   const [state, dispatch] = useReducer(wordleReducer, initState);
 
@@ -233,7 +233,7 @@ const GuestWordle = () => {
         isOpen={isWon}
         children={
           <WonModal
-            isPractice={true}
+            isContest={isContest || ""}
             isAIWordle={false}
             letter={state.wordlength}
             tries={state.currentRow}
@@ -255,7 +255,7 @@ const GuestWordle = () => {
         isOpen={isLost}
         children={
           <LostModal
-            isPractice={true}
+            isPractice={"true"}
             isGuest={true}
             stats={{
               currentStreak: 0,

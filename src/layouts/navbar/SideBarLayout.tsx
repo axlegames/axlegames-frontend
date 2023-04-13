@@ -10,7 +10,6 @@ import {
 import { theme } from "../../config/theme.config";
 
 // import ComingSoon from "../assets/logos/asap.png";
-import Live from "../../assets/logos/live.png";
 import Logo from "../../assets/home/logos/logo.png";
 
 import SideBarButton from "./components/SideBarButton";
@@ -41,6 +40,7 @@ import Telegram from "../../assets/socials/telegram.png";
 import Discord from "../../assets/socials/discord.png";
 import Terms from "../Terms";
 import HighLightButton from "./components/HighLightButton";
+import { FaMoneyBillWaveAlt } from "react-icons/fa";
 
 const images = [
   { img: Instagram, url: "https://www.instagram.com/axlegames/" },
@@ -196,17 +196,13 @@ const SideBarLayout = (props: SideBarProps) => {
             icon={<HiUser size={32} />}
           />
         </IsLoggedIn>
-        <Box width={"100%"} position="relative">
-          <Image
-            position={"absolute"}
-            zIndex={100}
-            right="5%"
-            top={"-12%"}
-            src={Live}
-            height="12"
-            width={"12"}
-          />
-        </Box>
+        <SideBarButton
+          onClick={() => {
+            window.open("https://sale.axlegames.io", "_blank");
+          }}
+          title={"AXLE Token Sale"}
+          icon={<FaMoneyBillWaveAlt size={32} />}
+        />
         <SideBarButton
           isCommingSoon={false}
           onClick={() => clearConnectionAndChangeRoute("/marketplace")}

@@ -15,17 +15,20 @@ interface Props {
   isAIWordle: boolean;
   tries: number;
   letter: number;
-  isPractice: boolean;
+  isContest: string;
 }
 
 const WonModal = (props: Props) => {
-  console.log(props);
   const getColor = (key: string) => {
     if (key === "absent") return "gray.200";
     if (key === "present") return "yellow.400";
     if (key === "correct") return "green.400";
     return "gray.200";
   };
+
+  const wp = (props.stats.winPercent || 0).toFixed(2);
+  const s = (props.stats.currentStreak || 0).toFixed(2);
+  const ms = (props.stats.maxStreak || 0).toFixed(2);
 
   return (
     <Box
@@ -38,7 +41,7 @@ const WonModal = (props: Props) => {
         You have won {props.letter} letter AI wordle in {props.tries} tries.
       </Text>
       <Divider></Divider>
-      {props.isGuest || props.isPractice ? null : (
+      {props.isGuest || props.isContest !== "true" ? null : (
         <Box>
           <Text fontSize={"xl"} textAlign={"center"}>
             Statistics
@@ -64,7 +67,7 @@ const WonModal = (props: Props) => {
               alignItems="center"
               flexDirection={"column"}
             >
-              <Text fontSize={"2xl"}>{props.stats.winPercent.toFixed(2)}</Text>
+              <Text fontSize={"2xl"}>{wp}</Text>
               <Text>Win %</Text>
             </Box>
             <Box
@@ -73,7 +76,7 @@ const WonModal = (props: Props) => {
               justifyContent="center"
               flexDirection={"column"}
             >
-              <Text fontSize={"2xl"}>{props.stats.currentStreak}</Text>
+              <Text fontSize={"2xl"}>{s}</Text>
               <Text>Streak</Text>
             </Box>
             <Box
@@ -82,14 +85,14 @@ const WonModal = (props: Props) => {
               justifyContent="center"
               flexDirection={"column"}
             >
-              <Text fontSize={"2xl"}>{props.stats.maxStreak}</Text>
+              <Text fontSize={"2xl"}>{ms}</Text>
               <Text>Max Streak</Text>
             </Box>
           </Grid>
         </Box>
       )}
       <Box>
-        {props.isGuest || props.isPractice ? (
+        {props.isGuest || props.isContest !== "true" ? (
           <Box
             display={"flex"}
             justifyContent="center"

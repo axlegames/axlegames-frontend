@@ -393,7 +393,7 @@ const Wordle = () => {
         isOpen={isWon}
         children={
           <WonModal
-            isPractice={Boolean(isContest)}
+            isContest={isContest || ""}
             isGuest={false}
             isAIWordle={false}
             letter={state.wordlength}
@@ -410,7 +410,7 @@ const Wordle = () => {
         isOpen={isLost}
         children={
           <LostModal
-            isPractice={Boolean(isContest)}
+            isPractice={isContest || ""}
             stats={stats}
             shareResult={shareResult}
           />
