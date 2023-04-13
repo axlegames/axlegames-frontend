@@ -38,6 +38,7 @@ import NeuButton from "../../Axle/component/NeuButton";
 import { TokenAuthStatus } from "../../../config/auth";
 
 import TryNow from "../components/TryNow";
+import AIEntryCard from "../components/AIEntryCard";
 
 interface Props {
   open: boolean;
@@ -72,18 +73,13 @@ const GameEntryModal = (props: Props) => {
   });
 
   const [isMobile] = useMediaQuery("(max-width: 600px)");
-  const [contests, setContests] = useState<AxleContests>();
+  const [practiceContests, setPracticeContests] = useState<AxleContests>();
+  const [gameNightContests, setGameNightContests] = useState<AxleContests>();
 
   function sort(a: AxleContest, b: AxleContest) {
-    if (a.gameType === GameType.PRACTICE) {
-      return 0;
-    }
-    if (a.gameType === GameType.GAMIN_NIGHTS) {
-      return -1;
-    }
-    if (a.gameType === GameType.CONTEST) {
-      return 1;
-    }
+    if (a.gameType === GameType.PRACTICE) return 0;
+    if (a.gameType === GameType.GAMIN_NIGHTS) return -1;
+    if (a.gameType === GameType.CONTEST) return 1;
     return 0;
   }
 
@@ -103,10 +99,18 @@ const GameEntryModal = (props: Props) => {
 
   useEffect(() => {
     if (props.open) {
-      HomeServices.getAxleGameContest(props._id).then((res) => {
+      HomeServices.getAxleGameContest(props._id, "practice").then((res) => {
         const results = filterFreeAndSpecialContests(res.axleContests);
         results.sort(sort);
-        setContests({
+        setPracticeContests({
+          ...res,
+          axleContests: results,
+        });
+      });
+      HomeServices.getAxleGameContest(props._id, "gamenights").then((res) => {
+        const results = filterFreeAndSpecialContests(res.axleContests);
+        results.sort(sort);
+        setGameNightContests({
           ...res,
           axleContests: results,
         });
@@ -339,12 +343,24 @@ const GameEntryModal = (props: Props) => {
               gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }}
               px={4}
             >
-              {contests?.axleContests.map((d, i) => (
+              {practiceContests?.axleContests.map((d, i) => (
                 <Box width={"100%"} key={i}>
                   <EntryCard
                     index={i}
                     name={props.name}
-                    currentTime={contests.currentTime}
+                    currentTime={practiceContests.currentTime}
+                    contest={d}
+                    action={() => enterContest(d, false)}
+                  />
+                </Box>
+              ))}
+
+              {gameNightContests?.axleContests.map((d, i) => (
+                <Box width={"100%"} key={i}>
+                  <AIEntryCard
+                    index={i}
+                    name={props.name}
+                    currentTime={gameNightContests.currentTime}
                     contest={d}
                     action={() => enterContest(d, false)}
                   />

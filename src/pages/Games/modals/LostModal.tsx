@@ -14,9 +14,9 @@ interface Props {
 }
 
 const LostModal = (props: Props) => {
-  const wp = (props.stats.winPercent || 0).toFixed(2);
-  const s = (props.stats.currentStreak || 0).toFixed(2);
-  const ms = (props.stats.maxStreak || 0).toFixed(2);
+  const wp = (props.stats.winPercent || 0).toFixed(0);
+  const s = (props.stats.currentStreak || 0).toFixed(0);
+  const ms = (props.stats.maxStreak || 0).toFixed(0);
 
   return (
     <Box

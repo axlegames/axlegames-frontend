@@ -24,29 +24,10 @@ import {
   WordleState,
 } from "./AIWordleReducer";
 
-import WordleTimer from "../../hooks/WordleTimer";
 import { TokenAuthStatus } from "../../../../config/auth";
 
 import AIWordleGrid from "./components/AIWordleGrid";
 import NeuButton from "../../../Axle/component/NeuButton";
-
-interface Props {
-  isLoaded: boolean;
-  currentTime: number;
-  forceFinishGame: Function;
-  deadline: string;
-}
-
-const Timer = (props: Props) => {
-  return props.isLoaded ? (
-    <WordleTimer
-      isLoaded={props.isLoaded}
-      endgame={() => props.forceFinishGame()}
-      deadline={props.deadline}
-      currentTime={props.currentTime}
-    />
-  ) : null;
-};
 
 const AIWordle = () => {
   const toast = useToast();
@@ -67,8 +48,6 @@ const AIWordle = () => {
     winPercent: 0,
   });
   const [state, dispatch] = useReducer(aiWordleReducer, initState);
-  const [deadLine, setDeadLine] = useState<string>(new Date().toString());
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const isAuthorized = (status: TokenAuthStatus) => {
     if (
@@ -79,20 +58,6 @@ const AIWordle = () => {
       navigate("/");
       return window.location.reload();
     }
-  };
-
-  const fectchState = (game: Status) => {
-    dispatch({
-      type: KEY_ACTION.ON_FETCH,
-      payload: {
-        guessesStatus: [],
-        key: "",
-        gameState: game.wordList,
-        gameStatus: game.gameStatus,
-        guessLength: game.guessLength,
-        wordLength: game.wordLength,
-      },
-    });
   };
 
   const initializeState = (game: Status) => {
@@ -125,15 +90,22 @@ const AIWordle = () => {
   };
 
   useEffect(() => {
-    GameServices.getGameState({ userId: localStorage.getItem("userId") })
-      .then((game) => {
+    GameServices.getGameState({
+      userId: localStorage.getItem("userId"),
+    })
+      .then(async (game) => {
         isAuthorized(game as TokenAuthStatus);
         game = game as Status;
         if (game.isGameCompeted)
           if (game.isWinningWord) setIsWon(true);
           else setIsLost(true);
-        if (game.wordList.length > 0) fectchState(game);
-        else initializeState(game);
+        if (game.wordList.length > 0) {
+          await GameServices.cleanGameState({
+            userId: localStorage.getItem("userId"),
+            isReset: true,
+          });
+          // fectchState(game);
+        } else initializeState(game);
       })
       .catch((err) => console.log(err));
 
@@ -164,10 +136,6 @@ const AIWordle = () => {
           const isOpened = opensAt - time < 0 ? true : false;
           if (!isOpened)
             return navigate(`/${game}/lobby/${contestId}/${gameStateId}`);
-          setDeadLine(
-            r.contest.axleContestInfo?.expiresAt || new Date().toString()
-          );
-          setIsLoaded(true);
         })
         .catch((err) => {
           console.log(err);
@@ -210,8 +178,6 @@ const AIWordle = () => {
     isAuthorized(resp as TokenAuthStatus);
     const { guessStatus, inValidWord, isWinningWord } = resp as GuessStatus;
 
-    if (state.currentRow === 15) return forceFinishGame();
-
     if (inValidWord) {
       return toast({
         title: "Invalid Word",
@@ -252,36 +218,41 @@ const AIWordle = () => {
     if (isWinningWord) {
       await GameServices.cleanGameState({
         userId: localStorage.getItem("userId"),
+        isReset: true,
       });
-      setTimeout(() => {
-        if (isWinningWord) {
-          GameServices.saveGame(
-            localStorage.getItem("userId") ?? "",
-            contestId ?? "",
-            state.currentRow + 1,
-            true
-          )
-            .then((r) => console.log(r))
-            .catch((e) => console.log(e));
+      setIsWon(true);
+      GameServices.saveGame(
+        localStorage.getItem("userId") ?? "",
+        contestId ?? "",
+        state.currentRow + 1,
+        true
+      )
+        .then((r) => {
           GameServices.getPlayerStats(contestId || "").then((resp) => {
+            console.log(r);
             setStats(resp);
             setIsWon(true);
           });
-        } else {
-          GameServices.saveGame(
-            localStorage.getItem("userId") ?? "",
-            contestId ?? "",
-            state.currentRow + 1,
-            false
-          )
-            .then((r) => console.log(r))
-            .catch((e) => console.log(e));
+        })
+        .catch((e) => console.log(e));
+    }
+
+    if (state.currentRow === 5) {
+      setIsLost(true);
+      GameServices.saveGame(
+        localStorage.getItem("userId") ?? "",
+        contestId ?? "",
+        state.currentRow + 1,
+        false
+      )
+        .then((r) => {
           GameServices.getPlayerStats(contestId || "").then((resp) => {
             setStats(resp);
             setIsLost(true);
+            console.log(r);
           });
-        }
-      }, 1500);
+        })
+        .catch((e) => console.log(e));
     }
   };
 
@@ -300,37 +271,39 @@ const AIWordle = () => {
     await GameServices.cleanGameState({
       userId: localStorage.getItem("userId"),
     });
-    setTimeout(() => {
-      if (isWinningWord) {
-        setIsWon(true);
-        GameServices.saveGame(
-          localStorage.getItem("userId") ?? "",
-          contestId ?? "",
-          state.currentRow + 1,
-          true
-        )
-          .then((r) => console.log(r))
-          .catch((e) => console.log(e));
-        GameServices.getPlayerStats(contestId || "").then((resp) => {
-          setStats(resp);
-          setIsWon(true);
-        });
-      } else {
-        setIsLost(true);
-        GameServices.saveGame(
-          localStorage.getItem("userId") ?? "",
-          contestId ?? "",
-          state.currentRow + 1,
-          false
-        )
-          .then((r) => console.log(r))
-          .catch((e) => console.log(e));
-        GameServices.getPlayerStats(contestId || "").then((resp) => {
-          setStats(resp);
-          setIsLost(true);
-        });
-      }
-    }, 1500);
+    if (isWinningWord) {
+      setIsWon(true);
+      GameServices.saveGame(
+        localStorage.getItem("userId") ?? "",
+        contestId ?? "",
+        state.currentRow + 1,
+        true
+      )
+        .then((r) => {
+          GameServices.getPlayerStats(contestId || "").then((resp) => {
+            setStats(resp);
+            setIsWon(true);
+            console.log(r);
+          });
+        })
+        .catch((e) => console.log(e));
+    } else {
+      setIsLost(true);
+      GameServices.saveGame(
+        localStorage.getItem("userId") ?? "",
+        contestId ?? "",
+        state.currentRow + 1,
+        false
+      )
+        .then((r) => {
+          GameServices.getPlayerStats(contestId || "").then((resp) => {
+            setStats(resp);
+            setIsLost(true);
+            console.log(r);
+          });
+        })
+        .catch((e) => console.log(e));
+    }
   };
 
   const onDelete = () =>
@@ -369,14 +342,7 @@ const AIWordle = () => {
         username={localStorage.getItem("username")}
         title={`AI WORDLE ${state.wordlength}`}
       />
-      {isContest === "true" ? (
-        <Timer
-          currentTime={currentTime}
-          deadline={deadLine}
-          forceFinishGame={forceFinishGame}
-          isLoaded={isLoaded}
-        />
-      ) : null}
+
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}

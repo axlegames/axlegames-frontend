@@ -63,9 +63,12 @@ export class HomeServices {
   };
 
   static getAxleGameContest = async (
-    gameTypeId: string
+    gameTypeId: string,
+    type: string
   ): Promise<AxleContests> => {
-    const response = await axios.get(`${gamePrefix}/contest/${gameTypeId}`);
+    const response = await axios.get(
+      `${gamePrefix}/contest/${gameTypeId}/${type}`
+    );
     let axleGames: AxleContests = response.data;
     return axleGames;
   };
