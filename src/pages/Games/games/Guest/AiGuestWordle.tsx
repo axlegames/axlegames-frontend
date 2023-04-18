@@ -210,7 +210,7 @@ const AIWordle = () => {
     });
 
   const shareResult = () => {
-    let result: string = `Hi! I have guessed this ${state.wordlength}-letter word in ${state.currentRow} tries on Axlegames.io - a skill-based AI gaming platform that is introducing Metamorphosis AI games to web3. Signup using the link below and win 500 AXLE tokens by playing your first AI game - https://play.axlegames.io`;
+    let result: string = `Hi! I have guessed this ${state.wordlength}-letter word in ${state.currentRow} tries on Axlegames.io - a skill-based AI gaming platform that is introducing Metamorphosis AI games to web3. Signup using the link below and win 500 AX Coins by playing your first AI game - https://play.axlegames.io`;
 
     window.open(
       `https://twitter.com/intent/tweet?text=${result}`,

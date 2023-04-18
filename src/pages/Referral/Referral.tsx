@@ -119,7 +119,7 @@ const Referral = () => {
                   key={i}
                 >
                   <Td>{d}</Td>
-                  <Td>+{500} AXLE</Td>
+                  <Td>+{500} AX</Td>
                 </Tr>
               ))}
             </Tbody>
@@ -150,9 +150,7 @@ const Referral = () => {
         </Box>
 
         <Box borderRadius={"lg"} p={4} bg={theme.fgColor}>
-          <Text color={theme.secondaryTextColor}>
-            100 AXLE Tokens per friend
-          </Text>
+          <Text color={theme.secondaryTextColor}>100 AX Tokens per friend</Text>
           <Box width="100%" my={2} bg={theme.bgColor} p={2} borderRadius="lg">
             <Text color={theme.primaryTwoTextColor}>{link}</Text>
           </Box>

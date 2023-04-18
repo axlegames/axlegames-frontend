@@ -54,7 +54,6 @@ const Leaderboard = () => {
     console.log(contestName);
     GameServices.getContestLeaderboardResults(contestName)
       .then((res) => {
-        console.log(res);
         setData(res);
       })
       .catch((err) => console.log(err));

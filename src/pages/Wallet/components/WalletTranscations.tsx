@@ -21,10 +21,10 @@ const WalletTranscations = (props: Props) => {
   const headers = [
     "Date",
     "Transcation Type",
-    "Amount",
+    "Amount (AX)",
     "Type",
-    "Reward",
-    "Balance",
+    "Reward (AX)",
+    "Balance (AX)",
   ];
   return (
     <Box fontFamily={"quicksand"} fontWeight="bold">
@@ -92,10 +92,10 @@ const WalletTranscations = (props: Props) => {
                     </Box>
                   </Td>
                   <Td>{d.transactionType} </Td>
-                  <Td>{`${sign}` + feeType} AXLE</Td>
+                  <Td>{`${sign}` + feeType} </Td>
                   <Td>{type}</Td>
-                  <Td>+{d.reward}</Td>
-                  <Td>{d.currentBalance}</Td>
+                  <Td>+{d.reward} </Td>
+                  <Td>{d.currentBalance} </Td>
                 </Tr>
               );
             })}

@@ -144,7 +144,6 @@ const ChallengesC = () => {
   ) => {
     // isAuthorized(res as TokenAuthStatus);
     res = res as EntryStatus;
-    console.log(res);
     const status = res.status.valueOf().toString();
     const toString = (entryStatus: ENTRY_STATUS): string => {
       return entryStatus.valueOf().toString();

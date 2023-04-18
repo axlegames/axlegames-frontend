@@ -81,8 +81,8 @@ const GameHistoryModal = (props: any) => {
                   ) : null}
                   <Text zIndex={2}>{d.game}</Text>
                 </Td>
-                <Td>{d.fee} AXLE</Td>
-                <Td>{d.reward} AXLE</Td>
+                <Td>{d.fee} AX</Td>
+                <Td>{d.reward} AX</Td>
               </Tr>
             ))}
           </Tbody>

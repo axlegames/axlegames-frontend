@@ -14,7 +14,7 @@ const TransactionSuccessDialog = (props: any) => {
       >
         <Image width={"50%"} src={Success} />
         <Text fontSize={"xl"}>Welcome to AXLE family!</Text>{" "}
-        <Text fontSize={"md"}> You purchased {props.fee} AXLE</Text>
+        <Text fontSize={"md"}> You purchased {props.fee} AX Coins</Text>
         <a
           href={`https://testnet.bscscan.com/tx/` + props.hash}
           target="_blank"
