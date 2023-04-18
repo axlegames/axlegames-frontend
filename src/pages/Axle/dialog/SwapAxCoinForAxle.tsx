@@ -13,23 +13,13 @@ import AxleDialog from "./AxleDialog";
 import TransactionSuccessDialog from "./TransactionSuccessDialog";
 import { useEffect, useState } from "react";
 import NeuButton from "../component/NeuButton";
+import creds from "../../../abi/creds";
 import { PaymentStatus, WalletServices } from "../../Wallet/WalletServices";
 import env from "react-dotenv";
 
-import TokenAbiTestnet from "../../../abi/testnet/AxleTokenTest.json";
-
-const TOKEN_CONTRACT_ADDRESS = "0x3b12b9ec6a9f1514809eed63597c13ff6146aa08";
-const axleTokenABI = TokenAbiTestnet;
-const chain = {
-  chainName: "BSC Testnet",
-  chainId: 97,
-  nativeCurrency: {
-    name: "BSC Testnet",
-    decimals: 18,
-    symbol: "BNB",
-  },
-  rpcUrls: ["https://data-seed-prebsc-2-s3.binance.org:8545"],
-};
+const TOKEN_CONTRACT_ADDRESS = creds.AXLE_CONTRACT;
+const axleTokenABI = creds.tokenAbi;
+const chain = creds.chain;
 
 const web3Modal = new Web3Modal({
   network: "testnet",

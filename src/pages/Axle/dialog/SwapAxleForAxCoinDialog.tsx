@@ -13,22 +13,13 @@ import AxleDialog from "./AxleDialog";
 import TransactionSuccessDialog from "./TransactionSuccessDialog";
 import { useEffect, useState } from "react";
 import NeuButton from "../component/NeuButton";
+import creds from "../../../abi/creds";
 import { PaymentStatus, WalletServices } from "../../Wallet/WalletServices";
 
-import TokenAbiTestnet from "../../../abi/testnet/AxleTokenTest.json";
+const TOKEN_CONTRACT_ADDRESS = creds.AXLE_CONTRACT;
+const axleTokenABI = creds.tokenAbi;
+const chain = creds.chain;
 
-const TOKEN_CONTRACT_ADDRESS = "0x3b12b9ec6a9f1514809eed63597c13ff6146aa08";
-const axleTokenABI = TokenAbiTestnet;
-const chain = {
-  chainName: "BSC Testnet",
-  chainId: 97,
-  nativeCurrency: {
-    name: "BSC Testnet",
-    decimals: 18,
-    symbol: "BNB",
-  },
-  rpcUrls: ["https://data-seed-prebsc-2-s3.binance.org:8545"],
-};
 const web3Modal = new Web3Modal({
   network: "testnet",
   theme: "dark",
@@ -224,11 +215,14 @@ const SwapAxleForAxCoinDialog = (props: any) => {
       });
 
     try {
-      console.log("sad");
       const web3Provider = await web3Modal.connect();
+      console.log(web3Provider);
       const provider = new ethers.providers.Web3Provider(web3Provider);
+      console.log(provider);
       const network = await provider.getNetwork();
+      console.log(provider);
       if (network.chainId !== chain.chainId) switchNetwork();
+      console.log(provider);
       const signer = provider.getSigner();
       const token = new ethers.Contract(
         TOKEN_CONTRACT_ADDRESS,
@@ -236,7 +230,6 @@ const SwapAxleForAxCoinDialog = (props: any) => {
         signer
       );
       console.log(token);
-
       let c = axle / 10 ** 9;
       const hash = await token.transfer(
         "0x46D3099487DDcf724df70ed11b40109dAb586F79",
