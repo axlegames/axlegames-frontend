@@ -54,7 +54,9 @@ const Leaderboard = () => {
     console.log(contestName);
     GameServices.getContestLeaderboardResults(contestName)
       .then((res) => {
-        setData(res);
+        console.log(res);
+
+        // if (res.length !== 0) setData(res);
       })
       .catch((err) => console.log(err));
   }, [params]);
@@ -63,7 +65,7 @@ const Leaderboard = () => {
     const contestName = wordle + "-" + e.target.value;
     GameServices.getContestLeaderboardResults(contestName)
       .then((res) => {
-        setData(res);
+        if (!res.error) setData(res.axleContests);
       })
       .catch((err) => console.log(err));
   };

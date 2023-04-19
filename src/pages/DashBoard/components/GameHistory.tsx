@@ -160,8 +160,8 @@ const GameHistory = () => {
                   ) : null}
                   <Text zIndex={2}>{d.game}</Text>
                 </Td>
-                <Td>{d.fee} AX</Td>
-                <Td>{d.reward} AX</Td>
+                <Td>{d.fee} AXCoins</Td>
+                <Td>{d.reward} AXCoins</Td>
               </Tr>
             ))}
           </Tbody>

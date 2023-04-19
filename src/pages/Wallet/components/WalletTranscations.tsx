@@ -18,13 +18,14 @@ interface Props {
 }
 const WalletTranscations = (props: Props) => {
   const transactions: Fee[] = props.transactions;
+  const hx = [false, false, true, false, true, true];
   const headers = [
     "Date",
     "Transcation Type",
-    "Amount (AX)",
+    "Amount",
     "Type",
-    "Reward (AX)",
-    "Balance (AX)",
+    "Reward ",
+    "Balance ",
   ];
   return (
     <Box fontFamily={"quicksand"} fontWeight="bold">
@@ -66,7 +67,10 @@ const WalletTranscations = (props: Props) => {
                   color={theme.secondaryTwoTextColor}
                   fontSize={"md"}
                 >
-                  {h}
+                  <Box>
+                    <Text>{h}</Text>
+                    {hx[i] ? <Text fontSize={"x-small"}>(AXCoins)</Text> : null}
+                  </Box>
                 </Th>
               ))}
             </Tr>

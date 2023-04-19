@@ -49,7 +49,7 @@ const WalletHeader = (props: WalletProps) => {
         img={Trophy}
         label="Swap AXCoin for AXLE"
         main="Wallet Balance"
-        sub={`${props.balance} AX Coins`}
+        sub={`${props.balance} AXCoins`}
       />
       <WalletCard
         form={false}

@@ -103,7 +103,10 @@ export class GameServices {
 
   static getContestLeaderboardResults = async (
     contestName: string
-  ): Promise<Array<LeaderboardInterface>> => {
+  ): Promise<{
+    error: boolean;
+    axleContests: Array<LeaderboardInterface>;
+  }> => {
     return await (
       await axios.get(`${gamePrefix}/contest/leaderboard/${contestName}`)
     ).data;
