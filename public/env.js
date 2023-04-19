@@ -56,7 +56,7 @@ window.env = {
   "npm_package_dependencies_react_crypto_icons": "^1.0.5",
   "npm_package_devDependencies__types_react_dom": "^18.0.4",
   "npm_package_dependencies__chakra_ui_react": "^2.3.4",
-  "PATH": "/var/folders/kx/__4j06dj131fc8hckq8l4_c00000gn/T/yarn--1681808098486-0.14702653821489275:/Users/praneethnagu/Desktop/axleverse/axlegames-frontend/node_modules/.bin:/Users/praneethnagu/.config/yarn/link/node_modules/.bin:/Users/praneethnagu/.yarn/bin:/usr/local/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/bin/node_modules/npm/bin/node-gyp-bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/praneethnagu/.cargo/bin:/Users/praneethnagu/Documents/flutter/bin:/Users/praneethnagu/Documents/flutter/bin",
+  "PATH": "/var/folders/kx/__4j06dj131fc8hckq8l4_c00000gn/T/yarn--1681896943961-0.9688785495687418:/Users/praneethnagu/Desktop/axleverse/axlegames-frontend/node_modules/.bin:/Users/praneethnagu/.config/yarn/link/node_modules/.bin:/Users/praneethnagu/.yarn/bin:/usr/local/libexec/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/lib/node_modules/npm/bin/node-gyp-bin:/usr/local/bin/node_modules/npm/bin/node-gyp-bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/praneethnagu/.cargo/bin:/Users/praneethnagu/Documents/flutter/bin:/Users/praneethnagu/Documents/flutter/bin",
   "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"start\"],\"original\":[\"start\"]}",
   "npm_package_dependencies_react_use_websocket": "^4.3.1",
   "_": "/Users/praneethnagu/Desktop/axleverse/axlegames-frontend/node_modules/.bin/react-dotenv",
@@ -134,6 +134,6 @@ window.env = {
   "npm_node_execpath": "/usr/local/bin/node",
   "npm_package_devDependencies__testing_library_jest_dom": "^5.16.4",
   "npm_config_version_tag_prefix": "v",
-  "IS_DEV_SERVER": "true",
+  "IS_DEV_SERVER": "false",
   "mpk": "17d2aaff70db061d71f226e9a7f09eeadb88804d13c260ef5f2ff8ebc2af82cb"
 };
