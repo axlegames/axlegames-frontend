@@ -324,7 +324,7 @@ const AIWordle = () => {
     });
 
   const shareResult = () => {
-    let result: string = `Hi! I have guessed this ${state.wordlength}-letter word in ${state.currentRow} tries on Axlegames.io - a skill-based AI gaming platform that is introducing Metamorphosis AI games to web3. Signup using the link below and win 500 AXLE tokens by playing your first AI game - https://play.axlegames.io`;
+    let result: string = `Hi! I have guessed the ${state.wordlength}-letter word in ${state.currentRow} tries on axlegames.io - First ever skill-based AI gaming platform introducing Metamorphosis AI games to web3. Signup, Play, and Share your result to earn free AXLE tokens. Presale coming soon on Pinksale. @AxleGames #Gamefi #AI`;
     window.open(
       `https://twitter.com/intent/tweet?text=${result}`,
       "_blank" // <- This is what makes it open in a new window.
