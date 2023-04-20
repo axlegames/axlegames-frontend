@@ -3,13 +3,12 @@ import { Box, Flex, Grid, Text } from "@chakra-ui/react";
 import { BiArrowBack } from "react-icons/bi/index";
 import { theme } from "../../../config/theme.config";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+
 import MenuModal from "../modals/MenuModal";
 import HowToPlayModal from "../modals/HowToPlayModal";
 
 const Navbar = (props: any) => {
   const [howToPlayModal, setHowToPlayModal] = useState(false);
-  const navigate = useNavigate();
 
   return (
     <Box
@@ -37,7 +36,7 @@ const Navbar = (props: any) => {
         <Flex>
           <BiArrowBack
             cursor={"pointer"}
-            onClick={() => navigate("/")}
+            onClick={() => props.action()}
             size={42}
           />
         </Flex>

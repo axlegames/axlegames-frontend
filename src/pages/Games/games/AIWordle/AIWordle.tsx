@@ -65,7 +65,10 @@ const AIWordle = () => {
     const initState: WordleState = {
       guessLength: 1,
       wordlength: game.wordLength,
-      gameState: GameServices.createInitState(game.guessLength, 5),
+      gameState: GameServices.createInitState(
+        game.guessLength,
+        game.wordLength
+      ),
       gameStatus: GameServices.createInitState(1, game.wordLength),
       completedRows: completedRows,
       currentGuess: "",
@@ -79,6 +82,22 @@ const AIWordle = () => {
         gameState: [],
         gameStatus: [],
         currentState: initState,
+      },
+    });
+  };
+
+  const fectchState = (game: Status) => {
+    console.log("here");
+    console.log(game.wordLength);
+    dispatch({
+      type: KEY_ACTION.ON_FETCH,
+      payload: {
+        guessesStatus: [],
+        key: "",
+        gameState: game.wordList,
+        gameStatus: game.gameStatus,
+        guessLength: game.guessLength,
+        wordLength: game.wordLength,
       },
     });
   };
@@ -99,7 +118,7 @@ const AIWordle = () => {
             userId: localStorage.getItem("userId"),
             isReset: true,
           });
-          // fectchState(game);
+          fectchState(game);
         } else initializeState(game);
       })
       .catch((err) => console.log(err));
@@ -344,11 +363,20 @@ const AIWordle = () => {
   return (
     <Box>
       <Navbar
+        action={() => forceFinishGame()}
         game={`aiwordle`}
         username={localStorage.getItem("username")}
         title={`AI WORDLE ${state.wordlength}`}
       />
 
+      <Box p={8} bg={theme.bgColor} display={"flex"} justifyContent="flex-end">
+        <NeuButton
+          bg={theme.neuPrimaryBg}
+          label="End Game"
+          shadow={theme.newPrimaryShadow}
+          onClick={() => forceFinishGame()}
+        />
+      </Box>
       <MenuModal
         title={"Hooray!"}
         isOpen={isWon}
@@ -384,21 +412,6 @@ const AIWordle = () => {
         close={() => navigate("/")}
       />
 
-      {isContest === "false" ? (
-        <Box
-          bg={theme.bgColor}
-          p={8}
-          justifyContent="flex-end"
-          display={"flex"}
-        >
-          <NeuButton
-            bg={theme.neuPrimaryBg}
-            label="End Game"
-            shadow={theme.newPrimaryShadow}
-            onClick={() => forceFinishGame()}
-          />
-        </Box>
-      ) : null}
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -417,7 +430,6 @@ const AIWordle = () => {
           completedRows={state.completedRows}
           game={state.gameState}
         />
-
         <Box display={"flex"} justifyContent="center" pos={"relative"}>
           <Box pb={8} bottom={0}>
             <KeyBoard

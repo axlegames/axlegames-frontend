@@ -6,6 +6,8 @@ let URL = "";
 if (SERVER === "true") URL = "http://localhost:5001";
 else URL = "https://api.axlegames.io";
 
+console.log(SERVER);
+
 const axlegamesPrefix = URL + "/axlegames/api/v1/";
 const userPrefix = axlegamesPrefix + "users";
 const gamePrefix = axlegamesPrefix + "games";

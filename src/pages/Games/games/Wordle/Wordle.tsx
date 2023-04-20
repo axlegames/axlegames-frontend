@@ -417,7 +417,11 @@ const Wordle = () => {
         }
         close={() => navigate("/")}
       />
-      <Navbar username={localStorage.getItem("username")} title={game} />
+      <Navbar
+        action={() => forceFinishGame()}
+        username={localStorage.getItem("username")}
+        title={game}
+      />
 
       <Box
         bg={theme.bgColor}
@@ -427,21 +431,14 @@ const Wordle = () => {
         justifyContent="flex-end"
         alignItems={"center"}
       >
-        {isContest === "false" ? (
-          <Box
-            bg={theme.bgColor}
-            p={4}
-            justifyContent="center"
-            display={"flex"}
-          >
-            <NeuButton
-              bg={theme.neuPrimaryBg}
-              label="End Game"
-              shadow={theme.newPrimaryShadow}
-              onClick={() => forceFinishGame()}
-            />
-          </Box>
-        ) : null}
+        <Box bg={theme.bgColor} p={4} justifyContent="center" display={"flex"}>
+          <NeuButton
+            bg={theme.neuPrimaryBg}
+            label="End Game"
+            shadow={theme.newPrimaryShadow}
+            onClick={() => forceFinishGame()}
+          />
+        </Box>
       </Box>
       {isContest === "true" ? (
         <Timer

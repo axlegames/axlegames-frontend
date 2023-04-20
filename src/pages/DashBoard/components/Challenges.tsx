@@ -15,6 +15,7 @@ import Web3Modal from "web3modal";
 import AuthDialog from "../../Auth/dialogs/AuthDialog";
 import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+
 import ChallengeModal from "./ChallengesModal";
 import Status from "./Status";
 import {
