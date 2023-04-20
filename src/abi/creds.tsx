@@ -1,7 +1,7 @@
-import env from "react-dotenv";
+// import env from "react-dotenv";
 
-import TokenAbiMainnet from "./mainnet/AxleTokenMain.json";
-import PresaleAbiMainnet from "./mainnet/AxlePresaleMain.json";
+// import TokenAbiMainnet from "./mainnet/AxleTokenMain.json";
+// import PresaleAbiMainnet from "./mainnet/AxlePresaleMain.json";
 
 import TokenAbiTestnet from "../abi/testnet/AxleTokenTest.json";
 import PresaleAbiTestnet from "../abi/testnet/AxlePresaleTest.json";
@@ -30,26 +30,26 @@ interface Creds {
   chain: Chain;
 }
 
-const mainnet: Creds = {
-  AXLE_CONTRACT: "0x7c56C79a454CBFaf63BAdb39f82555109a2A80Bf",
-  AXLE_ZEUS_PRESALE: "0xeA29a0f11EaAF0f88DBf705b2b53A09767cDF305",
-  tokenAbi: TokenAbiMainnet,
-  presaleAbi: PresaleAbiMainnet,
-  stakingAbi: null,
-  AXLE_STAKING: "",
-  AXLE_SENDER: "",
-  isTestNet: true,
-  chain: {
-    chainName: "Smart Chain",
-    chainId: 56,
-    nativeCurrency: {
-      name: "Smart Chain",
-      decimals: 18,
-      symbol: "BNB",
-    },
-    rpcUrls: ["https://bsc-dataseed.binance.org/"],
-  },
-};
+// const mainnet: Creds = {
+//   AXLE_CONTRACT: "0x7c56C79a454CBFaf63BAdb39f82555109a2A80Bf",
+//   AXLE_ZEUS_PRESALE: "0xeA29a0f11EaAF0f88DBf705b2b53A09767cDF305",
+//   tokenAbi: TokenAbiMainnet,
+//   presaleAbi: PresaleAbiMainnet,
+//   stakingAbi: null,
+//   AXLE_STAKING: "",
+//   AXLE_SENDER: "",
+//   isTestNet: true,
+//   chain: {
+//     chainName: "Smart Chain",
+//     chainId: 56,
+//     nativeCurrency: {
+//       name: "Smart Chain",
+//       decimals: 18,
+//       symbol: "BNB",
+//     },
+//     rpcUrls: ["https://bsc-dataseed.binance.org/"],
+//   },
+// };
 
 const testnet: Creds = {
   AXLE_CONTRACT: "0x3b12b9ec6a9f1514809eed63597c13ff6146aa08",
