@@ -222,11 +222,8 @@ const AIWordle = () => {
 
     const gameStatus = state.gameStatus;
     const len = gameStatus[gameStatus.length - 1].length;
-    if (len === 0) {
-      gameStatus.push(currentGuessStatus);
-    } else {
-      gameStatus.push([]);
-    }
+    if (len === 0) gameStatus.push(currentGuessStatus);
+    else gameStatus.push([]);
 
     dispatch({
       type: KEY_ACTION.ON_ENTER,
@@ -243,7 +240,7 @@ const AIWordle = () => {
     if (isWinningWord) {
       await GameServices.cleanGameState({
         userId: localStorage.getItem("userId"),
-        isReset: true,
+        isReset: false,
       });
       setIsWon(true);
       GameServices.saveGame(
@@ -263,6 +260,10 @@ const AIWordle = () => {
     }
 
     if (state.currentRow === 15) {
+      await GameServices.cleanGameState({
+        userId: localStorage.getItem("userId"),
+        isReset: false,
+      });
       setIsLost(true);
       GameServices.saveGame(
         localStorage.getItem("userId") ?? "",
@@ -295,6 +296,7 @@ const AIWordle = () => {
     const { isWinningWord } = resp as GuessStatus;
     await GameServices.cleanGameState({
       userId: localStorage.getItem("userId"),
+      reset: true,
     });
     if (isWinningWord) {
       setIsWon(true);
