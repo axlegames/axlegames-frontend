@@ -6,9 +6,11 @@ import { useState } from "react";
 
 import MenuModal from "../modals/MenuModal";
 import HowToPlayModal from "../modals/HowToPlayModal";
+import { useNavigate } from "react-router";
 
 const Navbar = (props: any) => {
   const [howToPlayModal, setHowToPlayModal] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -36,7 +38,7 @@ const Navbar = (props: any) => {
         <Flex>
           <BiArrowBack
             cursor={"pointer"}
-            onClick={() => props.action()}
+            onClick={() => navigate("/")}
             size={42}
           />
         </Flex>
