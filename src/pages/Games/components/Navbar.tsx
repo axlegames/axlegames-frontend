@@ -39,7 +39,7 @@ const Navbar = (props: any) => {
           <BiArrowBack
             cursor={"pointer"}
             onClick={() => navigate("/")}
-            size={42}
+            size={36}
           />
         </Flex>
         <Flex
@@ -50,18 +50,19 @@ const Navbar = (props: any) => {
           <Text
             cursor={"pointer"}
             textAlign={"center"}
-            fontSize={{ base: "2xl", lg: "4xl" }}
+            fontSize={{ base: "md", md: "xl", lg: "4xl" }}
           >
             {props.title.replace("-", " #")}
           </Text>
         </Flex>
 
         <Flex
+          display={{ base: "none", md: "flex" }}
           justifyContent={"flex-end"}
           textAlign={"center"}
           alignItems="center"
           columnGap={{ base: "2" }}
-          fontSize={{ base: "xl" }}
+          fontSize={{ base: "xs", md: "xl" }}
           px={8}
         >
           <Text>Hello, {props.username}</Text>
