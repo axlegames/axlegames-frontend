@@ -58,7 +58,8 @@ const GameBanner = (props: any) => {
         </GridItem>
         <GridItem>
           <a
-            href={`https://sale.axlegames.io`}
+            href="https://play.axlegames.io"
+            // href={`https://sale.axlegames.io`}
             target="_blank"
             rel="noopener noreferrer"
           >

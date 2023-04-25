@@ -40,7 +40,7 @@ import Telegram from "../../assets/socials/telegram.png";
 import Discord from "../../assets/socials/discord.png";
 import Terms from "../Terms";
 import HighLightButton from "./components/HighLightButton";
-import { FaMoneyBillWaveAlt } from "react-icons/fa";
+// import { FaMoneyBillWaveAlt } from "react-icons/fa";
 
 const images = [
   { img: Instagram, url: "https://www.instagram.com/axlegames/" },
@@ -196,13 +196,13 @@ const SideBarLayout = (props: SideBarProps) => {
             icon={<HiUser size={32} />}
           />
         </IsLoggedIn>
-        <SideBarButton
+        {/* <SideBarButton
           onClick={() => {
             window.open("https://sale.axlegames.io", "_blank");
           }}
           title={"AXLE Token Sale"}
           icon={<FaMoneyBillWaveAlt size={32} />}
-        />
+        /> */}
         <SideBarButton
           isCommingSoon={false}
           onClick={() => clearConnectionAndChangeRoute("/marketplace")}
