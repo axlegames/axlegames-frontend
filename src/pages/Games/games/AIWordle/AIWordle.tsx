@@ -345,7 +345,9 @@ const AIWordle = () => {
     });
 
   const shareResult = () => {
-    let result: string = `Hi! I have guessed the ${state.wordlength}-letter word in ${state.currentRow} tries on axlegames.io - First ever skill-based AI gaming platform introducing Metamorphosis AI games to web3. Signup, Play, and Share your result to earn free AXLE tokens. Presale coming soon on Pinksale. @AxleGames #Gamefi #AI`;
+    const word = isWon ? "guessed" : "tried";
+    const result = `Hi! I have ${word} the ${state.wordlength}-letter word in ${state.currentRow} tries on axlegames.io - the First ever WORDLE game for WEB3 with Elon Musk's fav MetamorphosisAI. \nCheckout their presale - \nhttps://www.pinksale.finance/launchpad/0x8261A864541081B45c6e12e7b11e46D1Ab977fC2?chain=BSC @AxleGames`;
+
     window.open(
       `https://twitter.com/intent/tweet?text=${result}`,
       "_blank" // <- This is what makes it open in a new window.

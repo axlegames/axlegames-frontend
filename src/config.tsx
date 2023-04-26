@@ -1,10 +1,8 @@
 import env from "react-dotenv";
 
 const SERVER = env.IS_DEV_SERVER || "";
-let URL = "";
-
-if (SERVER === "true") URL = "http://localhost:5001";
-else URL = "https://api.axlegames.io";
+let URL = "https://api.axlegames.io";
+if (SERVER) URL = "https://api.axlegames.io";
 
 console.log(SERVER);
 
