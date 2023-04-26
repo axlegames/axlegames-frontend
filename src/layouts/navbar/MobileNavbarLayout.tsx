@@ -2,12 +2,12 @@ import {
   Box,
   Flex,
   Image,
-  Text,
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
+  // Text,
+  // Accordion,
+  // AccordionButton,
+  // AccordionIcon,
+  // AccordionItem,
+  // AccordionPanel,
   useMediaQuery,
   useToast,
 } from "@chakra-ui/react";
@@ -28,19 +28,19 @@ import { useNavigate } from "react-router";
 import { MdStore, MdInfo } from "react-icons/md/index";
 import {
   HiHome,
-  HiGlobe,
-  HiOutlineViewList,
-  HiDocument,
+  // HiGlobe,
+  // HiOutlineViewList,
+  // HiDocument,
   HiUser,
   HiUsers,
   HiCreditCard,
 } from "react-icons/hi/index";
 import IsNotLoggedIn from "../../config/isNotLoggedIn";
-import { BiCoin } from "react-icons/bi";
+// import { BiCoin } from "react-icons/bi";
 import Dialog from "../../pages/Auth/dialogs/AuthDialog";
 import Terms from "../Terms";
 
-import Live from "../../assets/logos/live.png";
+// import Live from "../../assets/logos/live.png";
 import HighLightButton from "./components/HighLightButton";
 import Signin from "../../pages/Auth/Signin";
 
@@ -203,6 +203,12 @@ const MobileNavbar = () => {
                 icon={<AiOutlineDashboard size={32} />}
               />
               <SideBarButton
+                onClick={() => clearConnectionAndChangeRoute("/leaderboard")}
+                link={"/leaderboard"}
+                title={"Leaderboard"}
+                icon={<MdStore size={32} />}
+              />
+              <SideBarButton
                 onClick={() => clearConnectionAndChangeRoute("/wallet")}
                 link={"/wallet"}
                 title={"Wallet"}
@@ -233,7 +239,7 @@ const MobileNavbar = () => {
             </IsNotLoggedIn>
 
             <Box width={"100%"} position="relative">
-              <Image
+              {/* <Image
                 position={"absolute"}
                 zIndex={100}
                 right="5%"
@@ -241,20 +247,20 @@ const MobileNavbar = () => {
                 src={Live}
                 height="12"
                 width={"12"}
-              />
-              <SideBarButton
+              /> */}
+              {/* <SideBarButton
                 onClick={() => clearConnectionAndChangeRoute("/axle-token")}
                 title={"AXLE Token"}
                 link="/axle-token"
                 icon={<BiCoin size={32} />}
-              />
+              /> */}
             </Box>
-            <SideBarButton
+            {/* <SideBarButton
               isCommingSoon={true}
               onClick={() => clearConnectionAndChangeRoute("/coming-soon")}
               title={"AxleVerse"}
               icon={<HiGlobe size={32} />}
-            />
+            /> */}
 
             <SideBarButton
               onClick={() => clearConnectionAndChangeRoute("/coming-soon")}
@@ -267,7 +273,7 @@ const MobileNavbar = () => {
               icon={<MdInfo size={32} />}
             />
 
-            <Accordion width={"100%"} allowToggle defaultIndex={0}>
+            {/* <Accordion width={"100%"} allowToggle defaultIndex={0}>
               <AccordionItem border={"none"} outline="none" width={"100%"}>
                 <AccordionButton
                   borderRadius={"md"}
@@ -322,7 +328,7 @@ const MobileNavbar = () => {
                   </Flex>
                 </AccordionPanel>
               </AccordionItem>
-            </Accordion>
+            </Accordion> */}
           </SideBarCard>
           <Box p={open ? 4 : 0}>
             <IsNotLoggedIn>
