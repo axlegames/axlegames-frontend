@@ -110,7 +110,7 @@ const EntryCard = (props: Props) => {
           >
             {specialContest ? (
               <Text>
-                {dayGetter()} {`Game Night!`}
+                {`Wordle`} {dayGetter()} {`Contest!`}
               </Text>
             ) : (
               <Text>Practice</Text>
