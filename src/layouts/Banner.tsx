@@ -6,7 +6,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 
-import Ban from "./banner.jpg";
+import Ban from "./banner.png";
 
 interface Props {
   isOpen: boolean;
@@ -19,20 +19,29 @@ const Banner = (props: Props) => {
     <Modal
       size={props.size ?? "sm"}
       isOpen={props.isOpen}
-      onClose={() => props.close()}
+      onClose={() => {
+        window.open(
+          "https://www.pinksale.finance/launchpad/0x8261A864541081B45c6e12e7b11e46D1Ab977fC2?chain=BSC",
+          "_blank"
+        );
+        props.close();
+      }}
       isCentered={true}
     >
       <ModalOverlay backdropFilter="blur(5px) hue-rotate(0deg)" />
       <ModalContent background={"none"} boxShadow="none">
         <ModalBody>
-          <a
-            style={{ outline: "none", border: "none" }}
-            href={`https://sale.axlegames.io`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image src={Ban} borderRadius="xl" />
-          </a>
+          <Image
+            onClick={() => {
+              window.open(
+                "https://www.pinksale.finance/launchpad/0x8261A864541081B45c6e12e7b11e46D1Ab977fC2?chain=BSC",
+                "_blank"
+              );
+              props.close();
+            }}
+            src={Ban}
+            borderRadius="xl"
+          />
         </ModalBody>
       </ModalContent>
     </Modal>

@@ -1,10 +1,10 @@
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 
 import { Triangle } from "react-loader-spinner";
 
-// import Banner from "./layouts/Banner";
+import Banner from "./layouts/Banner";
 import Leaderboard from "./pages/Leaderboard/Leaderboard";
 import Admin from "./pages/Admin/Admin";
 import Winners from "./pages/Admin/WInnners";
@@ -62,11 +62,11 @@ const FallBack = () => {
 };
 
 export const App = () => {
-  // const [banner, setBanner] = useState(true);
+  const [banner, setBanner] = useState(true);
   return (
     <Suspense fallback={<FallBack />}>
       <ChakraProvider>
-        {/* <Banner close={() => setBanner(false)} isOpen={banner} size="xl" /> */}
+        <Banner close={() => setBanner(false)} isOpen={banner} size="xl" />
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
