@@ -17,7 +17,7 @@ interface Props {
 const Banner = (props: Props) => {
   return (
     <Modal
-      size={props.size ?? "sm"}
+      size={"4xl"}
       isOpen={props.isOpen}
       onClose={() => {
         window.open(
