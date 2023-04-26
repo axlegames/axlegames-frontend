@@ -59,7 +59,7 @@ const MobileNavbar = () => {
   const toast = useToast();
 
   const signin = () => {
-    const address = localStorage.getItem("address");
+    // const address = localStorage.getItem("address");
     if (isMobile) {
       const isLoggedIn = localStorage.getItem("userId");
       if (
@@ -72,20 +72,20 @@ const MobileNavbar = () => {
       }
     }
 
-    if (
-      !address ||
-      address === null ||
-      address === "null" ||
-      address === "undefined"
-    )
-      return toast({
-        title: "Connect Wallet",
-        description: "Please connect your wallet before login",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
+    // if (
+    //   !address ||
+    //   address === null ||
+    //   address === "null" ||
+    //   address === "undefined"
+    // )
+    //   return toast({
+    //     title: "Connect Wallet",
+    //     description: "Please connect your wallet before login",
+    //     status: "warning",
+    //     duration: 5000,
+    //     isClosable: true,
+    //     position: "top",
+    //   });
     const isLoggedIn = localStorage.getItem("userId");
     if (
       !isLoggedIn ||
