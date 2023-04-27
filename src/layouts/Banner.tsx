@@ -20,10 +20,6 @@ const Banner = (props: Props) => {
       size={"4xl"}
       isOpen={props.isOpen}
       onClose={() => {
-        window.open(
-          "https://www.pinksale.finance/launchpad/0x8261A864541081B45c6e12e7b11e46D1Ab977fC2?chain=BSC",
-          "_blank"
-        );
         props.close();
       }}
       isCentered={true}
