@@ -17,7 +17,7 @@ interface Props {
 const Banner = (props: Props) => {
   return (
     <Modal
-      size={"4xl"}
+      size={"lg"}
       isOpen={props.isOpen}
       onClose={() => {
         props.close();
@@ -28,11 +28,9 @@ const Banner = (props: Props) => {
       <ModalContent background={"none"} boxShadow="none">
         <ModalBody>
           <Image
+            cursor={"pointer"}
             onClick={() => {
-              window.open(
-                "https://www.pinksale.finance/launchpad/0x8261A864541081B45c6e12e7b11e46D1Ab977fC2?chain=BSC",
-                "_blank"
-              );
+              window.open("https://axlegames.io/staking", "_blank");
               props.close();
             }}
             src={Ban}
