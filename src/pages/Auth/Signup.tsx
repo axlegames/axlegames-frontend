@@ -39,7 +39,6 @@ const validate = (values: any) => {
 
 const Signup = (props: any) => {
   const params = useParams();
-  import { useRouter } from "next/router";
 
   const handleRequest = (data: any) => {
     setStatus({
